@@ -1,7 +1,7 @@
 import Drink from './Drink.js';
 import { $, $$ } from './utils/dom.js';
 
-class App {
+class DrinkMachine {
   constructor() {
     this.drinks = {
       americano: new Drink('아메리카노', ['에스프레소', '뜨거운 물']),
@@ -56,4 +56,4 @@ class App {
   };
 }
 
-new App();
+new DrinkMachine();
