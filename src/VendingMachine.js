@@ -7,7 +7,7 @@ export default class VendingMachine {
     this.$dispenser = $('.dispenser');
     this.$beverage = $('.beverage', this.$dispenser);
     this.$guideText = $('.dispenser-guide-text', this.$dispenser);
-    this.$takeOutButton = $('#initialize-button', this.$dispenser);
+    this.$takeOutButton = $('#take-out-button', this.$dispenser);
 
     this.$purchaseAmericanoButton.addEventListener('click', this.makeAmericano);
     this.$takeOutButton.addEventListener('click', this.initialize);
