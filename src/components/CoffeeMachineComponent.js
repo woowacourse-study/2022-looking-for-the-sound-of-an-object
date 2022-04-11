@@ -106,6 +106,7 @@ class CoffeeMachineComponent {
 
     if (!validateMaterialInput(coffeeBeanInputValue)) {
       showSnackBar('0이상, 소수점이 아닌 숫자를 입력해 주세요');
+      $rechargeCoffeeBeanInput.value = '';
       return;
     }
   };
@@ -118,6 +119,7 @@ class CoffeeMachineComponent {
 
     if (!validateMaterialInput(rechargeCupInputValue)) {
       showSnackBar('0이상, 소수점이 아닌 숫자를 입력해 주세요');
+      $rechargeCupInput.value = '';
       return;
     }
   };
