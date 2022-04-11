@@ -103,14 +103,15 @@ class CoffeeMachineComponent {
 
     const $rechargeCoffeeBeanInput = document.querySelector('#recharge-coffee-beans-input');
     const { valueAsNumber: coffeeBeanInputValue } = $rechargeCoffeeBeanInput;
+    $rechargeCoffeeBeanInput.value = '';
 
     if (!validateMaterialInput(coffeeBeanInputValue)) {
       showSnackBar('0이상, 소수점이 아닌 숫자를 입력해 주세요');
-      $rechargeCoffeeBeanInput.value = '';
       return;
     }
 
     materialStore.rechargeCoffeeBean(coffeeBeanInputValue);
+    this.showNowMaterialQuantity();
   };
 
   onRechargeCupButtonClick = e => {
@@ -118,14 +119,15 @@ class CoffeeMachineComponent {
 
     const $rechargeCupInput = document.querySelector('#recharge-cups-input');
     const { valueAsNumber: cupInputValue } = $rechargeCupInput;
+    $rechargeCupInput.value = '';
 
     if (!validateMaterialInput(cupInputValue)) {
       showSnackBar('0이상, 소수점이 아닌 숫자를 입력해 주세요');
-      $rechargeCupInput.value = '';
       return;
     }
 
     materialStore.rechargeCup(cupInputValue);
+    this.showNowMaterialQuantity();
   };
 }
 
