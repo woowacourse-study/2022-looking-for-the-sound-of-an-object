@@ -1,4 +1,5 @@
 import { materialStore } from '../store/materialStore';
+import { showServeCoffee } from '../utils/showServeCoffee';
 import { showSnackBar } from '../utils/showSnackBar';
 import { validateMaterialInput, validateMaterialQuantity } from '../utils/validations';
 
@@ -16,7 +17,6 @@ class CoffeeMachineComponent {
     this.$purchaseTab = document.querySelector('#purchase-coffee-tab');
     this.$purchaseCoffeeQuantityElement = document.querySelector('#purchase-coffee-quantity');
     this.$purchaseCoffeeButton = document.querySelector('#purchase-coffee');
-    this.$coffeeDispenserContainer = document.querySelector('.coffee-dispenser');
     this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
     this.$cupQuantityElement = document.querySelector('#cups-quantity');
     this.$rechargeCoffeeBeanButton = document.querySelector('#recharge-coffee-beans-button');
@@ -96,7 +96,7 @@ class CoffeeMachineComponent {
   };
 
   serveCoffee = () => {
-    this.$coffeeDispenserContainer.textContent = '☕️';
+    showServeCoffee();
   };
 
   onRechargeCoffeeBeanButtonClick = e => {
