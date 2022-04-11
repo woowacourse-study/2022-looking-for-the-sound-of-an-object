@@ -92,6 +92,7 @@ class CoffeeMachineComponent {
     }
     materialStore.buyCoffee();
     this.serveCoffee();
+    this.showPurchasableCoffeeQuantity();
   };
 
   serveCoffee = () => {
