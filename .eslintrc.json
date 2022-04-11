@@ -1,14 +1,12 @@
 {
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "env": {
     "browser": true,
-    "node": true,
-    "commonjs": true,
     "es2021": true
   },
-  "globals": { "_": true },
   "plugins": ["import", "html"],
   "extends": ["airbnb-base", "prettier"],
   "rules": {
@@ -24,6 +22,7 @@
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true
       }
-    ]
+    ],
+    "import/extensions": "off"
   }
 }
