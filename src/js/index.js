@@ -20,14 +20,11 @@ class DrinkMachine {
 
     e.target.classList.add('active');
 
-    let template = '<div>컵이 나옵니다.</div>';
-
-    switch (e.target.name) {
-      case 'americano':
-        template += this.drinks.americano.make();
-    }
-
-    template += '<div>완성되었습니다.</div>';
+    const template = `
+      <div>컵이 나옵니다.</div>
+      ${this.drinks[e.target.name].make()}
+      <div>완성되었습니다.</div>
+    `;
 
     this.showMaking(template);
   };
