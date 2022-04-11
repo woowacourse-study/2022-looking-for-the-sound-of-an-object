@@ -1,3 +1,5 @@
+import { SERVE_COFFEE_DELAY_TIME } from './constants';
+
 const serveCoffee = () => {
   const $coffeeDispenserContainer = document.querySelector('.coffee-dispenser');
   let isExistCoffee = null;
@@ -10,7 +12,7 @@ const serveCoffee = () => {
       $coffeeDispenserContainer.textContent = '';
       clearTimeout(isExistCoffee);
       isExistCoffee = null;
-    }, 3000);
+    }, SERVE_COFFEE_DELAY_TIME);
   };
 };
 

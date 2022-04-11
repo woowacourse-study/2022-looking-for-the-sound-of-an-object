@@ -1,3 +1,5 @@
+import { SHOW_SNACK_BAR_DELAY_TIME } from './constants';
+
 const snackBar = () => {
   const snackBarElement = document.querySelector('.snack-bar');
   let isExistSnackBar = null;
@@ -11,7 +13,7 @@ const snackBar = () => {
       snackBarElement.classList.remove('is-active');
       clearTimeout(isExistSnackBar);
       isExistSnackBar = null;
-    }, 3000);
+    }, SHOW_SNACK_BAR_DELAY_TIME);
   };
 };
 

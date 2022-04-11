@@ -1,4 +1,5 @@
 import { materialStore } from '../store/materialStore';
+import { ERROR_MSG } from '../utils/constants';
 import { showServeCoffee } from '../utils/showServeCoffee';
 import { showSnackBar } from '../utils/showSnackBar';
 import { validateMaterialInput, validateMaterialQuantity } from '../utils/validations';
@@ -87,7 +88,7 @@ class CoffeeMachineComponent {
     e.preventDefault();
 
     if (!validateMaterialQuantity()) {
-      showSnackBar('재료가 부족하여 커피를 제조할 수 없습니다');
+      showSnackBar(ERROR_MSG.SOLD_OUT_COFFEE);
       return;
     }
     materialStore.buyCoffee();
@@ -107,7 +108,7 @@ class CoffeeMachineComponent {
     $rechargeCoffeeBeanInput.value = '';
 
     if (!validateMaterialInput(coffeeBeanInputValue)) {
-      showSnackBar('0이상, 소수점이 아닌 숫자를 입력해 주세요');
+      showSnackBar(ERROR_MSG.INVALID_QUANTITY_INPUT);
       return;
     }
 
@@ -123,7 +124,7 @@ class CoffeeMachineComponent {
     $rechargeCupInput.value = '';
 
     if (!validateMaterialInput(cupInputValue)) {
-      showSnackBar('0이상, 소수점이 아닌 숫자를 입력해 주세요');
+      showSnackBar(ERROR_MSG.INVALID_QUANTITY_INPUT);
       return;
     }
 
