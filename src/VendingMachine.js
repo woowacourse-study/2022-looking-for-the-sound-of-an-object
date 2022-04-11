@@ -17,15 +17,21 @@ export default class VendingMachine {
 
   initialize = () => {
     this.$beverage.innerHTML = '';
+    this.$purchaseAmericanoButton.removeAttribute("disabled");
+    this.$takeOutButton.setAttribute("disabled", "");
     this.updateGuideText('아메리카노 버튼을 선택하세요.');
   }
 
   makeAmericano = () => {
+    this.$purchaseAmericanoButton.setAttribute("disabled", "");
     this.updateGuideText('음료 준비중...');
     this.prepareIngredient('컵')
       .then(() => this.prepareIngredient('에스프레소'))
       .then(() => this.prepareIngredient('뜨거운 물'))
-      .then(() => this.updateGuideText('음료가 다 나왔습니다. 가져가세요!'));
+      .then(() => { 
+        this.updateGuideText('음료가 다 나왔습니다. 가져가세요!');
+        this.$takeOutButton.removeAttribute("disabled");
+      });
   }
   
   prepareIngredient(ingredient) {
