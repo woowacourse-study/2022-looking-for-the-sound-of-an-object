@@ -1,3 +1,5 @@
+@import url(color.css);
+
 button {
   font-size: 16px;
   border-radius: 4px;
@@ -5,11 +7,11 @@ button {
 }
 
 button:hover {
-  background-color: dimgray;
+  background-color: var(--button-hover-background-color);
 }
 
 button.is-active {
-  background-color: dimgray;
+  background-color: var(--button-hover-background-color);
 }
 
 .tab-button {
