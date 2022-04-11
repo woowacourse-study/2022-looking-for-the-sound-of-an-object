@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/liswktjs/2022-looking-for-the-sound-of-an-object/issues"
   },
-  "homepage": "https://github.com/liswktjs/2022-looking-for-the-sound-of-an-object#readme",
+  "homepage": "https://github.com/liswktjs/2022-looking-for-the-sound-of-an-object",
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.6.0",
