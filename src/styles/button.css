@@ -8,6 +8,10 @@ button:hover {
   background-color: dimgray;
 }
 
+button.is-active {
+  background-color: dimgray;
+}
+
 .tab-button {
   width: 150px;
   height: 33px;
