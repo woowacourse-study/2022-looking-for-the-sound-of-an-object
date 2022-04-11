@@ -1,0 +1,28 @@
+button {
+  font-size: 16px;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+button:hover {
+  background-color: dimgray;
+}
+
+.tab-button {
+  width: 150px;
+  height: 33px;
+  border: 1px solid #fff;
+  margin-right: 10px;
+}
+
+.purchase-button {
+  width: 300px;
+  height: 33px;
+  border: 1px solid #fff;
+}
+
+.recharge-button {
+  width: 100px;
+  height: 33px;
+  border: 1px solid #fff;
+}

@@ -1,0 +1,54 @@
+@import url(color.css);
+@import url(button.css);
+@import url(recharge.css);
+@import url(purchase.css);
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: aliceblue;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+.purchase-coffee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.purchase-coffee-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+
+.recharge-material {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.now-material-table-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.now-material-quantity-table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
