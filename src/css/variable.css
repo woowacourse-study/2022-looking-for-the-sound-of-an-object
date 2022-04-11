@@ -1,0 +1,17 @@
+:root {
+  --color-body-background: #f9f9f9;
+
+  --color-app-background: #fff;
+  --color-app-border: #0000001f;
+
+  --color-menu-clicked-background: #322017d5;
+  --color-menu-clicked-text: #fff;
+
+  --color-dispenser-default-background: #e1e1e1;
+  --color-dispenser-default-border: #d4d4d4;
+  --color-dispenser-default-text: #000;
+  --color-dispenser-done-background: #322017a9;
+  --color-dispenser-done-text: #e1e1e1;
+
+  --color-clear-hover-background: #d4d4d4;
+}
