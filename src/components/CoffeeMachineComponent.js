@@ -1,6 +1,6 @@
-import { materialStore } from '../store/localStorage';
+import { materialStore } from '../store/materialStore';
 import { showSnackBar } from '../utils/showSnackBar';
-import { validateMaterialQuantity } from '../utils/validations';
+import { validateMaterialInput, validateMaterialQuantity } from '../utils/validations';
 
 class CoffeeMachineComponent {
   constructor() {
@@ -17,6 +17,10 @@ class CoffeeMachineComponent {
     this.$purchaseCoffeeQuantityElement = document.querySelector('#purchase-coffee-quantity');
     this.$purchaseCoffeeButton = document.querySelector('#purchase-coffee');
     this.$coffeeDispenserContainer = document.querySelector('.coffee-dispenser');
+    this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
+    this.$cupQuantityElement = document.querySelector('#cups-quantity');
+    this.$rechargeCoffeeBeanButton = document.querySelector('#recharge-coffee-beans-button');
+    this.$rechargeCupButton = document.querySelector('#recharge-cups-button');
   }
 
   showPurchasableCoffeeQuantity() {
@@ -28,6 +32,17 @@ class CoffeeMachineComponent {
       quantity = Math.min(coffeeBean, cup);
     }
     this.$purchaseCoffeeQuantityElement.textContent = quantity;
+  }
+
+  showNowMaterialQuantity() {
+    const materials = materialStore.getMaterialStore();
+
+    if (materials !== 0) {
+      const { coffeeBean, cup } = materials;
+
+      this.$coffeeBeanQuantityElement.textContent = coffeeBean;
+      this.$cupQuantityElement.textContent = cup;
+    }
   }
 
   showPurchaseCoffeeComponent() {
@@ -46,12 +61,16 @@ class CoffeeMachineComponent {
 
     this.$rechargeTab.classList.add('is-active');
     this.$purchaseTab.classList.remove('is-active');
+
+    this.showNowMaterialQuantity();
   }
 
   bindEventListener() {
     this.$purchaseTab.addEventListener('click', this.onPurchaseTabClick);
     this.$rechargeTab.addEventListener('click', this.onRechargeTabClick);
     this.$purchaseCoffeeButton.addEventListener('click', this.onPurchaseCoffeeButtonClick);
+    this.$rechargeCoffeeBeanButton.addEventListener('click', this.onRechargeCoffeeBeanButtonClick);
+    this.$rechargeCupButton.addEventListener('click', this.onRechargeCupButtonClick);
   }
 
   onPurchaseTabClick = e => {
@@ -77,6 +96,30 @@ class CoffeeMachineComponent {
 
   serveCoffee = () => {
     this.$coffeeDispenserContainer.textContent = '☕️';
+  };
+
+  onRechargeCoffeeBeanButtonClick = e => {
+    e.preventDefault();
+
+    const $rechargeCoffeeBeanInput = document.querySelector('#recharge-coffee-beans-input');
+    const { valueAsNumber: coffeeBeanInputValue } = $rechargeCoffeeBeanInput;
+
+    if (!validateMaterialInput(coffeeBeanInputValue)) {
+      showSnackBar('0이상, 소수점이 아닌 숫자를 입력해 주세요');
+      return;
+    }
+  };
+
+  onRechargeCupButtonClick = e => {
+    e.preventDefault();
+
+    const $rechargeCupInput = document.querySelector('#recharge-cups-input');
+    const { valueAsNumber: rechargeCupInputValue } = $rechargeCupInput;
+
+    if (!validateMaterialInput(rechargeCupInputValue)) {
+      showSnackBar('0이상, 소수점이 아닌 숫자를 입력해 주세요');
+      return;
+    }
   };
 }
 

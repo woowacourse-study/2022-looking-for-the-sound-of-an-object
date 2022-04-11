@@ -1,4 +1,4 @@
-import { materialStore } from '../store/localStorage';
+import { materialStore } from '../store/materialStore';
 
 export const validateMaterialQuantity = () => {
   const materials = materialStore.getMaterialStore();
@@ -13,4 +13,12 @@ export const validateMaterialQuantity = () => {
   return true;
 };
 
-export const validateMaterialInput = userInput => {};
+export const validateMaterialInput = userInput => {
+  if (userInput < 0) {
+    return false;
+  }
+  if (!Number.isInteger(userInput)) {
+    return false;
+  }
+  return true;
+};
