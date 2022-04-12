@@ -68,7 +68,7 @@ button:disabled:hover {
   align-items: center
 }
 
-.dispenser-guide-text {
+#guide-message-area {
   text-align: center;
 }
 
