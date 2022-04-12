@@ -1,0 +1,27 @@
+{
+  "name": "2022-looking-for-the-sound-of-an-object",
+  "version": "1.0.0",
+  "description": "2022 우아한 스터디 :: 객체의 소리를 찾아",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-import": "^2.25.4",
+    "prettier": "2.5.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soyi47/2022-looking-for-the-sound-of-an-object.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soyi47/2022-looking-for-the-sound-of-an-object/issues"
+  },
+  "homepage": "https://github.com/soyi47/2022-looking-for-the-sound-of-an-object#readme"
+}
