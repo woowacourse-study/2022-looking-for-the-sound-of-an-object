@@ -9,3 +9,10 @@ export const ERROR_MSG = {
 export const SERVE_COFFEE_DELAY_TIME = 3000;
 
 export const SHOW_SNACK_BAR_DELAY_TIME = 2000;
+
+export const MENU_NAME = {
+  ESPRESSO: 'espresso',
+  AMERICANO: 'americano',
+  CAFE_LATTE: 'cafeLatte',
+  MILK: 'milk',
+};

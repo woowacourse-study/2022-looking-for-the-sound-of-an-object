@@ -1,5 +1,5 @@
 import { materialStore } from '../store/materialStore';
-import { ERROR_MSG } from '../utils/constants';
+import { ERROR_MSG, MENU_NAME } from '../utils/constants';
 import { showServeCoffee } from '../utils/showServeCoffee';
 import { showSnackBar } from '../utils/showSnackBar';
 import {
@@ -114,7 +114,7 @@ class CoffeeMachineComponent {
         showSnackBar(ERROR_MSG.SOLD_OUT_COFFEE);
         return;
       }
-      materialStore.buyDrink('espresso');
+      materialStore.buyDrink(MENU_NAME.ESPRESSO);
       showServeCoffee('☕️');
     }
     if (e.target.id === 'purchase-americano-button') {
@@ -122,7 +122,7 @@ class CoffeeMachineComponent {
         showSnackBar(ERROR_MSG.SOLD_OUT_AMERICANO);
         return;
       }
-      materialStore.buyDrink('americano');
+      materialStore.buyDrink(MENU_NAME.AMERICANO);
       showServeCoffee('🥃');
     }
     if (e.target.id === 'purchase-cafe-latte-button') {
@@ -130,7 +130,7 @@ class CoffeeMachineComponent {
         showSnackBar(ERROR_MSG.SOLD_OUT_CAFE_LATTE);
         return;
       }
-      materialStore.buyDrink('cafeLatte');
+      materialStore.buyDrink(MENU_NAME.CAFE_LATTE);
       showServeCoffee('🧋');
     }
     if (e.target.id === 'purchase-milk-button') {
@@ -138,7 +138,7 @@ class CoffeeMachineComponent {
         showSnackBar(ERROR_MSG.SOLD_OUT_MILK);
         return;
       }
-      materialStore.buyDrink('milk');
+      materialStore.buyDrink(MENU_NAME.MILK);
       showServeCoffee('🥛');
     }
     this.showPurchasableDrinkQuantity();

@@ -1,3 +1,5 @@
+import { MENU_NAME } from '../utils/constants';
+
 export const materialStore = {
   setMaterialStore(stuff) {
     localStorage.setItem('materialStore', JSON.stringify(stuff));
@@ -9,14 +11,14 @@ export const materialStore = {
   buyDrink(drinkName) {
     const existMaterial = this.getMaterialStore();
     let { coffeeBean, cup, milk } = existMaterial;
-    if (drinkName === 'espresso' || drinkName === 'americano') {
+    if (drinkName === MENU_NAME.ESPRESSO || drinkName === MENU_NAME.AMERICANO) {
       coffeeBean -= 1;
     }
-    if (drinkName === 'cafeLatte') {
+    if (drinkName === MENU_NAME.CAFE_LATTE) {
       coffeeBean -= 1;
       milk -= 1;
     }
-    if (drinkName == 'milk') {
+    if (drinkName === MENU_NAME.MILK) {
       milk -= 1;
     }
     const newData = { coffeeBean, cup: cup - 1, milk };
