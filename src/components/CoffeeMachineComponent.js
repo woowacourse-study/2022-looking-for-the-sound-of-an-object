@@ -23,23 +23,37 @@ class CoffeeMachineComponent {
     this.$rechargeTab = document.querySelector('#recharge-material-tab');
     this.$purchaseTab = document.querySelector('#purchase-coffee-tab');
     this.$purchaseDrinkButtonContainer = document.querySelector('.purchase-drink-container');
-    // this.$purchaseCoffeeQuantityElement = document.querySelector('#purchase-coffee-quantity');
-    // this.$purchaseCoffeeButton = document.querySelector('#purchase-coffee');
+    this.$purchasableEspressoQuantityElement = document.querySelector(
+      '#purchaseable-espresso-quantity',
+    );
+    this.$purchasableAmericanoQuantityElement = document.querySelector(
+      '#purchaseable-americano-quantity',
+    );
+    this.$purchaseableCafeLatteQuantityElement = document.querySelector(
+      '#purchaseable-cafe-latte-quantity',
+    );
+    this.$purchaseableMilkQuantityElement = document.querySelector('#purchaseable-milk-quantity');
     this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
     this.$cupQuantityElement = document.querySelector('#cups-quantity');
     this.$milkQuantityElement = document.querySelector('#milk-quantity');
     this.$rechargeDrinkButtonContainer = document.querySelector('.recharge-drink-container');
   }
 
-  showPurchasableCoffeeQuantity() {
+  showPurchasableDrinkQuantity() {
     const materials = materialStore.getMaterialStore();
-    let quantity = 0;
 
     if (materials !== 0) {
       const { coffeeBean, cup, milk } = materials;
-      quantity = Math.min(coffeeBean, cup, milk);
+      const espressoQuantity = Math.min(coffeeBean, cup);
+      const americanoQuantity = Math.min(coffeeBean, cup);
+      const cafeLatteQuantity = Math.min(coffeeBean, cup, milk);
+      const milkQuantity = Math.min(milk, cup);
+
+      this.$purchasableEspressoQuantityElement.textContent = espressoQuantity;
+      this.$purchasableAmericanoQuantityElement.textContent = americanoQuantity;
+      this.$purchaseableCafeLatteQuantityElement.textContent = cafeLatteQuantity;
+      this.$purchaseableMilkQuantityElement.textContent = milkQuantity;
     }
-    // this.$purchaseCoffeeQuantityElement.textContent = quantity;
   }
 
   showNowMaterialQuantity() {
@@ -61,7 +75,7 @@ class CoffeeMachineComponent {
     this.$purchaseTab.classList.add('is-active');
     this.$rechargeTab.classList.remove('is-active');
 
-    this.showPurchasableCoffeeQuantity();
+    this.showPurchasableDrinkQuantity();
   }
 
   showRechargeMaterialComponent() {
@@ -127,7 +141,7 @@ class CoffeeMachineComponent {
       materialStore.buyDrink('milk');
       showServeCoffee('🥛');
     }
-    this.showPurchasableCoffeeQuantity();
+    this.showPurchasableDrinkQuantity();
   };
 
   onRechargeButtonClick = e => {
