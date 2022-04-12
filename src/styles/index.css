@@ -28,16 +28,23 @@ nav {
   justify-content: center;
 }
 
-.purchase-coffee {
+.purchase-drink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.purchase-drink-quantity-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.purchase-coffee-container {
+.purchase-drink-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   justify-items: center;
 }

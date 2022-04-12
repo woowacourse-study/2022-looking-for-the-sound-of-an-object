@@ -1,8 +1,15 @@
-.purchase-coffee {
+.purchase-drink-quantity-container {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.purchase-coffee-container {
+.purchase-drink-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.purchase-drink-container {
   margin-bottom: 20px;
 }
 
