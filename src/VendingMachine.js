@@ -1,4 +1,6 @@
-import { $ } from './util.js';
+import { $, $$ } from './util.js';
+import menus from './menus.js';
+
 
 export default class VendingMachine {
   constructor() {
@@ -9,29 +11,47 @@ export default class VendingMachine {
     this.$guideText = $('.dispenser-guide-text', this.$dispenser);
     this.$takeOutButton = $('#take-out-button', this.$dispenser);
 
-    this.$purchaseAmericanoButton.addEventListener('click', this.makeAmericano);
-    this.$takeOutButton.addEventListener('click', this.initialize);
-
+    this.initializeMenuArea();
     this.initialize();
+
+    this.$menuArea.addEventListener('click', this.onClickMenuArea);
+    this.$takeOutButton.addEventListener('click', this.initialize);
   }
 
   initialize = () => {
     this.$beverage.innerHTML = '';
-    this.$purchaseAmericanoButton.removeAttribute("disabled");
+    $$('button', this.$menuArea).forEach((menuButton) => {
+      menuButton.removeAttribute("disabled");
+    })
     this.$takeOutButton.setAttribute("disabled", "");
-    this.updateGuideText('아메리카노 버튼을 선택하세요.');
+    this.updateGuideText('원하는 음료를 선택하세요.');
   }
 
-  makeAmericano = () => {
-    this.$purchaseAmericanoButton.setAttribute("disabled", "");
-    this.updateGuideText('음료 준비중...');
-    this.prepareIngredient('컵')
-      .then(() => this.prepareIngredient('에스프레소'))
-      .then(() => this.prepareIngredient('뜨거운 물'))
-      .then(() => { 
-        this.updateGuideText('음료가 다 나왔습니다. 가져가세요!');
-        this.$takeOutButton.removeAttribute("disabled");
-      });
+  initializeMenuArea = () => {
+    this.$menuArea.innerHTML = Object.keys(menus).map((menu) => `
+      <button name="${menu}" type="button">${menus[menu].name}</button>
+    `).join('');
+  }
+
+  onClickMenuArea = (event) => {
+    if (event.target.tagName !== 'BUTTON') return;
+    this.makeBeverage(menus[event.target.name]);
+  }
+
+  makeBeverage = (menu) => {
+    $$('button', this.$menuArea).forEach((menuButton) => {
+      menuButton.setAttribute("disabled", "");
+    })
+    this.updateGuideText(`${menu.name} 준비 중...`);
+
+    const prepareIngredientChains = menu.ingredients.reduce((prev, ingredient) =>
+      prev.then(() => this.prepareIngredient(ingredient))
+    , this.prepareIngredient('컵'));
+    
+    prepareIngredientChains.then(() => {
+      this.updateGuideText(`${menu.name} 나왔습니다. 😉`);
+      this.$takeOutButton.removeAttribute("disabled");
+    })
   }
   
   prepareIngredient(ingredient) {
