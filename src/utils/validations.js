@@ -14,11 +14,5 @@ export const validateMaterialQuantity = () => {
 };
 
 export const validateMaterialInput = userInput => {
-  if (userInput < 0) {
-    return false;
-  }
-  if (!Number.isInteger(userInput)) {
-    return false;
-  }
-  return true;
+  return userInput >= 0 && Number.isInteger(userInput);
 };

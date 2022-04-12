@@ -3,10 +3,8 @@ export const materialStore = {
     localStorage.setItem('materialStore', JSON.stringify(stuff));
   },
   getMaterialStore() {
-    if (localStorage.getItem('materialStore')) {
-      return JSON.parse(localStorage.getItem('materialStore'));
-    }
-    return 0;
+    const item = localStorage.getItem('materialStore');
+    return item ? JSON.parse(item) : 0;
   },
   buyCoffee() {
     const existMaterial = this.getMaterialStore();
