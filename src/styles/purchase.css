@@ -1,0 +1,14 @@
+.purchase-coffee {
+  margin-top: 20px;
+}
+
+.purchase-coffee-container {
+  margin-bottom: 20px;
+}
+
+.coffee-dispenser {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #111;
+  font-size: 150px;
+}

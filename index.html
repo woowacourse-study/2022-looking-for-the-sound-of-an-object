@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자판기</title>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>☕️ 자판기</h1>
+      </header>
+      <nav>
+        <button id="recharge-material-tab" class="tab-button" type="button">재료 충전📦</button>
+        <button type="button" class="tab-button" id="purchase-coffee-tab">에스프레소☕️</button>
+      </nav>
+      <section class="purchase-coffee" aria-labelledby="purchase-coffee-title">
+        <h2 id="purchase-coffee-title" hidden>에스프레소 구매하는 탭</h2>
+        <div class="purchase-coffee-container">
+          <div class="purchase-coffee-quantity-container">
+            현재 잔여 수량: <span id="purchase-coffee-quantity"></span>개
+          </div>
+          <button id="purchase-coffee" class="purchase-button" type="button">구매하기</button>
+        </div>
+
+        <div class="coffee-dispenser"></div>
+      </section>
+      <section class="recharge-material" aria-labelledby="recharge-material-title">
+        <h2 id="recharge-material-title" hidden>재료 충전하는 탭</h2>
+        <div class="now-material-title">현재 재료 현황판</div>
+        <table class="now-material-quantity-table">
+          <tr>
+            <td>원두</td>
+            <td>컵</td>
+          </tr>
+          <tr>
+            <td id="coffee-beans-quantity">0</td>
+            <td id="cups-quantity">0</td>
+          </tr>
+        </table>
+        <div class="recharge-coffee-beans-container">
+          <div class="recharge-coffee-beans-container">
+            <label for="recharge-coffee-beans-input">원두 </label>
+            <input
+              type="number"
+              id="recharge-coffee-beans-input"
+              class="recharge-input"
+              placeholder="몇인 분의 원두를 충전 할 것인지 입력해주세요"
+            />
+            <button type="button" id="recharge-coffee-beans-button" class="recharge-button">
+              충전하기
+            </button>
+          </div>
+
+          <div class="recharge-cups-container">
+            <label for="recharge-cups-input">컵 </label>
+            <input
+              type="number"
+              id="recharge-cups-input"
+              class="recharge-input"
+              placeholder="몇 개의 컵을 충전할 것인지 입력해주세요"
+            />
+            <button type="button" id="recharge-cups-button" class="recharge-button">
+              충전하기
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="snack-bar"></div>
+  </body>
+</html>

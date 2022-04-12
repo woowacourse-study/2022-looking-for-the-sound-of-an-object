@@ -1,0 +1,89 @@
+@import url(color.css);
+@import url(button.css);
+@import url(recharge.css);
+@import url(purchase.css);
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--app-background-color);
+}
+
+.hide {
+  display: none;
+  visibility: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+.purchase-coffee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.purchase-coffee-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+
+.recharge-material {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.now-material-table-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.now-material-quantity-table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.snack-bar {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+
+  visibility: hidden;
+  transform: translateX(-50%) translate3d(0, 100%, 0);
+
+  background-color: var(--snackbar-background-color);
+  border-style: none;
+  border-radius: 4px;
+
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  color: var(--snackbar-font-color);
+  font-size: 18px;
+}
+
+.snack-bar.is-active {
+  visibility: visible;
+  transform: translateX(-50%) translate3d(0, 0, 0);
+  transition: transform 300ms ease-in-out;
+}

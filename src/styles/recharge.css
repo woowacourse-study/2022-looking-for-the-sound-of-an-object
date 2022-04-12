@@ -1,0 +1,40 @@
+.now-material-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.now-material-quantity-table {
+  border-collapse: collapse;
+  min-width: 200px;
+  border-left: 1px solid #111;
+  border-right: 1px solid #111;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+tr {
+  border-top: 1px solid #111;
+  border-bottom: 1px solid #111;
+}
+
+td {
+  text-align: center;
+  min-width: 100px;
+}
+
+label {
+  display: block;
+  width: 50px;
+}
+
+.recharge-coffee-beans-container {
+  margin-bottom: 20px;
+}
+
+.recharge-input {
+  width: 300px;
+  height: fit-content;
+  padding: 4px;
+  margin-right: 10px;
+}
