@@ -12,8 +12,8 @@ export default class Order {
     }
     this.#subscribers = new Set();
   }
-
-  get state() { return this.#state; }
+  
+  get progress() { return this.#state.progress; }
 
   addSubscriber(subscriber) {
     this.#subscribers.add(subscriber);

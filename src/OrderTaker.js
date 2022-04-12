@@ -47,10 +47,14 @@ export default class OrderTaker {
     
   onClickMenuArea = (event) => {
     if (event.target.tagName !== 'BUTTON') return;
+    if (this.order.progress !== ORDER_PROGRESS.PENDING) return;
+
     this.order.updateOrderStateToMaking(menus[event.target.name]);
   }
   
   onClickBeveragePickUpButton = () => {
+    if (this.order.progress !== ORDER_PROGRESS.COMPLETE) return;
+    
     this.order.updateOrderStateToPending();
   }
 
