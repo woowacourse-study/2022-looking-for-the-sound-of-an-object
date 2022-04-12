@@ -1,5 +1,6 @@
 import { $, $$ } from './util.js';
 import menus from './menus.js';
+import { ORDER_PROGRESS } from './constants.js';
 
 export default class OrderTaker {
   constructor(order) {
@@ -23,9 +24,9 @@ export default class OrderTaker {
   }
 
   updateOnOrderChange = ({progress, orderedMenu}) => {
-    if (progress === 'pending') this.updateOnOrderPending();
-    if (progress === 'making') this.updateOnOrderMaking(orderedMenu);
-    if (progress === 'complete') this.updateOnOrderComplete(orderedMenu);
+    if (progress === ORDER_PROGRESS.PENDING) this.updateOnOrderPending();
+    if (progress === ORDER_PROGRESS.MAKING) this.updateOnOrderMaking(orderedMenu);
+    if (progress === ORDER_PROGRESS.COMPLETE) this.updateOnOrderComplete(orderedMenu);
   }
 
   updateOnOrderPending = () => {

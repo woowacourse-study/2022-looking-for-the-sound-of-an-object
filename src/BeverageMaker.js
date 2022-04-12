@@ -1,3 +1,4 @@
+import { ORDER_PROGRESS } from './constants.js';
 import { $ } from './util.js';
 
 export default class BeverageMaker {
@@ -11,8 +12,8 @@ export default class BeverageMaker {
   }
 
   updateOnOrderChange = ({progress, orderedMenu}) => {
-    if (progress === 'pending') this.clearBeverage();
-    if (progress === 'making') this.makeBeverage(orderedMenu);
+    if (progress === ORDER_PROGRESS.PENDING) this.clearBeverage();
+    if (progress === ORDER_PROGRESS.MAKING) this.makeBeverage(orderedMenu);
   }
 
   clearBeverage = () => {

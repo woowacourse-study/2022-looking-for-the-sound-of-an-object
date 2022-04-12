@@ -1,3 +1,5 @@
+import { ORDER_PROGRESS } from './constants.js';
+
 export default class Order {
   #state
 
@@ -5,7 +7,7 @@ export default class Order {
 
   constructor() {
     this.#state = {
-      progress: 'pending',
+      progress: ORDER_PROGRESS.PENDING,
       orderedMenu: null
     }
     this.#subscribers = new Set();
@@ -23,7 +25,7 @@ export default class Order {
 
   updateOrderStateToPending() {
     this.#state = {
-      progress: 'pending',
+      progress: ORDER_PROGRESS.PENDING,
       orderedMenu: null
     }
     this.notify();
@@ -31,7 +33,7 @@ export default class Order {
 
   updateOrderStateToMaking(orderedMenu) {
     this.#state = {
-      progress: 'making',
+      progress: ORDER_PROGRESS.MAKING,
       orderedMenu
     }
     this.notify();
@@ -40,7 +42,7 @@ export default class Order {
   updateOrderStateToComplete() {
     this.#state = {
       ...this.#state,
-      progress: 'complete',
+      progress: ORDER_PROGRESS.COMPLETE,
     }
     this.notify();
   }
