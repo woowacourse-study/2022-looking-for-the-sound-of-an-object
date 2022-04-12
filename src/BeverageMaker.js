@@ -1,4 +1,5 @@
 import { ORDER_PROGRESS } from './constants.js';
+import menus from './menus.js';
 import { $ } from './util.js';
 
 export default class BeverageMaker {
@@ -19,9 +20,10 @@ export default class BeverageMaker {
     this.$makeBeverageArea.innerHTML = '';
   }
   
-  makeBeverage = (menu) => {
+  makeBeverage = (menuName) => {
+    const beverage = menus[menuName];
     const initialPrepare = this.prepareIngredient('컵');
-    const prepareIngredientChains = menu.ingredients.reduce((prev, ingredient) =>
+    const prepareIngredientChains = beverage.ingredients.reduce((prev, ingredient) =>
       prev.then(() => this.prepareIngredient(ingredient))
     , initialPrepare);
 
