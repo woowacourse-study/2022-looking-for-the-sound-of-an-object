@@ -101,6 +101,7 @@ class CoffeeMachineComponent {
         return;
       }
       materialStore.buyDrink('espresso');
+      showServeCoffee('☕️');
     }
     if (e.target.id === 'purchase-americano-button') {
       if (!validateCoffeeMaterialQuantity()) {
@@ -108,6 +109,7 @@ class CoffeeMachineComponent {
         return;
       }
       materialStore.buyDrink('americano');
+      showServeCoffee('🥃');
     }
     if (e.target.id === 'purchase-cafe-latte-button') {
       if (!validateCafeLatteMaterialQuantity()) {
@@ -115,6 +117,7 @@ class CoffeeMachineComponent {
         return;
       }
       materialStore.buyDrink('cafeLatte');
+      showServeCoffee('🧋');
     }
     if (e.target.id === 'purchase-milk-button') {
       if (!validateMilkMaterialQuantity()) {
@@ -122,13 +125,9 @@ class CoffeeMachineComponent {
         return;
       }
       materialStore.buyDrink('milk');
+      showServeCoffee('🥛');
     }
-    this.serveCoffee();
     this.showPurchasableCoffeeQuantity();
-  };
-
-  serveCoffee = () => {
-    showServeCoffee();
   };
 
   onRechargeButtonClick = e => {

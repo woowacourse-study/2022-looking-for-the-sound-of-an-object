@@ -3,10 +3,9 @@ import { SERVE_COFFEE_DELAY_TIME } from './constants';
 const serveCoffee = () => {
   const $coffeeDispenserContainer = document.querySelector('.coffee-dispenser');
   let isExistCoffee = null;
-
-  return () => {
+  return drinkName => {
     if (isExistCoffee) return;
-    $coffeeDispenserContainer.textContent = '☕️';
+    $coffeeDispenserContainer.textContent = drinkName;
 
     isExistCoffee = setTimeout(() => {
       $coffeeDispenserContainer.textContent = '';
