@@ -5,8 +5,7 @@ export default class BeverageMaker {
   constructor(order) {
     this.order = order;
 
-    this.$dispenser = $('.dispenser');
-    this.$beverage = $('.beverage', this.$dispenser);
+    this.$makeBeverageArea = $('#make-beverage-area');
 
     this.order.addSubscriber(this.updateOnOrderChange);
   }
@@ -17,7 +16,7 @@ export default class BeverageMaker {
   }
 
   clearBeverage = () => {
-    this.$beverage.innerHTML = '';
+    this.$makeBeverageArea.innerHTML = '';
   }
   
   makeBeverage = (menu) => {
@@ -34,7 +33,7 @@ export default class BeverageMaker {
   prepareIngredient(ingredient) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        this.$beverage.insertAdjacentHTML('beforeend', `<li>${ingredient}</li>`);
+        this.$makeBeverageArea.insertAdjacentHTML('beforeend', `<li>${ingredient}</li>`);
         resolve();
       }, 1000);
     });

@@ -6,21 +6,21 @@ export default class OrderTaker {
   constructor(order) {
     this.order = order;
 
-    this.$menuArea = $('.menu-area');
+    this.$menuButtonArea = $('#menu-button-area');
     this.$guideText = $('#guide-message-area');
     this.$beveragePickUpButton = $('#beverage-pick-up-button');
     this.initializeMenuButtons();
 
     this.order.addSubscriber(this.updateOnOrderChange);
-    this.$menuArea.addEventListener('click', this.onClickMenuArea);
+    this.$menuButtonArea.addEventListener('click', this.onClickMenuArea);
     this.$beveragePickUpButton.addEventListener('click', this.onClickBeveragePickUpButton);
   }
   
   initializeMenuButtons() {
-    this.$menuArea.innerHTML = Object.keys(menus).map((menu) => `
+    this.$menuButtonArea.innerHTML = Object.keys(menus).map((menu) => `
       <button name="${menu}" type="button">${menus[menu].name}</button>
     `).join('');
-    this.$$menuButtons = $$('button', this.$menuArea);
+    this.$$menuButtons = $$('button', this.$menuButtonArea);
   }
 
   updateOnOrderChange = ({progress, orderedMenu}) => {
