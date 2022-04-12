@@ -7,12 +7,12 @@ export default class OrderTaker {
 
     this.$menuArea = $('.menu-area');
     this.$guideText = $('#guide-message-area');
-    this.$takeOutButton = $('#take-out-button');
+    this.$beveragePickUpButton = $('#beverage-pick-up-button');
     this.initializeMenuButtons();
 
     this.order.addSubscriber(this.updateOnOrderChange);
     this.$menuArea.addEventListener('click', this.onClickMenuArea);
-    this.$takeOutButton.addEventListener('click', this.onClickTakeOutButton);
+    this.$beveragePickUpButton.addEventListener('click', this.onClickBeveragePickUpButton);
   }
   
   initializeMenuButtons() {
@@ -30,7 +30,7 @@ export default class OrderTaker {
 
   updateOnOrderPending = () => {
     this.setAllMenuButtonActive();
-    this.$takeOutButton.setAttribute("disabled", "");
+    this.$beveragePickUpButton.setAttribute("disabled", "");
     this.updateGuideText('원하는 음료를 선택하세요.');
   }
 
@@ -40,7 +40,7 @@ export default class OrderTaker {
   }
 
   updateOnOrderComplete = (menu) => {
-    this.$takeOutButton.removeAttribute("disabled");
+    this.$beveragePickUpButton.removeAttribute("disabled");
     this.updateGuideText(`${menu.name} 나왔습니다. 😉`);
   }
     
@@ -49,7 +49,7 @@ export default class OrderTaker {
     this.order.updateOrderStateToMaking(menus[event.target.name]);
   }
   
-  onClickTakeOutButton = () => {
+  onClickBeveragePickUpButton = () => {
     this.order.updateOrderStateToPending();
   }
 
@@ -68,5 +68,5 @@ export default class OrderTaker {
   updateGuideText(guideMessage) {
     this.$guideText.innerText = guideMessage;
   }
-  
+
 }
