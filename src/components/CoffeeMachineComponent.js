@@ -2,7 +2,12 @@ import { materialStore } from '../store/materialStore';
 import { ERROR_MSG } from '../utils/constants';
 import { showServeCoffee } from '../utils/showServeCoffee';
 import { showSnackBar } from '../utils/showSnackBar';
-import { validateMaterialInput, validateMaterialQuantity } from '../utils/validations';
+import {
+  validateCafeLatteMaterialQuantity,
+  validateCoffeeMaterialQuantity,
+  validateMaterialInput,
+  validateMilkMaterialQuantity,
+} from '../utils/validations';
 
 class CoffeeMachineComponent {
   constructor() {
@@ -17,6 +22,7 @@ class CoffeeMachineComponent {
     this.$nav = document.querySelector('nav');
     this.$rechargeTab = document.querySelector('#recharge-material-tab');
     this.$purchaseTab = document.querySelector('#purchase-coffee-tab');
+    this.$purchaseDrinkButtonContainer = document.querySelector('.purchase-drink-container');
     // this.$purchaseCoffeeQuantityElement = document.querySelector('#purchase-coffee-quantity');
     // this.$purchaseCoffeeButton = document.querySelector('#purchase-coffee');
     this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
@@ -70,7 +76,7 @@ class CoffeeMachineComponent {
 
   bindEventListener() {
     this.$nav.addEventListener('click', this.onTabButtonClick);
-    // this.$purchaseCoffeeButton.addEventListener('click', this.onPurchaseCoffeeButtonClick);
+    this.$purchaseDrinkButtonContainer.addEventListener('click', this.onPurchaseDrinkButtonClick);
     this.$rechargeDrinkButtonContainer.addEventListener('click', this.onRechargeButtonClick);
   }
 
@@ -86,14 +92,37 @@ class CoffeeMachineComponent {
     }
   };
 
-  onPurchaseCoffeeButtonClick = e => {
+  onPurchaseDrinkButtonClick = e => {
     e.preventDefault();
 
-    if (!validateMaterialQuantity()) {
-      showSnackBar(ERROR_MSG.SOLD_OUT_COFFEE);
-      return;
+    if (e.target.id === 'purchase-espresso-button') {
+      if (!validateCoffeeMaterialQuantity()) {
+        showSnackBar(ERROR_MSG.SOLD_OUT_COFFEE);
+        return;
+      }
+      materialStore.buyDrink('espresso');
     }
-    materialStore.buyCoffee();
+    if (e.target.id === 'purchase-americano-button') {
+      if (!validateCoffeeMaterialQuantity()) {
+        showSnackBar(ERROR_MSG.SOLD_OUT_AMERICANO);
+        return;
+      }
+      materialStore.buyDrink('americano');
+    }
+    if (e.target.id === 'purchase-cafe-latte-button') {
+      if (!validateCafeLatteMaterialQuantity()) {
+        showSnackBar(ERROR_MSG.SOLD_OUT_CAFE_LATTE);
+        return;
+      }
+      materialStore.buyDrink('cafeLatte');
+    }
+    if (e.target.id === 'purchase-milk-button') {
+      if (!validateMilkMaterialQuantity()) {
+        showSnackBar(ERROR_MSG.SOLD_OUT_MILK);
+        return;
+      }
+      materialStore.buyDrink('milk');
+    }
     this.serveCoffee();
     this.showPurchasableCoffeeQuantity();
   };

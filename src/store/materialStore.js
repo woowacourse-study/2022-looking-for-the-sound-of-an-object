@@ -6,10 +6,20 @@ export const materialStore = {
     const item = localStorage.getItem('materialStore');
     return item ? JSON.parse(item) : 0;
   },
-  buyCoffee() {
+  buyDrink(drinkName) {
     const existMaterial = this.getMaterialStore();
-    const { coffeeBean, cup } = existMaterial;
-    const newData = { coffeeBean: coffeeBean - 1, cup: cup - 1 };
+    let { coffeeBean, cup, milk } = existMaterial;
+    if (drinkName === 'espresso' || drinkName === 'americano') {
+      coffeeBean -= 1;
+    }
+    if (drinkName === 'cafeLatte') {
+      coffeeBean -= 1;
+      milk -= 1;
+    }
+    if (drinkName == 'milk') {
+      milk -= 1;
+    }
+    const newData = { coffeeBean, cup: cup - 1, milk };
 
     this.setMaterialStore(newData);
   },
