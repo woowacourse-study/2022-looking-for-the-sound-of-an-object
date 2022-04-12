@@ -42,5 +42,5 @@ export const validateMilkMaterialQuantity = () => {
 };
 
 export const validateMaterialInput = userInput => {
-  return userInput >= 0 && Number.isInteger(userInput);
+  return userInput > 0 && Number.isInteger(userInput);
 };
