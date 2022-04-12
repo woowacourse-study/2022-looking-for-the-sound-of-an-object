@@ -7,3 +7,5 @@ const order = new Order();
 
 const orderTaker = new OrderTaker(order);
 const beverageMaker = new BeverageMaker(order);
+
+order.updateOrderStateToPending();
