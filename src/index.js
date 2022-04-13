@@ -1,3 +1,11 @@
-import VendingMachine from './VendingMachine.js';
+import Order from './Order.js';
 
-const vendingMachine = new VendingMachine();
+import BeverageMaker from './BeverageMaker.js';
+import OrderTaker from './OrderTaker.js';
+
+const order = new Order();
+
+const orderTaker = new OrderTaker(order);
+const beverageMaker = new BeverageMaker(order);
+
+order.updateOrderStateToPending();
