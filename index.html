@@ -9,6 +9,19 @@
   <body>
     <div id="app">
       <h1 class="title">☕️ 자판기 ☕️</h1>
+      <section class="charge-money">
+        <h2 hidden>자판기 금액 투입</h2>
+        <form class="charge-money__form">
+          <input
+            class="charge-money__input"
+            type="number"
+            placeholder="투입할 금액 입력"
+          />
+        </form>
+        <div class="charge-money__total-description">
+          현재 투입된 금액: <span class="charge-money__total">0</span>원
+        </div>
+      </section>
       <nav class="menu"></nav>
       <div class="dispenser"></div>
       <button class="clear" hidden>가져가기</button>
