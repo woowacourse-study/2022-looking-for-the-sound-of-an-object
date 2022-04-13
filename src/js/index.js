@@ -34,7 +34,9 @@ class DrinkMachine {
 
   showTotalMoney() {
     const totalMoney = store.get(KEY.CHARGE_MONEY);
-    this.$totalChargeMoney.textContent = totalMoney ? totalMoney : 0;
+    this.$totalChargeMoney.textContent = totalMoney
+      ? totalMoney.toLocaleString('ko-KR')
+      : 0;
   }
 
   showMenuButton() {
