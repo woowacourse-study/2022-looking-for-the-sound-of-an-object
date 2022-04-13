@@ -7,12 +7,12 @@ const ingredients = {
 };
 
 const drinks = {
-  espresso: new Drink('에스프레소', 1000, [ingredients.espresso]),
+  espresso: new Drink('에스프레소', 1500, [ingredients.espresso]),
   americano: new Drink('아메리카노', 1000, [
     ingredients.espresso,
     ingredients.hotWater,
   ]),
-  cafelatte: new Drink('카페라떼', 1000, [
+  cafelatte: new Drink('카페라떼', 2000, [
     ingredients.milk,
     ingredients.espresso,
   ]),
