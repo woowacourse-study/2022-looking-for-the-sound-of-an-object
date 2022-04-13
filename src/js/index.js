@@ -1,33 +1,62 @@
 import { drinks } from './constants/drink.js';
 import { $, $$ } from './utils/dom.js';
+import { store } from './utils/store.js';
 
 class DrinkMachine {
   constructor() {
-    this.showMenuButton();
-
+    this.$totalChargeInput = $('.charge-money__input');
+    this.$totalChargeMoney = $('.charge-money__total');
     this.$dispenser = $('.dispenser');
     this.$clearButton = $('.clear');
-    this.$menuButtons = $$('.menu__button');
+    this.$menu = $('.menu');
+    this.$menuButtons;
 
-    $('.menu').addEventListener('click', this.menuButtonClickEvent);
+    this.showMenuButton();
+    this.showTotalMoney();
+    this.$totalChargeInput.focus();
+
+    $('.charge-money__form').addEventListener('submit', this.chargeMoneyEvent);
+    this.$menu.addEventListener('click', this.menuButtonClickEvent);
     this.$clearButton.addEventListener('click', this.clearDispenser);
   }
 
-  showMenuButton() {
-    const template = Object.keys(drinks)
-      .map(
-        drink => `
-        <button
-          class="menu__button"
-          name="${drink}"
-          type="button"
-        >${drinks[drink].name}</button>`,
-      )
-      .join('');
-    const $menu = $('.menu');
+  chargeMoneyEvent = e => {
+    e.preventDefault();
 
-    $menu.replaceChildren();
-    $menu.insertAdjacentHTML('beforeend', template);
+    const inputMoney = e.target.elements[0].valueAsNumber;
+    store.set('money', store.get('money') + inputMoney);
+
+    this.showTotalMoney();
+    this.showMenuButton();
+    this.$totalChargeInput.value = '';
+  };
+
+  showTotalMoney() {
+    const totalMoney = store.get('money');
+    this.$totalChargeMoney.textContent = totalMoney ? totalMoney : 0;
+  }
+
+  showMenuButton() {
+    const totalMoney = store.get('money');
+    const template = Object.keys(drinks)
+      .map(drink => {
+        const { name, price } = drinks[drink];
+        return `
+          <button
+            class="menu__button"
+            name="${drink}"
+            type="button"
+            title=${price}원
+            ${price > totalMoney ? 'disabled' : ''}
+          >${name}</button>
+        `;
+      })
+      .join('');
+
+    this.$menu.replaceChildren();
+    this.$menu.insertAdjacentHTML('beforeend', template);
+
+    this.$menuButtons = $$('.menu__button');
   }
 
   menuButtonClickEvent = e => {
