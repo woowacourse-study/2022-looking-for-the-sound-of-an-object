@@ -24,9 +24,18 @@ export default class OrderTaker {
   }
 
   updateOnOrderChange = ({progress, orderedMenu}) => {
-    if (progress === ORDER_PROGRESS.PENDING) this.updateOnOrderPending();
-    if (progress === ORDER_PROGRESS.MAKING) this.updateOnOrderMaking(orderedMenu);
-    if (progress === ORDER_PROGRESS.COMPLETE) this.updateOnOrderComplete(orderedMenu);
+    switch (progress) {
+    case ORDER_PROGRESS.PENDING:
+      this.updateOnOrderPending()
+      break;
+    case ORDER_PROGRESS.MAKING:
+      this.updateOnOrderMaking(orderedMenu);
+      break;
+    case ORDER_PROGRESS.COMPLETE:
+      this.updateOnOrderComplete(orderedMenu);
+      break;
+    default:
+    }
   }
 
   updateOnOrderPending = () => {
