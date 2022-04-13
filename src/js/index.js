@@ -78,6 +78,7 @@ class DrinkMachine {
     `;
 
     this.showMaking(template);
+    this.$totalChargeInput.focus();
   };
 
   showMaking(template) {
@@ -101,6 +102,7 @@ class DrinkMachine {
 
     this.$dispenser.replaceChildren();
     this.$clearButton.toggleAttribute('hidden');
+    this.$totalChargeInput.focus();
   };
 }
 
