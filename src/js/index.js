@@ -2,6 +2,7 @@ import { drinks } from './constants/drink.js';
 import { KEY } from './constants/index.js';
 import { $, $$ } from './utils/dom.js';
 import { store } from './utils/store.js';
+import { validateChargeMoney } from './utils/validator.js';
 
 class DrinkMachine {
   constructor() {
@@ -25,6 +26,15 @@ class DrinkMachine {
     e.preventDefault();
 
     const inputMoney = e.target.elements[0].valueAsNumber;
+
+    try {
+      validateChargeMoney(inputMoney);
+    } catch ({ message }) {
+      alert(message);
+      this.$totalChargeInput.value = '';
+      return;
+    }
+
     store.set(KEY.CHARGE_MONEY, store.get(KEY.CHARGE_MONEY) + inputMoney);
 
     this.showTotalMoney();
