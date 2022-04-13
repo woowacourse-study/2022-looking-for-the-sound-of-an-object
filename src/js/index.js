@@ -46,7 +46,7 @@ class DrinkMachine {
             class="menu__button"
             name="${drink}"
             type="button"
-            title=${price}원
+            title=${price}
             ${price > totalMoney ? 'disabled' : ''}
           >${name}</button>
         `;
@@ -61,6 +61,10 @@ class DrinkMachine {
 
   menuButtonClickEvent = e => {
     if (this.$dispenser.children.length > 0) return;
+
+    store.set('money', store.get('money') - e.target.title);
+    this.showTotalMoney();
+    this.showMenuButton();
 
     e.target.classList.add('active');
 

@@ -1,14 +1,20 @@
 export default class Drink {
   #name;
+  #price;
   #ingredients;
 
-  constructor(name, ingredients) {
+  constructor(name, price, ingredients) {
     this.#name = name;
+    this.#price = price;
     this.#ingredients = ingredients;
   }
 
   get name() {
     return this.#name;
+  }
+
+  get price() {
+    return this.#price;
   }
 
   make() {
