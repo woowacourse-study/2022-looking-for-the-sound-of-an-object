@@ -1,4 +1,5 @@
 import { drinks } from './constants/drink.js';
+import { KEY } from './constants/index.js';
 import { $, $$ } from './utils/dom.js';
 import { store } from './utils/store.js';
 
@@ -24,7 +25,7 @@ class DrinkMachine {
     e.preventDefault();
 
     const inputMoney = e.target.elements[0].valueAsNumber;
-    store.set('money', store.get('money') + inputMoney);
+    store.set(KEY.CHARGE_MONEY, store.get(KEY.CHARGE_MONEY) + inputMoney);
 
     this.showTotalMoney();
     this.showMenuButton();
@@ -32,12 +33,12 @@ class DrinkMachine {
   };
 
   showTotalMoney() {
-    const totalMoney = store.get('money');
+    const totalMoney = store.get(KEY.CHARGE_MONEY);
     this.$totalChargeMoney.textContent = totalMoney ? totalMoney : 0;
   }
 
   showMenuButton() {
-    const totalMoney = store.get('money');
+    const totalMoney = store.get(KEY.CHARGE_MONEY);
     const template = Object.keys(drinks)
       .map(drink => {
         const { name, price } = drinks[drink];
@@ -62,7 +63,7 @@ class DrinkMachine {
   menuButtonClickEvent = e => {
     if (this.$dispenser.children.length > 0) return;
 
-    store.set('money', store.get('money') - e.target.title);
+    store.set(KEY.CHARGE_MONEY, store.get(KEY.CHARGE_MONEY) - e.target.title);
     this.showTotalMoney();
     this.showMenuButton();
 
