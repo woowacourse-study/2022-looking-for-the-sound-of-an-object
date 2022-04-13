@@ -1,26 +1,8 @@
-import Drink from './Drink.js';
+import { drinks } from './constants/drink.js';
 import { $, $$ } from './utils/dom.js';
 
 class DrinkMachine {
   constructor() {
-    this.ingredients = {
-      espresso: '에스프레소',
-      hotWater: '뜨거운 물',
-      milk: '우유',
-    };
-    this.drinks = {
-      espresso: new Drink('에스프레소', [this.ingredients.espresso]),
-      americano: new Drink('아메리카노', [
-        this.ingredients.espresso,
-        this.ingredients.hotWater,
-      ]),
-      cafelatte: new Drink('카페라떼', [
-        this.ingredients.milk,
-        this.ingredients.espresso,
-      ]),
-      milk: new Drink('우유', [this.ingredients.milk]),
-    };
-
     this.showMenuButton();
 
     this.$dispenser = $('.dispenser');
@@ -32,17 +14,20 @@ class DrinkMachine {
   }
 
   showMenuButton() {
-    const template = Object.keys(this.drinks)
+    const template = Object.keys(drinks)
       .map(
         drink => `
         <button
           class="menu__button"
           name="${drink}"
           type="button"
-        >${this.drinks[drink].name}</button>`,
+        >${drinks[drink].name}</button>`,
       )
       .join('');
-    $('.menu').insertAdjacentHTML('beforeend', template);
+    const $menu = $('.menu');
+
+    $menu.replaceChildren();
+    $menu.insertAdjacentHTML('beforeend', template);
   }
 
   menuButtonClickEvent = e => {
@@ -52,7 +37,7 @@ class DrinkMachine {
 
     const template = `
       <div>컵이 나옵니다.</div>
-      ${this.drinks[e.target.name].make()}
+      ${drinks[e.target.name].make()}
       <div>완성되었습니다.</div>
     `;
 
