@@ -21,12 +21,28 @@ class DrinkMachine {
       milk: new Drink('우유', [this.ingredients.milk]),
     };
 
+    this.showMenuButton();
+
     this.$dispenser = $('.dispenser');
     this.$clearButton = $('.clear');
     this.$menuButtons = $$('.menu__button');
 
     $('.menu').addEventListener('click', this.menuButtonClickEvent);
     this.$clearButton.addEventListener('click', this.clearDispenser);
+  }
+
+  showMenuButton() {
+    const template = Object.keys(this.drinks)
+      .map(
+        drink => `
+        <button
+          class="menu__button"
+          name="${drink}"
+          type="button"
+        >${this.drinks[drink].name}</button>`,
+      )
+      .join('');
+    $('.menu').insertAdjacentHTML('beforeend', template);
   }
 
   menuButtonClickEvent = e => {
