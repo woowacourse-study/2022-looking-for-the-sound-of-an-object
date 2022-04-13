@@ -37,12 +37,12 @@ export default class OrderTaker {
 
   updateOnOrderMaking = (menu) => {
     this.setAllMenuButtonDisable();
-    this.updateGuideText(`${menu.name} 준비 중...`);
+    this.updateGuideText(`${menus[menu].name} 준비 중...`);
   }
 
   updateOnOrderComplete = (menu) => {
     this.$beveragePickUpButton.removeAttribute("disabled");
-    this.updateGuideText(`${menu.name} 나왔습니다. 😉`);
+    this.updateGuideText(`${menus[menu].name} 나왔습니다. 😉`);
   }
     
   onClickMenuArea = (event) => {
