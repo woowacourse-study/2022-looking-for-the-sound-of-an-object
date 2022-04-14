@@ -29,13 +29,13 @@ class CoffeeMachineComponent {
 
     this.$purchaseDrinkButtonContainer = document.querySelector('.purchase-drink-container');
     this.$purchasableDrinkQuantity = document.querySelectorAll('.drink-quantity');
+    this.$purchaseButtons = document.querySelectorAll('.purchase-button');
 
     this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
-
     this.$cupQuantityElement = document.querySelector('#cups-quantity');
     this.$milkQuantityElement = document.querySelector('#milk-quantity');
-    this.$rechargeDrinkButtonContainer = document.querySelector('.recharge-drink-container');
 
+    this.$rechargeDrinkButtonContainer = document.querySelector('.recharge-drink-container');
     this.$totalChargeCoinElement = document.querySelector('#total-charge-coin');
     this.$chargeCoinButton = document.querySelector('#charge-coin-submit');
   }
@@ -208,12 +208,24 @@ class CoffeeMachineComponent {
       return;
     }
     coinStore.chargeCoins(chargeCoinInputValue);
+    this.activePurchaseMenuButton();
     this.showTotalChargeCoin();
   };
 
   showTotalChargeCoin = () => {
     const totalCoin = coinStore.getCoinStore();
     this.$totalChargeCoinElement.textContent = totalCoin;
+  };
+
+  activePurchaseMenuButton = () => {
+    const menuNames = this.drink.getPurchaseableDrinkName();
+    if (menuNames.length !== 0) {
+      this.$purchaseButtons.forEach(item => {
+        if (menuNames.find(name => name === item.dataset.menuName)) {
+          item.classList.add('is-active');
+        }
+      });
+    }
   };
 }
 
