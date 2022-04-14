@@ -1,9 +1,11 @@
+import { coinStore } from '../store/coinStore';
 import { materialStore } from '../store/materialStore';
 import { ERROR_MSG, MENU_NAME } from '../utils/constants';
 import { showServeCoffee } from '../utils/showServeCoffee';
 import { showSnackBar } from '../utils/showSnackBar';
 import {
   validateCafeLatteMaterialQuantity,
+  validateChargeCoinInput,
   validateCoffeeMaterialQuantity,
   validateMaterialInput,
   validateMilkMaterialQuantity,
@@ -22,6 +24,7 @@ class CoffeeMachineComponent {
     this.$nav = document.querySelector('nav');
     this.$rechargeTab = document.querySelector('#recharge-material-tab');
     this.$purchaseTab = document.querySelector('#purchase-coffee-tab');
+
     this.$purchaseDrinkButtonContainer = document.querySelector('.purchase-drink-container');
     this.$purchasableEspressoQuantityElement = document.querySelector(
       '#purchaseable-espresso-quantity',
@@ -34,9 +37,13 @@ class CoffeeMachineComponent {
     );
     this.$purchaseableMilkQuantityElement = document.querySelector('#purchaseable-milk-quantity');
     this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
+
     this.$cupQuantityElement = document.querySelector('#cups-quantity');
     this.$milkQuantityElement = document.querySelector('#milk-quantity');
     this.$rechargeDrinkButtonContainer = document.querySelector('.recharge-drink-container');
+
+    this.$totalChargeCoinElement = document.querySelector('#total-charge-coin');
+    this.$chargeCoinButton = document.querySelector('#charge-coin-submit');
   }
 
   showPurchasableDrinkQuantity() {
@@ -92,6 +99,7 @@ class CoffeeMachineComponent {
     this.$nav.addEventListener('click', this.onNavButtonClick);
     this.$purchaseDrinkButtonContainer.addEventListener('click', this.onPurchaseDrinkButtonClick);
     this.$rechargeDrinkButtonContainer.addEventListener('click', this.onRechargeButtonClick);
+    this.$chargeCoinButton.addEventListener('click', this.onChargeCoinButtonClick);
   }
 
   onNavButtonClick = e => {
@@ -198,6 +206,19 @@ class CoffeeMachineComponent {
     }
 
     materialStore.rechargeCup(cupInputValue);
+  };
+
+  onChargeCoinButtonClick = e => {
+    e.preventDefault();
+    const $chargeCoinInput = document.querySelector('#charge-coin-input');
+    const { valueAsNumber: chargeCoinInputValue } = $chargeCoinInput;
+    $chargeCoinInput.value = '';
+
+    if (!validateChargeCoinInput(chargeCoinInputValue)) {
+      showSnackBar(ERROR_MSG.INVALID_CHARGE_COIN_INPUT);
+      return;
+    }
+    coinStore.chargeCoins(chargeCoinInputValue);
   };
 }
 

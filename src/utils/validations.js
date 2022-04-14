@@ -44,3 +44,7 @@ export const validateMilkMaterialQuantity = () => {
 export const validateMaterialInput = userInput => {
   return userInput > 0 && Number.isInteger(userInput);
 };
+
+export const validateChargeCoinInput = userInput => {
+  return userInput > 0 && userInput % 100 === 0;
+};
