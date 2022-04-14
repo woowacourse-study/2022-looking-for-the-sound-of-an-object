@@ -32,7 +32,6 @@ class CoffeeMachineComponent {
     this.$purchaseButtons = document.querySelectorAll('.purchase-button');
 
     this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
-
     this.$cupQuantityElement = document.querySelector('#cups-quantity');
     this.$milkQuantityElement = document.querySelector('#milk-quantity');
 
