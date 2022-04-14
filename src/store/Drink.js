@@ -30,28 +30,23 @@ class Drink {
 
   getPurchasableDrinkQuantity() {
     const materials = materialStore.getMaterialStore();
-    return Object.values(this.menu).map(item => Math.min(...item.material.map(m => materials[m])));
+    const getMin = material => Math.min(...material.map(m => materials[m]));
+    return Object.values(this.menu).map(item => getMin(item.material));
   }
 
   getPurchaseableDrinkName() {
     const totalCoin = coinStore.getCoinStore();
-    const menuNames = [];
-    Object.values(this.menu).forEach(item => {
+    return Object.values(this.menu).reduce((menuNames, item) => {
       if (totalCoin >= item.price) {
         menuNames.push(item.name);
       }
-    });
-    return menuNames;
+      return menuNames;
+    }, []);
   }
 
   getMenuPrice(menuName) {
-    let menuPrice = 0;
-    Object.values(this.menu).forEach(item => {
-      if (item.name === menuName) {
-        menuPrice = item.price;
-      }
-    });
-    return menuPrice;
+    const menu = Object.values(this.menu).find(item => item.name === menuName);
+    return menu.price;
   }
 }
 

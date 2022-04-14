@@ -231,14 +231,10 @@ class CoffeeMachineComponent {
     const menuNames = this.drink.getPurchaseableDrinkName();
     this.$purchaseButtons.forEach(item => {
       item.classList.remove('is-active');
+      if (menuNames.includes(item.dataset.menuName)) {
+        item.classList.add('is-active');
+      }
     });
-    if (menuNames.length !== 0) {
-      this.$purchaseButtons.forEach(item => {
-        if (menuNames.find(name => name === item.dataset.menuName)) {
-          item.classList.add('is-active');
-        }
-      });
-    }
   };
 }
 
