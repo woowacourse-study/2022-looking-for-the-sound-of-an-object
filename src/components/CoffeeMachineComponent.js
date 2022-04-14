@@ -83,6 +83,7 @@ class CoffeeMachineComponent {
     this.$rechargeTab.classList.remove('is-active');
 
     this.showPurchasableDrinkQuantity();
+    this.showTotalChargeCoin();
   }
 
   showRechargeMaterialComponent() {
@@ -219,6 +220,12 @@ class CoffeeMachineComponent {
       return;
     }
     coinStore.chargeCoins(chargeCoinInputValue);
+    this.showTotalChargeCoin();
+  };
+
+  showTotalChargeCoin = () => {
+    const totalCoin = coinStore.getCoinStore();
+    this.$totalChargeCoinElement.textContent = totalCoin;
   };
 }
 
