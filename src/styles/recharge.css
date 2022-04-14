@@ -1,6 +1,7 @@
 .now-material-title {
   font-size: 18px;
   font-weight: bold;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -28,8 +29,8 @@ label {
   width: 50px;
 }
 
-.recharge-coffee-beans-container {
-  margin-bottom: 20px;
+.recharge-input-container {
+  margin-bottom: 10px;
 }
 
 .recharge-input {

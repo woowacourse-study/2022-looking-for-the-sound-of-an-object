@@ -1,8 +1,13 @@
 import { materialStore } from '../store/materialStore';
-import { ERROR_MSG } from '../utils/constants';
+import { ERROR_MSG, MENU_NAME } from '../utils/constants';
 import { showServeCoffee } from '../utils/showServeCoffee';
 import { showSnackBar } from '../utils/showSnackBar';
-import { validateMaterialInput, validateMaterialQuantity } from '../utils/validations';
+import {
+  validateCafeLatteMaterialQuantity,
+  validateCoffeeMaterialQuantity,
+  validateMaterialInput,
+  validateMilkMaterialQuantity,
+} from '../utils/validations';
 
 class CoffeeMachineComponent {
   constructor() {
@@ -12,37 +17,54 @@ class CoffeeMachineComponent {
   }
 
   initDOM() {
-    this.$purchaseCoffee = document.querySelector('.purchase-coffee');
+    this.$purchaseCoffee = document.querySelector('.purchase-drink');
     this.$rechargeMaterial = document.querySelector('.recharge-material');
+    this.$nav = document.querySelector('nav');
     this.$rechargeTab = document.querySelector('#recharge-material-tab');
     this.$purchaseTab = document.querySelector('#purchase-coffee-tab');
-    this.$purchaseCoffeeQuantityElement = document.querySelector('#purchase-coffee-quantity');
-    this.$purchaseCoffeeButton = document.querySelector('#purchase-coffee');
+    this.$purchaseDrinkButtonContainer = document.querySelector('.purchase-drink-container');
+    this.$purchasableEspressoQuantityElement = document.querySelector(
+      '#purchaseable-espresso-quantity',
+    );
+    this.$purchasableAmericanoQuantityElement = document.querySelector(
+      '#purchaseable-americano-quantity',
+    );
+    this.$purchaseableCafeLatteQuantityElement = document.querySelector(
+      '#purchaseable-cafe-latte-quantity',
+    );
+    this.$purchaseableMilkQuantityElement = document.querySelector('#purchaseable-milk-quantity');
     this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
     this.$cupQuantityElement = document.querySelector('#cups-quantity');
-    this.$rechargeCoffeeBeanButton = document.querySelector('#recharge-coffee-beans-button');
-    this.$rechargeCupButton = document.querySelector('#recharge-cups-button');
+    this.$milkQuantityElement = document.querySelector('#milk-quantity');
+    this.$rechargeDrinkButtonContainer = document.querySelector('.recharge-drink-container');
   }
 
-  showPurchasableCoffeeQuantity() {
+  showPurchasableDrinkQuantity() {
     const materials = materialStore.getMaterialStore();
-    let quantity = 0;
 
     if (materials !== 0) {
-      const { coffeeBean, cup } = materials;
-      quantity = Math.min(coffeeBean, cup);
+      const { coffeeBean, cup, milk } = materials;
+      const espressoQuantity = Math.min(coffeeBean, cup);
+      const americanoQuantity = Math.min(coffeeBean, cup);
+      const cafeLatteQuantity = Math.min(coffeeBean, cup, milk);
+      const milkQuantity = Math.min(milk, cup);
+
+      this.$purchasableEspressoQuantityElement.textContent = espressoQuantity;
+      this.$purchasableAmericanoQuantityElement.textContent = americanoQuantity;
+      this.$purchaseableCafeLatteQuantityElement.textContent = cafeLatteQuantity;
+      this.$purchaseableMilkQuantityElement.textContent = milkQuantity;
     }
-    this.$purchaseCoffeeQuantityElement.textContent = quantity;
   }
 
   showNowMaterialQuantity() {
     const materials = materialStore.getMaterialStore();
 
     if (materials !== 0) {
-      const { coffeeBean, cup } = materials;
+      const { coffeeBean, cup, milk } = materials;
 
       this.$coffeeBeanQuantityElement.textContent = coffeeBean;
       this.$cupQuantityElement.textContent = cup;
+      this.$milkQuantityElement.textContent = milk;
     }
   }
 
@@ -53,7 +75,7 @@ class CoffeeMachineComponent {
     this.$purchaseTab.classList.add('is-active');
     this.$rechargeTab.classList.remove('is-active');
 
-    this.showPurchasableCoffeeQuantity();
+    this.showPurchasableDrinkQuantity();
   }
 
   showRechargeMaterialComponent() {
@@ -67,42 +89,80 @@ class CoffeeMachineComponent {
   }
 
   bindEventListener() {
-    this.$purchaseTab.addEventListener('click', this.onPurchaseTabClick);
-    this.$rechargeTab.addEventListener('click', this.onRechargeTabClick);
-    this.$purchaseCoffeeButton.addEventListener('click', this.onPurchaseCoffeeButtonClick);
-    this.$rechargeCoffeeBeanButton.addEventListener('click', this.onRechargeCoffeeBeanButtonClick);
-    this.$rechargeCupButton.addEventListener('click', this.onRechargeCupButtonClick);
+    this.$nav.addEventListener('click', this.onNavButtonClick);
+    this.$purchaseDrinkButtonContainer.addEventListener('click', this.onPurchaseDrinkButtonClick);
+    this.$rechargeDrinkButtonContainer.addEventListener('click', this.onRechargeButtonClick);
   }
 
-  onPurchaseTabClick = e => {
-    e.preventDefault();
-    this.showPurchaseCoffeeComponent();
-  };
-
-  onRechargeTabClick = e => {
-    e.preventDefault();
-    this.showRechargeMaterialComponent();
-  };
-
-  onPurchaseCoffeeButtonClick = e => {
+  onNavButtonClick = e => {
     e.preventDefault();
 
-    if (!validateMaterialQuantity()) {
-      showSnackBar(ERROR_MSG.SOLD_OUT_COFFEE);
-      return;
+    if (e.target.id === 'recharge-material-tab') {
+      this.showRechargeMaterialComponent();
     }
-    materialStore.buyCoffee();
-    this.serveCoffee();
-    this.showPurchasableCoffeeQuantity();
+
+    if (e.target.id === 'purchase-coffee-tab') {
+      this.showPurchaseCoffeeComponent();
+    }
   };
 
-  serveCoffee = () => {
-    showServeCoffee();
-  };
-
-  onRechargeCoffeeBeanButtonClick = e => {
+  onPurchaseDrinkButtonClick = e => {
     e.preventDefault();
 
+    if (e.target.id === 'purchase-espresso-button') {
+      if (!validateCoffeeMaterialQuantity()) {
+        showSnackBar(ERROR_MSG.SOLD_OUT_ESPRESSO);
+        return;
+      }
+      materialStore.buyDrink(MENU_NAME.ESPRESSO);
+      showServeCoffee('☕️');
+      showSnackBar('에스프레소가 나왔습니다');
+    }
+    if (e.target.id === 'purchase-americano-button') {
+      if (!validateCoffeeMaterialQuantity()) {
+        showSnackBar(ERROR_MSG.SOLD_OUT_AMERICANO);
+        return;
+      }
+      materialStore.buyDrink(MENU_NAME.AMERICANO);
+      showServeCoffee('🥃');
+      showSnackBar('아메리카노가 나왔습니다');
+    }
+    if (e.target.id === 'purchase-cafe-latte-button') {
+      if (!validateCafeLatteMaterialQuantity()) {
+        showSnackBar(ERROR_MSG.SOLD_OUT_CAFE_LATTE);
+        return;
+      }
+      materialStore.buyDrink(MENU_NAME.CAFE_LATTE);
+      showServeCoffee('🧋');
+      showSnackBar('카페라떼가 나왔습니다');
+    }
+    if (e.target.id === 'purchase-milk-button') {
+      if (!validateMilkMaterialQuantity()) {
+        showSnackBar(ERROR_MSG.SOLD_OUT_MILK);
+        return;
+      }
+      materialStore.buyDrink(MENU_NAME.MILK);
+      showServeCoffee('🥛');
+      showSnackBar('우유가 나왔습니다');
+    }
+    this.showPurchasableDrinkQuantity();
+  };
+
+  onRechargeButtonClick = e => {
+    e.preventDefault();
+    if (e.target.id === 'recharge-coffee-beans-button') {
+      this.onRechargeCoffeeBeanButtonClick();
+    }
+    if (e.target.id === 'recharge-milk-button') {
+      this.onRechargeMilkButtonClick();
+    }
+    if (e.target.id === 'recharge-cups-button') {
+      this.onRechargeCupButtonClick();
+    }
+    this.showNowMaterialQuantity();
+  };
+
+  onRechargeCoffeeBeanButtonClick = () => {
     const $rechargeCoffeeBeanInput = document.querySelector('#recharge-coffee-beans-input');
     const { valueAsNumber: coffeeBeanInputValue } = $rechargeCoffeeBeanInput;
     $rechargeCoffeeBeanInput.value = '';
@@ -113,12 +173,21 @@ class CoffeeMachineComponent {
     }
 
     materialStore.rechargeCoffeeBean(coffeeBeanInputValue);
-    this.showNowMaterialQuantity();
   };
 
-  onRechargeCupButtonClick = e => {
-    e.preventDefault();
+  onRechargeMilkButtonClick = () => {
+    const $rechargeMilkInput = document.querySelector('#recharge-milk-input');
+    const { valueAsNumber: milkInputValue } = $rechargeMilkInput;
+    $rechargeMilkInput.value = '';
 
+    if (!validateMaterialInput(milkInputValue)) {
+      showSnackBar(ERROR_MSG.INVALID_QUANTITY_INPUT);
+      return;
+    }
+    materialStore.rechargeMilk(milkInputValue);
+  };
+
+  onRechargeCupButtonClick = () => {
     const $rechargeCupInput = document.querySelector('#recharge-cups-input');
     const { valueAsNumber: cupInputValue } = $rechargeCupInput;
     $rechargeCupInput.value = '';
@@ -129,7 +198,6 @@ class CoffeeMachineComponent {
     }
 
     materialStore.rechargeCup(cupInputValue);
-    this.showNowMaterialQuantity();
   };
 }
 

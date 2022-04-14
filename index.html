@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kor">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,15 +13,38 @@
       </header>
       <nav>
         <button id="recharge-material-tab" class="tab-button" type="button">재료 충전📦</button>
-        <button type="button" class="tab-button" id="purchase-coffee-tab">에스프레소☕️</button>
+        <button type="button" class="tab-button" id="purchase-coffee-tab">주문 하기🤵‍♀️</button>
       </nav>
-      <section class="purchase-coffee" aria-labelledby="purchase-coffee-title">
-        <h2 id="purchase-coffee-title" hidden>에스프레소 구매하는 탭</h2>
-        <div class="purchase-coffee-container">
-          <div class="purchase-coffee-quantity-container">
-            현재 잔여 수량: <span id="purchase-coffee-quantity"></span>개
-          </div>
-          <button id="purchase-coffee" class="purchase-button" type="button">구매하기</button>
+      <section class="purchase-drink" aria-labelledby="purchase-drink-title">
+        <h2 id="purchase-drink-title" hidden>음료수를 구매하는 탭</h2>
+        <div class="purchase-drink-quantity-container">
+          <div class="purchase-drink-title">현재 잔여 수량</div>
+          <table id="purchase-drink-table">
+            <tr>
+              <td>에스프레소</td>
+              <td>아메리카노</td>
+              <td>카페라떼</td>
+              <td>우유</td>
+            </tr>
+            <tr>
+              <td id="purchaseable-espresso-quantity">0</td>
+              <td id="purchaseable-americano-quantity">0</td>
+              <td id="purchaseable-cafe-latte-quantity">0</td>
+              <td id="purchaseable-milk-quantity">0</td>
+            </tr>
+          </table>
+        </div>
+        <div class="purchase-drink-container">
+          <button id="purchase-espresso-button" class="purchase-button" type="button">
+            에스프레소
+          </button>
+          <button id="purchase-americano-button" class="purchase-button" type="button">
+            아메리카노
+          </button>
+          <button id="purchase-cafe-latte-button" class="purchase-button" type="button">
+            카페라떼
+          </button>
+          <button id="purchase-milk-button" class="purchase-button" type="button">우유</button>
         </div>
 
         <div class="coffee-dispenser"></div>
@@ -32,15 +55,17 @@
         <table class="now-material-quantity-table">
           <tr>
             <td>원두</td>
+            <td>우유</td>
             <td>컵</td>
           </tr>
           <tr>
             <td id="coffee-beans-quantity">0</td>
+            <td id="milk-quantity">0</td>
             <td id="cups-quantity">0</td>
           </tr>
         </table>
-        <div class="recharge-coffee-beans-container">
-          <div class="recharge-coffee-beans-container">
+        <div class="recharge-drink-container">
+          <div class="recharge-coffee-beans-container recharge-input-container">
             <label for="recharge-coffee-beans-input">원두 </label>
             <input
               type="number"
@@ -53,7 +78,18 @@
             </button>
           </div>
 
-          <div class="recharge-cups-container">
+          <div class="recharge-milk-container recharge-input-container">
+            <label for="recharge-milk-input">우유</label>
+            <input
+              type="number"
+              id="recharge-milk-input"
+              class="recharge-input"
+              placeholder="몇 인 분의 우유를 충전 할 것인지 입력해주세요"
+            />
+            <button id="recharge-milk-button" class="recharge-button">충전하기</button>
+          </div>
+
+          <div class="recharge-cups-container recharge-input-container">
             <label for="recharge-cups-input">컵 </label>
             <input
               type="number"
