@@ -89,12 +89,12 @@ class CoffeeMachineComponent {
   }
 
   bindEventListener() {
-    this.$nav.addEventListener('click', this.onTabButtonClick);
+    this.$nav.addEventListener('click', this.onNavButtonClick);
     this.$purchaseDrinkButtonContainer.addEventListener('click', this.onPurchaseDrinkButtonClick);
     this.$rechargeDrinkButtonContainer.addEventListener('click', this.onRechargeButtonClick);
   }
 
-  onTabButtonClick = e => {
+  onNavButtonClick = e => {
     e.preventDefault();
 
     if (e.target.id === 'recharge-material-tab') {
@@ -111,11 +111,12 @@ class CoffeeMachineComponent {
 
     if (e.target.id === 'purchase-espresso-button') {
       if (!validateCoffeeMaterialQuantity()) {
-        showSnackBar(ERROR_MSG.SOLD_OUT_COFFEE);
+        showSnackBar(ERROR_MSG.SOLD_OUT_ESPRESSO);
         return;
       }
       materialStore.buyDrink(MENU_NAME.ESPRESSO);
       showServeCoffee('☕️');
+      showSnackBar('에스프레소가 나왔습니다');
     }
     if (e.target.id === 'purchase-americano-button') {
       if (!validateCoffeeMaterialQuantity()) {
@@ -124,6 +125,7 @@ class CoffeeMachineComponent {
       }
       materialStore.buyDrink(MENU_NAME.AMERICANO);
       showServeCoffee('🥃');
+      showSnackBar('아메리카노가 나왔습니다');
     }
     if (e.target.id === 'purchase-cafe-latte-button') {
       if (!validateCafeLatteMaterialQuantity()) {
@@ -132,6 +134,7 @@ class CoffeeMachineComponent {
       }
       materialStore.buyDrink(MENU_NAME.CAFE_LATTE);
       showServeCoffee('🧋');
+      showSnackBar('카페라떼가 나왔습니다');
     }
     if (e.target.id === 'purchase-milk-button') {
       if (!validateMilkMaterialQuantity()) {
@@ -140,6 +143,7 @@ class CoffeeMachineComponent {
       }
       materialStore.buyDrink(MENU_NAME.MILK);
       showServeCoffee('🥛');
+      showSnackBar('우유가 나왔습니다');
     }
     this.showPurchasableDrinkQuantity();
   };
