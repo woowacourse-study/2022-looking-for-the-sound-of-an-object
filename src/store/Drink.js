@@ -48,6 +48,16 @@ class Drink {
     const menu = Object.values(this.menu).find(item => item.name === menuName);
     return menu.price;
   }
+
+  getMenuPrice(menuName) {
+    let menuPrice = 0;
+    Object.values(this.menu).forEach(item => {
+      if (item.name === menuName) {
+        menuPrice = item.price;
+      }
+    });
+    return menuPrice;
+  }
 }
 
 export default Drink;
