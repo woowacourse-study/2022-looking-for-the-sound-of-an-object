@@ -17,3 +17,16 @@ export const MENU_NAME = {
   CAFE_LATTE: 'cafeLatte',
   MILK: 'milk',
 };
+
+export const MATERIAL_NAME = {
+  COFFEE_BEAN: 'coffeeBean',
+  MILK: 'milk',
+  CUP: 'cup',
+};
+
+export const DRINK_PRICE = {
+  ESPRESSO: 1000,
+  AMERICANO: 1500,
+  CAFE_LATTE: 2000,
+  MILK: 1500,
+};

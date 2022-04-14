@@ -1,4 +1,5 @@
 import { coinStore } from '../store/coinStore';
+import Drink from '../store/Drink';
 import { materialStore } from '../store/materialStore';
 import { ERROR_MSG, MENU_NAME } from '../utils/constants';
 import { showServeCoffee } from '../utils/showServeCoffee';
@@ -16,6 +17,7 @@ class CoffeeMachineComponent {
     this.initDOM();
     this.showPurchaseCoffeeComponent();
     this.bindEventListener();
+    this.drink = new Drink();
   }
 
   initDOM() {
@@ -26,16 +28,8 @@ class CoffeeMachineComponent {
     this.$purchaseTab = document.querySelector('#purchase-coffee-tab');
 
     this.$purchaseDrinkButtonContainer = document.querySelector('.purchase-drink-container');
-    this.$purchasableEspressoQuantityElement = document.querySelector(
-      '#purchaseable-espresso-quantity',
-    );
-    this.$purchasableAmericanoQuantityElement = document.querySelector(
-      '#purchaseable-americano-quantity',
-    );
-    this.$purchaseableCafeLatteQuantityElement = document.querySelector(
-      '#purchaseable-cafe-latte-quantity',
-    );
-    this.$purchaseableMilkQuantityElement = document.querySelector('#purchaseable-milk-quantity');
+    this.$purchasableDrinkQuantity = document.querySelectorAll('.drink-quantity');
+
     this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
 
     this.$cupQuantityElement = document.querySelector('#cups-quantity');
@@ -50,16 +44,10 @@ class CoffeeMachineComponent {
     const materials = materialStore.getMaterialStore();
 
     if (materials !== 0) {
-      const { coffeeBean, cup, milk } = materials;
-      const espressoQuantity = Math.min(coffeeBean, cup);
-      const americanoQuantity = Math.min(coffeeBean, cup);
-      const cafeLatteQuantity = Math.min(coffeeBean, cup, milk);
-      const milkQuantity = Math.min(milk, cup);
-
-      this.$purchasableEspressoQuantityElement.textContent = espressoQuantity;
-      this.$purchasableAmericanoQuantityElement.textContent = americanoQuantity;
-      this.$purchaseableCafeLatteQuantityElement.textContent = cafeLatteQuantity;
-      this.$purchaseableMilkQuantityElement.textContent = milkQuantity;
+      const purchaseDrinkQuantity = this.drink.getPurchasableDrinkQuantity();
+      this.$purchasableDrinkQuantity.forEach((item, index) => {
+        item.textContent = purchaseDrinkQuantity[index];
+      });
     }
   }
 
