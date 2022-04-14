@@ -43,6 +43,16 @@ class Drink {
     });
     return menuNames;
   }
+
+  getMenuPrice(menuName) {
+    let menuPrice = 0;
+    Object.values(this.menu).forEach(item => {
+      if (item.name === menuName) {
+        menuPrice = item.price;
+      }
+    });
+    return menuPrice;
+  }
 }
 
 export default Drink;

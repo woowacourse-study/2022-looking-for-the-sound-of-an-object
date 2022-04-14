@@ -111,38 +111,48 @@ class CoffeeMachineComponent {
         showSnackBar(ERROR_MSG.SOLD_OUT_ESPRESSO);
         return;
       }
-      materialStore.buyDrink(MENU_NAME.ESPRESSO);
-      showServeCoffee('☕️');
-      showSnackBar('에스프레소가 나왔습니다');
+      if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.ESPRESSO))) {
+        materialStore.buyDrink(MENU_NAME.ESPRESSO);
+        showServeCoffee('☕️');
+        showSnackBar('에스프레소가 나왔습니다');
+      }
     }
     if (e.target.id === 'purchase-americano-button') {
       if (!validateCoffeeMaterialQuantity()) {
         showSnackBar(ERROR_MSG.SOLD_OUT_AMERICANO);
         return;
       }
-      materialStore.buyDrink(MENU_NAME.AMERICANO);
-      showServeCoffee('🥃');
-      showSnackBar('아메리카노가 나왔습니다');
+      if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.AMERICANO))) {
+        materialStore.buyDrink(MENU_NAME.AMERICANO);
+        showServeCoffee('🥃');
+        showSnackBar('아메리카노가 나왔습니다');
+      }
     }
     if (e.target.id === 'purchase-cafe-latte-button') {
       if (!validateCafeLatteMaterialQuantity()) {
         showSnackBar(ERROR_MSG.SOLD_OUT_CAFE_LATTE);
         return;
       }
-      materialStore.buyDrink(MENU_NAME.CAFE_LATTE);
-      showServeCoffee('🧋');
-      showSnackBar('카페라떼가 나왔습니다');
+      if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.CAFE_LATTE))) {
+        materialStore.buyDrink(MENU_NAME.CAFE_LATTE);
+        showServeCoffee('🧋');
+        showSnackBar('카페라떼가 나왔습니다');
+      }
     }
     if (e.target.id === 'purchase-milk-button') {
       if (!validateMilkMaterialQuantity()) {
         showSnackBar(ERROR_MSG.SOLD_OUT_MILK);
         return;
       }
-      materialStore.buyDrink(MENU_NAME.MILK);
-      showServeCoffee('🥛');
-      showSnackBar('우유가 나왔습니다');
+      if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.MILK))) {
+        materialStore.buyDrink(MENU_NAME.MILK);
+        showServeCoffee('🥛');
+        showSnackBar('우유가 나왔습니다');
+      }
     }
     this.showPurchasableDrinkQuantity();
+    this.activePurchaseMenuButton();
+    this.showTotalChargeCoin();
   };
 
   onRechargeButtonClick = e => {
@@ -219,6 +229,9 @@ class CoffeeMachineComponent {
 
   activePurchaseMenuButton = () => {
     const menuNames = this.drink.getPurchaseableDrinkName();
+    this.$purchaseButtons.forEach(item => {
+      item.classList.remove('is-active');
+    });
     if (menuNames.length !== 0) {
       this.$purchaseButtons.forEach(item => {
         if (menuNames.find(name => name === item.dataset.menuName)) {
