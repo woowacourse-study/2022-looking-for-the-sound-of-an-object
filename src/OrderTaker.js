@@ -3,23 +3,17 @@ import menus from './menus.js';
 import { ORDER_PROGRESS } from './constants.js';
 
 export default class OrderTaker {
-  constructor(order) {
+  constructor({customerCharge, order}) {
+    this.customerCharge = customerCharge;
     this.order = order;
-    this.customerCharge = 0;
-
-    this.$customerChargeArea = $('#customer-charge-area');
-    this.$customerChargeForm = $('#customer-charge-form');
-    this.$customerCharge = $('#customer-charge');
 
     this.$menuButtonArea = $('#menu-button-area');
     this.$$menuButtons;
-    this.$guideText = $('#guide-message-area');
     this.$beveragePickUpButton = $('#beverage-pick-up-button');
     this.initializeMenuButtons();
-    this.updateCustomerCharge();
 
+    this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
     this.order.addSubscriber(this.updateOnOrderChange);
-    this.$customerChargeForm.addEventListener('submit', this.onSubmitCustomerChargeForm);
     this.$menuButtonArea.addEventListener('click', this.onClickMenuArea);
     this.$beveragePickUpButton.addEventListener('click', this.onClickBeveragePickUpButton);
   }
@@ -32,16 +26,22 @@ export default class OrderTaker {
     this.setAllMenuButtonDisable();
   }
 
-  updateOnOrderChange = ({progress, orderedMenu}) => {
+  updateOnCustomerChargeChange = () => {
+    if (this.order.progress === ORDER_PROGRESS.PENDING) {
+      this.setPurchaseAvailableButtonActive();
+    }
+  }
+
+  updateOnOrderChange = ({progress}) => {
     switch (progress) {
     case ORDER_PROGRESS.PENDING:
       this.updateOnOrderPending()
       break;
     case ORDER_PROGRESS.MAKING:
-      this.updateOnOrderMaking(orderedMenu);
+      this.updateOnOrderMaking();
       break;
     case ORDER_PROGRESS.COMPLETE:
-      this.updateOnOrderComplete(orderedMenu);
+      this.updateOnOrderComplete();
       break;
     default:
     }
@@ -49,46 +49,22 @@ export default class OrderTaker {
 
   updateOnOrderPending = () => {
     this.setPurchaseAvailableButtonActive();
-    
     this.$beveragePickUpButton.setAttribute("disabled", "");
-    this.updateGuideText(
-      this.customerCharge >= Math.min(...Object.keys(menus).map(menu => menus[menu].price)) 
-        ? '원하는 음료를 선택하세요.'
-        : '투입 금액이 부족하여 선택 가능한 음료가 없습니다.'
-    );
   }
 
-  updateOnOrderMaking = (menu) => {
+  updateOnOrderMaking = () => {
     this.setAllMenuButtonDisable();
-    this.updateGuideText(`${menus[menu].name} 준비 중...`);
   }
 
-  updateOnOrderComplete = (menu) => {
+  updateOnOrderComplete = () => {
     this.$beveragePickUpButton.removeAttribute("disabled");
-    this.updateGuideText(`${menus[menu].name} 나왔습니다. 😉`);
-  }
-
-  onSubmitCustomerChargeForm = (event) => {
-    event.preventDefault();
-    const $customerChargeInput = $('#customer-charge-input', event.target);
-    const chargeValue = Number($customerChargeInput.value);
-    $customerChargeInput.value = '';
-    this.customerCharge = chargeValue;
-    this.updateCustomerCharge();
-    this.updateGuideText(
-      this.customerCharge >= Math.min(...Object.keys(menus).map(menu => menus[menu].price)) 
-        ? '원하는 음료를 선택하세요.'
-        : '투입 금액이 부족하여 선택 가능한 음료가 없습니다.'
-    );
-    this.setPurchaseAvailableButtonActive();
   }
     
   onClickMenuArea = (event) => {
     if (event.target.tagName !== 'BUTTON') return;
     if (this.order.progress !== ORDER_PROGRESS.PENDING) return;
 
-    this.customerCharge -= menus[event.target.name].price;
-    this.updateCustomerCharge();
+    this.customerCharge.subtractCustomerCharge(menus[event.target.name].price);
     this.order.updateOrderStateToMaking(event.target.name);
   }
   
@@ -113,18 +89,10 @@ export default class OrderTaker {
   setPurchaseAvailableButtonActive() {
     Array.from(this.$$menuButtons).filter((menuButton) => {
       const { price } = menus[menuButton.name];
-      return price <= this.customerCharge;
+      return price <= this.customerCharge.value;
     }).forEach((menuButton) => {
       menuButton.removeAttribute("disabled");
     })
-  }
-
-  updateCustomerCharge() {
-    this.$customerCharge.textContent = this.customerCharge.toLocaleString();
-  }
-  
-  updateGuideText(guideMessage) {
-    this.$guideText.innerText = guideMessage;
   }
 
 }

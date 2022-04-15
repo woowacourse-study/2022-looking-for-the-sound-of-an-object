@@ -1,7 +1,7 @@
 import { ORDER_PROGRESS } from './constants.js';
 
 export default class Order {
-  #state
+  #state;
 
   #subscribers;
 

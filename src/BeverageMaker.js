@@ -3,7 +3,7 @@ import menus from './menus.js';
 import { $ } from './util.js';
 
 export default class BeverageMaker {
-  constructor(order) {
+  constructor({order}) {
     this.order = order;
 
     this.$makeBeverageArea = $('#make-beverage-area');
