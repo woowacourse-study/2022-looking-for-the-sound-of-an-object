@@ -13,8 +13,18 @@
       <h1>자판기</h1>
     </header>
     <main>
-      <section id="menu-button-area" class="menu-area"></section>
+      <section id="customer-charge-area" class="form-container">
+        <form id="customer-charge-form">
+          <label form="customer-charge-form">금액을 투입하세요. (1,000원 단위)</label>
+          <div class="input-button-wrap">
+            <input type="number" id="customer-charge-input" placeholder="1000" step="1000" min="1000" max="10000" required>
+            <button class="small-button">충전</button>
+          </div>
+        </form>
+        <p>현재 투입 금액: <span id="customer-charge">0</span>원</p>
+      </section>
       <p id="guide-message-area" class="text"></p>
+      <section id="menu-button-area" class="menu-area"></section>
       <ol id="make-beverage-area" class="ol-reverse"></ol>
       <button id="beverage-pick-up-button" type="button">음료 가져가기</button>
     </main>
