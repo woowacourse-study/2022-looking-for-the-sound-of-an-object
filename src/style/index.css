@@ -36,6 +36,16 @@ main {
   align-items: center
 }
 
+button {
+  width: 120px;
+  height: 36px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background: var(--platinum);
+  text-align: center;
+}
+
 .form-container {
   width: 100%;
   display: flex;
@@ -60,9 +70,15 @@ input {
 }
 
 .input-button-wrap {
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.input-button-wrap > input,
+.input-button-wrap > button {
+  height: 100%;
 }
 
 .small-button {
@@ -71,7 +87,7 @@ input {
 
 .menu-area {
   width: 100%;
-  margin: 30px 0;
+  margin: 20px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
