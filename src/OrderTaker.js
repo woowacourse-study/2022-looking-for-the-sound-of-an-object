@@ -17,9 +17,9 @@ export default class OrderTaker {
   }
   
   initializeMenuButtons() {
-    this.$menuButtonArea.innerHTML = Object.keys(menus).map((menu) => `
+    this.$menuButtonArea.insertAdjacentHTML('afterbegin', Object.keys(menus).map((menu) => `
       <button name="${menu}" type="button">${menus[menu].name}</button>
-    `).join('');
+    `).join(''));
     this.$$menuButtons = $$('button', this.$menuButtonArea);
   }
 
