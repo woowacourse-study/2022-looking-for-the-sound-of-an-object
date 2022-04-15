@@ -48,9 +48,14 @@ export default class OrderTaker {
   }
 
   updateOnOrderPending = () => {
-    // this.setAllMenuButtonActive();
+    this.setPurchaseAvailableButtonActive();
+    
     this.$beveragePickUpButton.setAttribute("disabled", "");
-    this.updateGuideText('원하는 음료를 선택하세요.');
+    this.updateGuideText(
+      this.customerCharge >= Math.min(...Object.keys(menus).map(menu => menus[menu].price)) 
+        ? '원하는 음료를 선택하세요.'
+        : '투입 금액이 부족하여 선택 가능한 음료가 없습니다.'
+    );
   }
 
   updateOnOrderMaking = (menu) => {
@@ -65,14 +70,25 @@ export default class OrderTaker {
 
   onSubmitCustomerChargeForm = (event) => {
     event.preventDefault();
-    const chargeValue = Number($('#customer-charge-input', event.target).value);
-    console.log(chargeValue);
+    const $customerChargeInput = $('#customer-charge-input', event.target);
+    const chargeValue = Number($customerChargeInput.value);
+    $customerChargeInput.value = '';
+    this.customerCharge = chargeValue;
+    this.updateCustomerCharge();
+    this.updateGuideText(
+      this.customerCharge >= Math.min(...Object.keys(menus).map(menu => menus[menu].price)) 
+        ? '원하는 음료를 선택하세요.'
+        : '투입 금액이 부족하여 선택 가능한 음료가 없습니다.'
+    );
+    this.setPurchaseAvailableButtonActive();
   }
     
   onClickMenuArea = (event) => {
     if (event.target.tagName !== 'BUTTON') return;
     if (this.order.progress !== ORDER_PROGRESS.PENDING) return;
 
+    this.customerCharge -= menus[event.target.name].price;
+    this.updateCustomerCharge();
     this.order.updateOrderStateToMaking(event.target.name);
   }
   
@@ -90,6 +106,15 @@ export default class OrderTaker {
 
   setAllMenuButtonActive() {
     this.$$menuButtons.forEach((menuButton) => {
+      menuButton.removeAttribute("disabled");
+    })
+  }
+
+  setPurchaseAvailableButtonActive() {
+    Array.from(this.$$menuButtons).filter((menuButton) => {
+      const { price } = menus[menuButton.name];
+      return price <= this.customerCharge;
+    }).forEach((menuButton) => {
       menuButton.removeAttribute("disabled");
     })
   }
