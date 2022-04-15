@@ -7,6 +7,7 @@ export default class OrderTaker {
     this.order = order;
 
     this.$menuButtonArea = $('#menu-button-area');
+    this.$$menuButtons;
     this.$guideText = $('#guide-message-area');
     this.$beveragePickUpButton = $('#beverage-pick-up-button');
     this.initializeMenuButtons();
