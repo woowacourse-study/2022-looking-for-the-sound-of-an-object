@@ -3,7 +3,15 @@ const store = {
     localStorage.setItem(key, JSON.stringify(value));
   },
   get(key) {
-    return JSON.parse(localStorage.getItem(key));
+    let items;
+
+    try {
+      items = JSON.parse(localStorage.getItem(key));
+    } catch (e) {
+      console.error(e);
+    }
+
+    return items;
   },
 };
 
