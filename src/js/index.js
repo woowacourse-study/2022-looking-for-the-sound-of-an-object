@@ -17,12 +17,15 @@ class DrinkMachine {
     this.showTotalMoney();
     this.$totalChargeInput.focus();
 
-    $('.charge-money__form').addEventListener('submit', this.chargeMoneyEvent);
-    this.$menu.addEventListener('click', this.menuButtonClickEvent);
+    $('.charge-money__form').addEventListener(
+      'submit',
+      this.chargeMoneyHandler,
+    );
+    this.$menu.addEventListener('click', this.menuButtonClickHandler);
     this.$clearButton.addEventListener('click', this.clearDispenser);
   }
 
-  chargeMoneyEvent = e => {
+  chargeMoneyHandler = e => {
     e.preventDefault();
 
     const inputMoney = e.target.elements[0].valueAsNumber;
@@ -72,7 +75,7 @@ class DrinkMachine {
     this.$menuButtons = $$('.menu__button');
   }
 
-  menuButtonClickEvent = e => {
+  menuButtonClickHandler = e => {
     if (this.$dispenser.children.length > 0) return;
 
     store.set(KEY.CHARGE_MONEY, store.get(KEY.CHARGE_MONEY) - e.target.title);
