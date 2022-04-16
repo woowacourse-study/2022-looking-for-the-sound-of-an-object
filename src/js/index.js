@@ -21,6 +21,10 @@ class DrinkMachine {
       'submit',
       this.chargeMoneyHandler,
     );
+    $('.charge-money__return-button').addEventListener(
+      'click',
+      this.returnChargeMoneyHandler,
+    );
     this.$menu.addEventListener('click', this.menuButtonClickHandler);
     this.$clearButton.addEventListener('click', this.clearDispenser);
   }
@@ -43,6 +47,33 @@ class DrinkMachine {
     this.showTotalMoney();
     this.showMenuButton();
     this.$totalChargeInput.value = '';
+  };
+
+  returnChargeMoneyHandler = () => {
+    store.set(KEY.CHARGE_MONEY, 0);
+
+    this.showTotalMoney();
+    this.showMenuButton();
+    this.$totalChargeInput.focus();
+  };
+
+  menuButtonClickHandler = e => {
+    if (this.$dispenser.children.length > 0) return;
+
+    store.set(KEY.CHARGE_MONEY, store.get(KEY.CHARGE_MONEY) - e.target.title);
+    this.showTotalMoney();
+    this.showMenuButton();
+
+    e.target.classList.add('active');
+
+    const template = `
+      <div>컵이 나옵니다.</div>
+      ${drinks[e.target.name].make()}
+      <div>완성되었습니다.</div>
+    `;
+
+    this.showMaking(template);
+    this.$totalChargeInput.focus();
   };
 
   showTotalMoney() {
@@ -74,25 +105,6 @@ class DrinkMachine {
 
     this.$menuButtons = $$('.menu__button');
   }
-
-  menuButtonClickHandler = e => {
-    if (this.$dispenser.children.length > 0) return;
-
-    store.set(KEY.CHARGE_MONEY, store.get(KEY.CHARGE_MONEY) - e.target.title);
-    this.showTotalMoney();
-    this.showMenuButton();
-
-    e.target.classList.add('active');
-
-    const template = `
-      <div>컵이 나옵니다.</div>
-      ${drinks[e.target.name].make()}
-      <div>완성되었습니다.</div>
-    `;
-
-    this.showMaking(template);
-    this.$totalChargeInput.focus();
-  };
 
   showMaking(template) {
     this.$dispenser.insertAdjacentHTML('beforeend', template);
