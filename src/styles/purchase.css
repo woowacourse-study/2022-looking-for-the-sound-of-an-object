@@ -3,14 +3,23 @@
   margin-bottom: 20px;
 }
 
-.purchase-drink-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.charge-coin-container {
+  margin: 20px auto;
 }
 
 .purchase-drink-container {
   margin-bottom: 20px;
+}
+
+.total-charge-coin-container {
+  margin-bottom: 20px;
+}
+
+.charge-input {
+  width: 200px;
+  padding: 7px;
+  border: 1px solid #111;
+  border-radius: 4px;
 }
 
 .coffee-dispenser {

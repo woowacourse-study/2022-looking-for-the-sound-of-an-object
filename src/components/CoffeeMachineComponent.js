@@ -1,9 +1,12 @@
+import { coinStore } from '../store/coinStore';
+import Drink from '../store/Drink';
 import { materialStore } from '../store/materialStore';
 import { ERROR_MSG, MENU_NAME } from '../utils/constants';
 import { showServeCoffee } from '../utils/showServeCoffee';
 import { showSnackBar } from '../utils/showSnackBar';
 import {
   validateCafeLatteMaterialQuantity,
+  validateChargeCoinInput,
   validateCoffeeMaterialQuantity,
   validateMaterialInput,
   validateMilkMaterialQuantity,
@@ -14,6 +17,7 @@ class CoffeeMachineComponent {
     this.initDOM();
     this.showPurchaseCoffeeComponent();
     this.bindEventListener();
+    this.drink = new Drink();
   }
 
   initDOM() {
@@ -22,37 +26,28 @@ class CoffeeMachineComponent {
     this.$nav = document.querySelector('nav');
     this.$rechargeTab = document.querySelector('#recharge-material-tab');
     this.$purchaseTab = document.querySelector('#purchase-coffee-tab');
+
     this.$purchaseDrinkButtonContainer = document.querySelector('.purchase-drink-container');
-    this.$purchasableEspressoQuantityElement = document.querySelector(
-      '#purchaseable-espresso-quantity',
-    );
-    this.$purchasableAmericanoQuantityElement = document.querySelector(
-      '#purchaseable-americano-quantity',
-    );
-    this.$purchaseableCafeLatteQuantityElement = document.querySelector(
-      '#purchaseable-cafe-latte-quantity',
-    );
-    this.$purchaseableMilkQuantityElement = document.querySelector('#purchaseable-milk-quantity');
+    this.$purchasableDrinkQuantity = document.querySelectorAll('.drink-quantity');
+    this.$purchaseButtons = document.querySelectorAll('.purchase-button');
+
     this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
     this.$cupQuantityElement = document.querySelector('#cups-quantity');
     this.$milkQuantityElement = document.querySelector('#milk-quantity');
+
     this.$rechargeDrinkButtonContainer = document.querySelector('.recharge-drink-container');
+    this.$totalChargeCoinElement = document.querySelector('#total-charge-coin');
+    this.$chargeCoinButton = document.querySelector('#charge-coin-submit');
   }
 
   showPurchasableDrinkQuantity() {
     const materials = materialStore.getMaterialStore();
 
     if (materials !== 0) {
-      const { coffeeBean, cup, milk } = materials;
-      const espressoQuantity = Math.min(coffeeBean, cup);
-      const americanoQuantity = Math.min(coffeeBean, cup);
-      const cafeLatteQuantity = Math.min(coffeeBean, cup, milk);
-      const milkQuantity = Math.min(milk, cup);
-
-      this.$purchasableEspressoQuantityElement.textContent = espressoQuantity;
-      this.$purchasableAmericanoQuantityElement.textContent = americanoQuantity;
-      this.$purchaseableCafeLatteQuantityElement.textContent = cafeLatteQuantity;
-      this.$purchaseableMilkQuantityElement.textContent = milkQuantity;
+      const purchaseDrinkQuantity = this.drink.getPurchasableDrinkQuantity();
+      this.$purchasableDrinkQuantity.forEach((item, index) => {
+        item.textContent = purchaseDrinkQuantity[index];
+      });
     }
   }
 
@@ -76,6 +71,7 @@ class CoffeeMachineComponent {
     this.$rechargeTab.classList.remove('is-active');
 
     this.showPurchasableDrinkQuantity();
+    this.showTotalChargeCoin();
   }
 
   showRechargeMaterialComponent() {
@@ -92,6 +88,7 @@ class CoffeeMachineComponent {
     this.$nav.addEventListener('click', this.onNavButtonClick);
     this.$purchaseDrinkButtonContainer.addEventListener('click', this.onPurchaseDrinkButtonClick);
     this.$rechargeDrinkButtonContainer.addEventListener('click', this.onRechargeButtonClick);
+    this.$chargeCoinButton.addEventListener('click', this.onChargeCoinButtonClick);
   }
 
   onNavButtonClick = e => {
@@ -114,38 +111,48 @@ class CoffeeMachineComponent {
         showSnackBar(ERROR_MSG.SOLD_OUT_ESPRESSO);
         return;
       }
-      materialStore.buyDrink(MENU_NAME.ESPRESSO);
-      showServeCoffee('☕️');
-      showSnackBar('에스프레소가 나왔습니다');
+      if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.ESPRESSO))) {
+        materialStore.buyDrink(MENU_NAME.ESPRESSO);
+        showServeCoffee('☕️');
+        showSnackBar('에스프레소가 나왔습니다');
+      }
     }
     if (e.target.id === 'purchase-americano-button') {
       if (!validateCoffeeMaterialQuantity()) {
         showSnackBar(ERROR_MSG.SOLD_OUT_AMERICANO);
         return;
       }
-      materialStore.buyDrink(MENU_NAME.AMERICANO);
-      showServeCoffee('🥃');
-      showSnackBar('아메리카노가 나왔습니다');
+      if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.AMERICANO))) {
+        materialStore.buyDrink(MENU_NAME.AMERICANO);
+        showServeCoffee('🥃');
+        showSnackBar('아메리카노가 나왔습니다');
+      }
     }
     if (e.target.id === 'purchase-cafe-latte-button') {
       if (!validateCafeLatteMaterialQuantity()) {
         showSnackBar(ERROR_MSG.SOLD_OUT_CAFE_LATTE);
         return;
       }
-      materialStore.buyDrink(MENU_NAME.CAFE_LATTE);
-      showServeCoffee('🧋');
-      showSnackBar('카페라떼가 나왔습니다');
+      if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.CAFE_LATTE))) {
+        materialStore.buyDrink(MENU_NAME.CAFE_LATTE);
+        showServeCoffee('🧋');
+        showSnackBar('카페라떼가 나왔습니다');
+      }
     }
     if (e.target.id === 'purchase-milk-button') {
       if (!validateMilkMaterialQuantity()) {
         showSnackBar(ERROR_MSG.SOLD_OUT_MILK);
         return;
       }
-      materialStore.buyDrink(MENU_NAME.MILK);
-      showServeCoffee('🥛');
-      showSnackBar('우유가 나왔습니다');
+      if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.MILK))) {
+        materialStore.buyDrink(MENU_NAME.MILK);
+        showServeCoffee('🥛');
+        showSnackBar('우유가 나왔습니다');
+      }
     }
     this.showPurchasableDrinkQuantity();
+    this.activePurchaseMenuButton();
+    this.showTotalChargeCoin();
   };
 
   onRechargeButtonClick = e => {
@@ -198,6 +205,40 @@ class CoffeeMachineComponent {
     }
 
     materialStore.rechargeCup(cupInputValue);
+  };
+
+  onChargeCoinButtonClick = e => {
+    e.preventDefault();
+    const $chargeCoinInput = document.querySelector('#charge-coin-input');
+    const { valueAsNumber: chargeCoinInputValue } = $chargeCoinInput;
+    $chargeCoinInput.value = '';
+
+    if (!validateChargeCoinInput(chargeCoinInputValue)) {
+      showSnackBar(ERROR_MSG.INVALID_CHARGE_COIN_INPUT);
+      return;
+    }
+    coinStore.chargeCoins(chargeCoinInputValue);
+    this.activePurchaseMenuButton();
+    this.showTotalChargeCoin();
+  };
+
+  showTotalChargeCoin = () => {
+    const totalCoin = coinStore.getCoinStore();
+    this.$totalChargeCoinElement.textContent = totalCoin;
+  };
+
+  activePurchaseMenuButton = () => {
+    const menuNames = this.drink.getPurchaseableDrinkName();
+    this.$purchaseButtons.forEach(item => {
+      item.classList.remove('is-active');
+    });
+    if (menuNames.length !== 0) {
+      this.$purchaseButtons.forEach(item => {
+        if (menuNames.find(name => name === item.dataset.menuName)) {
+          item.classList.add('is-active');
+        }
+      });
+    }
   };
 }
 

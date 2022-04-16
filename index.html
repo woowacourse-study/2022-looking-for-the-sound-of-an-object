@@ -18,7 +18,7 @@
       <section class="purchase-drink" aria-labelledby="purchase-drink-title">
         <h2 id="purchase-drink-title" hidden>음료수를 구매하는 탭</h2>
         <div class="purchase-drink-quantity-container">
-          <div class="purchase-drink-title">현재 잔여 수량</div>
+          <div class="purchase-drink-title sub-title">현재 잔여 수량</div>
           <table id="purchase-drink-table">
             <tr>
               <td>에스프레소</td>
@@ -27,24 +27,61 @@
               <td>우유</td>
             </tr>
             <tr>
-              <td id="purchaseable-espresso-quantity">0</td>
-              <td id="purchaseable-americano-quantity">0</td>
-              <td id="purchaseable-cafe-latte-quantity">0</td>
-              <td id="purchaseable-milk-quantity">0</td>
+              <td id="purchaseable-espresso-quantity" class="drink-quantity">0</td>
+              <td id="purchaseable-americano-quantity" class="drink-quantity">0</td>
+              <td id="purchaseable-cafe-latte-quantity" class="drink-quantity">0</td>
+              <td id="purchaseable-milk-quantity" class="drink-quantity">0</td>
             </tr>
           </table>
         </div>
+        <div class="charge-coin-container">
+          <div class="charge-coin-title sub-title">금액 투입하기</div>
+          <div class="total-charge-coin-container">
+            현재 투입된 금액 <span id="total-charge-coin">0</span>원
+          </div>
+          <form id="charge-coin-form">
+            <input
+              type="number"
+              id="charge-coin-input"
+              class="charge-input"
+              placeholder="투입할 금액을 입력해주세요"
+            />
+            <button id="charge-coin-submit" class="recharge-button">투입</button>
+          </form>
+        </div>
         <div class="purchase-drink-container">
-          <button id="purchase-espresso-button" class="purchase-button" type="button">
+          <button
+            id="purchase-espresso-button"
+            class="purchase-button"
+            type="button"
+            data-menu-name="espresso"
+          >
             에스프레소
           </button>
-          <button id="purchase-americano-button" class="purchase-button" type="button">
+          <button
+            id="purchase-americano-button"
+            class="purchase-button"
+            type="button"
+            data-menu-name="americano"
+          >
             아메리카노
           </button>
-          <button id="purchase-cafe-latte-button" class="purchase-button" type="button">
+          <button
+            id="purchase-cafe-latte-button"
+            class="purchase-button"
+            type="button"
+            data-menu-name="cafeLatte"
+          >
             카페라떼
           </button>
-          <button id="purchase-milk-button" class="purchase-button" type="button">우유</button>
+          <button
+            id="purchase-milk-button"
+            class="purchase-button"
+            type="button"
+            data-menu-name="milk"
+          >
+            우유
+          </button>
         </div>
 
         <div class="coffee-dispenser"></div>
