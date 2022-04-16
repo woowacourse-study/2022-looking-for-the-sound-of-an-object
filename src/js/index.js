@@ -1,6 +1,7 @@
 import { drinks } from './constants/drink.js';
-import { KEY } from './constants/index.js';
+import { KEY, MESSAGE } from './constants/index.js';
 import { $, $$ } from './utils/dom.js';
+import { showSnackbar } from './utils/snackbar.js';
 import { store } from './utils/store.js';
 import { validateChargeMoney } from './utils/validator.js';
 
@@ -37,13 +38,14 @@ class DrinkMachine {
     try {
       validateChargeMoney(inputMoney);
     } catch ({ message }) {
-      alert(message);
+      showSnackbar(message);
       this.$totalChargeInput.value = '';
       return;
     }
 
     store.set(KEY.CHARGE_MONEY, store.get(KEY.CHARGE_MONEY) + inputMoney);
 
+    showSnackbar(MESSAGE.SUCCESS_CHARGE_MONEY);
     this.showTotalMoney();
     this.showMenuButton();
     this.$totalChargeInput.value = '';
@@ -52,6 +54,7 @@ class DrinkMachine {
   returnChargeMoneyHandler = () => {
     store.set(KEY.CHARGE_MONEY, 0);
 
+    showSnackbar(MESSAGE.RETURN_CHARGE_MONEY);
     this.showTotalMoney();
     this.showMenuButton();
     this.$totalChargeInput.focus();
