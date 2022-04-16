@@ -29,6 +29,10 @@
   font-size: 15px;
 }
 
+.menu__button {
+  height: 40px;
+}
+
 .menu__button:enabled:hover,
 .menu__button.active {
   background: var(--color-menu-clicked-background);
