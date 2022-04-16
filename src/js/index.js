@@ -61,7 +61,7 @@ class DrinkMachine {
             type="button"
             title=${price}
             ${price > totalMoney ? 'disabled' : ''}
-          >${name}</button>
+          >${name}<br />${price}원</button>
         `;
       })
       .join('');
