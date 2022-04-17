@@ -22,7 +22,7 @@ export default class Guide {
   updateOnOrderChange = ({progress, orderedMenu}) => {
     switch (progress) {
     case ORDER_PROGRESS.PENDING:
-      this.updateOnOrderPending()
+      this.updateOnOrderPending();
       break;
     case ORDER_PROGRESS.MAKING:
       this.updateOnOrderMaking(orderedMenu);
