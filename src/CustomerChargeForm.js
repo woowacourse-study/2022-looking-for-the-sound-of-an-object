@@ -11,7 +11,6 @@ export default class CustomerChargeForm {
     this.$customerChargeInput = $('#customer-charge-input', this.$customerChargeForm);
     this.$customerChargeSubmitButton = $('button', this.$customerChargeForm);
     this.$customerCharge = $('#customer-charge', this.$customerChargeArea);
-    this.updateCustomerCharge(0);
 
     this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
     this.order.addSubscriber(this.updateOnOrderChange);
