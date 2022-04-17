@@ -3,8 +3,7 @@ import menus from './constant/menus.js';
 import { $ } from './util/index.js';
 
 export default class BeverageIngredientsList {
-  constructor({customerCharge, order}) {
-    this.customerCharge = customerCharge;
+  constructor({order}) {
     this.order = order;
 
     this.$beverageIngredientsList = $('#beverage-ingredients-list');
