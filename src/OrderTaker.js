@@ -26,9 +26,12 @@ export default class OrderTaker {
     this.setAllMenuButtonDisable();
   }
 
-  updateOnCustomerChargeChange = () => {
+  updateOnCustomerChargeChange = ({returnedChangeValue}) => {
     if (this.order.progress === ORDER_PROGRESS.PENDING) {
       this.setPurchaseAvailableButtonActive();
+    }
+    if (this.order.progress === ORDER_PROGRESS.MAKING) {
+      $('#returned-changes').textContent = returnedChangeValue;
     }
   }
 
@@ -49,6 +52,7 @@ export default class OrderTaker {
 
   updateOnOrderPending = () => {
     this.setPurchaseAvailableButtonActive();
+    $('#returned-changes').textContent = 0;
     this.$beveragePickUpButton.setAttribute("disabled", "");
   }
 
@@ -66,6 +70,7 @@ export default class OrderTaker {
 
     this.customerCharge.subtractCustomerCharge(menus[event.target.name].price);
     this.order.updateOrderStateToMaking(event.target.name);
+    this.customerCharge.returnLeftCustomerCharge();
   }
   
   onClickBeveragePickUpButton = () => {
