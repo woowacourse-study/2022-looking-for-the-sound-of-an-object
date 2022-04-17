@@ -10,7 +10,7 @@ export default class CustomerChargeForm {
     this.$customerChargeForm = $('#customer-charge-form', this.$customerChargeArea);
     this.$customerChargeInput = $('#customer-charge-input', this.$customerChargeForm);
     this.$customerChargeSubmitButton = $('button', this.$customerChargeForm);
-    this.$customerCharge = $('#customer-charge', this.$customerChargeArea);
+    this.$totalCustomerChargeText = $('#total-customer-charge-text', this.$customerChargeArea);
 
     this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
     this.order.addSubscriber(this.updateOnOrderChange);
@@ -18,7 +18,7 @@ export default class CustomerChargeForm {
   }
 
   updateOnCustomerChargeChange = ({value: customerCharge}) => {
-    this.$customerCharge.textContent = customerCharge;
+    this.$totalCustomerChargeText.textContent = customerCharge;
   }
 
   updateOnOrderChange = ({progress}) => {
