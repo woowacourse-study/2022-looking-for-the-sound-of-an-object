@@ -1,6 +1,6 @@
-import { ORDER_PROGRESS } from './constants.js';
-import menus from './menus.js';
-import { $ } from './util.js';
+import { ORDER_PROGRESS } from './constant/index.js';
+import menus from './constant/menus.js';
+import { $ } from './util/index.js';
 
 export default class BeverageMaker {
   constructor({order}) {

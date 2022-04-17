@@ -1,6 +1,6 @@
-import { $, $$ } from './util.js';
-import menus from './menus.js';
-import { ORDER_PROGRESS } from './constants.js';
+import { $, $$ } from './util/index.js';
+import menus from './constant/menus.js';
+import { ORDER_PROGRESS } from './constant/index.js';
 
 export default class OrderTaker {
   constructor({customerCharge, order}) {

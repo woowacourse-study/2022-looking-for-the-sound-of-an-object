@@ -1,5 +1,5 @@
-import { ORDER_PROGRESS } from './constants.js';
-import { $ } from './util.js';
+import { ORDER_PROGRESS } from './constant/index.js';
+import { $ } from './util/index.js';
 
 export default class CustomerChargeForm {
   constructor({customerCharge, order}) {

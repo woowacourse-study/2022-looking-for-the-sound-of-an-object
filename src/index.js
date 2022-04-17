@@ -1,8 +1,8 @@
-import Order from './Order.js';
+import CustomerCharge from './store/CustomerCharge.js';
+import Order from './store/Order.js';
 
 import BeverageMaker from './BeverageMaker.js';
 import OrderTaker from './OrderTaker.js';
-import CustomerCharge from './CustomerCharge.js';
 import Guide from './Guide.js';
 import CustomerChargeForm from './CustomerChargeForm.js';
 
