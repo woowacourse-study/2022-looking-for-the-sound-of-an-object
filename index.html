@@ -25,8 +25,22 @@
       </section>
       <p id="guide-message-area" class="text"></p>
       <section id="menu-button-area" class="menu-area"></section>
-      <ol id="make-beverage-area" class="ol-reverse"></ol>
-      <button id="beverage-pick-up-button" type="button">음료 가져가기</button>
+      <section class="pick-up-area">
+        <ol id="make-beverage-area" class="ol-reverse"></ol>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>잔돈</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="returned-changes">0</td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="beverage-pick-up-button" class="flexible-button" type="button">음료와 잔돈 받아가기</button>
+      </section>
     </main>
   </div>
   <script type="module" src="src/index.js"></script>

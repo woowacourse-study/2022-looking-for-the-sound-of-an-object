@@ -13,3 +13,5 @@ const customerChargeForm = new CustomerChargeForm({customerCharge, order})
 const guide = new Guide({customerCharge, order});
 const orderTaker = new OrderTaker({customerCharge, order});
 const beverageMaker = new BeverageMaker({order});
+
+order.updateOrderStateToPending();
