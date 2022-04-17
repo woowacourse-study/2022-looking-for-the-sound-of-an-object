@@ -18,7 +18,7 @@ export default class CustomerChargeForm {
   }
 
   updateOnCustomerChargeChange = ({value: customerCharge}) => {
-    this.updateCustomerCharge(customerCharge);
+    this.$customerCharge.textContent = customerCharge;
   }
 
   updateOnOrderChange = ({progress}) => {
@@ -41,10 +41,6 @@ export default class CustomerChargeForm {
     $customerChargeInput.value = '';
 
     this.customerCharge.addCustomerCharge(chargeValue);
-  }
-
-  updateCustomerCharge(customerCharge) {
-    this.$customerCharge.textContent = customerCharge;
   }
 
   setFormDisable() {
