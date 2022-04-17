@@ -4,22 +4,26 @@ import { ORDER_PROGRESS } from './constants.js';
 
 export default class OrderTaker {
   constructor({customerCharge, order}) {
+    this.initDOM();
     this.customerCharge = customerCharge;
     this.order = order;
+    
+    this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
+    this.order.addSubscriber(this.updateOnOrderChange);
 
+    this.$menuButtonArea.addEventListener('click', this.onClickMenuArea);
+    this.$beveragePickUpButton.addEventListener('click', this.onClickBeveragePickUpButton);
+  }
+
+  initDOM() {
     this.$menuButtonArea = $('#menu-button-area');
     this.$$menuButtons;
     this.$beveragePickUpButton = $('#beverage-pick-up-button');
     this.$returnedChangeText = $('#returned-change-text');
-    this.initializeMenuButtons();
-
-    this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
-    this.order.addSubscriber(this.updateOnOrderChange);
-    this.$menuButtonArea.addEventListener('click', this.onClickMenuArea);
-    this.$beveragePickUpButton.addEventListener('click', this.onClickBeveragePickUpButton);
+    this.initMenuButtons();
   }
-  
-  initializeMenuButtons() {
+
+  initMenuButtons() {
     this.$menuButtonArea.insertAdjacentHTML('afterbegin', Object.keys(menus).map((menu) => `
       <button name="${menu}" type="button" disabled>${menus[menu].name}<br >${menus[menu].price.toLocaleString()}원</button>
     `).join(''));

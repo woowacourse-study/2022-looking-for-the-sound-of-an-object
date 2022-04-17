@@ -3,18 +3,22 @@ import { $ } from './util.js';
 
 export default class CustomerChargeForm {
   constructor({customerCharge, order}) {
+    this.initDOM();
+    
     this.customerCharge = customerCharge;
     this.order = order;
+    this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
+    this.order.addSubscriber(this.updateOnOrderChange);
 
+    this.$customerChargeForm.addEventListener('submit', this.onSubmitCustomerChargeForm);
+  }
+
+  initDOM() {
     this.$customerChargeArea = $('#customer-charge-area');
     this.$customerChargeForm = $('#customer-charge-form', this.$customerChargeArea);
     this.$customerChargeInput = $('#customer-charge-input', this.$customerChargeForm);
     this.$customerChargeSubmitButton = $('button', this.$customerChargeForm);
     this.$totalCustomerChargeText = $('#total-customer-charge-text', this.$customerChargeArea);
-
-    this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
-    this.order.addSubscriber(this.updateOnOrderChange);
-    this.$customerChargeForm.addEventListener('submit', this.onSubmitCustomerChargeForm);
   }
 
   updateOnCustomerChargeChange = ({value: customerCharge}) => {
