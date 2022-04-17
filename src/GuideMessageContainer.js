@@ -2,12 +2,12 @@ import menus from './constant/menus.js';
 import { ORDER_PROGRESS } from './constant/index.js';
 import { $ } from './util/index.js';
 
-export default class Guide {
+export default class GuideMessageContainer {
   constructor({customerCharge, order}) {
     this.order = order;
     this.customerCharge = customerCharge;
 
-    this.$guideText = $('#guide-message-area');
+    this.$guideMessageContainer = $('#guide-message-container');
 
     this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
     this.order.addSubscriber(this.updateOnOrderChange);
@@ -51,7 +51,7 @@ export default class Guide {
   }
 
   updateGuideText(guideMessage) {
-    this.$guideText.textContent = guideMessage;
+    this.$guideMessageContainer.textContent = guideMessage;
   }
 
 }

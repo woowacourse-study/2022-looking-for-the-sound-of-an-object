@@ -37,4 +37,9 @@ export default class CustomerCharge {
     this.#state.value = 0;
     this.notify();
   }
+
+  resetReturnedChange() {
+    this.#state.returnedChangeValue = 0;
+    this.notify();
+  }
 }

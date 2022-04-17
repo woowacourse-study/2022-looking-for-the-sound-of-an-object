@@ -3,10 +3,11 @@ import menus from './constant/menus.js';
 import { $ } from './util/index.js';
 
 export default class BeverageMaker {
-  constructor({order}) {
+  constructor({customerCharge, order}) {
+    this.customerCharge = customerCharge;
     this.order = order;
 
-    this.$makeBeverageArea = $('#make-beverage-area');
+    this.$beverageIngredientsList = $('#ingredients-list');
 
     this.order.addSubscriber(this.updateOnOrderChange);
   }
@@ -17,7 +18,7 @@ export default class BeverageMaker {
   }
 
   clearBeverage = () => {
-    this.$makeBeverageArea.innerHTML = '';
+    this.$beverageIngredientsList.innerHTML = '';
   }
   
   makeBeverage = (menuName) => {
@@ -35,7 +36,7 @@ export default class BeverageMaker {
   prepareIngredient(ingredient) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        this.$makeBeverageArea.insertAdjacentHTML('beforeend', `<li>${ingredient}</li>`);
+        this.$beverageIngredientsList.insertAdjacentHTML('beforeend', `<li>${ingredient}</li>`);
         resolve();
       }, 1000);
     });

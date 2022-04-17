@@ -11,32 +11,28 @@ export default class OrderTaker {
     this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
     this.order.addSubscriber(this.updateOnOrderChange);
 
-    this.$menuButtonArea.addEventListener('click', this.onClickMenuArea);
+    this.$menuButtonContainer.addEventListener('click', this.onClickMenuArea);
     this.$beveragePickUpButton.addEventListener('click', this.onClickBeveragePickUpButton);
   }
 
   initDOM() {
-    this.$menuButtonArea = $('#menu-button-area');
+    this.$menuButtonContainer = $('#menu-button-container');
     this.$$menuButtons;
     this.$beveragePickUpButton = $('#beverage-pick-up-button');
-    this.$returnedChangeText = $('#returned-change-text');
     this.initMenuButtons();
   }
 
   initMenuButtons() {
-    this.$menuButtonArea.insertAdjacentHTML('afterbegin', Object.keys(menus).map((menu) => `
+    this.$menuButtonContainer.insertAdjacentHTML('afterbegin', Object.keys(menus).map((menu) => `
       <button name="${menu}" type="button" disabled>${menus[menu].name}<br >${menus[menu].price.toLocaleString()}원</button>
     `).join(''));
-    this.$$menuButtons = $$('button', this.$menuButtonArea);
+    this.$$menuButtons = $$('button', this.$menuButtonContainer);
     this.setAllMenuButtonDisable();
   }
 
-  updateOnCustomerChargeChange = ({returnedChangeValue}) => {
+  updateOnCustomerChargeChange = () => {
     if (this.order.progress === ORDER_PROGRESS.PENDING) {
       this.setPurchaseAvailableButtonActive();
-    }
-    if (this.order.progress === ORDER_PROGRESS.MAKING) {
-      this.$returnedChangeText.textContent = returnedChangeValue;
     }
   }
 
@@ -57,7 +53,6 @@ export default class OrderTaker {
 
   updateOnOrderPending = () => {
     this.setPurchaseAvailableButtonActive();
-    this.$returnedChangeText.textContent = 0;
     this.$beveragePickUpButton.setAttribute("disabled", "");
   }
 
