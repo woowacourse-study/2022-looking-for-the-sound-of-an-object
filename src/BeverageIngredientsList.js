@@ -2,12 +2,12 @@ import { ORDER_PROGRESS } from './constant/index.js';
 import menus from './constant/menus.js';
 import { $ } from './util/index.js';
 
-export default class BeverageMaker {
+export default class BeverageIngredientsList {
   constructor({customerCharge, order}) {
     this.customerCharge = customerCharge;
     this.order = order;
 
-    this.$beverageIngredientsList = $('#ingredients-list');
+    this.$beverageIngredientsList = $('#beverage-ingredients-list');
 
     this.order.addSubscriber(this.updateOnOrderChange);
   }

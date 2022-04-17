@@ -2,7 +2,7 @@ import { $, $$ } from './util/index.js';
 import menus from './constant/menus.js';
 import { ORDER_PROGRESS } from './constant/index.js';
 
-export default class OrderTaker {
+export default class BeverageButtonSection {
   constructor({customerCharge, order}) {
     this.initDOM();
     this.customerCharge = customerCharge;
