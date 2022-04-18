@@ -1,4 +1,4 @@
-import { DRINK_PRICE, MATERIAL_NAME } from '../utils/constants';
+import { DRINK_PRICE, MATERIAL_NAME, RECIPE } from '../utils/constants';
 import { coinStore } from './coinStore';
 import { materialStore } from './materialStore';
 
@@ -9,21 +9,35 @@ class Drink {
         name: 'espresso',
         material: [MATERIAL_NAME.COFFEE_BEAN, MATERIAL_NAME.CUP],
         price: DRINK_PRICE.ESPRESSO,
+        recipe: [RECIPE.BE_READY_CUP, RECIPE.BREW_COFFEE, RECIPE.SERVE_DRINK],
       },
       americano: {
         name: 'americano',
         material: [MATERIAL_NAME.COFFEE_BEAN, MATERIAL_NAME.CUP],
         price: DRINK_PRICE.AMERICANO,
+        recipe: [
+          RECIPE.BE_READY_CUP,
+          RECIPE.BREW_COFFEE,
+          RECIPE.FILL_WITH_WATER,
+          RECIPE.SERVE_DRINK,
+        ],
       },
       cafeLatte: {
         name: 'cafeLatte',
         material: [MATERIAL_NAME.COFFEE_BEAN, MATERIAL_NAME.CUP, MATERIAL_NAME.MILK],
         price: DRINK_PRICE.CAFE_LATTE,
+        recipe: [
+          RECIPE.BE_READY_CUP,
+          RECIPE.BREW_COFFEE,
+          RECIPE.FILL_WITH_MILK,
+          RECIPE.SERVE_DRINK,
+        ],
       },
       milk: {
         name: 'milk',
         material: [MATERIAL_NAME.CUP, MATERIAL_NAME.MILK],
         price: DRINK_PRICE.MILK,
+        recipe: [RECIPE.BE_READY_CUP, RECIPE.FILL_WITH_MILK, RECIPE.SERVE_DRINK],
       },
     };
   }
@@ -49,14 +63,8 @@ class Drink {
     return menu.price;
   }
 
-  getMenuPrice(menuName) {
-    let menuPrice = 0;
-    Object.values(this.menu).forEach(item => {
-      if (item.name === menuName) {
-        menuPrice = item.price;
-      }
-    });
-    return menuPrice;
+  getDrinkRecipe(menuName) {
+    return this.menu[menuName].recipe;
   }
 }
 

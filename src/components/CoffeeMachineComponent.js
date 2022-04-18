@@ -2,7 +2,7 @@ import { coinStore } from '../store/coinStore';
 import Drink from '../store/Drink';
 import { materialStore } from '../store/materialStore';
 import { ERROR_MSG, MENU_NAME } from '../utils/constants';
-import { showServeCoffee } from '../utils/showServeCoffee';
+import { showServeDrink } from '../utils/showServeDrink';
 import { showSnackBar } from '../utils/showSnackBar';
 import {
   validateCafeLatteMaterialQuantity,
@@ -31,6 +31,8 @@ class CoffeeMachineComponent {
     this.$purchaseDrinkButtonContainer = document.querySelector('.purchase-drink-container');
     this.$purchasableDrinkQuantity = document.querySelectorAll('.drink-quantity');
     this.$purchaseButtons = document.querySelectorAll('.purchase-button');
+    this.$coffeeDispenserContainer = document.querySelector('.coffee-dispenser');
+    this.$takeDrinkButton = document.querySelector('#take-drink-button');
 
     this.$totalChargeCoinElement = document.querySelector('#total-charge-coin');
     this.$chargeCoinButton = document.querySelector('#charge-coin-submit');
@@ -76,6 +78,7 @@ class CoffeeMachineComponent {
     this.$purchaseDrinkButtonContainer.addEventListener('click', this.onPurchaseDrinkButtonClick);
     this.$chargeCoinButton.addEventListener('click', this.onChargeCoinButtonClick);
     this.$returnChargeButton.addEventListener('click', this.onReturnChargeButtonClick);
+    this.$takeDrinkButton.addEventListener('click', this.onTakeDrinkButtonClick);
   }
 
   onNavButtonClick = e => {
@@ -99,9 +102,10 @@ class CoffeeMachineComponent {
         return;
       }
       if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.ESPRESSO))) {
+        this.makeButtonsDisable();
         materialStore.buyDrink(MENU_NAME.ESPRESSO);
-        showServeCoffee('☕️');
-        showSnackBar('에스프레소가 나왔습니다');
+        const recipeList = this.drink.getDrinkRecipe(MENU_NAME.ESPRESSO);
+        showServeDrink(recipeList);
       }
     }
     if (e.target.id === 'purchase-americano-button') {
@@ -110,9 +114,10 @@ class CoffeeMachineComponent {
         return;
       }
       if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.AMERICANO))) {
+        this.makeButtonsDisable();
         materialStore.buyDrink(MENU_NAME.AMERICANO);
-        showServeCoffee('🥃');
-        showSnackBar('아메리카노가 나왔습니다');
+        const recipeList = this.drink.getDrinkRecipe(MENU_NAME.AMERICANO);
+        showServeDrink(recipeList);
       }
     }
     if (e.target.id === 'purchase-cafe-latte-button') {
@@ -121,9 +126,10 @@ class CoffeeMachineComponent {
         return;
       }
       if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.CAFE_LATTE))) {
+        this.makeButtonsDisable();
         materialStore.buyDrink(MENU_NAME.CAFE_LATTE);
-        showServeCoffee('🧋');
-        showSnackBar('카페라떼가 나왔습니다');
+        const recipeList = this.drink.getDrinkRecipe(MENU_NAME.CAFE_LATTE);
+        showServeDrink(recipeList);
       }
     }
     if (e.target.id === 'purchase-milk-button') {
@@ -132,9 +138,10 @@ class CoffeeMachineComponent {
         return;
       }
       if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.MILK))) {
+        this.makeButtonsDisable();
         materialStore.buyDrink(MENU_NAME.MILK);
-        showServeCoffee('🥛');
-        showSnackBar('우유가 나왔습니다');
+        const recipeList = this.drink.getDrinkRecipe(MENU_NAME.MILK);
+        showServeDrink(recipeList);
       }
     }
     this.showPurchasableDrinkQuantity();
@@ -155,6 +162,12 @@ class CoffeeMachineComponent {
     coinStore.chargeCoins(chargeCoinInputValue);
     this.activePurchaseMenuButton();
     this.showTotalChargeCoin();
+  };
+
+  onTakeDrinkButtonClick = e => {
+    e.preventDefault();
+    const $coffeeDispenserContainer = document.querySelector('.coffee-dispenser');
+    $coffeeDispenserContainer.replaceChildren('');
   };
 
   showTotalChargeCoin = () => {
@@ -179,6 +192,12 @@ class CoffeeMachineComponent {
 
     coinStore.setCoinStore(0);
     this.showTotalChargeCoin();
+  };
+
+  makeButtonsDisable = () => {
+    document.querySelectorAll('button').forEach(btn => {
+      btn.disabled = true;
+    });
   };
 }
 

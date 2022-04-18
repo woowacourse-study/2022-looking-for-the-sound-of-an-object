@@ -23,8 +23,37 @@
 }
 
 .coffee-dispenser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
   width: 150px;
   height: 150px;
   border: 1px solid #111;
   font-size: 150px;
+}
+
+.step-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: fit-content;
+  font-size: 16px;
+
+  padding: 3px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--snackbar-background-color);
+  margin-bottom: 4px;
+}
+
+#take-drink-button {
+  width: 130px;
+  height: fit-content;
+  padding: 4px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
 }
