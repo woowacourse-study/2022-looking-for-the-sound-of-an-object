@@ -39,3 +39,19 @@ label {
   padding: 4px;
   margin-right: 10px;
 }
+
+.charge-return-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+#total-charge-return {
+  width: 100px;
+  height: 20px;
+  padding: 4px;
+  border: 1px solid #111;
+  border-radius: 4px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
