@@ -16,9 +16,9 @@ class CoffeeMachineComponent {
   constructor() {
     this.initDOM();
     this.rechargeComponent = new RechargeMaterialComponent();
+    this.drink = new Drink();
     this.showPurchaseCoffeeComponent();
     this.bindEventListener();
-    this.drink = new Drink();
   }
 
   initDOM() {
@@ -34,6 +34,9 @@ class CoffeeMachineComponent {
 
     this.$totalChargeCoinElement = document.querySelector('#total-charge-coin');
     this.$chargeCoinButton = document.querySelector('#charge-coin-submit');
+
+    this.$returnChargeButton = document.querySelector('#charge-return-button');
+    this.$returnCoinElement = document.querySelector('#total-charge-return');
   }
 
   showPurchasableDrinkQuantity() {
@@ -72,6 +75,7 @@ class CoffeeMachineComponent {
     this.$nav.addEventListener('click', this.onNavButtonClick);
     this.$purchaseDrinkButtonContainer.addEventListener('click', this.onPurchaseDrinkButtonClick);
     this.$chargeCoinButton.addEventListener('click', this.onChargeCoinButtonClick);
+    this.$returnChargeButton.addEventListener('click', this.onReturnChargeButtonClick);
   }
 
   onNavButtonClick = e => {
@@ -166,6 +170,15 @@ class CoffeeMachineComponent {
         item.classList.add('is-active');
       }
     });
+  };
+
+  onReturnChargeButtonClick = e => {
+    e.preventDefault();
+    const totalCoin = coinStore.getCoinStore();
+    this.$returnCoinElement.textContent = totalCoin;
+
+    coinStore.setCoinStore(0);
+    this.showTotalChargeCoin();
   };
 }
 
