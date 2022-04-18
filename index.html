@@ -16,14 +16,21 @@
       <p id="guide-message-container" class="guide text"></p>
       <div class="sections-wrapper">
         <section class="beverage-section">
-          <section id="menu-button-container" class="menu-area"></section>
+          <h2 class="hidden">음료 주문 및 제공 영역</h2>
+          <section>
+            <h3 class="hidden">음료 주문 버튼 영역</h2>
+            <div id="menu-button-container" class="menu-area"></div>
+          </section>
           <section class="pick-up-area">
+            <h3 class="hidden">구입한 음료 가져가기 영역</h3>
             <ol id="beverage-ingredients-list" class="ol-reverse"></ol>
             <button id="beverage-pick-up-button" class="flexible-button" type="button">음료 받아가기</button>
           </section>
         </section>
         <section class="charge-section">
+          <h2 class="hidden">금액 충전 및 잔돈 반환 영역</h2>
           <section id="customer-charge-area" class="form-container">
+            <h3 class="hidden">음료 구입를 위한 금액 충전 영역</h3>
             <form id="customer-charge-form">
               <label form="customer-charge-form">금액을 투입하세요. (1,000원 단위)</label>
               <div class="input-button-wrap">
@@ -34,6 +41,7 @@
             <p>현재 투입 금액: <span id="total-customer-charge-text"></span>원</p>
           </section>
           <section class="pick-up-area">
+            <h3 class="hidden">잔돈 반환 영역</h3>
             <table class="table">
               <thead>
                 <tr><th>잔돈</th></tr>
