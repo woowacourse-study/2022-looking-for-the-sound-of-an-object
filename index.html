@@ -49,42 +49,63 @@
             <button id="charge-coin-submit" class="recharge-button">투입</button>
           </form>
         </div>
-        <div class="purchase-drink-container">
-          <button
-            id="purchase-espresso-button"
-            class="purchase-button"
-            type="button"
-            data-menu-name="espresso"
-          >
-            에스프레소
-          </button>
-          <button
-            id="purchase-americano-button"
-            class="purchase-button"
-            type="button"
-            data-menu-name="americano"
-          >
-            아메리카노
-          </button>
-          <button
-            id="purchase-cafe-latte-button"
-            class="purchase-button"
-            type="button"
-            data-menu-name="cafeLatte"
-          >
-            카페라떼
-          </button>
-          <button
-            id="purchase-milk-button"
-            class="purchase-button"
-            type="button"
-            data-menu-name="milk"
-          >
-            우유
-          </button>
-        </div>
+        <table class="purchase-drink-container">
+          <tr>
+            <td>
+              <button
+                id="purchase-espresso-button"
+                class="purchase-button"
+                type="button"
+                data-menu-name="espresso"
+              >
+                에스프레소
+              </button>
+            </td>
+            <td>
+              <button
+                id="purchase-americano-button"
+                class="purchase-button"
+                type="button"
+                data-menu-name="americano"
+              >
+                아메리카노
+              </button>
+            </td>
+            <td>
+              <button
+                id="purchase-cafe-latte-button"
+                class="purchase-button"
+                type="button"
+                data-menu-name="cafeLatte"
+              >
+                카페라떼
+              </button>
+            </td>
+            <td>
+              <button
+                id="purchase-milk-button"
+                class="purchase-button"
+                type="button"
+                data-menu-name="milk"
+              >
+                우유
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>1000원</td>
+            <td>1500원</td>
+            <td>2000원</td>
+            <td>1500원</td>
+          </tr>
+        </table>
 
         <div class="coffee-dispenser"></div>
+        <button type="button" id="take-drink-button">음료 가져가기</button>
+        <div class="charge-return-container">
+          <button class="return-button" id="charge-return-button">잔돈 반환</button>
+          <div id="total-charge-return"></div>
+        </div>
       </section>
       <section class="recharge-material" aria-labelledby="recharge-material-title">
         <h2 id="recharge-material-title" hidden>재료 충전하는 탭</h2>

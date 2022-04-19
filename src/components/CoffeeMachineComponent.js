@@ -2,22 +2,23 @@ import { coinStore } from '../store/coinStore';
 import Drink from '../store/Drink';
 import { materialStore } from '../store/materialStore';
 import { ERROR_MSG, MENU_NAME } from '../utils/constants';
-import { showServeCoffee } from '../utils/showServeCoffee';
+import { showServeDrink } from '../utils/showServeDrink';
 import { showSnackBar } from '../utils/showSnackBar';
 import {
   validateCafeLatteMaterialQuantity,
   validateChargeCoinInput,
   validateCoffeeMaterialQuantity,
-  validateMaterialInput,
   validateMilkMaterialQuantity,
 } from '../utils/validations';
+import RechargeMaterialComponent from './RechargeMaterialComponent';
 
 class CoffeeMachineComponent {
   constructor() {
     this.initDOM();
+    this.rechargeComponent = new RechargeMaterialComponent();
+    this.drink = new Drink();
     this.showPurchaseCoffeeComponent();
     this.bindEventListener();
-    this.drink = new Drink();
   }
 
   initDOM() {
@@ -30,14 +31,14 @@ class CoffeeMachineComponent {
     this.$purchaseDrinkButtonContainer = document.querySelector('.purchase-drink-container');
     this.$purchasableDrinkQuantity = document.querySelectorAll('.drink-quantity');
     this.$purchaseButtons = document.querySelectorAll('.purchase-button');
+    this.$coffeeDispenserContainer = document.querySelector('.coffee-dispenser');
+    this.$takeDrinkButton = document.querySelector('#take-drink-button');
 
-    this.$coffeeBeanQuantityElement = document.querySelector('#coffee-beans-quantity');
-    this.$cupQuantityElement = document.querySelector('#cups-quantity');
-    this.$milkQuantityElement = document.querySelector('#milk-quantity');
-
-    this.$rechargeDrinkButtonContainer = document.querySelector('.recharge-drink-container');
     this.$totalChargeCoinElement = document.querySelector('#total-charge-coin');
     this.$chargeCoinButton = document.querySelector('#charge-coin-submit');
+
+    this.$returnChargeButton = document.querySelector('#charge-return-button');
+    this.$returnCoinElement = document.querySelector('#total-charge-return');
   }
 
   showPurchasableDrinkQuantity() {
@@ -48,18 +49,6 @@ class CoffeeMachineComponent {
       this.$purchasableDrinkQuantity.forEach((item, index) => {
         item.textContent = purchaseDrinkQuantity[index];
       });
-    }
-  }
-
-  showNowMaterialQuantity() {
-    const materials = materialStore.getMaterialStore();
-
-    if (materials !== 0) {
-      const { coffeeBean, cup, milk } = materials;
-
-      this.$coffeeBeanQuantityElement.textContent = coffeeBean;
-      this.$cupQuantityElement.textContent = cup;
-      this.$milkQuantityElement.textContent = milk;
     }
   }
 
@@ -81,14 +70,15 @@ class CoffeeMachineComponent {
     this.$rechargeTab.classList.add('is-active');
     this.$purchaseTab.classList.remove('is-active');
 
-    this.showNowMaterialQuantity();
+    this.rechargeComponent.showNowMaterialQuantity();
   }
 
   bindEventListener() {
     this.$nav.addEventListener('click', this.onNavButtonClick);
     this.$purchaseDrinkButtonContainer.addEventListener('click', this.onPurchaseDrinkButtonClick);
-    this.$rechargeDrinkButtonContainer.addEventListener('click', this.onRechargeButtonClick);
     this.$chargeCoinButton.addEventListener('click', this.onChargeCoinButtonClick);
+    this.$returnChargeButton.addEventListener('click', this.onReturnChargeButtonClick);
+    this.$takeDrinkButton.addEventListener('click', this.onTakeDrinkButtonClick);
   }
 
   onNavButtonClick = e => {
@@ -112,9 +102,10 @@ class CoffeeMachineComponent {
         return;
       }
       if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.ESPRESSO))) {
+        this.makeButtonsDisable();
         materialStore.buyDrink(MENU_NAME.ESPRESSO);
-        showServeCoffee('☕️');
-        showSnackBar('에스프레소가 나왔습니다');
+        const recipeList = this.drink.getDrinkRecipe(MENU_NAME.ESPRESSO);
+        showServeDrink(recipeList);
       }
     }
     if (e.target.id === 'purchase-americano-button') {
@@ -123,9 +114,10 @@ class CoffeeMachineComponent {
         return;
       }
       if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.AMERICANO))) {
+        this.makeButtonsDisable();
         materialStore.buyDrink(MENU_NAME.AMERICANO);
-        showServeCoffee('🥃');
-        showSnackBar('아메리카노가 나왔습니다');
+        const recipeList = this.drink.getDrinkRecipe(MENU_NAME.AMERICANO);
+        showServeDrink(recipeList);
       }
     }
     if (e.target.id === 'purchase-cafe-latte-button') {
@@ -134,9 +126,10 @@ class CoffeeMachineComponent {
         return;
       }
       if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.CAFE_LATTE))) {
+        this.makeButtonsDisable();
         materialStore.buyDrink(MENU_NAME.CAFE_LATTE);
-        showServeCoffee('🧋');
-        showSnackBar('카페라떼가 나왔습니다');
+        const recipeList = this.drink.getDrinkRecipe(MENU_NAME.CAFE_LATTE);
+        showServeDrink(recipeList);
       }
     }
     if (e.target.id === 'purchase-milk-button') {
@@ -145,66 +138,15 @@ class CoffeeMachineComponent {
         return;
       }
       if (coinStore.buyDrink(this.drink.getMenuPrice(MENU_NAME.MILK))) {
+        this.makeButtonsDisable();
         materialStore.buyDrink(MENU_NAME.MILK);
-        showServeCoffee('🥛');
-        showSnackBar('우유가 나왔습니다');
+        const recipeList = this.drink.getDrinkRecipe(MENU_NAME.MILK);
+        showServeDrink(recipeList);
       }
     }
     this.showPurchasableDrinkQuantity();
     this.activePurchaseMenuButton();
     this.showTotalChargeCoin();
-  };
-
-  onRechargeButtonClick = e => {
-    e.preventDefault();
-    if (e.target.id === 'recharge-coffee-beans-button') {
-      this.onRechargeCoffeeBeanButtonClick();
-    }
-    if (e.target.id === 'recharge-milk-button') {
-      this.onRechargeMilkButtonClick();
-    }
-    if (e.target.id === 'recharge-cups-button') {
-      this.onRechargeCupButtonClick();
-    }
-    this.showNowMaterialQuantity();
-  };
-
-  onRechargeCoffeeBeanButtonClick = () => {
-    const $rechargeCoffeeBeanInput = document.querySelector('#recharge-coffee-beans-input');
-    const { valueAsNumber: coffeeBeanInputValue } = $rechargeCoffeeBeanInput;
-    $rechargeCoffeeBeanInput.value = '';
-
-    if (!validateMaterialInput(coffeeBeanInputValue)) {
-      showSnackBar(ERROR_MSG.INVALID_QUANTITY_INPUT);
-      return;
-    }
-
-    materialStore.rechargeCoffeeBean(coffeeBeanInputValue);
-  };
-
-  onRechargeMilkButtonClick = () => {
-    const $rechargeMilkInput = document.querySelector('#recharge-milk-input');
-    const { valueAsNumber: milkInputValue } = $rechargeMilkInput;
-    $rechargeMilkInput.value = '';
-
-    if (!validateMaterialInput(milkInputValue)) {
-      showSnackBar(ERROR_MSG.INVALID_QUANTITY_INPUT);
-      return;
-    }
-    materialStore.rechargeMilk(milkInputValue);
-  };
-
-  onRechargeCupButtonClick = () => {
-    const $rechargeCupInput = document.querySelector('#recharge-cups-input');
-    const { valueAsNumber: cupInputValue } = $rechargeCupInput;
-    $rechargeCupInput.value = '';
-
-    if (!validateMaterialInput(cupInputValue)) {
-      showSnackBar(ERROR_MSG.INVALID_QUANTITY_INPUT);
-      return;
-    }
-
-    materialStore.rechargeCup(cupInputValue);
   };
 
   onChargeCoinButtonClick = e => {
@@ -222,6 +164,12 @@ class CoffeeMachineComponent {
     this.showTotalChargeCoin();
   };
 
+  onTakeDrinkButtonClick = e => {
+    e.preventDefault();
+    const $coffeeDispenserContainer = document.querySelector('.coffee-dispenser');
+    $coffeeDispenserContainer.replaceChildren('');
+  };
+
   showTotalChargeCoin = () => {
     const totalCoin = coinStore.getCoinStore();
     this.$totalChargeCoinElement.textContent = totalCoin;
@@ -231,14 +179,25 @@ class CoffeeMachineComponent {
     const menuNames = this.drink.getPurchaseableDrinkName();
     this.$purchaseButtons.forEach(item => {
       item.classList.remove('is-active');
+      if (menuNames.includes(item.dataset.menuName)) {
+        item.classList.add('is-active');
+      }
     });
-    if (menuNames.length !== 0) {
-      this.$purchaseButtons.forEach(item => {
-        if (menuNames.find(name => name === item.dataset.menuName)) {
-          item.classList.add('is-active');
-        }
-      });
-    }
+  };
+
+  onReturnChargeButtonClick = e => {
+    e.preventDefault();
+    const totalCoin = coinStore.getCoinStore();
+    this.$returnCoinElement.textContent = totalCoin;
+
+    coinStore.setCoinStore(0);
+    this.showTotalChargeCoin();
+  };
+
+  makeButtonsDisable = () => {
+    document.querySelectorAll('button').forEach(btn => {
+      btn.disabled = true;
+    });
   };
 }
 
