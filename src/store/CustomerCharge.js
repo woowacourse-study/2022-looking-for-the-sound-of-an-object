@@ -6,6 +6,7 @@ export default class CustomerCharge {
   constructor() {
     this.#state = {
       value: 0,
+      returnedChangeValue : 0,
     }
     this.#subscribers = new Set();
   }
@@ -28,6 +29,17 @@ export default class CustomerCharge {
 
   subtractCustomerCharge(chargeToSubtract) {
     this.#state.value -= chargeToSubtract;
+    this.notify();
+  }
+
+  returnLeftCustomerCharge() {
+    this.#state.returnedChangeValue = this.#state.value;
+    this.#state.value = 0;
+    this.notify();
+  }
+
+  resetReturnedChange() {
+    this.#state.returnedChangeValue = 0;
     this.notify();
   }
 }

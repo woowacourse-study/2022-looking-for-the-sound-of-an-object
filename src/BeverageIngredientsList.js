@@ -1,12 +1,12 @@
-import { ORDER_PROGRESS } from './constants.js';
-import menus from './menus.js';
-import { $ } from './util.js';
+import { ORDER_PROGRESS } from './constant/index.js';
+import menus from './constant/menus.js';
+import { $ } from './util/index.js';
 
-export default class BeverageMaker {
+export default class BeverageIngredientsList {
   constructor({order}) {
     this.order = order;
 
-    this.$makeBeverageArea = $('#make-beverage-area');
+    this.$beverageIngredientsList = $('#beverage-ingredients-list');
 
     this.order.addSubscriber(this.updateOnOrderChange);
   }
@@ -17,7 +17,7 @@ export default class BeverageMaker {
   }
 
   clearBeverage = () => {
-    this.$makeBeverageArea.innerHTML = '';
+    this.$beverageIngredientsList.innerHTML = '';
   }
   
   makeBeverage = (menuName) => {
@@ -35,7 +35,7 @@ export default class BeverageMaker {
   prepareIngredient(ingredient) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        this.$makeBeverageArea.insertAdjacentHTML('beforeend', `<li>${ingredient}</li>`);
+        this.$beverageIngredientsList.insertAdjacentHTML('beforeend', `<li>${ingredient}</li>`);
         resolve();
       }, 1000);
     });

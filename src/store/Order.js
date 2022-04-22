@@ -1,4 +1,4 @@
-import { ORDER_PROGRESS } from './constants.js';
+import { ORDER_PROGRESS } from '../constant/index.js';
 
 export default class Order {
   #state;

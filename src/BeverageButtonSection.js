@@ -1,28 +1,32 @@
-import { $, $$ } from './util.js';
-import menus from './menus.js';
-import { ORDER_PROGRESS } from './constants.js';
+import { $, $$ } from './util/index.js';
+import menus from './constant/menus.js';
+import { ORDER_PROGRESS } from './constant/index.js';
 
-export default class OrderTaker {
+export default class BeverageButtonSection {
   constructor({customerCharge, order}) {
+    this.initDOM();
     this.customerCharge = customerCharge;
     this.order = order;
-
-    this.$menuButtonArea = $('#menu-button-area');
-    this.$$menuButtons;
-    this.$beveragePickUpButton = $('#beverage-pick-up-button');
-    this.initializeMenuButtons();
-
+    
     this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
     this.order.addSubscriber(this.updateOnOrderChange);
-    this.$menuButtonArea.addEventListener('click', this.onClickMenuArea);
+
+    this.$menuButtonContainer.addEventListener('click', this.onClickMenuArea);
     this.$beveragePickUpButton.addEventListener('click', this.onClickBeveragePickUpButton);
   }
-  
-  initializeMenuButtons() {
-    this.$menuButtonArea.insertAdjacentHTML('afterbegin', Object.keys(menus).map((menu) => `
+
+  initDOM() {
+    this.$menuButtonContainer = $('#menu-button-container');
+    this.$$menuButtons;
+    this.$beveragePickUpButton = $('#beverage-pick-up-button');
+    this.initMenuButtons();
+  }
+
+  initMenuButtons() {
+    this.$menuButtonContainer.insertAdjacentHTML('afterbegin', Object.keys(menus).map((menu) => `
       <button name="${menu}" type="button" disabled>${menus[menu].name}<br >${menus[menu].price.toLocaleString()}원</button>
     `).join(''));
-    this.$$menuButtons = $$('button', this.$menuButtonArea);
+    this.$$menuButtons = $$('button', this.$menuButtonContainer);
     this.setAllMenuButtonDisable();
   }
 
@@ -66,6 +70,7 @@ export default class OrderTaker {
 
     this.customerCharge.subtractCustomerCharge(menus[event.target.name].price);
     this.order.updateOrderStateToMaking(event.target.name);
+    this.customerCharge.returnLeftCustomerCharge();
   }
   
   onClickBeveragePickUpButton = () => {

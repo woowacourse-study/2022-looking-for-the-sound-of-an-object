@@ -1,25 +1,28 @@
-import { ORDER_PROGRESS } from './constants.js';
-import { $ } from './util.js';
+import { ORDER_PROGRESS } from './constant/index.js';
+import { $ } from './util/index.js';
 
 export default class CustomerChargeForm {
   constructor({customerCharge, order}) {
+    this.initDOM();
+    
     this.customerCharge = customerCharge;
     this.order = order;
+    this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
+    this.order.addSubscriber(this.updateOnOrderChange);
 
+    this.$customerChargeForm.addEventListener('submit', this.onSubmitCustomerChargeForm);
+  }
+
+  initDOM() {
     this.$customerChargeArea = $('#customer-charge-area');
     this.$customerChargeForm = $('#customer-charge-form', this.$customerChargeArea);
     this.$customerChargeInput = $('#customer-charge-input', this.$customerChargeForm);
     this.$customerChargeSubmitButton = $('button', this.$customerChargeForm);
-    this.$customerCharge = $('#customer-charge', this.$customerChargeArea);
-    this.updateCustomerCharge(0);
-
-    this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
-    this.order.addSubscriber(this.updateOnOrderChange);
-    this.$customerChargeForm.addEventListener('submit', this.onSubmitCustomerChargeForm);
+    this.$totalCustomerChargeText = $('#total-customer-charge-text', this.$customerChargeArea);
   }
 
   updateOnCustomerChargeChange = ({value: customerCharge}) => {
-    this.updateCustomerCharge(customerCharge);
+    this.$totalCustomerChargeText.textContent = customerCharge;
   }
 
   updateOnOrderChange = ({progress}) => {
@@ -42,10 +45,6 @@ export default class CustomerChargeForm {
     $customerChargeInput.value = '';
 
     this.customerCharge.addCustomerCharge(chargeValue);
-  }
-
-  updateCustomerCharge(customerCharge) {
-    this.$customerCharge.textContent = customerCharge;
   }
 
   setFormDisable() {

@@ -14,7 +14,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 550px;
+  width: 600px;
   border-radius: 4px;
   padding: 36px 30px;
   border: 1px solid rgba(0, 0, 0, 0.12);
@@ -30,10 +30,30 @@ header {
 
 main {
   width: 100%;
-  margin: 30px 0;
+  margin: 0 0 30px;
   display: flex;
   flex-direction: column;
   align-items: center
+}
+
+.guide {
+  width: 80%;
+  border: 4px solid var(--melon);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.sections-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.beverage-section, 
+.charge-section {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 button {
@@ -51,10 +71,15 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px 0;
+}
+
+.form-container > p {
+  align-self: flex-start;
 }
 
 form {
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -85,6 +110,11 @@ input {
   width: 50px;
 }
 
+.flexible-button {
+  width: fit-content;
+  padding: 4px 10px;
+}
+
 .menu-area {
   width: 100%;
   margin: 20px 0;
@@ -112,6 +142,13 @@ button:disabled:hover {
   text-align: center;
 }
 
+.pick-up-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .ol-reverse {
   list-style: none;
   width: 60%;
@@ -132,4 +169,22 @@ button:disabled:hover {
   border-radius: 4px;
   background: var(--peach-puff);
   text-align: center;
+}
+
+.table {
+  border-collapse: collapse;
+  margin: 20px;
+  text-align: center;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > td {
+  width: fit-content;
+  min-width: 100px;
+  padding: 4px;
+  border: 1px solid gray;
+}
+
+.hidden {
+  display: none;
 }
