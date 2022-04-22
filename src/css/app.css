@@ -27,6 +27,11 @@
 
 .charge-money__total-description {
   font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.menu__button {
+  height: 40px;
 }
 
 .menu__button:enabled:hover,

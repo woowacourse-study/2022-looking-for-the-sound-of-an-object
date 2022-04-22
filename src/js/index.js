@@ -1,6 +1,7 @@
 import { drinks } from './constants/drink.js';
-import { KEY } from './constants/index.js';
+import { KEY, MESSAGE } from './constants/index.js';
 import { $, $$ } from './utils/dom.js';
+import { showSnackbar } from './utils/snackbar.js';
 import { store } from './utils/store.js';
 import { validateChargeMoney } from './utils/validator.js';
 
@@ -17,12 +18,19 @@ class DrinkMachine {
     this.showTotalMoney();
     this.$totalChargeInput.focus();
 
-    $('.charge-money__form').addEventListener('submit', this.chargeMoneyEvent);
-    this.$menu.addEventListener('click', this.menuButtonClickEvent);
+    $('.charge-money__form').addEventListener(
+      'submit',
+      this.chargeMoneyHandler,
+    );
+    $('.charge-money__return-button').addEventListener(
+      'click',
+      this.returnChargeMoneyHandler,
+    );
+    this.$menu.addEventListener('click', this.menuButtonClickHandler);
     this.$clearButton.addEventListener('click', this.clearDispenser);
   }
 
-  chargeMoneyEvent = e => {
+  chargeMoneyHandler = e => {
     e.preventDefault();
 
     const inputMoney = e.target.elements[0].valueAsNumber;
@@ -30,16 +38,45 @@ class DrinkMachine {
     try {
       validateChargeMoney(inputMoney);
     } catch ({ message }) {
-      alert(message);
+      showSnackbar(message);
       this.$totalChargeInput.value = '';
       return;
     }
 
     store.set(KEY.CHARGE_MONEY, store.get(KEY.CHARGE_MONEY) + inputMoney);
 
+    showSnackbar(MESSAGE.SUCCESS_CHARGE_MONEY);
     this.showTotalMoney();
     this.showMenuButton();
     this.$totalChargeInput.value = '';
+  };
+
+  returnChargeMoneyHandler = () => {
+    store.set(KEY.CHARGE_MONEY, 0);
+
+    showSnackbar(MESSAGE.RETURN_CHARGE_MONEY);
+    this.showTotalMoney();
+    this.showMenuButton();
+    this.$totalChargeInput.focus();
+  };
+
+  menuButtonClickHandler = e => {
+    if (this.$dispenser.children.length > 0) return;
+
+    store.set(KEY.CHARGE_MONEY, store.get(KEY.CHARGE_MONEY) - e.target.title);
+    this.showTotalMoney();
+    this.showMenuButton();
+
+    e.target.classList.add('active');
+
+    const template = `
+      <div>컵이 나옵니다.</div>
+      ${drinks[e.target.name].make()}
+      <div>완성되었습니다.</div>
+    `;
+
+    this.showMaking(template);
+    this.$totalChargeInput.focus();
   };
 
   showTotalMoney() {
@@ -61,7 +98,7 @@ class DrinkMachine {
             type="button"
             title=${price}
             ${price > totalMoney ? 'disabled' : ''}
-          >${name}</button>
+          >${name}<br />${price}원</button>
         `;
       })
       .join('');
@@ -71,25 +108,6 @@ class DrinkMachine {
 
     this.$menuButtons = $$('.menu__button');
   }
-
-  menuButtonClickEvent = e => {
-    if (this.$dispenser.children.length > 0) return;
-
-    store.set(KEY.CHARGE_MONEY, store.get(KEY.CHARGE_MONEY) - e.target.title);
-    this.showTotalMoney();
-    this.showMenuButton();
-
-    e.target.classList.add('active');
-
-    const template = `
-      <div>컵이 나옵니다.</div>
-      ${drinks[e.target.name].make()}
-      <div>완성되었습니다.</div>
-    `;
-
-    this.showMaking(template);
-    this.$totalChargeInput.focus();
-  };
 
   showMaking(template) {
     this.$dispenser.insertAdjacentHTML('beforeend', template);
