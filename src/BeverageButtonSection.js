@@ -3,11 +3,11 @@ import menus from './constant/menus.js';
 import { ORDER_PROGRESS } from './constant/index.js';
 
 export default class BeverageButtonSection {
-  constructor({customerCharge, order}) {
+  constructor({ customerCharge, order }) {
     this.initDOM();
     this.customerCharge = customerCharge;
     this.order = order;
-    
+
     this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
     this.order.addSubscriber(this.updateOnOrderChange);
 
@@ -27,19 +27,17 @@ export default class BeverageButtonSection {
       <button name="${menu}" type="button" disabled>${menus[menu].name}<br >${menus[menu].price.toLocaleString()}원</button>
     `).join(''));
     this.$$menuButtons = $$('button', this.$menuButtonContainer);
-    this.setAllMenuButtonDisable();
+    this.updatedAllMenuButtonDisabled();
   }
 
   updateOnCustomerChargeChange = () => {
-    if (this.order.progress === ORDER_PROGRESS.PENDING) {
-      this.setPurchaseAvailableButtonActive();
-    }
-  }
+    this.updateMenuButtonAvailable();
+  };
 
-  updateOnOrderChange = ({progress}) => {
+  updateOnOrderChange = ({ progress }) => {
     switch (progress) {
     case ORDER_PROGRESS.PENDING:
-      this.updateOnOrderPending()
+      this.updateOnOrderPending();
       break;
     case ORDER_PROGRESS.MAKING:
       this.updateOnOrderMaking();
@@ -49,55 +47,55 @@ export default class BeverageButtonSection {
       break;
     default:
     }
-  }
+  };
 
   updateOnOrderPending = () => {
-    this.setPurchaseAvailableButtonActive();
-    this.$beveragePickUpButton.setAttribute("disabled", "");
-  }
+    this.updateMenuButtonAvailable();
+    this.$beveragePickUpButton.setAttribute('disabled', '');
+  };
 
   updateOnOrderMaking = () => {
-    this.setAllMenuButtonDisable();
-  }
+    this.updatedAllMenuButtonDisabled();
+  };
 
   updateOnOrderComplete = () => {
-    this.$beveragePickUpButton.removeAttribute("disabled");
-  }
-    
+    this.$beveragePickUpButton.removeAttribute('disabled');
+  };
+
   onClickMenuArea = (event) => {
     if (event.target.tagName !== 'BUTTON') return;
     if (this.order.progress !== ORDER_PROGRESS.PENDING) return;
 
     this.customerCharge.subtractCustomerCharge(menus[event.target.name].price);
     this.order.updateOrderStateToMaking(event.target.name);
-    this.customerCharge.returnLeftCustomerCharge();
-  }
-  
+  };
+
   onClickBeveragePickUpButton = () => {
     if (this.order.progress !== ORDER_PROGRESS.COMPLETE) return;
 
     this.order.updateOrderStateToPending();
-  }
+  };
 
-  setAllMenuButtonDisable() {
+  updatedAllMenuButtonDisabled() {
     this.$$menuButtons.forEach((menuButton) => {
-      menuButton.setAttribute("disabled", "");
-    })
+      menuButton.setAttribute('disabled', '');
+    });
   }
 
-  setAllMenuButtonActive() {
+  updateAllMenuButtonActive() {
     this.$$menuButtons.forEach((menuButton) => {
-      menuButton.removeAttribute("disabled");
-    })
+      menuButton.removeAttribute('disabled');
+    });
   }
 
-  setPurchaseAvailableButtonActive() {
-    Array.from(this.$$menuButtons).filter((menuButton) => {
+  updateMenuButtonAvailable() {
+    this.$$menuButtons.forEach((menuButton) => {
       const { price } = menus[menuButton.name];
-      return price <= this.customerCharge.value;
-    }).forEach((menuButton) => {
-      menuButton.removeAttribute("disabled");
+      if (price <= this.customerCharge.value) {
+        menuButton.removeAttribute('disabled');
+        return;
+      }
+      menuButton.setAttribute('disabled', '');
     })
   }
-
 }
