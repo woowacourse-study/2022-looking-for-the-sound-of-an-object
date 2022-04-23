@@ -33,12 +33,15 @@
             <h3 class="sr-only">음료 구입를 위한 금액 충전 영역</h3>
             <form id="customer-charge-form">
               <label form="customer-charge-form">금액을 투입하세요. (1,000원 단위)</label>
-              <div class="input-button-wrap">
+              <div class="flex-row-space-between-container">
                 <input type="number" id="customer-charge-input" placeholder="1000" step="1000" min="1000" max="10000" required>
                 <button class="small-button">충전</button>
               </div>
             </form>
-            <p>현재 투입 금액: <span id="total-customer-charge-text"></span>원</p>
+            <div class="flex-row-space-between-container">
+              <p>현재 투입 금액: <span id="total-customer-charge-text"></span>원</p>
+              <button class="small-button">잔돈 반환</button>
+            </div>
           </section>
           <section class="pick-up-area">
             <h3 class="sr-only">잔돈 반환 영역</h3>
