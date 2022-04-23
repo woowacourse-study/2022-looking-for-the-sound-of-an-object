@@ -12,6 +12,7 @@ export default class Order {
   }
 
   initDOM() {
+    this.$chargeMoneyReturnButton = $('.charge-money__return-button');
     this.$totalChargeInput = $('.charge-money__input');
     this.$dispenser = $('.dispenser');
     this.$clearButton = $('.clear');
@@ -66,6 +67,7 @@ export default class Order {
   }
 
   showMaking(template) {
+    this.$chargeMoneyReturnButton.toggleAttribute('disabled');
     this.$dispenser.insertAdjacentHTML('beforeend', template);
 
     Array.from(this.$dispenser.children).forEach(($child, idx) => {
@@ -75,6 +77,7 @@ export default class Order {
     });
 
     setTimeout(() => {
+      this.$chargeMoneyReturnButton.toggleAttribute('disabled');
       this.$clearButton.toggleAttribute('hidden');
     }, 1000 * this.$dispenser.children.length);
   }
