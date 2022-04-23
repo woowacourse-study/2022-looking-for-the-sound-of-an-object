@@ -27,7 +27,7 @@ export default class BeverageButtonSection {
       <button name="${menu}" type="button" disabled>${menus[menu].name}<br >${menus[menu].price.toLocaleString()}원</button>
     `).join(''));
     this.$$menuButtons = $$('button', this.$menuButtonContainer);
-    this.updatedAllMenuButtonDisabled();
+    this.updateAllMenuButtonDisabled();
   }
 
   updateOnCustomerChargeChange = () => {
@@ -55,7 +55,7 @@ export default class BeverageButtonSection {
   };
 
   updateOnOrderMaking = () => {
-    this.updatedAllMenuButtonDisabled();
+    this.updateAllMenuButtonDisabled();
   };
 
   updateOnOrderComplete = () => {
@@ -76,7 +76,7 @@ export default class BeverageButtonSection {
     this.order.updateOrderStateToPending();
   };
 
-  updatedAllMenuButtonDisabled() {
+  updateAllMenuButtonDisabled() {
     this.$$menuButtons.forEach((menuButton) => {
       menuButton.setAttribute('disabled', '');
     });
