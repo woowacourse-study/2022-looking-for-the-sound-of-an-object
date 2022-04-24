@@ -39,6 +39,8 @@ class CoffeeMachineComponent {
 
     this.$returnChargeButton = document.querySelector('#charge-return-button');
     this.$returnCoinElement = document.querySelector('#total-charge-return');
+
+    this.$refundButton = document.querySelector('#refund-button');
   }
 
   showPurchasableDrinkQuantity() {
@@ -79,6 +81,7 @@ class CoffeeMachineComponent {
     this.$chargeCoinButton.addEventListener('click', this.onChargeCoinButtonClick);
     this.$returnChargeButton.addEventListener('click', this.onReturnChargeButtonClick);
     this.$takeDrinkButton.addEventListener('click', this.onTakeDrinkButtonClick);
+    this.$refundButton.addEventListener('click', this.onReturnChargeButtonClick);
   }
 
   onNavButtonClick = e => {
