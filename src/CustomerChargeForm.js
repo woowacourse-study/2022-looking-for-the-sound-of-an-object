@@ -2,14 +2,13 @@ import { ORDER_PROGRESS } from './constant/index.js';
 import { $ } from './util/index.js';
 
 export default class CustomerChargeForm {
-  constructor({customerCharge, order}) {
+  constructor({ customerCharge, order }) {
     this.initDOM();
-    
+
     this.customerCharge = customerCharge;
     this.order = order;
     this.customerCharge.addSubscriber(this.updateOnCustomerChargeChange);
     this.order.addSubscriber(this.updateOnOrderChange);
-
     this.$customerChargeForm.addEventListener('submit', this.onSubmitCustomerChargeForm);
   }
 
@@ -21,11 +20,11 @@ export default class CustomerChargeForm {
     this.$totalCustomerChargeText = $('#total-customer-charge-text', this.$customerChargeArea);
   }
 
-  updateOnCustomerChargeChange = ({value: customerCharge}) => {
+  updateOnCustomerChargeChange = ({ value: customerCharge }) => {
     this.$totalCustomerChargeText.textContent = customerCharge;
-  }
+  };
 
-  updateOnOrderChange = ({progress}) => {
+  updateOnOrderChange = ({ progress }) => {
     switch (progress) {
     case ORDER_PROGRESS.PENDING:
       this.setFormActive();
@@ -35,25 +34,24 @@ export default class CustomerChargeForm {
       break;
     default:
     }
-  }
+  };
 
   onSubmitCustomerChargeForm = (event) => {
     event.preventDefault();
-
     const $customerChargeInput = $('#customer-charge-input', event.target);
     const chargeValue = Number($customerChargeInput.value);
     $customerChargeInput.value = '';
 
     this.customerCharge.addCustomerCharge(chargeValue);
-  }
+  };
 
   setFormDisable() {
-    this.$customerChargeInput.setAttribute("disabled", "");
-    this.$customerChargeSubmitButton.setAttribute("disabled", "");
+    this.$customerChargeInput.setAttribute('disabled', '');
+    this.$customerChargeSubmitButton.setAttribute('disabled', '');
   }
 
   setFormActive() {
-    this.$customerChargeInput.removeAttribute("disabled");
-    this.$customerChargeSubmitButton.removeAttribute("disabled");
+    this.$customerChargeInput.removeAttribute('disabled');
+    this.$customerChargeSubmitButton.removeAttribute('disabled');
   }
 }

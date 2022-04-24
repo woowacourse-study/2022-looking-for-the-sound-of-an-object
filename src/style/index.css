@@ -94,15 +94,17 @@ input {
   padding: 10px;
 }
 
-.input-button-wrap {
+.flex-row-space-between-container {
+  width: 100%;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 4px;
 }
 
-.input-button-wrap > input,
-.input-button-wrap > button {
+.flex-row-space-between-container > input,
+.flex-row-space-between-container > button {
   height: 100%;
 }
 
@@ -185,6 +187,11 @@ button:disabled:hover {
   border: 1px solid gray;
 }
 
-.hidden {
-  display: none;
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }

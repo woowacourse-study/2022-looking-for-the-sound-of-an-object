@@ -17,7 +17,7 @@ export default class BeverageIngredientsList {
   }
 
   clearBeverage = () => {
-    this.$beverageIngredientsList.innerHTML = '';
+    this.$beverageIngredientsList.replaceChildren();
   }
   
   makeBeverage = (menuName) => {
