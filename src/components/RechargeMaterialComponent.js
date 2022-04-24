@@ -20,6 +20,7 @@ class RechargeMaterialComponent {
   bindEventListener() {
     this.$rechargeDrinkButtonContainer.addEventListener('click', this.onRechargeButtonClick);
   }
+  
   onRechargeButtonClick = e => {
     e.preventDefault();
     if (e.target.id === 'recharge-coffee-beans-button') {
