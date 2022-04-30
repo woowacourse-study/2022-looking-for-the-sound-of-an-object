@@ -1,4 +1,4 @@
-import Drink from '../Drink.js';
+import Drink from '../components/Order/Drink.js';
 
 const ingredients = {
   espresso: '에스프레소',
