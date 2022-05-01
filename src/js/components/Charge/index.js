@@ -47,6 +47,7 @@ export default class ChargeSection {
 
     showSnackbar(MESSAGE.SUCCESS_CHARGE_MONEY);
     observer.notify();
+    this.$totalChargeInput.value = '';
     this.$totalChargeInput.focus();
   };
 
