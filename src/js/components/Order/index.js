@@ -1,10 +1,10 @@
 import { KEY } from '../../constants/index.js';
-import { drinks } from '../../constants/drink.js';
+import drinks from '../../constants/drink.js';
 import { $, $$ } from '../../utils/dom.js';
 import { store } from '../../utils/store.js';
 import { observer } from '../../Observer.js';
 
-export default class Order {
+export default class OrderSection {
   constructor() {
     this.render();
     this.initDOM();

@@ -19,4 +19,4 @@ const drinks = {
   milk: new Drink('우유', 1000, [ingredients.milk]),
 };
 
-export { drinks };
+export default drinks;

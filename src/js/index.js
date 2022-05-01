@@ -1,10 +1,10 @@
-import Charge from './components/Charge/Charge.js';
-import Order from './components/Order/Order.js';
+import ChargeSection from './components/Charge/index.js';
+import OrderSection from './components/Order/index.js';
 import { observer } from './Observer.js';
 
 function app() {
-  const charge = new Charge();
-  const order = new Order();
+  const charge = new ChargeSection();
+  const order = new OrderSection();
 
   observer.subscribe(charge);
   observer.subscribe(order);

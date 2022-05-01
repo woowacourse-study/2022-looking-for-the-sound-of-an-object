@@ -5,7 +5,7 @@ import { showSnackbar } from '../../utils/snackbar.js';
 import { validateChargeMoney } from '../../utils/validator.js';
 import { observer } from '../../Observer.js';
 
-export default class Charge {
+export default class ChargeSection {
   constructor() {
     this.render();
     this.initDOM();
