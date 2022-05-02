@@ -10,8 +10,8 @@ export default class OrderSection {
     this.render();
     this.initDOM();
     this.bindDOM();
-    this.cart = [];
     this.showMenu();
+    this.cart = [];
   }
 
   initDOM() {
@@ -37,15 +37,17 @@ export default class OrderSection {
 
     const itemIdx = this.cart.findIndex(drink => drink.name === e.target.name);
 
-    if (itemIdx === -1) {
-      this.cart.push({
-        name: e.target.name,
-        price: e.target.title,
-        quantity: 1,
-      });
-    } else {
-      const prevState = this.cart[itemIdx];
-      this.cart[itemIdx] = { ...prevState, quantity: prevState.quantity + 1 };
+    switch (itemIdx) {
+      case -1:
+        this.cart.push({
+          name: e.target.name,
+          price: e.target.title,
+          quantity: 1,
+        });
+        break;
+      default:
+        const prevState = this.cart[itemIdx];
+        this.cart[itemIdx] = { ...prevState, quantity: prevState.quantity + 1 };
     }
 
     this.showCart();
