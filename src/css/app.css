@@ -1,10 +1,13 @@
 #app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 500px;
+  min-height: 680px;
+  height: 100%;
   background: var(--color-app-background);
   border: 1px solid var(--color-app-border);
-  width: 500px;
-  min-height: 700px;
-  height: 100%;
-  text-align: center;
   margin-top: 30px;
 }
 
@@ -34,28 +37,63 @@
   height: 40px;
 }
 
-.menu__button:enabled:hover,
-.menu__button.active {
+.menu__button:enabled:hover {
   background: var(--color-menu-clicked-background);
   color: var(--color-menu-clicked-text);
+}
+
+.cart {
+  display: flex;
+  align-items: center;
+  width: 420px;
+  height: 50px;
+  border: 1px solid #929292;
+  border-radius: 5px;
+  margin: 20px auto;
+}
+
+.cart div {
+  display: inline-block;
+  text-align: center;
+  width: 94px;
+  background: #e9faff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 3px;
+  margin: 5px 2.5px;
+}
+
+.cart div:hover {
+  background: #daf1f8;
+}
+
+.exit {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin: 20px;
 }
 
 .dispenser {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: scroll;
-  overflow: hidden;
-  height: 390px;
-  margin: 10px 0;
+  overflow-y: scroll;
+  width: 350px;
+  height: 270px;
+  margin-right: 10px;
 }
 
-.dispenser > div {
-  width: 400px;
-  font-size: 15px;
+.dispenser::-webkit-scrollbar {
+  display: none;
+}
+
+.dispenser div {
+  width: 100%;
   background: var(--color-dispenser-default-background);
   border: 1px solid var(--color-dispenser-default-border);
   border-radius: 5px;
+  font-size: 15px;
   padding: 10px 0;
   margin: 5px 0;
 }
@@ -64,6 +102,20 @@
   background: var(--color-dispenser-done-background);
   color: var(--color-dispenser-done-text);
   animation: done-change 0.5s;
+}
+
+.tray {
+  display: inline;
+  height: 270px;
+  margin-left: 10px;
+}
+
+.tray div {
+  background: #fbd4db;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 5px;
+  padding: 5px;
 }
 
 .clear:hover {

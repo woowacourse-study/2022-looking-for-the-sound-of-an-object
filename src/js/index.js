@@ -4,10 +4,9 @@ import { observer } from './Observer.js';
 
 function app() {
   const charge = new ChargeSection();
-  const order = new OrderSection();
+  new OrderSection();
 
   observer.subscribe(charge);
-  observer.subscribe(order);
   observer.notify();
 }
 
