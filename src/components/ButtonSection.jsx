@@ -1,11 +1,6 @@
 import { useRef } from "react";
 
-export const DRINK_PRICE = {
-  milk: 1000,
-  espresso: 1000,
-  americano: 1500,
-  cafeLatte: 2000,
-};
+import { DRINK_PRICE } from "../constants";
 
 function ButtonSection({ inputMoney, setDispenserAction, handleDispenser }) {
   const timeId = useRef(null);
