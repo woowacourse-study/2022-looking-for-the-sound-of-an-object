@@ -4,7 +4,7 @@ import { DISPENSER_TIME_INTERVAL, INSERT_MONEY_RANGE } from "../constants";
 
 import { useHandleDispenser } from "../hooks/useHandleDispenser";
 
-import ButtonSection from "./ButtonSection";
+import DrinkButtonSection from "./DrinkButtonSection";
 
 function App() {
   const [inputMoney, setInputMoney] = useState(0);
@@ -47,7 +47,7 @@ function App() {
           투입한 금액: <span>{inputMoney.toLocaleString()}</span>원
         </p>
       </section>
-      <ButtonSection
+      <DrinkButtonSection
         handleDispenser={handleDispenser}
         setDispenserAction={setDispenserAction}
         inputMoney={inputMoney}

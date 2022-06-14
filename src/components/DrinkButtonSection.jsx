@@ -2,7 +2,11 @@ import { useRef } from "react";
 
 import { DRINK_PRICE } from "../constants";
 
-function ButtonSection({ inputMoney, setDispenserAction, handleDispenser }) {
+function DrinkButtonSection({
+  inputMoney,
+  setDispenserAction,
+  handleDispenser,
+}) {
   const timeId = useRef(null);
 
   const makeMilk = async () => {
@@ -78,4 +82,4 @@ function ButtonSection({ inputMoney, setDispenserAction, handleDispenser }) {
   );
 }
 
-export default ButtonSection;
+export default DrinkButtonSection;
