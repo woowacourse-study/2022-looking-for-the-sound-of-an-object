@@ -7,11 +7,14 @@ function DrinkButtonSection({
   inputMoney,
   setDispenserAction,
   handleDispenser,
+  setInputMoney,
 }) {
   const timeId = useRef(null);
 
   const makeMilk = async () => {
     if (timeId.current) return;
+    setInputMoney((prev) => prev - DRINK_PRICE.milk);
+
     setDispenserAction([]);
     await handleDispenser("컵", timeId);
     await handleDispenser("우유", timeId);
@@ -21,6 +24,8 @@ function DrinkButtonSection({
 
   const makeEspresso = async () => {
     if (timeId.current) return;
+    setInputMoney((prev) => prev - DRINK_PRICE.espresso);
+
     setDispenserAction([]);
     await handleDispenser("컵", timeId);
     await handleDispenser("에스프레소", timeId);
@@ -30,6 +35,8 @@ function DrinkButtonSection({
 
   const makeAmericano = async () => {
     if (timeId.current) return;
+    setInputMoney((prev) => prev - DRINK_PRICE.americano);
+
     setDispenserAction([]);
     await handleDispenser("컵", timeId);
     await handleDispenser("에스프레소", timeId);
@@ -40,6 +47,8 @@ function DrinkButtonSection({
 
   const makeCafeLatte = async () => {
     if (timeId.current) return;
+    setInputMoney((prev) => prev - DRINK_PRICE.cafeLatte);
+
     setDispenserAction([]);
     await handleDispenser("컵", timeId);
     await handleDispenser("우유", timeId);
