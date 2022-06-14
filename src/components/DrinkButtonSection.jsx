@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { DRINK } from "../constants";
 
@@ -10,6 +10,7 @@ function DrinkButtonSection({
   handleDispenser,
   setInputMoney,
 }) {
+  const [latestDrink, setLatestDrink] = useState("");
   const timeId = useRef(null);
 
   const makeDrink = async (dispenserActionList) => {
@@ -21,9 +22,31 @@ function DrinkButtonSection({
 
   const buyDrink = (drink) => async () => {
     if (timeId.current) return;
-    setInputMoney((prev) => prev - DRINK[drink].PRICE);
-    await makeDrink(DRINK[drink].ACTION);
-    timeId.current = null;
+    if (
+      window.confirm(
+        `${drink}를 구매하시는 게 맞나요? 음료가 나온 후에 환불할 수 있습니다.`
+      )
+    ) {
+      setLatestDrink(DRINK[drink].NAME);
+      setInputMoney((prev) => prev - DRINK[drink].PRICE);
+      await makeDrink(DRINK[drink].ACTION);
+      timeId.current = null;
+    }
+  };
+
+  const refundMoney = () => {
+    if (timeId.current) {
+      alert("음료가 나온 후에 환불할 수 있습니다.");
+      return;
+    }
+    if (
+      latestDrink &&
+      window.confirm(`정말 ${latestDrink}를 환불하시겠습니까?`)
+    ) {
+      setDispenserAction([]);
+      setLatestDrink("");
+      setInputMoney((prev) => prev + DRINK[latestDrink].PRICE);
+    }
   };
 
   return (
@@ -53,6 +76,9 @@ function DrinkButtonSection({
       >
         카페라떼
       </DrinkButton>
+      <button type="button" onClick={refundMoney} disabled={!latestDrink}>
+        환불하기
+      </button>
     </section>
   );
 }

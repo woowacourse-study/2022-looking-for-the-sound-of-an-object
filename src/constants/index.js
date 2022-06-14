@@ -5,6 +5,7 @@ export const INSERT_MONEY_RANGE = {
   MAX: 50000,
 };
 
+// key와 NAME은 같아야 함
 export const DRINK = {
   MILK: {
     NAME: "MILK",
