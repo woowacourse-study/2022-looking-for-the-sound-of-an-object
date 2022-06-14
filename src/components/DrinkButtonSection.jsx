@@ -1,6 +1,7 @@
 import { useRef } from "react";
 
 import { DRINK_PRICE } from "../constants";
+import DrinkButton from "./DrinkButton";
 
 function DrinkButtonSection({
   inputMoney,
@@ -50,34 +51,27 @@ function DrinkButtonSection({
   return (
     <section>
       <h2>자판기 버튼</h2>
-      <button
-        type="button"
-        onClick={makeMilk}
-        disabled={inputMoney < DRINK_PRICE.milk}
-      >
+      <DrinkButton onClick={makeMilk} disabled={inputMoney < DRINK_PRICE.milk}>
         우유
-      </button>
-      <button
-        type="button"
+      </DrinkButton>
+      <DrinkButton
         onClick={makeEspresso}
         disabled={inputMoney < DRINK_PRICE.espresso}
       >
         에스프레소
-      </button>
-      <button
-        type="button"
+      </DrinkButton>
+      <DrinkButton
         onClick={makeAmericano}
         disabled={inputMoney < DRINK_PRICE.americano}
       >
         아메리카노
-      </button>
-      <button
-        type="button"
+      </DrinkButton>
+      <DrinkButton
         onClick={makeCafeLatte}
         disabled={inputMoney < DRINK_PRICE.cafeLatte}
       >
         카페라떼
-      </button>
+      </DrinkButton>
     </section>
   );
 }
