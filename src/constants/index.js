@@ -11,3 +11,10 @@ export const DRINK_PRICE = {
   americano: 1500,
   cafeLatte: 2000,
 };
+
+export const COIN_UNIT = {
+  500: 500,
+  100: 100,
+  50: 50,
+  10: 10,
+};
