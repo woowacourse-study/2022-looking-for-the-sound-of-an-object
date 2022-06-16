@@ -18,8 +18,8 @@ function DrinkSection({ inputMoney, setInputMoney }) {
       />
       <section>
         <h2>디스펜서</h2>
-        {dispenserAction.map((action) => (
-          <p key={action}>{action}</p>
+        {dispenserAction.map((action, index) => (
+          <p key={index}>{action}</p>
         ))}
       </section>
     </>
