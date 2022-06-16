@@ -18,14 +18,16 @@ function ReturnMoneySection({ inputMoney, setInputMoney }) {
       return;
     }
 
-    let leftMoney = inputMoney;
-    let counts = initialChangeState;
-    Object.keys(COIN_UNIT)
+    const [counts, leftMoney] = Object.values(COIN_UNIT)
       .sort((a, b) => b - a)
-      .forEach((unit) => {
-        counts[COIN_UNIT[unit]] = Math.floor(leftMoney / COIN_UNIT[unit]);
-        leftMoney %= COIN_UNIT[unit];
-      });
+      .reduce(
+        (acc, unitValue) => {
+          acc[0][unitValue] = Math.floor(acc[1] / unitValue);
+          acc[1] %= unitValue;
+          return acc;
+        },
+        [initialChangeState, inputMoney]
+      );
     setChanges(counts);
     setInputMoney(leftMoney);
   };
