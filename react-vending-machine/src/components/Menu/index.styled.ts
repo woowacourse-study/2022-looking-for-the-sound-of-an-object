@@ -5,7 +5,11 @@ const StyledMenu = styled.div<{ lightOn?: boolean }>`
   flex-direction: column;
   align-items: center;
 
-  font-size: 25px;
+  font-size: 28px;
+
+  div {
+    font-size: 14px;
+  }
 
   button {
     width: 80px;
@@ -20,8 +24,6 @@ const StyledMenu = styled.div<{ lightOn?: boolean }>`
       background-color: lightgreen;
     }
   }
-
-  color: aliceblue;
 `;
 
 export { StyledMenu };
