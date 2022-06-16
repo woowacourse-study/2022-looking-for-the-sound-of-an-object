@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import { DRINK } from "../constants";
+import { DRINK } from "../../constants";
 
 import DrinkButton from "./DrinkButton";
 
