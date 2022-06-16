@@ -15,13 +15,13 @@ const ButtonStyle = {
   primary: css`
     background-color: ${({ theme }) => theme.COLOR.GREY_100};
 
+    &:hover {
+      background-color: ${({ theme }) => theme.COLOR.GREEN_100};
+    }
+
     &:disabled {
       background-color: ${({ theme }) => theme.COLOR.GREY_300};
       cursor: default;
-    }
-
-    &:hover {
-      background-color: ${({ theme }) => theme.COLOR.GREEN_100};
     }
   `,
   secondary: css`
