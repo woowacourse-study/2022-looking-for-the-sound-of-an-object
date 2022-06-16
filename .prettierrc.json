@@ -1,9 +1,9 @@
 {
   "importOrder": [
-    "^(@|styled-components)(.*|$)",
     "^(@|constants)(.*|$)",
     "^(@|hooks)(.*|$)",
-    "^(@|components)(.*|$)"
+    "^(@|components)(.*|$)",
+    "^(@|styles)(.*|$)"
   ],
   "importOrderSeparation": true
 }
