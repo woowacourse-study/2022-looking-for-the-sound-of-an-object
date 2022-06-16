@@ -7,7 +7,7 @@ import MoneyInput from "./components/MoneyInput";
 
 import {
   StyledVendingMachine,
-  Menus,
+  StyledMenus,
   StyledMoneyBox,
   StyledMoney,
 } from "./VendingMachine.styled";
@@ -68,7 +68,7 @@ export default function VendingMachine() {
   return (
     <StyledVendingMachine>
       <h1>도리의 자판기</h1>
-      <Menus>
+      <StyledMenus>
         {Object.entries(menus).map(([key, value]) => (
           <Menu
             lightOn={value.price <= totalMoney}
@@ -79,7 +79,7 @@ export default function VendingMachine() {
             onClick={() => handleMenuClick(key, value.price)}
           />
         ))}
-      </Menus>
+      </StyledMenus>
       <StyledMoneyBox>
         <MoneyDisplay>{+totalMoney}</MoneyDisplay>
         <StyledMoney>

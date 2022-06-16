@@ -9,7 +9,7 @@ const StyledMoneyDisplay = styled.div`
 
   border-radius: 4px;
   background-color: black;
-  color: red;
+  color: #c9144e;
 `;
 
 export default StyledMoneyDisplay;
