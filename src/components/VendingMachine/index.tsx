@@ -13,6 +13,15 @@ const clearAllTimers = () => {
 
 const BEVERAGE: TBeverageInfo[] = [
   {
+    id: 0,
+    name: '에스프레소',
+    price: 600,
+    ingredients: [
+      { name: '컵', time: 1000 },
+      { name: '에스프레소', time: 2000 },
+    ],
+  },
+  {
     id: 1,
     name: '아메리카노',
     price: 1000,
@@ -20,6 +29,25 @@ const BEVERAGE: TBeverageInfo[] = [
       { name: '컵', time: 1000 },
       { name: '에스프레소', time: 2000 },
       { name: '뜨거운 물', time: 1000 },
+    ],
+  },
+  {
+    id: 3,
+    name: '카페라떼',
+    price: 2000,
+    ingredients: [
+      { name: '컵', time: 1000 },
+      { name: '에스프레소', time: 2000 },
+      { name: '우유', time: 1000 },
+    ],
+  },
+  {
+    id: 4,
+    name: '우유',
+    price: 1000,
+    ingredients: [
+      { name: '컵', time: 1000 },
+      { name: '우유', time: 1000 },
     ],
   },
 ];
@@ -157,6 +185,8 @@ const FlexRow = styled.div`
   width: 100%;
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const Input = styled.input`
