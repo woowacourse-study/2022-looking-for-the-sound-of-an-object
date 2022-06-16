@@ -27,3 +27,4 @@
 - [소피아](https://github.com/soyi47)
 - [샐리](https://github.com/liswktjs)
 - [하리](https://github.com/LAH1203)
+- [태태](https://github.com/nan-noo)
