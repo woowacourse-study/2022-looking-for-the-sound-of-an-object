@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { COIN_UNIT } from "constants";
 
+import BoxButton from "components/common/OutlinedButton";
+
 const initialChangeState = {
   [COIN_UNIT[500]]: 0,
   [COIN_UNIT[100]]: 0,
@@ -40,9 +42,9 @@ function ReturnMoneySection({ inputMoney, setInputMoney }) {
   return (
     <section>
       <h2>금액 반환구</h2>
-      <button type="button" onClick={returnMoney}>
+      <BoxButton type="button" onClick={returnMoney}>
         반환하기
-      </button>
+      </BoxButton>
       <p>
         반환한 금액: <span>{totalChanges.toLocaleString()}</span>원 <br />
         500원: <span>{changes[COIN_UNIT[500]]}</span>개 <br />

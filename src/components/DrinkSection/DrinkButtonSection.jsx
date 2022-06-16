@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { DRINK } from "constants";
 
 import DrinkButton from "components/DrinkSection/DrinkButton";
+import BoxButton from "components/common/OutlinedButton";
 
 function DrinkButtonSection({
   inputMoney,
@@ -87,13 +88,13 @@ function DrinkButtonSection({
       >
         카페라떼
       </DrinkButton>
-      <button
+      <BoxButton
         type="button"
         onClick={refundMoney}
         disabled={!latestDrinks.length}
       >
         환불하기
-      </button>
+      </BoxButton>
       <section>
         <h3>구입한 목록</h3>
         <p>{latestDrinks.join(", ")}</p>

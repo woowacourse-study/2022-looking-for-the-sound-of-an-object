@@ -2,6 +2,8 @@ import { useRef } from "react";
 
 import { COIN_UNIT, INSERT_MONEY_RANGE } from "constants";
 
+import BoxButton from "components/common/OutlinedButton";
+
 const validateInsertMoney = (insert) => {
   if (!insert) {
     throw new Error("금액을 입력해주세요.");
@@ -51,9 +53,9 @@ function InsertMoneySection({ inputMoney, setInputMoney }) {
         ref={insertMoneyRef}
       />
       원
-      <button type="button" onClick={InsertMoney}>
+      <BoxButton type="button" onClick={InsertMoney}>
         투입하기
-      </button>
+      </BoxButton>
       <p>
         투입한 금액: <span>{inputMoney.toLocaleString()}</span>원
       </p>

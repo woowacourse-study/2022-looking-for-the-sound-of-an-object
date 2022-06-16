@@ -5,6 +5,7 @@ import InsertMoneySection from "components/MoneySection/InsertMoneySection";
 import ReturnMoneySection from "components/MoneySection/ReturnMoneySection";
 
 function App() {
+  // TODO: 나중엔 Context API로 관리
   const [inputMoney, setInputMoney] = useState(0);
 
   return (
