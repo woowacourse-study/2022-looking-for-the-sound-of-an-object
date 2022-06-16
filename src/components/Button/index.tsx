@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 type buttonType = 'primary' | 'secondary';
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  buttonType: buttonType;
+  buttonStyle: buttonType;
 }
 
 const Button = ({ children, ...rest }: Props) => {
@@ -14,9 +14,12 @@ const Button = ({ children, ...rest }: Props) => {
 const ButtonStyle = {
   primary: css`
     background-color: ${({ theme }) => theme.COLOR.GREY_100};
+
     &:disabled {
       background-color: ${({ theme }) => theme.COLOR.GREY_300};
+      cursor: default;
     }
+
     &:hover {
       background-color: ${({ theme }) => theme.COLOR.GREEN_100};
     }
@@ -25,6 +28,11 @@ const ButtonStyle = {
     background-color: ${({ theme }) => theme.COLOR.GREY_100};
     &:hover {
       background-color: ${({ theme }) => theme.COLOR.BROWN_100};
+    }
+
+    &:disabled {
+      background-color: ${({ theme }) => theme.COLOR.GREY_300};
+      cursor: default;
     }
   `,
 };
@@ -37,7 +45,7 @@ const Container = styled.button<Props>`
   color: ${({ theme }) => theme.COLOR.BLACK};
   cursor: pointer;
   transition-duration: 400ms;
-  ${({ buttonType }) => ButtonStyle[buttonType]}
+  ${({ buttonStyle }) => ButtonStyle[buttonStyle]}
 `;
 
-export default Button;
+export default React.memo(Button);

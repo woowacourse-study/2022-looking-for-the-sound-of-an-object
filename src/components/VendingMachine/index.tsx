@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Button from 'components/Button';
-import { isErrorWithMessage } from 'type';
+import Dispenser from 'components/Dispenser';
+import { isErrorWithMessage, TBeverageInfo } from 'type';
 import { useState } from 'react';
+
+const timers: number[] = [];
+
+const clearAllTimers = () => {
+  timers.forEach((timer) => clearTimeout(timer));
+};
+
+const BEVERAGE: TBeverageInfo[] = [
+  {
+    id: 1,
+    name: '아메리카노',
+    price: 1000,
+    ingredients: [
+      { name: '컵', time: 1000 },
+      { name: '에스프레소', time: 2000 },
+      { name: '뜨거운 물', time: 1000 },
+    ],
+  },
+];
 
 const validateMoney = (money: number) => {
   if (money <= 0) throw new Error('돈을 제대로 넣어주세요!');
@@ -13,10 +33,13 @@ const validateMoney = (money: number) => {
 const VendingMachine = () => {
   const [moneyInput, setMoneyInput] = useState('');
   const [chargedMoney, setChargedMoney] = useState(0);
+  const [served, setServed] = useState<string[]>([]);
+  const [finished, setFinished] = useState('');
 
   const handleChangeInput = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     const value = target.value;
+    if (Number.isNaN(+value)) return;
     setMoneyInput(value);
   };
 
@@ -33,6 +56,39 @@ const VendingMachine = () => {
     }
   };
 
+  const handleOrderMenu = (id: number) => () => {
+    const orderedMenu = BEVERAGE.find((menu) => menu.id === id);
+    if (orderedMenu === undefined) return;
+
+    setChargedMoney((prevState) => prevState - orderedMenu.price);
+
+    let totalTime = 0;
+    const timers = [];
+    orderedMenu.ingredients.forEach(({ name, time }) => {
+      totalTime += time;
+      timers.push(
+        setTimeout(() => {
+          setServed((prevState) => [name, ...prevState]);
+        }, totalTime),
+      );
+    });
+    timers.push(
+      setTimeout(() => {
+        setFinished(orderedMenu?.name ?? '');
+      }, totalTime + 1000),
+    );
+  };
+
+  const handlePickUpBeverage = () => {
+    clearAllTimers();
+    setFinished('');
+    setServed([]);
+  };
+
+  useEffect(() => {
+    return () => clearAllTimers();
+  }, []);
+
   return (
     <Container>
       <Title>🌱 나는야 짱판기 🌱</Title>
@@ -43,13 +99,36 @@ const VendingMachine = () => {
           onChange={handleChangeInput}
           onKeyDown={(e) => e.key === 'Enter' && handleChargeMoney()}
         />
-        <Button buttonType="primary" type="button" onClick={handleChargeMoney}>
+        <Button buttonStyle="primary" type="button" onClick={handleChargeMoney}>
           투입
         </Button>
       </FlexRow>
       <ChargedMoneyDescription>
         💰 투입된 금액 : {chargedMoney} 원 💰
       </ChargedMoneyDescription>
+
+      <FlexRow>
+        {BEVERAGE.map(({ id, name, price }) => (
+          <Button
+            key={id}
+            buttonStyle="secondary"
+            type="button"
+            disabled={chargedMoney < price}
+            onClick={handleOrderMenu(id)}
+          >
+            {name} / {price}원
+          </Button>
+        ))}
+      </FlexRow>
+      <Dispenser finished={finished} ingredients={served} />
+      <Button
+        buttonStyle="primary"
+        type="button"
+        onClick={handlePickUpBeverage}
+        disabled={finished.length <= 0}
+      >
+        가져가기
+      </Button>
     </Container>
   );
 };
