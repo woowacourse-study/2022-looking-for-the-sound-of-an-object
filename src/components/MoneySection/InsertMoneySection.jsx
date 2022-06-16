@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import { COIN_UNIT, INSERT_MONEY_RANGE } from "../../constants";
+import { COIN_UNIT, INSERT_MONEY_RANGE } from "constants";
 
 const validateInsertMoney = (insert) => {
   if (!insert) {

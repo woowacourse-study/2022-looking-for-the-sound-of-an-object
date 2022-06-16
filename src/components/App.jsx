@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import DrinkSection from "./DrinkSection";
-import InsertMoneySection from "./MoneySection/InsertMoneySection";
-import ReturnMoneySection from "./MoneySection/ReturnMoneySection";
+import DrinkSection from "components/DrinkSection";
+import InsertMoneySection from "components/MoneySection/InsertMoneySection";
+import ReturnMoneySection from "components/MoneySection/ReturnMoneySection";
 
 function App() {
   const [inputMoney, setInputMoney] = useState(0);
