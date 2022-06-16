@@ -28,7 +28,7 @@ const drop = keyframes`
 
 const Container = styled.section`
   width: 100%;
-  height: 200px;
+  height: 300px;
   overflow-y: auto;
   background-color: ${({ theme }) => theme.COLOR.GREEN_100};
 
@@ -50,7 +50,7 @@ const Box = styled.div`
   border-radius: 4px;
   background-color: ${({ theme }) => theme.COLOR.GREY_100};
   padding: 10px 20px;
-  width: 200px;
+  width: 250px;
 `;
 
 export default React.memo(Dispenser);

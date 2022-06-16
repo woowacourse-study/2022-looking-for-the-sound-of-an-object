@@ -33,7 +33,8 @@ const validateMoney = (money: number) => {
 const VendingMachine = () => {
   const [moneyInput, setMoneyInput] = useState('');
   const [chargedMoney, setChargedMoney] = useState(0);
-  const [served, setServed] = useState<string[]>([]);
+  const [isServing, setIsServing] = useState(false);
+  const [ingredients, setIngredients] = useState<string[]>([]);
   const [finished, setFinished] = useState('');
 
   const handleChangeInput = (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -61,6 +62,7 @@ const VendingMachine = () => {
     if (orderedMenu === undefined) return;
 
     setChargedMoney((prevState) => prevState - orderedMenu.price);
+    setIsServing(true);
 
     let totalTime = 0;
     const timers = [];
@@ -68,7 +70,7 @@ const VendingMachine = () => {
       totalTime += time;
       timers.push(
         setTimeout(() => {
-          setServed((prevState) => [name, ...prevState]);
+          setIngredients((prevState) => [name, ...prevState]);
         }, totalTime),
       );
     });
@@ -82,7 +84,8 @@ const VendingMachine = () => {
   const handlePickUpBeverage = () => {
     clearAllTimers();
     setFinished('');
-    setServed([]);
+    setIngredients([]);
+    setIsServing(false);
   };
 
   useEffect(() => {
@@ -113,14 +116,14 @@ const VendingMachine = () => {
             key={id}
             buttonStyle="secondary"
             type="button"
-            disabled={chargedMoney < price}
+            disabled={chargedMoney < price || isServing}
             onClick={handleOrderMenu(id)}
           >
             {name} / {price}원
           </Button>
         ))}
       </FlexRow>
-      <Dispenser finished={finished} ingredients={served} />
+      <Dispenser finished={finished} ingredients={ingredients} />
       <Button
         buttonStyle="primary"
         type="button"
