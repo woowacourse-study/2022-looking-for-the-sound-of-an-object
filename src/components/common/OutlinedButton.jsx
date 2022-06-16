@@ -28,7 +28,7 @@ const Button = styled.button`
   }
 `;
 
-function BoxButton({ type, onClick, children, ...rest }) {
+function OutlinedButton({ type, onClick, children, ...rest }) {
   return (
     <Button type={type} onClick={onClick} {...rest}>
       {children}
@@ -36,4 +36,4 @@ function BoxButton({ type, onClick, children, ...rest }) {
   );
 }
 
-export default BoxButton;
+export default OutlinedButton;

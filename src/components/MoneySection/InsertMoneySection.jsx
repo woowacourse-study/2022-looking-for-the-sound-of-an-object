@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import { COIN_UNIT, INSERT_MONEY_RANGE } from "constants";
 
-import BoxButton from "components/common/OutlinedButton";
+import OutlinedButton from "components/common/OutlinedButton";
 
 const validateInsertMoney = (insert) => {
   if (!insert) {
@@ -53,9 +53,9 @@ function InsertMoneySection({ inputMoney, setInputMoney }) {
         ref={insertMoneyRef}
       />
       원
-      <BoxButton type="button" onClick={InsertMoney}>
+      <OutlinedButton type="button" onClick={InsertMoney}>
         투입하기
-      </BoxButton>
+      </OutlinedButton>
       <p>
         투입한 금액: <span>{inputMoney.toLocaleString()}</span>원
       </p>
