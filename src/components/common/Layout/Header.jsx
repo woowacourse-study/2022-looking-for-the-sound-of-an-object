@@ -35,7 +35,7 @@ const Header = () => {
   return (
     <>
       <HeaderContainer>
-        <HeaderTitle>자판기</HeaderTitle>
+        <HeaderTitle>자판기 ☕️</HeaderTitle>
         <Nav>
           <NavButton onClick={() => navigate("/store")}>재료충전</NavButton>
           <NavButton onClick={() => navigate("/")}>상품구매</NavButton>
