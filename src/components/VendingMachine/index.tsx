@@ -4,7 +4,12 @@ import Button from 'components/Button';
 import Dispenser from 'components/Dispenser';
 import ChangeBox from 'components/ChangeBox';
 import { BEVERAGE, NUMBER_VALUE } from 'constant';
-import { validateMoney, clearAllTimers, isNumber } from 'utils';
+import {
+  validateMoney,
+  clearAllTimers,
+  isNumber,
+  handleEnterEvent,
+} from 'utils';
 import { isErrorWithMessage, TCoin, CoinUnit } from 'type';
 import { useState } from 'react';
 
@@ -98,7 +103,7 @@ const VendingMachine = () => {
           placeholder="💰 투입할 금액을 입력하세요 🧐"
           value={moneyInput}
           onChange={handleChangeInput}
-          onKeyDown={(e) => e.key === 'Enter' && handleChargeMoney()}
+          onKeyDown={handleEnterEvent(handleChargeMoney)}
         />
         <Button buttonStyle="primary" type="button" onClick={handleChargeMoney}>
           투입

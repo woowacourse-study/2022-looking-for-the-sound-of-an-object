@@ -1,3 +1,4 @@
+import React from 'react';
 import { NUMBER_VALUE, MESSAGE } from 'constant';
 
 export const validateMoney = (money: number) => {
@@ -14,3 +15,9 @@ export const clearAllTimers = (timers: number[]) => {
 export const isNumber = (value: string) => {
   return !Number.isNaN(+value);
 };
+
+export const handleEnterEvent =
+  (cb: Function) => (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== 'Enter') return;
+    cb();
+  };
