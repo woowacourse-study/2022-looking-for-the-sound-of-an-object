@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import Button from 'components/Button';
 import Dispenser from 'components/Dispenser';
 import ChangeBox from 'components/ChangeBox';
@@ -13,6 +12,7 @@ import {
 } from 'utils';
 import { isErrorWithMessage, TCoin } from 'type';
 import { useState } from 'react';
+import * as S from './style';
 
 const timers: number[] = [];
 
@@ -89,10 +89,10 @@ const VendingMachine = () => {
   }, []);
 
   return (
-    <Container>
-      <Title>🌱 나는야 짱판기 🌱</Title>
-      <FlexRow>
-        <Input
+    <S.Container>
+      <S.Title>🌱 나는야 짱판기 🌱</S.Title>
+      <S.FlexRow>
+        <S.Input
           placeholder="💰 투입할 금액을 입력하세요 🧐"
           value={moneyInput}
           onChange={handleChangeInput}
@@ -101,12 +101,12 @@ const VendingMachine = () => {
         <Button buttonStyle="primary" type="button" onClick={handleChargeMoney}>
           투입
         </Button>
-      </FlexRow>
-      <ChargedMoneyDescription>
+      </S.FlexRow>
+      <S.ChargedMoneyDescription>
         💰 투입된 금액 : {chargedMoney} 원 💰
-      </ChargedMoneyDescription>
+      </S.ChargedMoneyDescription>
 
-      <FlexRow>
+      <S.FlexRow>
         {BEVERAGE.map(({ id, name, price }) => (
           <Button
             key={id}
@@ -118,12 +118,12 @@ const VendingMachine = () => {
             {name} / {price}원
           </Button>
         ))}
-      </FlexRow>
-      <FlexRow>
+      </S.FlexRow>
+      <S.FlexRow>
         <Dispenser finished={finished} ingredients={ingredients} />
         <ChangeBox coins={changes} />
-      </FlexRow>
-      <FlexRow>
+      </S.FlexRow>
+      <S.FlexRow>
         <Button
           buttonStyle="primary"
           type="button"
@@ -140,46 +140,9 @@ const VendingMachine = () => {
         >
           동전 반환하기
         </Button>
-      </FlexRow>
-    </Container>
+      </S.FlexRow>
+    </S.Container>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 500px;
-  border-radius: 5px;
-  background-color: ${({ theme }) => theme.COLOR.WHITE};
-  padding: 30px 40px;
-  gap: 20px;
-`;
-
-const Title = styled.h1`
-  color: ${({ theme }) => theme.COLOR.GREEN_200};
-`;
-
-const FlexRow = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-const Input = styled.input`
-  width: 80%;
-  padding: 10px 5px;
-  border: 1px solid ${({ theme }) => theme.COLOR.GREEN_200};
-  border-radius: 4px;
-`;
-
-const ChargedMoneyDescription = styled.p`
-  color: ${({ theme }) => theme.COLOR.BROWN_100};
-  font-weight: bold;
-`;
 
 export default VendingMachine;
