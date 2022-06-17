@@ -34,36 +34,6 @@ const Guiding = styled.div`
   font-size: 16px;
 `;
 
-const ChangeContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-
-  width: 90%;
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 25%;
-    height: 50px;
-
-    border: none;
-    border-radius: 5px;
-
-    background: ${({ theme: { colors } }) => colors.black001};
-    color: ${({ theme: { colors } }) => colors.white001};
-  }
-
-  button {
-    width: 50px;
-    height: 50px;
-
-    border-radius: 50%;
-  }
-`;
-
 const DispenserContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -93,11 +63,4 @@ const Dispenser = styled.div`
   background: ${({ theme: { colors } }) => colors.gray001};
 `;
 
-export {
-  VendingMachine,
-  Guiding,
-  ChangeContainer,
-  DispenserContainer,
-  Light,
-  Dispenser,
-};
+export { VendingMachine, Guiding, DispenserContainer, Light, Dispenser };
