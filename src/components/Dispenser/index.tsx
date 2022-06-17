@@ -48,7 +48,7 @@ const Dispenser = ({ orderedMenu, handleSetFinished }: Props) => {
   return (
     <S.Container>
       {finished && <S.Box>{finished} 나왔습니다 손님! 😆 </S.Box>}
-      {ingredients?.map((name, index) => (
+      {ingredients.map((name, index) => (
         <S.Box key={index}>{name} 👩🏻‍🍳 </S.Box>
       ))}
     </S.Container>
