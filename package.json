@@ -2,6 +2,7 @@
   "name": "2022-looking-for-the-sound-of-an-object",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lah1203.github.io/2022-looking-for-the-sound-of-an-object/",
   "dependencies": {
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -20,13 +21,16 @@
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "gh-pages": "^4.0.0",
     "prettier": "^2.6.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

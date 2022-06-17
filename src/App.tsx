@@ -10,7 +10,7 @@ function App() {
     <RecoilRoot>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <Routes>
             <Route path="/" element={<MainPage />} />
           </Routes>
