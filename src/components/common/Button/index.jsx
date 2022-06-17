@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { COLORS } from "../../../style/theme";
 
 const ButtonWrapper = styled.div`
-  width: fit-content;
+  width: ${(props) => props.width || "fit-content"};
   border: none;
   border-radius: 0.4rem;
   padding: 0.4rem;
@@ -13,8 +13,8 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const Button = ({ children }) => {
-  return <ButtonWrapper>{children}</ButtonWrapper>;
+const Button = ({ width, children }) => {
+  return <ButtonWrapper width={width}>{children}</ButtonWrapper>;
 };
 
 export default Button;
