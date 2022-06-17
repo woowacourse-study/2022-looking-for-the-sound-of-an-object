@@ -27,7 +27,7 @@ const drop = keyframes`
 `;
 
 const Container = styled.section`
-  width: 100%;
+  width: 250px;
   height: 300px;
   overflow-y: auto;
   background-color: ${({ theme }) => theme.COLOR.GREEN_100};

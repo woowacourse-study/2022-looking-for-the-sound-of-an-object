@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Button from 'components/Button';
 import Dispenser from 'components/Dispenser';
-import { isErrorWithMessage, TBeverageInfo } from 'type';
+import ChangeBox from 'components/ChangeBox';
+import { isErrorWithMessage, TBeverageInfo, TCoin, CoinUnit } from 'type';
 import { useState } from 'react';
 
 const timers: number[] = [];
@@ -64,6 +65,7 @@ const VendingMachine = () => {
   const [isServing, setIsServing] = useState(false);
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [finished, setFinished] = useState('');
+  const [changes, setChanges] = useState<TCoin>();
 
   const handleChangeInput = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
@@ -116,6 +118,20 @@ const VendingMachine = () => {
     setIsServing(false);
   };
 
+  const handleChangeMoney = () => {
+    const newChanges: TCoin = { 500: 0, 100: 0, 50: 0, 10: 0 };
+
+    let index = 0;
+    let money = chargedMoney;
+    while (money > 0) {
+      if (money < CoinUnit[index]) index += 1;
+      money -= CoinUnit[index];
+      newChanges[CoinUnit[index]] += 1;
+    }
+    setChargedMoney(0);
+    setChanges(newChanges);
+  };
+
   useEffect(() => {
     return () => clearAllTimers();
   }, []);
@@ -151,15 +167,28 @@ const VendingMachine = () => {
           </Button>
         ))}
       </FlexRow>
-      <Dispenser finished={finished} ingredients={ingredients} />
-      <Button
-        buttonStyle="primary"
-        type="button"
-        onClick={handlePickUpBeverage}
-        disabled={finished.length <= 0}
-      >
-        가져가기
-      </Button>
+      <FlexRow>
+        <Dispenser finished={finished} ingredients={ingredients} />
+        <ChangeBox coins={changes} />
+      </FlexRow>
+      <FlexRow>
+        <Button
+          buttonStyle="primary"
+          type="button"
+          onClick={handlePickUpBeverage}
+          disabled={finished.length <= 0}
+        >
+          가져가기
+        </Button>
+        <Button
+          buttonStyle="secondary"
+          type="button"
+          onClick={handleChangeMoney}
+          disabled={chargedMoney === 0}
+        >
+          동전 반환하기
+        </Button>
+      </FlexRow>
     </Container>
   );
 };
