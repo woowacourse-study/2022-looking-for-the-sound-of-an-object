@@ -34,31 +34,6 @@ const Guiding = styled.div`
   font-size: 16px;
 `;
 
-const MoneyInputForm = styled.form`
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-
-  width: 90%;
-  height: 30px;
-
-  input {
-    width: 60%;
-    box-sizing: border-box;
-    border: 1px solid ${({ theme: { colors } }) => colors.gray001};
-    border-radius: 3px;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  button {
-    width: 15%;
-    border-radius: 3px;
-  }
-`;
-
 const ChangeContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -121,7 +96,6 @@ const Dispenser = styled.div`
 export {
   VendingMachine,
   Guiding,
-  MoneyInputForm,
   ChangeContainer,
   DispenserContainer,
   Light,
