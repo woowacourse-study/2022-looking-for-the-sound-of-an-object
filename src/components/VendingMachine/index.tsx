@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from 'components/Button';
 import Dispenser from 'components/Dispenser';
 import ChangeBox from 'components/ChangeBox';
-import { BEVERAGE, validateMoney, clearAllTimers } from 'utils';
+import { BEVERAGE, validateMoney, clearAllTimers, isNumber } from 'utils';
 import { isErrorWithMessage, TCoin, CoinUnit } from 'type';
 import { useState } from 'react';
 
@@ -12,15 +12,17 @@ const timers: number[] = [];
 const VendingMachine = () => {
   const [moneyInput, setMoneyInput] = useState('');
   const [chargedMoney, setChargedMoney] = useState(0);
+  const [changes, setChanges] = useState<TCoin>();
+
   const [isServing, setIsServing] = useState(false);
   const [ingredients, setIngredients] = useState<string[]>([]);
+
   const [finished, setFinished] = useState('');
-  const [changes, setChanges] = useState<TCoin>();
 
   const handleChangeInput = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     const value = target.value;
-    if (Number.isNaN(+value)) return;
+    if (!isNumber(value)) return;
     setMoneyInput(value);
   };
 
@@ -39,7 +41,7 @@ const VendingMachine = () => {
 
   const handleOrderMenu = (id: number) => () => {
     const orderedMenu = BEVERAGE.find((menu) => menu.id === id);
-    if (orderedMenu === undefined) return;
+    if (!orderedMenu) return;
 
     setChargedMoney((prevState) => prevState - orderedMenu.price);
     setIsServing(true);
@@ -56,7 +58,7 @@ const VendingMachine = () => {
     });
     timers.push(
       setTimeout(() => {
-        setFinished(orderedMenu?.name ?? '');
+        setFinished(orderedMenu.name);
       }, totalTime + 1000),
     );
   };

@@ -50,3 +50,7 @@ export const validateMoney = (money: number) => {
 export const clearAllTimers = (timers: number[]) => {
   timers.forEach((timer) => clearTimeout(timer));
 };
+
+export const isNumber = (value: string) => {
+  return !Number.isNaN(+value);
+};
