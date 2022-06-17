@@ -1,3 +1,4 @@
+import React from 'react';
 import { TCoin, CoinUnit } from 'type';
 import * as S from './style';
 interface Props {
@@ -17,4 +18,4 @@ const ChangeBox = ({ coins }: Props) => {
   );
 };
 
-export default ChangeBox;
+export default React.memo(ChangeBox);
