@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Button from 'components/Button';
 import Dispenser from 'components/Dispenser';
 import ChangeBox from 'components/ChangeBox';
-import { BEVERAGE, validateMoney, clearAllTimers, isNumber } from 'utils';
+import { BEVERAGE, NUMBER_VALUE } from 'constant';
+import { validateMoney, clearAllTimers, isNumber } from 'utils';
 import { isErrorWithMessage, TCoin, CoinUnit } from 'type';
 import { useState } from 'react';
 
@@ -56,10 +57,11 @@ const VendingMachine = () => {
         }, totalTime),
       );
     });
+
     timers.push(
       setTimeout(() => {
         setFinished(orderedMenu.name);
-      }, totalTime + 1000),
+      }, totalTime + NUMBER_VALUE.ORDER_DELAY_TIME),
     );
   };
 
