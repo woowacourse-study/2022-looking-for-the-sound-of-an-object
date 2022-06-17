@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const VendingMachine = styled.div`
   display: flex;
@@ -17,50 +17,4 @@ const VendingMachine = styled.div`
   padding: 50px 0;
 `;
 
-const Guiding = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 90%;
-  height: 40px;
-
-  border: none;
-  border-radius: 5px;
-
-  background: ${({ theme: { colors } }) => colors.black001};
-  color: ${({ theme: { colors } }) => colors.white001};
-
-  font-size: 16px;
-`;
-
-const DispenserContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-`;
-
-const Light = styled.div`
-  width: 10px;
-  height: 10px;
-  border: none;
-  border-radius: 50%;
-
-  ${({ making }: { making: boolean }) => css`
-    background: ${({ theme: { colors } }) =>
-      making ? colors.red001 : colors.green001};
-  `}
-`;
-
-const Dispenser = styled.div`
-  width: 150px;
-  height: 150px;
-  border: none;
-  border-radius: 5px;
-
-  background: ${({ theme: { colors } }) => colors.gray001};
-`;
-
-export { VendingMachine, Guiding, DispenserContainer, Light, Dispenser };
+export { VendingMachine };
