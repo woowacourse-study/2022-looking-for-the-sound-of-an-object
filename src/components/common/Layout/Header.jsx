@@ -8,6 +8,7 @@ const HeaderContainer = styled.header`
   height: fit-content;
   justify-content: space-around;
   background-color: ${COLORS.BLUE};
+  margin-bottom: 4rem;
 `;
 
 const HeaderTitle = styled.h2`
@@ -36,8 +37,8 @@ const Header = () => {
       <HeaderContainer>
         <HeaderTitle>자판기</HeaderTitle>
         <Nav>
-          <NavButton onClick={navigate("/store")}>재료충전</NavButton>
-          <NavButton onClick={navigate("/")}>상품구매</NavButton>
+          <NavButton onClick={() => navigate("/store")}>재료충전</NavButton>
+          <NavButton onClick={() => navigate("/")}>상품구매</NavButton>
         </Nav>
       </HeaderContainer>
       <Outlet />

@@ -11,7 +11,7 @@ const MenuSelectContainer = styled.article`
 const MenuSelect = () => {
   return (
     <MenuSelectContainer>
-      <h2 hidden>메뉴 고르는 곳</h2>
+      <h3 hidden>메뉴 고르는 곳</h3>
       <label>
         <Button width="5rem">에스프레소</Button>
         1000원
