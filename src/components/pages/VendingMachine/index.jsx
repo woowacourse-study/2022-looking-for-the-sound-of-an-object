@@ -3,6 +3,7 @@ import CoinInsert from "./CoinInsert";
 import CoinReturn from "./CoinReturn";
 import DrinkDispenser from "./DrinkDispenser";
 import MenuSelect from "./MenuSelect";
+import NowSelling from "./NowSelling";
 
 const VendingMachineContainer = styled.section`
   display: flex;
@@ -16,6 +17,7 @@ const VendingMachine = () => {
 
   return (
     <VendingMachineContainer>
+      <NowSelling />
       <CoinInsert amount={amount} />
       <MenuSelect />
       <DrinkDispenser />
