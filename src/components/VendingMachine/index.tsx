@@ -9,8 +9,9 @@ import {
   clearAllTimers,
   isNumber,
   handleEnterEvent,
+  changeCoins,
 } from 'utils';
-import { isErrorWithMessage, TCoin, CoinUnit } from 'type';
+import { isErrorWithMessage, TCoin } from 'type';
 import { useState } from 'react';
 
 const timers: number[] = [];
@@ -78,15 +79,7 @@ const VendingMachine = () => {
   };
 
   const handleChangeMoney = () => {
-    const newChanges: TCoin = { 500: 0, 100: 0, 50: 0, 10: 0 };
-
-    let index = 0;
-    let money = chargedMoney;
-    while (money > 0) {
-      if (money < CoinUnit[index]) index += 1;
-      money -= CoinUnit[index];
-      newChanges[CoinUnit[index]] += 1;
-    }
+    const newChanges = changeCoins(chargedMoney);
     setChargedMoney(0);
     setChanges(newChanges);
   };
