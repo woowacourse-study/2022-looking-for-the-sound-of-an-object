@@ -4,12 +4,12 @@ export const NUMBER_VALUE = {
   ORDER_DELAY_TIME: 1000,
   MINIMUM_MONEY: 0,
   DIVISIBLE_NUMBER: 10,
-};
+} as const;
 
 export const MESSAGE = {
   MINIMUM_MONEY: '돈을 제대로 넣어주세요!',
   DIVISIBLE_NUMBER: '10원으로 나누어떨어지는 금액만 입력 가능합니다!',
-};
+} as const;
 
 export const BEVERAGE: TBeverageInfo[] = [
   {
@@ -51,3 +51,9 @@ export const BEVERAGE: TBeverageInfo[] = [
     ],
   },
 ];
+
+export const VENDING_MACHINE_STATUS = {
+  SERVING: 'SERVING',
+  SERVED: 'SERVED',
+  REST: 'REST',
+} as const;

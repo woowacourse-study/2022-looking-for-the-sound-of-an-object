@@ -1,30 +1,27 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from 'components/Button';
 import Dispenser from 'components/Dispenser';
 import ChangeBox from 'components/ChangeBox';
-import { BEVERAGE, NUMBER_VALUE } from 'constant';
+import { BEVERAGE, VENDING_MACHINE_STATUS } from 'constant';
+import { validateMoney, isNumber, handleEnterEvent, changeCoins } from 'utils';
 import {
-  validateMoney,
-  clearAllTimers,
-  isNumber,
-  handleEnterEvent,
-  changeCoins,
-} from 'utils';
-import { isErrorWithMessage, TCoin } from 'type';
+  isErrorWithMessage,
+  TCoin,
+  TMenuInfo,
+  TVendingMachineStatus,
+} from 'type';
 import { useState } from 'react';
 import * as S from './style';
-
-const timers: number[] = [];
 
 const VendingMachine = () => {
   const [moneyInput, setMoneyInput] = useState('');
   const [chargedMoney, setChargedMoney] = useState(0);
   const [changes, setChanges] = useState<TCoin>();
 
-  const [isServing, setIsServing] = useState(false);
-  const [ingredients, setIngredients] = useState<string[]>([]);
-
-  const [finished, setFinished] = useState('');
+  const [status, setStatus] = useState<TVendingMachineStatus>(
+    VENDING_MACHINE_STATUS.REST,
+  );
+  const [orderedMenu, setOrderedMenu] = useState<TMenuInfo | undefined>();
 
   const handleChangeInput = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
@@ -49,33 +46,18 @@ const VendingMachine = () => {
   const handleOrderMenu = (id: number) => () => {
     const orderedMenu = BEVERAGE.find((menu) => menu.id === id);
     if (!orderedMenu) return;
-
-    setChargedMoney((prevState) => prevState - orderedMenu.price);
-    setIsServing(true);
-
-    let totalTime = 0;
-    const timers = [];
-    orderedMenu.ingredients.forEach(({ name, time }) => {
-      totalTime += time;
-      timers.push(
-        setTimeout(() => {
-          setIngredients((prevState) => [name, ...prevState]);
-        }, totalTime),
-      );
+    setOrderedMenu({
+      name: orderedMenu.name,
+      ingredients: orderedMenu.ingredients,
     });
 
-    timers.push(
-      setTimeout(() => {
-        setFinished(orderedMenu.name);
-      }, totalTime + NUMBER_VALUE.ORDER_DELAY_TIME),
-    );
+    setChargedMoney((prevState) => prevState - orderedMenu.price);
+    setStatus(VENDING_MACHINE_STATUS.SERVING);
   };
 
   const handlePickUpBeverage = () => {
-    clearAllTimers(timers);
-    setFinished('');
-    setIngredients([]);
-    setIsServing(false);
+    setOrderedMenu(undefined);
+    setStatus(VENDING_MACHINE_STATUS.REST);
   };
 
   const handleChangeMoney = () => {
@@ -83,10 +65,6 @@ const VendingMachine = () => {
     setChargedMoney(0);
     setChanges(newChanges);
   };
-
-  useEffect(() => {
-    return () => clearAllTimers(timers);
-  }, []);
 
   return (
     <S.Container>
@@ -112,7 +90,9 @@ const VendingMachine = () => {
             key={id}
             buttonStyle="secondary"
             type="button"
-            disabled={chargedMoney < price || isServing}
+            disabled={
+              chargedMoney < price || status !== VENDING_MACHINE_STATUS.REST
+            }
             onClick={handleOrderMenu(id)}
           >
             {name} / {price}원
@@ -120,7 +100,10 @@ const VendingMachine = () => {
         ))}
       </S.FlexRow>
       <S.FlexRow>
-        <Dispenser finished={finished} ingredients={ingredients} />
+        <Dispenser
+          orderedMenu={orderedMenu}
+          handleSetFinished={() => setStatus(VENDING_MACHINE_STATUS.SERVED)}
+        />
         <ChangeBox coins={changes} />
       </S.FlexRow>
       <S.FlexRow>
@@ -128,7 +111,7 @@ const VendingMachine = () => {
           buttonStyle="primary"
           type="button"
           onClick={handlePickUpBeverage}
-          disabled={finished.length <= 0}
+          disabled={status !== VENDING_MACHINE_STATUS.SERVED}
         >
           가져가기
         </Button>

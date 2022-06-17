@@ -9,7 +9,7 @@ export const validateMoney = (money: number) => {
     throw new Error(MESSAGE.DIVISIBLE_NUMBER);
 };
 
-export const clearAllTimers = (timers: number[]) => {
+export const clearAllTimers = (timers: NodeJS.Timeout[]) => {
   timers.forEach((timer) => clearTimeout(timer));
 };
 

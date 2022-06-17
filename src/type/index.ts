@@ -25,6 +25,11 @@ export interface TBeverageInfo {
   ingredients: TIngredient[];
 }
 
+export interface TMenuInfo {
+  name: string;
+  ingredients: TIngredient[];
+}
+
 export type TUnit = 500 | 100 | 50 | 10;
 
 export const CoinUnit: TUnit[] = [500, 100, 50, 10];
@@ -34,3 +39,5 @@ export interface TCoin {
   50: number;
   10: number;
 }
+
+export type TVendingMachineStatus = 'SERVING' | 'SERVED' | 'REST';
