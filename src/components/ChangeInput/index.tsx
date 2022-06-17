@@ -6,7 +6,7 @@ import { changeState, guideState } from 'recoil/states';
 import * as S from './index.styled';
 
 function ChangeInput() {
-  const [guiding, setGuiding] = useRecoilState(guideState);
+  const [guideMessage, setGuideMessage] = useRecoilState(guideState);
   const [change, setChange] = useRecoilState(changeState);
 
   const chargeChange = (e: React.FormEvent) => {
@@ -23,7 +23,7 @@ function ChangeInput() {
 
     setChange(prevState => prevState + money);
 
-    setGuiding('투입되었습니다.');
+    setGuideMessage('투입되었습니다.');
   };
 
   return (

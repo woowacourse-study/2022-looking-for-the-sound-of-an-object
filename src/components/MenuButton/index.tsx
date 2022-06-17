@@ -7,7 +7,7 @@ import * as S from './index.styled';
 import { Props } from './index.type';
 
 function MenuButton({ drink: { name, price, ingredients } }: Props) {
-  const [guiding, setGuiding] = useRecoilState(guideState);
+  const [guideMessage, setGuideMessage] = useRecoilState(guideState);
   const [change, setChange] = useRecoilState(changeState);
   const [dispenser, setDispenser] = useRecoilState(dispenserState);
 
@@ -24,17 +24,17 @@ function MenuButton({ drink: { name, price, ingredients } }: Props) {
 
     setChange(prevState => prevState - price);
 
-    setGuiding('음료 제조를 시작합니다.');
+    setGuideMessage('음료 제조를 시작합니다.');
     setDispenser(DISPENSER_STATE.MAKING);
 
     ingredients.forEach((ingredient, index) => {
       setTimeout(() => {
-        setGuiding(`${ingredient}가(이) 나옵니다.`);
+        setGuideMessage(`${ingredient}가(이) 나옵니다.`);
       }, 1000 * (index + 1));
     });
 
     setTimeout(() => {
-      setGuiding(`${name} 제조가 완료되었습니다.`);
+      setGuideMessage(`${name} 제조가 완료되었습니다.`);
       setDispenser(DISPENSER_STATE.EMPTY);
     }, 1000 * (ingredients.length + 1));
   };

@@ -4,7 +4,7 @@ import { changeState, guideState } from 'recoil/states';
 import * as S from './index.styled';
 
 function ChangeOutput() {
-  const [guiding, setGuiding] = useRecoilState(guideState);
+  const [guideMessage, setGuideMessage] = useRecoilState(guideState);
   const [change, setChange] = useRecoilState(changeState);
 
   const returnChange = () => {
@@ -12,7 +12,7 @@ function ChangeOutput() {
 
     setChange(0);
 
-    setGuiding('반환되었습니다.');
+    setGuideMessage('반환되었습니다.');
   };
 
   return (
