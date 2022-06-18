@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../../style/theme";
 
-const ButtonWrapper = styled.div`
+const ButtonWrapper = styled.button`
   width: ${(props) => props.width || "fit-content"};
   border: none;
   border-radius: 0.4rem;
@@ -11,11 +11,17 @@ const ButtonWrapper = styled.div`
   &:hover {
     background-color: ${COLORS.PINK};
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${COLORS.WHITE};
+    color: black;
+  }
 `;
 
-const Button = ({ width, children, onClick }) => {
+const Button = ({ width, children, onClick, disabled = false }) => {
   return (
-    <ButtonWrapper onClick={onClick} width={width}>
+    <ButtonWrapper onClick={onClick} width={width} disabled={disabled}>
       {children}
     </ButtonWrapper>
   );
