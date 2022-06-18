@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const NowStockContainer = styled.article`
@@ -18,6 +19,8 @@ const NowStockItem = styled.td`
 `;
 
 const NowStock = () => {
+  const { espresso, milk, cup } = useSelector((state) => state.stock);
+
   return (
     <NowStockContainer>
       <h3>현재 재료 현황판</h3>
@@ -29,9 +32,9 @@ const NowStock = () => {
             <NowStockTitle>컵</NowStockTitle>
           </tr>
           <tr>
-            <NowStockItem>50</NowStockItem>
-            <NowStockItem>50</NowStockItem>
-            <NowStockItem>50</NowStockItem>
+            <NowStockItem>{espresso}</NowStockItem>
+            <NowStockItem>{milk}</NowStockItem>
+            <NowStockItem>{cup}</NowStockItem>
           </tr>
         </tbody>
       </table>

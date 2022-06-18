@@ -13,8 +13,12 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const Button = ({ width, children }) => {
-  return <ButtonWrapper width={width}>{children}</ButtonWrapper>;
+const Button = ({ width, children, onClick }) => {
+  return (
+    <ButtonWrapper onClick={onClick} width={width}>
+      {children}
+    </ButtonWrapper>
+  );
 };
 
 export default Button;
