@@ -20,7 +20,6 @@ const VendingMachine = () => {
       <NowSelling />
       <CoinInsert amount={amount} />
       <MenuSelect />
-      <DrinkDispenser />
       <CoinReturn />
     </VendingMachineContainer>
   );

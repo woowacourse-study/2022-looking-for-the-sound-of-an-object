@@ -1,5 +1,3 @@
-export const INIT_STOCK = "stock/INIT_STOCK";
-
 export const ADD_ESPRESSO = "stock/ADD_ESPRESSO";
 export const ADD_MILK = "stock/ADD_MILK";
 export const ADD_CUP = "stock/ADD_CUP";
@@ -39,7 +37,26 @@ export const addStock = (menu, quantity) => {
 
 export const useStock = (menu) => {
   if (menu === "espresso") {
+    return {
+      type: MAKE_ESPRESSO,
+    };
   }
+  if (menu === "americano") {
+    return {
+      type: MAKE_AMERICANO,
+    };
+  }
+  if (menu === "cafelatte") {
+    return {
+      type: MAKE_CAFE_LATTE,
+    };
+  }
+  if (menu === "milk") {
+    return {
+      type: MAKE_MILK,
+    };
+  }
+  return;
 };
 
 const initState = {

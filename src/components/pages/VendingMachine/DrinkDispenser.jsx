@@ -16,12 +16,12 @@ const DispenserWrapper = styled.div`
   margin-bottom: 2rem;
 `;
 
-const DrinkDispenser = () => {
+const DrinkDispenser = ({ disabled, drink }) => {
   return (
     <DrinkDispenserContainer>
       <h2 hidden>음료가 나오는 곳</h2>
-      <DispenserWrapper></DispenserWrapper>
-      <Button>음료 가져가기</Button>
+      <DispenserWrapper>{drink}</DispenserWrapper>
+      <Button disabled={disabled}>음료 가져가기</Button>
     </DrinkDispenserContainer>
   );
 };
