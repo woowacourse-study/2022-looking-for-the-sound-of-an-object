@@ -1,4 +1,7 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { chargeCoin } from "../../../modules/coin";
 import Button from "../../common/Button";
 
 const CoinInsertContainer = styled.article`
@@ -20,14 +23,30 @@ const CoinInput = styled.input`
   background-color: transparent;
 `;
 
-const CoinInsert = ({ amount }) => {
+const CoinInsert = () => {
+  const dispatch = useDispatch();
+  const { coin } = useSelector((state) => state.coin);
+  const [inputCoin, setInputCoin] = useState(0);
+
+  const coinCharge = () => {
+    if (inputCoin < 0) {
+      alert("0이상의 숫자를 입력해주세요");
+      return;
+    }
+    dispatch(chargeCoin(inputCoin));
+  };
+
   return (
     <CoinInsertContainer>
       <h3>금액 투입하기</h3>
-      <div>현재 투입된 금액 {amount}원</div>
+      <div>현재 투입된 금액 {coin}원</div>
       <CoinInputWrapper>
-        <CoinInput placeholder="투입할 금액을 입력해주세요" />
-        <Button>투입</Button>
+        <CoinInput
+          placeholder="투입할 금액을 입력해주세요"
+          value={inputCoin}
+          onChange={(e) => setInputCoin(e.target.value)}
+        />
+        <Button onClick={coinCharge}>투입</Button>
       </CoinInputWrapper>
     </CoinInsertContainer>
   );

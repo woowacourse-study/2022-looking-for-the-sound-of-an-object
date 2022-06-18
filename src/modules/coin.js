@@ -1,11 +1,11 @@
 const CHARGE_COIN = "coin/CHARGE_COIN";
 const RETURN_COIN = "coin/RETURN_COIN";
 
-export const chargeCoin = (coin) => {
+export const chargeCoin = (chargeCoin) => {
   return {
     type: CHARGE_COIN,
     payload: {
-      coin,
+      chargeCoin,
     },
   };
 };
