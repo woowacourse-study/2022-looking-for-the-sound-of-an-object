@@ -1,7 +1,7 @@
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import CoinInsert from "./CoinInsert";
 import CoinReturn from "./CoinReturn";
-import DrinkDispenser from "./DrinkDispenser";
 import MenuSelect from "./MenuSelect";
 import NowSelling from "./NowSelling";
 
@@ -13,14 +13,14 @@ const VendingMachineContainer = styled.section`
 `;
 
 const VendingMachine = () => {
-  const amount = 0;
+  const { coin } = useSelector((state) => state.coin);
 
   return (
     <VendingMachineContainer>
       <NowSelling />
-      <CoinInsert amount={amount} />
+      <CoinInsert coin={coin} />
       <MenuSelect />
-      <CoinReturn />
+      <CoinReturn coin={coin} />
     </VendingMachineContainer>
   );
 };

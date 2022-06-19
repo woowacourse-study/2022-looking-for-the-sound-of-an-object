@@ -31,7 +31,6 @@ const StockCharge = () => {
   const [milk, setMilk] = useState(0);
 
   const chargeEspresso = () => {
-    console.log("espresso");
     if (espresso < 0) {
       alert("0이상의 숫자를 입력해 주세요");
       return;

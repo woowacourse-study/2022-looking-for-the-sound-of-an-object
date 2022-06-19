@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { returnCoin } from "../../../modules/coin";
 import Button from "../../common/Button";
 
 const CoinReturnContainer = styled.article`
@@ -17,13 +18,11 @@ const CoinOutputWrapper = styled.span`
   border-radius: 2rem;
 `;
 
-const CoinReturn = () => {
+const CoinReturn = ({ coin }) => {
   const dispatch = useDispatch();
 
-  const { coin } = useSelector((state) => state.coin);
-
   const [coinOutput, setCoinOutput] = useState(0);
-  const returnCoin = () => {
+  const handleReturnCoin = () => {
     setCoinOutput(coin);
     dispatch(returnCoin());
   };
@@ -33,7 +32,7 @@ const CoinReturn = () => {
 
   return (
     <CoinReturnContainer>
-      <Button onClick={returnCoin}>잔돈반환</Button>
+      <Button onClick={handleReturnCoin}>잔돈반환</Button>
       <Button onClick={takeCoin}>가져가기</Button>
       <CoinOutputWrapper>{coinOutput}</CoinOutputWrapper>
     </CoinReturnContainer>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { chargeCoin } from "../../../modules/coin";
 import Button from "../../common/Button";
@@ -23,10 +23,9 @@ const CoinInput = styled.input`
   background-color: transparent;
 `;
 
-const CoinInsert = () => {
+const CoinInsert = ({ coin }) => {
   const dispatch = useDispatch();
-  const { coin } = useSelector((state) => state.coin);
-  const [inputCoin, setInputCoin] = useState(0);
+  const [inputCoin, setInputCoin] = useState("");
 
   const coinCharge = () => {
     if (inputCoin < 0) {
@@ -34,6 +33,7 @@ const CoinInsert = () => {
       return;
     }
     dispatch(chargeCoin(inputCoin));
+    setInputCoin("");
   };
 
   return (

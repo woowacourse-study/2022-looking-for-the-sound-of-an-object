@@ -21,7 +21,6 @@ export const coinUse = (change) => {
 };
 
 export const returnCoin = () => {
-  console.log("ssss");
   return {
     type: RETURN_COIN,
   };
