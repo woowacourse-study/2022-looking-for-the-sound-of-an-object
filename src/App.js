@@ -15,8 +15,14 @@ const App = () => {
       <Provider store={store}>
         <Routes>
           <Route element={<Header />}>
-            <Route path="/" element={<VendingMachine />} />
-            <Route path="/store" element={<Store />} />
+            <Route
+              path="2022-looking-for-the-sound-of-an-object"
+              element={<VendingMachine />}
+            />
+            <Route
+              path="2022-looking-for-the-sound-of-an-object/store"
+              element={<Store />}
+            />
           </Route>
         </Routes>
       </Provider>

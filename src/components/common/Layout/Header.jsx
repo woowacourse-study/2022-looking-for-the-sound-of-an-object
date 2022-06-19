@@ -37,8 +37,18 @@ const Header = () => {
       <HeaderContainer>
         <HeaderTitle>자판기 ☕️</HeaderTitle>
         <Nav>
-          <NavButton onClick={() => navigate("/store")}>재료충전</NavButton>
-          <NavButton onClick={() => navigate("/")}>상품구매</NavButton>
+          <NavButton
+            onClick={() =>
+              navigate("2022-looking-for-the-sound-of-an-object/store")
+            }
+          >
+            재료충전
+          </NavButton>
+          <NavButton
+            onClick={() => navigate("2022-looking-for-the-sound-of-an-object/")}
+          >
+            상품구매
+          </NavButton>
         </Nav>
       </HeaderContainer>
       <Outlet />
