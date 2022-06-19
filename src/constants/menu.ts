@@ -19,6 +19,6 @@ const menu = [
     price: 1000,
     ingredients: ['우유'],
   },
-];
+] as const;
 
 export default menu;
