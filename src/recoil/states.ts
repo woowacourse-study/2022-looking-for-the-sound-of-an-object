@@ -12,7 +12,9 @@ const changeState = atom({
   default: 0,
 });
 
-const dispenserState = atom({
+const dispenserState = atom<
+  typeof DISPENSER_STATE[keyof typeof DISPENSER_STATE]
+>({
   key: 'dispenserState',
   default: DISPENSER_STATE.EMPTY,
 });

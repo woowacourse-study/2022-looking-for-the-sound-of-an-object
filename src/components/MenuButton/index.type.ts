@@ -1,5 +1,5 @@
 import { Drink } from 'types';
 
 export interface Props {
-  drink: Drink;
+  drink: Omit<Drink, 'ingredients'> & { ingredients: readonly String[] };
 }
