@@ -1,7 +1,5 @@
+import { Drink } from 'types';
+
 export interface Props {
-  drink: {
-    name: string;
-    price: number;
-    ingredients: String[];
-  };
+  drink: Drink;
 }
