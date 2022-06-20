@@ -1,4 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const show = keyframes`
+  0%, 100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+`;
 
 const GuideMessage = styled.div`
   display: flex;
@@ -15,6 +25,10 @@ const GuideMessage = styled.div`
   color: ${({ theme: { colors } }) => colors.white001};
 
   font-size: 16px;
+
+  span {
+    animation: 3s ${show} infinite;
+  }
 `;
 
 export { GuideMessage };
