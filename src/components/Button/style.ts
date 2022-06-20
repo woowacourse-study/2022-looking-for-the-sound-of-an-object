@@ -32,7 +32,7 @@ export const Container = styled.button<Props>`
   border: none;
   border-radius: 4px;
   padding: 5px 10px;
-  color: ${({ theme }) => theme.COLOR.BLACK};
+  color: ${({ theme }) => theme.COLOR.BLACK_100};
   cursor: pointer;
   transition-duration: 400ms;
   ${({ buttonStyle }) => ButtonStyle[buttonStyle]}
