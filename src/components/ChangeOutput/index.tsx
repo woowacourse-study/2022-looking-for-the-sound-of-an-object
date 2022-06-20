@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { changeState, guideState } from 'recoil/states';
-import { formatNumber } from 'utils';
+import { formatNumber } from 'utils/formatter';
 
 import * as S from './index.styled';
 
