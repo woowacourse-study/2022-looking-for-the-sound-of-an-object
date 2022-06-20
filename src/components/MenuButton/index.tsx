@@ -47,7 +47,7 @@ function MenuButton({ drink: { name, price, ingredients } }: Props) {
         {name}
         <br />({price}원)
       </S.Label>
-      <S.Button type="button" onClick={orderMenu} canBuy={price <= change} />
+      <S.Button type="button" onClick={orderMenu} disabled={price > change} />
     </S.MenuButton>
   );
 }
