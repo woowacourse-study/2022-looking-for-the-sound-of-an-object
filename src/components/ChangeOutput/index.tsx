@@ -1,5 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { changeState, guideState } from 'recoil/states';
+import { formatNumber } from 'utils';
 
 import * as S from './index.styled';
 
@@ -17,7 +18,7 @@ function ChangeOutput() {
 
   return (
     <S.ChangeContainer>
-      <S.Change>{change.toLocaleString('ko-KR')}</S.Change>
+      <S.Change>{formatNumber(change)}</S.Change>
       <S.ReturnButton type="button" onClick={returnChange}>
         반환
       </S.ReturnButton>
