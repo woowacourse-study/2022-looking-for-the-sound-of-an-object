@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { ORDER_PROGRESS } from "../constants";
 import menus from "./../constants/menus";
 
-function GuideMessage({ customerCharge, order }) {
+const GuideMessage = ({ customerCharge, order }) => {
   const [guideText, setGuideText] = useState("");
 
   const updateOnOrderPending = useCallback(() => {
@@ -47,6 +47,6 @@ function GuideMessage({ customerCharge, order }) {
   }, [order.progress, updateOnOrderPending]);
 
   return <p className="guide text">{guideText}</p>;
-}
+};
 
 export default GuideMessage;

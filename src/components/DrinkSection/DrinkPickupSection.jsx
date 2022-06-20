@@ -1,12 +1,12 @@
 import React from "react";
 import { ORDER_PROGRESS } from "../../constants";
 
-function DrinkPickupSection({
+const DrinkPickupSection = ({
   order,
   ingredientList,
   clearIngredientList,
   updateOrderStateToPending,
-}) {
+}) => {
   const handleClickDrinkPickupButton = () => {
     updateOrderStateToPending();
     clearIngredientList();
@@ -30,6 +30,6 @@ function DrinkPickupSection({
       </button>
     </section>
   );
-}
+};
 
 export default DrinkPickupSection;

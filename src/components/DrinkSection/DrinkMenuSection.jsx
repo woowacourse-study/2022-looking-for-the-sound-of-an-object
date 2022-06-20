@@ -2,13 +2,13 @@ import React from "react";
 import { ORDER_PROGRESS } from "../../constants";
 import menus from "../../constants/menus";
 
-function DrinkMenuSection({
+const DrinkMenuSection = ({
   customerCharge,
   order,
   makeDrink,
   updateOrderStateToMaking,
   subtractCustomerCharge,
-}) {
+}) => {
   const handleClickDrinkMenuButton = (e) => {
     updateOrderStateToMaking(e.target.name);
     makeDrink(e.target.name);
@@ -38,6 +38,6 @@ function DrinkMenuSection({
       </div>
     </section>
   );
-}
+};
 
 export default DrinkMenuSection;

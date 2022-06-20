@@ -1,6 +1,6 @@
 import React from "react";
 
-function TakeChangeSection({ customerCharge, resetReturnedChange }) {
+const TakeChangeSection = ({ customerCharge, resetReturnedChange }) => {
   const handleClickTakeChangeButton = () => {
     resetReturnedChange();
   };
@@ -30,6 +30,6 @@ function TakeChangeSection({ customerCharge, resetReturnedChange }) {
       </button>
     </section>
   );
-}
+};
 
 export default TakeChangeSection;

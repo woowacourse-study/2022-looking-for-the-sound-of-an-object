@@ -5,7 +5,7 @@ import DrinkSection from "./components/DrinkSection";
 import useCustomerCharge from "./hooks/useCustomerCharge";
 import useOrder from "./hooks/useOrder";
 
-function App() {
+const App = () => {
   const {
     customerCharge,
     addCustomerCharge,
@@ -48,6 +48,6 @@ function App() {
       </main>
     </div>
   );
-}
+};
 
 export default App;

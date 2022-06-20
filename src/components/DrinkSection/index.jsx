@@ -4,14 +4,14 @@ import menus from "../../constants/menus";
 import DrinkMenuSection from "./DrinkMenuSection";
 import DrinkPickupSection from "./DrinkPickupSection";
 
-function DrinkSection({
+const DrinkSection = ({
   customerCharge,
   order,
   subtractCustomerCharge,
   updateOrderStateToPending,
   updateOrderStateToMaking,
   updateOrderStateToComplete,
-}) {
+}) => {
   const [ingredientList, setIngredientList] = useState([]);
 
   const makeDrink = (menuName) => {
@@ -62,6 +62,6 @@ function DrinkSection({
       />
     </section>
   );
-}
+};
 
 export default DrinkSection;

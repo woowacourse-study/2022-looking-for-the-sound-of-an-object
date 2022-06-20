@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-function ChargeAmountSection({
+const ChargeAmountSection = ({
   customerCharge,
   addCustomerCharge,
   returnAllCustomerCharge,
-}) {
+}) => {
   const [chargeAmount, setChargeAmount] = useState(0);
 
   const handleChangeChargeAmountInput = (e) => {
@@ -54,6 +54,6 @@ function ChargeAmountSection({
       </div>
     </section>
   );
-}
+};
 
 export default ChargeAmountSection;
