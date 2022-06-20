@@ -50,6 +50,24 @@ export const BEVERAGE: TBeverageInfo[] = [
       { name: '우유', time: 1000 },
     ],
   },
+  {
+    id: 5,
+    name: '콜라',
+    price: 1500,
+    ingredients: [
+      { name: '컵', time: 1000 },
+      { name: '콜라', time: 1000 },
+    ],
+  },
+  {
+    id: 6,
+    name: '사이다',
+    price: 1500,
+    ingredients: [
+      { name: '컵', time: 1000 },
+      { name: '사이다', time: 1000 },
+    ],
+  },
 ];
 
 export const VENDING_MACHINE_STATUS = {
