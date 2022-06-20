@@ -19,6 +19,26 @@ const menu = [
     price: 1000,
     ingredients: ['우유'],
   },
+  {
+    name: '코카콜라',
+    price: 2000,
+    ingredients: ['코카콜라'],
+  },
+  {
+    name: '펩시',
+    price: 1500,
+    ingredients: ['펩시'],
+  },
+  {
+    name: '칠성사이다',
+    price: 2000,
+    ingredients: ['칠성사이다'],
+  },
+  {
+    name: '스프라이트',
+    price: 1500,
+    ingredients: ['스프라이트'],
+  },
 ] as const;
 
 export default menu;
