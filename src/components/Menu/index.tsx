@@ -1,4 +1,4 @@
-import MenuButton from 'components/MenuButton';
+import MenuButton from 'components/Menu/MenuButton';
 
 import menu from 'constants/menu';
 

@@ -1,5 +1,5 @@
-import ChangeInput from 'components/ChangeInput';
-import ChangeOutput from 'components/ChangeOutput';
+import ChangeInput from 'components/Change/ChangeInput';
+import ChangeOutput from 'components/Change/ChangeOutput';
 
 function Change() {
   return (
