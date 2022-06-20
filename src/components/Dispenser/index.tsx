@@ -10,7 +10,7 @@ function Dispenser() {
 
   return (
     <S.DispenserContainer>
-      <S.Light making={dispenser === DISPENSER_STATE.MAKING} />
+      <S.Light isMaking={dispenser === DISPENSER_STATE.MAKING} />
       <S.Dispenser />
     </S.DispenserContainer>
   );

@@ -14,9 +14,9 @@ const Light = styled.div`
   border: none;
   border-radius: 50%;
 
-  ${({ making }: { making: boolean }) => css`
+  ${({ isMaking }: { isMaking: boolean }) => css`
     background: ${({ theme: { colors } }) =>
-      making ? colors.red001 : colors.green001};
+      isMaking ? colors.red001 : colors.green001};
   `}
 `;
 
