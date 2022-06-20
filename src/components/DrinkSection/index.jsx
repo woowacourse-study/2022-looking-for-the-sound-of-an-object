@@ -32,11 +32,10 @@ const DrinkSection = ({
   const prepareIngredient = (ingredient) => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        setIngredientList((prevIngredientList) => {
-          const newIngredientList = [...prevIngredientList];
-          newIngredientList.push(ingredient);
-          return newIngredientList;
-        });
+        setIngredientList((prevIngredientList) => [
+          ...prevIngredientList,
+          ingredient,
+        ]);
         resolve();
       }, PREPARE_INGREDIENT_TIME_INTERVAL);
     });
