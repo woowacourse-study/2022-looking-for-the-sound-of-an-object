@@ -4,6 +4,8 @@ import menus from "../../constants/menus";
 import DrinkMenuSection from "./DrinkMenuSection";
 import DrinkPickupSection from "./DrinkPickupSection";
 
+const PREPARE_INGREDIENT_TIME_INTERVAL = 1000;
+
 const DrinkSection = ({
   customerCharge,
   order,
@@ -36,7 +38,7 @@ const DrinkSection = ({
           return newIngredientList;
         });
         resolve();
-      }, 1000);
+      }, PREPARE_INGREDIENT_TIME_INTERVAL);
     });
   };
 
