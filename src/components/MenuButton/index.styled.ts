@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import theme from 'styles/theme';
 
 const MenuButton = styled.div`
   display: inline-flex;
@@ -21,11 +22,24 @@ const Label = styled.label`
   }
 `;
 
+const backgroundAnime = keyframes`
+  0%, 100% {
+    background: ${theme.colors.brown001};
+  }
+  50% {
+    background: ${theme.colors.brown002};
+  }
+`;
+
 const Button = styled.button`
   width: 100%;
   height: 20px;
   border-radius: 50px;
   background: ${({ theme: { colors } }) => colors.brown002};
+
+  &:hover {
+    animation: ${backgroundAnime} 1s linear infinite;
+  }
 
   &:disabled {
     background: ${({ theme: { colors } }) => colors.gray002};

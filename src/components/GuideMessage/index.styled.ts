@@ -27,7 +27,7 @@ const GuideMessage = styled.div`
   font-size: 16px;
 
   span {
-    animation: 3s ${show} infinite;
+    animation: ${show} 3s linear infinite;
   }
 `;
 
