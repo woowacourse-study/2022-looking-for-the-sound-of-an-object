@@ -12,13 +12,15 @@ function MenuButton({ drink: { name, price, ingredients } }: Props) {
   const [dispenser, setDispenser] = useRecoilState(dispenserState);
 
   const orderMenu = () => {
-    if (dispenser === DISPENSER_STATE.MAKING) {
-      alert('음료 제조가 끝난 후 주문해주세요.');
-      return;
-    }
-
-    if (price > change) {
-      alert('돈이 부족합니다.');
+    try {
+      if (dispenser === DISPENSER_STATE.MAKING) {
+        throw new Error('음료 제조가 끝난 후 주문해주세요.');
+      }
+      if (price > change) {
+        throw new Error('돈이 부족합니다.');
+      }
+    } catch ({ message }) {
+      alert(message);
       return;
     }
 
