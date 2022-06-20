@@ -1,27 +1,45 @@
 {
   "name": "2022-looking-for-the-sound-of-an-object",
-  "version": "1.0.0",
-  "description": "2022 우아한 스터디 :: 객체의 소리를 찾아",
-  "main": "index.js",
+  "version": "0.1.0",
+  "homepage": "https://soyi47.github.io/2022-looking-for-the-sound-of-an-object/",
+  "description": "2022 우아한 스터디 :: 객체의 소리를 찾아서",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
   "devDependencies": {
-    "eslint": "^8.10.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-html": "^6.2.0",
-    "eslint-plugin-import": "^2.25.4",
-    "prettier": "2.5.1"
+    "gh-pages": "^4.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/soyi47/2022-looking-for-the-sound-of-an-object.git"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/soyi47/2022-looking-for-the-sound-of-an-object/issues"
-  },
-  "homepage": "https://github.com/soyi47/2022-looking-for-the-sound-of-an-object#readme"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
