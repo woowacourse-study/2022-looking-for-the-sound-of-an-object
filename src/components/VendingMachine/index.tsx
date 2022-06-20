@@ -23,7 +23,7 @@ const VendingMachine = () => {
   );
   const [orderedMenu, setOrderedMenu] = useState<TMenuInfo | undefined>();
 
-  const handleChangeInput = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     const value = target.value;
     if (!isNumber(value)) return;
