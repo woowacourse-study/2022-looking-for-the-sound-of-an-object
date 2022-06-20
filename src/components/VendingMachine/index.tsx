@@ -13,10 +13,17 @@ import {
 import { useState } from 'react';
 import * as S from './style';
 
+const initChanges: TCoin = {
+  500: 0,
+  100: 0,
+  50: 0,
+  10: 0,
+};
+
 const VendingMachine = () => {
   const [moneyInput, setMoneyInput] = useState('');
   const [chargedMoney, setChargedMoney] = useState(0);
-  const [changes, setChanges] = useState<TCoin>();
+  const [changes, setChanges] = useState<TCoin>(initChanges);
 
   const [status, setStatus] = useState<TVendingMachineStatus>(
     VENDING_MACHINE_STATUS.REST,
