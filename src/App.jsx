@@ -2,18 +2,10 @@ import GuideMessage from "./components/GuideMessage";
 import ChargeSection from "./components/ChargeSection";
 import DrinkSection from "./components/DrinkSection";
 
-import useCustomerCharge from "./hooks/useCustomerCharge";
 import { OrderProvider } from "./context/OrderContext";
+import { CustomerChargeProvider } from "./context/CustomerChargeContext";
 
 const App = () => {
-  const {
-    customerCharge,
-    addCustomerCharge,
-    subtractCustomerCharge,
-    returnAllCustomerCharge,
-    resetReturnedChange,
-  } = useCustomerCharge();
-
   return (
     <div className="app">
       <header>
@@ -21,20 +13,13 @@ const App = () => {
       </header>
       <main>
         <OrderProvider>
-          <GuideMessage customerCharge={customerCharge} />
-          <div className="sections-wrapper">
-            <DrinkSection
-              customerCharge={customerCharge}
-              subtractCustomerCharge={subtractCustomerCharge}
-            />
-
-            <ChargeSection
-              customerCharge={customerCharge}
-              addCustomerCharge={addCustomerCharge}
-              returnAllCustomerCharge={returnAllCustomerCharge}
-              resetReturnedChange={resetReturnedChange}
-            />
-          </div>
+          <CustomerChargeProvider>
+            <GuideMessage />
+            <div className="sections-wrapper">
+              <DrinkSection />
+              <ChargeSection />
+            </div>
+          </CustomerChargeProvider>
         </OrderProvider>
       </main>
     </div>

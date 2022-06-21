@@ -9,7 +9,7 @@ import menus from "../../constants/menus";
 
 const PREPARE_INGREDIENT_TIME_INTERVAL = 1000;
 
-const DrinkSection = ({ customerCharge, subtractCustomerCharge }) => {
+const DrinkSection = () => {
   const { updateOrderStateToComplete } = useContext(OrderContext);
   const [ingredientList, setIngredientList] = useState([]);
 
@@ -45,11 +45,7 @@ const DrinkSection = ({ customerCharge, subtractCustomerCharge }) => {
   return (
     <section className="beverage-section">
       <h2 className="sr-only">음료 주문 및 제공 영역</h2>
-      <DrinkMenuSection
-        customerCharge={customerCharge}
-        makeDrink={makeDrink}
-        subtractCustomerCharge={subtractCustomerCharge}
-      />
+      <DrinkMenuSection makeDrink={makeDrink} />
       <DrinkPickupSection
         ingredientList={ingredientList}
         clearIngredientList={clearIngredientList}

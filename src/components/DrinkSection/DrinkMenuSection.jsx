@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
+
 import { OrderContext } from "../../context/OrderContext";
+import { CustomerChargeContext } from "../../context/CustomerChargeContext";
+
 import { ORDER_PROGRESS } from "../../constants";
 import menus from "../../constants/menus";
 
-const DrinkMenuSection = ({
-  customerCharge,
-  makeDrink,
-  subtractCustomerCharge,
-}) => {
+const DrinkMenuSection = ({ makeDrink }) => {
   const { order, updateOrderStateToMaking } = useContext(OrderContext);
+  const { customerCharge, subtractCustomerCharge } = useContext(
+    CustomerChargeContext
+  );
 
   const handleClickDrinkMenuButton = (e) => {
     updateOrderStateToMaking(e.target.name);

@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CustomerChargeContext } from "../../context/CustomerChargeContext";
 
-const TakeChangeSection = ({ customerCharge, resetReturnedChange }) => {
+const TakeChangeSection = () => {
+  const { customerCharge, resetReturnedChange } = useContext(
+    CustomerChargeContext
+  );
+
   const handleClickTakeChangeButton = () => {
     resetReturnedChange();
   };

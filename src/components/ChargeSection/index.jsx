@@ -2,24 +2,12 @@ import React from "react";
 import ChargeAmountSection from "./ChargeAmountSection";
 import TakeChangeSection from "./TakeChangeSection";
 
-const ChargeSection = ({
-  customerCharge,
-  addCustomerCharge,
-  returnAllCustomerCharge,
-  resetReturnedChange,
-}) => {
+const ChargeSection = () => {
   return (
     <section className="charge-section">
       <h2 className="sr-only">금액 충전 및 잔돈 반환 영역</h2>
-      <ChargeAmountSection
-        customerCharge={customerCharge}
-        addCustomerCharge={addCustomerCharge}
-        returnAllCustomerCharge={returnAllCustomerCharge}
-      />
-      <TakeChangeSection
-        customerCharge={customerCharge}
-        resetReturnedChange={resetReturnedChange}
-      />
+      <ChargeAmountSection />
+      <TakeChangeSection />
     </section>
   );
 };

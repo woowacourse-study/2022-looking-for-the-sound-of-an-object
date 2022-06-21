@@ -1,14 +1,16 @@
 import React, { useContext, useMemo } from "react";
 
-import { ORDER_PROGRESS } from "../constants";
-
 import { OrderContext } from "../context/OrderContext";
+import { CustomerChargeContext } from "../context/CustomerChargeContext";
+
+import { ORDER_PROGRESS } from "../constants";
 import menus from "./../constants/menus";
 
-const GuideMessage = ({ customerCharge }) => {
+const GuideMessage = () => {
   const {
     order: { progress, orderedMenu },
   } = useContext(OrderContext);
+  const { customerCharge } = useContext(CustomerChargeContext);
 
   const guideText = useMemo(() => {
     switch (progress) {
