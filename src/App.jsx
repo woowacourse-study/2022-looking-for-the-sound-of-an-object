@@ -39,7 +39,6 @@ const App = () => {
           />
           <ChargeSection
             customerCharge={customerCharge}
-            order={order}
             addCustomerCharge={addCustomerCharge}
             returnAllCustomerCharge={returnAllCustomerCharge}
             resetReturnedChange={resetReturnedChange}

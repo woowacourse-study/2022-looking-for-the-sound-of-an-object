@@ -4,7 +4,6 @@ import TakeChangeSection from "./TakeChangeSection";
 
 const ChargeSection = ({
   customerCharge,
-  order,
   addCustomerCharge,
   returnAllCustomerCharge,
   resetReturnedChange,
