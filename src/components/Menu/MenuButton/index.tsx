@@ -11,6 +11,19 @@ function MenuButton({ drink: { name, price, ingredients } }: Props) {
   const [change, setChange] = useRecoilState(changeState);
   const [dispenser, setDispenser] = useRecoilState(dispenserState);
 
+  const showMaking = () => {
+    ingredients.forEach((ingredient, index) => {
+      setTimeout(() => {
+        setGuideMessage(`${ingredient}가(이) 나옵니다.`);
+      }, 1000 * (index + 1));
+    });
+
+    setTimeout(() => {
+      setGuideMessage(`${name} 제조가 완료되었습니다.`);
+      setDispenser(DISPENSER_STATE.EMPTY);
+    }, 1000 * (ingredients.length + 1));
+  };
+
   const orderMenu = () => {
     if (dispenser === DISPENSER_STATE.MAKING) {
       alert('음료 제조가 끝난 후 주문해주세요.');
@@ -22,16 +35,7 @@ function MenuButton({ drink: { name, price, ingredients } }: Props) {
     setGuideMessage('음료 제조를 시작합니다.');
     setDispenser(DISPENSER_STATE.MAKING);
 
-    ingredients.forEach((ingredient, index) => {
-      setTimeout(() => {
-        setGuideMessage(`${ingredient}가(이) 나옵니다.`);
-      }, 1000 * (index + 1));
-    });
-
-    setTimeout(() => {
-      setGuideMessage(`${name} 제조가 완료되었습니다.`);
-      setDispenser(DISPENSER_STATE.EMPTY);
-    }, 1000 * (ingredients.length + 1));
+    showMaking();
   };
 
   return (
