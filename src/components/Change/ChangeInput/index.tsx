@@ -13,9 +13,13 @@ function ChangeInput() {
   const chargeChange = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!(e.target instanceof HTMLFormElement)) return;
+    if (
+      !(e.target instanceof HTMLFormElement) ||
+      !(e.target.elements[0] instanceof HTMLInputElement)
+    )
+      return;
 
-    const money = (e.target.elements[0] as HTMLInputElement).valueAsNumber;
+    const money = e.target.elements[0].valueAsNumber;
 
     try {
       validateChangeInput(money);
