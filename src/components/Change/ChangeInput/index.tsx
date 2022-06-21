@@ -36,12 +36,17 @@ function ChangeInput() {
     if (!changeRef.current) return;
 
     changeRef.current.value = '';
-    changeRef.current.focus();
   };
 
   return (
     <S.ChangeInputForm onSubmit={chargeChange}>
-      <input type="number" ref={changeRef} />
+      <input
+        type="number"
+        min="500"
+        max="999999500"
+        ref={changeRef}
+        autoFocus
+      />
       <button>투입</button>
     </S.ChangeInputForm>
   );
