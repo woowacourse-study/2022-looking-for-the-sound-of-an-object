@@ -1,9 +1,15 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 
 import { ORDER_PROGRESS } from "../constants";
+
+import { OrderContext } from "../context/OrderContext";
 import menus from "./../constants/menus";
 
-const GuideMessage = ({ customerCharge, order: { progress, orderedMenu } }) => {
+const GuideMessage = ({ customerCharge }) => {
+  const {
+    order: { progress, orderedMenu },
+  } = useContext(OrderContext);
+
   const guideText = useMemo(() => {
     switch (progress) {
       case ORDER_PROGRESS.PENDING:

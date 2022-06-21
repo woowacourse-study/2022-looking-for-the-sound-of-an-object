@@ -1,19 +1,16 @@
-import React, { useState } from "react";
-import menus from "../../constants/menus";
+import React, { useContext, useState } from "react";
+
+import { OrderContext } from "../../context/OrderContext";
 
 import DrinkMenuSection from "./DrinkMenuSection";
 import DrinkPickupSection from "./DrinkPickupSection";
 
+import menus from "../../constants/menus";
+
 const PREPARE_INGREDIENT_TIME_INTERVAL = 1000;
 
-const DrinkSection = ({
-  customerCharge,
-  order,
-  subtractCustomerCharge,
-  updateOrderStateToPending,
-  updateOrderStateToMaking,
-  updateOrderStateToComplete,
-}) => {
+const DrinkSection = ({ customerCharge, subtractCustomerCharge }) => {
+  const { updateOrderStateToComplete } = useContext(OrderContext);
   const [ingredientList, setIngredientList] = useState([]);
 
   const makeDrink = (menuName) => {
@@ -50,16 +47,12 @@ const DrinkSection = ({
       <h2 className="sr-only">음료 주문 및 제공 영역</h2>
       <DrinkMenuSection
         customerCharge={customerCharge}
-        order={order}
         makeDrink={makeDrink}
         subtractCustomerCharge={subtractCustomerCharge}
-        updateOrderStateToMaking={updateOrderStateToMaking}
       />
       <DrinkPickupSection
-        order={order}
         ingredientList={ingredientList}
         clearIngredientList={clearIngredientList}
-        updateOrderStateToPending={updateOrderStateToPending}
       />
     </section>
   );

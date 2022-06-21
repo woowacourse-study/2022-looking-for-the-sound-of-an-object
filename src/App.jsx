@@ -3,7 +3,7 @@ import ChargeSection from "./components/ChargeSection";
 import DrinkSection from "./components/DrinkSection";
 
 import useCustomerCharge from "./hooks/useCustomerCharge";
-import useOrder from "./hooks/useOrder";
+import { OrderProvider } from "./context/OrderContext";
 
 const App = () => {
   const {
@@ -14,36 +14,28 @@ const App = () => {
     resetReturnedChange,
   } = useCustomerCharge();
 
-  const {
-    order,
-    updateOrderStateToPending,
-    updateOrderStateToMaking,
-    updateOrderStateToComplete,
-  } = useOrder();
-
   return (
     <div className="app">
       <header>
         <h1>🧃 자판기 🧃</h1>
       </header>
       <main>
-        <GuideMessage customerCharge={customerCharge} order={order} />
-        <div className="sections-wrapper">
-          <DrinkSection
-            customerCharge={customerCharge}
-            order={order}
-            subtractCustomerCharge={subtractCustomerCharge}
-            updateOrderStateToPending={updateOrderStateToPending}
-            updateOrderStateToMaking={updateOrderStateToMaking}
-            updateOrderStateToComplete={updateOrderStateToComplete}
-          />
-          <ChargeSection
-            customerCharge={customerCharge}
-            addCustomerCharge={addCustomerCharge}
-            returnAllCustomerCharge={returnAllCustomerCharge}
-            resetReturnedChange={resetReturnedChange}
-          />
-        </div>
+        <OrderProvider>
+          <GuideMessage customerCharge={customerCharge} />
+          <div className="sections-wrapper">
+            <DrinkSection
+              customerCharge={customerCharge}
+              subtractCustomerCharge={subtractCustomerCharge}
+            />
+
+            <ChargeSection
+              customerCharge={customerCharge}
+              addCustomerCharge={addCustomerCharge}
+              returnAllCustomerCharge={returnAllCustomerCharge}
+              resetReturnedChange={resetReturnedChange}
+            />
+          </div>
+        </OrderProvider>
       </main>
     </div>
   );
