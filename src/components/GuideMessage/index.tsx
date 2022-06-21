@@ -1,10 +1,10 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { guideState } from 'recoil/states';
 
 import * as S from './index.styled';
 
 function GuideMessage() {
-  const [guideMessage, setGuideMessage] = useRecoilState(guideState);
+  const guideMessage = useRecoilValue(guideState);
 
   return (
     <S.GuideMessage>

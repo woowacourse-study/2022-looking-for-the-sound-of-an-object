@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { changeState, guideState } from 'recoil/states';
 import { validateChangeInput } from 'utils/validator';
 
 import * as S from './index.styled';
 
 function ChangeInput() {
-  const [guideMessage, setGuideMessage] = useRecoilState(guideState);
-  const [change, setChange] = useRecoilState(changeState);
+  const setGuideMessage = useSetRecoilState(guideState);
+  const setChange = useSetRecoilState(changeState);
 
   const chargeChange = (e: React.FormEvent) => {
     e.preventDefault();
