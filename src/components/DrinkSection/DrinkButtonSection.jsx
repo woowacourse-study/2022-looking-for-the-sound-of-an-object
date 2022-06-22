@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 
 import { DRINK } from "constants";
+import { INSERT_MONEY_RANGE } from "constants";
 
 import DrinkButton from "components/DrinkSection/DrinkButton";
 import OutlinedButton from "components/common/OutlinedButton";
@@ -13,8 +14,11 @@ function DrinkButtonSection({
 }) {
   const [latestDrinks, setLatestDrinks] = useState([]);
   const timeId = useRef(null);
+  const isDispenserProcessing = !!timeId.current;
 
   const addDrinkToList = (drink) => () => {
+    if (isDispenserProcessing) return;
+
     const drinkPrice = DRINK[drink].PRICE;
     if (drinkPrice > inputMoney) {
       alert("더 이상 구입할 수 없습니다.");
@@ -25,7 +29,7 @@ function DrinkButtonSection({
   };
 
   const buyDrinkList = async () => {
-    if (timeId.current || !latestDrinks.length) return;
+    if (isDispenserProcessing || !latestDrinks.length) return;
     if (
       window.confirm(`음료가 나오면 환불할 수 없습니다. 음료를 받으시겠습니까?`)
     ) {
@@ -45,7 +49,7 @@ function DrinkButtonSection({
   };
 
   const refundMoney = () => {
-    if (timeId.current) {
+    if (isDispenserProcessing) {
       alert("음료가 나온 후에는 환불할 수 없습니다.");
       return;
     }
@@ -55,6 +59,12 @@ function DrinkButtonSection({
         (acc, drink) => acc + DRINK[drink].PRICE,
         0
       );
+      if (inputMoney + refundMoney > INSERT_MONEY_RANGE.MAX) {
+        alert(
+          `최대 ${INSERT_MONEY_RANGE.MAX}원까지 투입할 수 있습니다. 먼저 투입한 금액을 반환한 후 다시 시도해주세요.`
+        );
+        return;
+      }
       setInputMoney((prev) => prev + refundMoney);
       resetDispenserAction();
       setLatestDrinks([]);
@@ -66,39 +76,47 @@ function DrinkButtonSection({
       <h2>자판기 버튼</h2>
       <DrinkButton
         onClick={addDrinkToList(DRINK.MILK.NAME)}
-        disabled={inputMoney < DRINK.MILK.PRICE}
+        inputMoney={inputMoney}
+        isDispenserProcessing={isDispenserProcessing}
       >
-        우유
+        MILK
       </DrinkButton>
       <DrinkButton
         onClick={addDrinkToList(DRINK.ESPRESSO.NAME)}
-        disabled={inputMoney < DRINK.ESPRESSO.PRICE}
+        inputMoney={inputMoney}
+        isDispenserProcessing={isDispenserProcessing}
       >
-        에스프레소
+        ESPRESSO
       </DrinkButton>
       <DrinkButton
         onClick={addDrinkToList(DRINK.AMERICANO.NAME)}
-        disabled={inputMoney < DRINK.AMERICANO.PRICE}
+        inputMoney={inputMoney}
+        isDispenserProcessing={isDispenserProcessing}
       >
-        아메리카노
+        AMERICANO
       </DrinkButton>
       <DrinkButton
         onClick={addDrinkToList(DRINK.CAFELATTE.NAME)}
-        disabled={inputMoney < DRINK.CAFELATTE.PRICE}
+        inputMoney={inputMoney}
+        isDispenserProcessing={isDispenserProcessing}
       >
-        카페라떼
+        CAFELATTE
       </DrinkButton>
       <OutlinedButton
         type="button"
         onClick={refundMoney}
-        disabled={!latestDrinks.length}
+        disabled={!latestDrinks.length || isDispenserProcessing}
       >
         환불하기
       </OutlinedButton>
       <section>
         <h3>구입한 목록</h3>
         <p>{latestDrinks.join(", ")}</p>
-        <OutlinedButton type="button" onClick={buyDrinkList}>
+        <OutlinedButton
+          type="button"
+          onClick={buyDrinkList}
+          disabled={!latestDrinks.length || isDispenserProcessing}
+        >
           음료 받기
         </OutlinedButton>
       </section>

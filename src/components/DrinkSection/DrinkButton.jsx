@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { DRINK } from "constants";
+
 const Button = styled.button`
   padding: 0.5rem 1rem;
 
@@ -25,10 +27,19 @@ const Button = styled.button`
   }
 `;
 
-function DrinkButton({ onClick, disabled, children }) {
+function DrinkButton({
+  onClick,
+  inputMoney,
+  children: drinkName,
+  isDispenserProcessing,
+}) {
   return (
-    <Button type="button" onClick={onClick} disabled={disabled}>
-      {children}
+    <Button
+      type="button"
+      onClick={onClick}
+      disabled={inputMoney < DRINK[drinkName].PRICE || isDispenserProcessing}
+    >
+      {drinkName}
     </Button>
   );
 }
