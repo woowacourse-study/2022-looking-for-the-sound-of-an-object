@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import { DRINK } from "constants";
+import { DRINKS } from "constants";
 import { INSERT_MONEY_RANGE } from "constants";
 
 import DrinkButton from "components/DrinkSection/DrinkButton";
@@ -20,7 +20,7 @@ function DrinkButtonSection({
   const addDrinkToList = (drink) => () => {
     if (isDispenserProcessing) return;
 
-    const drinkPrice = DRINK[drink].PRICE;
+    const drinkPrice = DRINKS[drink].PRICE;
     if (drinkPrice > inputMoney) {
       alert("더 이상 구입할 수 없습니다.");
       return;
@@ -40,7 +40,7 @@ function DrinkButtonSection({
 
     resetDispenserAction();
     for (const drink of latestDrinks) {
-      await makeDrink(DRINK[drink].ACTION);
+      await makeDrink(DRINKS[drink].ACTION);
       timeId.current = null;
     }
     setLatestDrinks([]);
@@ -61,7 +61,7 @@ function DrinkButtonSection({
     if (!window.confirm(`정말 구입한 음료(들)를 환불하시겠습니까?`)) return;
 
     const refundMoney = latestDrinks.reduce(
-      (acc, drink) => acc + DRINK[drink].PRICE,
+      (acc, drink) => acc + DRINKS[drink].PRICE,
       0
     );
     if (inputMoney + refundMoney > INSERT_MONEY_RANGE.MAX) {
@@ -79,28 +79,28 @@ function DrinkButtonSection({
     <section>
       <h2>자판기 버튼</h2>
       <DrinkButton
-        onClick={addDrinkToList(DRINK.MILK.NAME)}
+        onClick={addDrinkToList(DRINKS.MILK.NAME)}
         inputMoney={inputMoney}
         isDispenserProcessing={isDispenserProcessing}
       >
         MILK
       </DrinkButton>
       <DrinkButton
-        onClick={addDrinkToList(DRINK.ESPRESSO.NAME)}
+        onClick={addDrinkToList(DRINKS.ESPRESSO.NAME)}
         inputMoney={inputMoney}
         isDispenserProcessing={isDispenserProcessing}
       >
         ESPRESSO
       </DrinkButton>
       <DrinkButton
-        onClick={addDrinkToList(DRINK.AMERICANO.NAME)}
+        onClick={addDrinkToList(DRINKS.AMERICANO.NAME)}
         inputMoney={inputMoney}
         isDispenserProcessing={isDispenserProcessing}
       >
         AMERICANO
       </DrinkButton>
       <DrinkButton
-        onClick={addDrinkToList(DRINK.CAFELATTE.NAME)}
+        onClick={addDrinkToList(DRINKS.CAFELATTE.NAME)}
         inputMoney={inputMoney}
         isDispenserProcessing={isDispenserProcessing}
       >

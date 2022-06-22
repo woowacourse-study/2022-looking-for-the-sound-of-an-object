@@ -6,7 +6,7 @@ export const INSERT_MONEY_RANGE = {
 };
 
 // key와 NAME은 같아야 함
-export const DRINK = {
+export const DRINKS = {
   MILK: {
     NAME: "MILK",
     PRICE: 1000,

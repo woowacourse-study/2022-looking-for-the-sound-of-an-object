@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { DRINK } from "constants";
+import { DRINKS } from "constants";
 
 const Button = styled.button`
   padding: 0.5rem 1rem;
@@ -37,7 +37,7 @@ function DrinkButton({
     <Button
       type="button"
       onClick={onClick}
-      disabled={inputMoney < DRINK[drinkName].PRICE || isDispenserProcessing}
+      disabled={inputMoney < DRINKS[drinkName].PRICE || isDispenserProcessing}
     >
       {drinkName}
     </Button>
