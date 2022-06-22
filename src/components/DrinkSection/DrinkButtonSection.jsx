@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 
-import { DRINKS } from "constants";
-import { INSERT_MONEY_RANGE } from "constants";
+import { DRINKS, INSERT_MONEY_RANGE } from "constants";
 
 import DrinkButton from "components/DrinkSection/DrinkButton";
 import OutlinedButton from "components/common/OutlinedButton";
@@ -17,16 +16,16 @@ function DrinkButtonSection({
   const timeId = useRef(null);
   const isDispenserProcessing = !!timeId.current;
 
-  const addDrinkToList = (drink) => () => {
+  const addDrinkToList = ({ target: { name: drinkKey } }) => {
     if (isDispenserProcessing) return;
 
-    const drinkPrice = DRINKS[drink].PRICE;
+    const drinkPrice = DRINKS[drinkKey].PRICE;
     if (drinkPrice > inputMoney) {
       alert("더 이상 구입할 수 없습니다.");
       return;
     }
     subtractInputMoney(drinkPrice);
-    setLatestDrinks((prev) => [...prev, drink]);
+    setLatestDrinks((prev) => [...prev, drinkKey]);
   };
 
   const buyDrinkList = async () => {
@@ -76,45 +75,32 @@ function DrinkButtonSection({
   };
 
   return (
-    <section>
-      <h2>자판기 버튼</h2>
-      <DrinkButton
-        onClick={addDrinkToList(DRINKS.MILK.NAME)}
-        inputMoney={inputMoney}
-        isDispenserProcessing={isDispenserProcessing}
-      >
-        MILK
-      </DrinkButton>
-      <DrinkButton
-        onClick={addDrinkToList(DRINKS.ESPRESSO.NAME)}
-        inputMoney={inputMoney}
-        isDispenserProcessing={isDispenserProcessing}
-      >
-        ESPRESSO
-      </DrinkButton>
-      <DrinkButton
-        onClick={addDrinkToList(DRINKS.AMERICANO.NAME)}
-        inputMoney={inputMoney}
-        isDispenserProcessing={isDispenserProcessing}
-      >
-        AMERICANO
-      </DrinkButton>
-      <DrinkButton
-        onClick={addDrinkToList(DRINKS.CAFELATTE.NAME)}
-        inputMoney={inputMoney}
-        isDispenserProcessing={isDispenserProcessing}
-      >
-        CAFELATTE
-      </DrinkButton>
-      <OutlinedButton
-        type="button"
-        onClick={refundMoney}
-        disabled={!latestDrinks.length || isDispenserProcessing}
-      >
-        환불하기
-      </OutlinedButton>
+    <>
       <section>
-        <h3>구입한 목록</h3>
+        <h2>자판기 버튼</h2>
+        {Object.keys(DRINKS).map((drinkKey) => (
+          <DrinkButton
+            name={drinkKey}
+            onClick={addDrinkToList}
+            disabled={
+              inputMoney <
+                (DRINKS[drinkKey]?.PRICE || INSERT_MONEY_RANGE.MAX) ||
+              isDispenserProcessing
+            }
+          >
+            {DRINKS[drinkKey].NAME}
+          </DrinkButton>
+        ))}
+        <OutlinedButton
+          type="button"
+          onClick={refundMoney}
+          disabled={!latestDrinks.length || isDispenserProcessing}
+        >
+          환불하기
+        </OutlinedButton>
+      </section>
+      <section>
+        <h2>구입한 목록</h2>
         <p>{latestDrinks.join(", ")}</p>
         <OutlinedButton
           type="button"
@@ -124,7 +110,7 @@ function DrinkButtonSection({
           음료 받기
         </OutlinedButton>
       </section>
-    </section>
+    </>
   );
 }
 
