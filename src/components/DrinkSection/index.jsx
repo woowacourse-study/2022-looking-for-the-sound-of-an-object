@@ -1,18 +1,18 @@
 import { DISPENSER_TIME_INTERVAL } from "constants";
 
-import { useHandleDispenser } from "hooks/useHandleDispenser";
+import { useDispenser } from "hooks/useDispenser";
 
 import DrinkButtonSection from "components/DrinkSection/DrinkButtonSection";
 
 function DrinkSection({ inputMoney, setInputMoney }) {
-  const { dispenserAction, handleDispenser, setDispenserAction } =
-    useHandleDispenser(DISPENSER_TIME_INTERVAL);
+  const { dispenserAction, resetDispenserAction, addDispenserAction } =
+    useDispenser(DISPENSER_TIME_INTERVAL);
 
   return (
     <>
       <DrinkButtonSection
-        handleDispenser={handleDispenser}
-        setDispenserAction={setDispenserAction}
+        addDispenserAction={addDispenserAction}
+        resetDispenserAction={resetDispenserAction}
         inputMoney={inputMoney}
         setInputMoney={setInputMoney}
       />

@@ -7,8 +7,8 @@ import OutlinedButton from "components/common/OutlinedButton";
 
 function DrinkButtonSection({
   inputMoney,
-  setDispenserAction,
-  handleDispenser,
+  addDispenserAction,
+  resetDispenserAction,
   setInputMoney,
 }) {
   const [latestDrinks, setLatestDrinks] = useState([]);
@@ -29,7 +29,7 @@ function DrinkButtonSection({
     if (
       window.confirm(`음료가 나오면 환불할 수 없습니다. 음료를 받으시겠습니까?`)
     ) {
-      setDispenserAction([]);
+      resetDispenserAction();
       for (const drink of latestDrinks) {
         await makeDrink(DRINK[drink].ACTION);
         timeId.current = null;
@@ -40,7 +40,7 @@ function DrinkButtonSection({
 
   const makeDrink = async (dispenserActionList) => {
     for (const action of dispenserActionList) {
-      await handleDispenser(action, timeId);
+      await addDispenserAction(action, timeId);
     }
   };
 
@@ -56,7 +56,7 @@ function DrinkButtonSection({
         0
       );
       setInputMoney((prev) => prev + refundMoney);
-      setDispenserAction([]);
+      resetDispenserAction();
       setLatestDrinks([]);
     }
   };
