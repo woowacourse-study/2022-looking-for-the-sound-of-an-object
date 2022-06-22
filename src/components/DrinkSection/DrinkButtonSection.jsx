@@ -31,15 +31,18 @@ function DrinkButtonSection({
   const buyDrinkList = async () => {
     if (isDispenserProcessing || !latestDrinks.length) return;
     if (
-      window.confirm(`음료가 나오면 환불할 수 없습니다. 음료를 받으시겠습니까?`)
-    ) {
-      resetDispenserAction();
-      for (const drink of latestDrinks) {
-        await makeDrink(DRINK[drink].ACTION);
-        timeId.current = null;
-      }
-      setLatestDrinks([]);
+      !window.confirm(
+        `음료가 나오면 환불할 수 없습니다. 음료를 받으시겠습니까?`
+      )
+    )
+      return;
+
+    resetDispenserAction();
+    for (const drink of latestDrinks) {
+      await makeDrink(DRINK[drink].ACTION);
+      timeId.current = null;
     }
+    setLatestDrinks([]);
   };
 
   const makeDrink = async (dispenserActionList) => {
@@ -54,21 +57,21 @@ function DrinkButtonSection({
       return;
     }
     if (!latestDrinks.length) return;
-    if (window.confirm(`정말 구입한 음료(들)를 환불하시겠습니까?`)) {
-      const refundMoney = latestDrinks.reduce(
-        (acc, drink) => acc + DRINK[drink].PRICE,
-        0
+    if (!window.confirm(`정말 구입한 음료(들)를 환불하시겠습니까?`)) return;
+
+    const refundMoney = latestDrinks.reduce(
+      (acc, drink) => acc + DRINK[drink].PRICE,
+      0
+    );
+    if (inputMoney + refundMoney > INSERT_MONEY_RANGE.MAX) {
+      alert(
+        `최대 ${INSERT_MONEY_RANGE.MAX}원까지 투입할 수 있습니다. 먼저 투입한 금액을 반환한 후 다시 시도해주세요.`
       );
-      if (inputMoney + refundMoney > INSERT_MONEY_RANGE.MAX) {
-        alert(
-          `최대 ${INSERT_MONEY_RANGE.MAX}원까지 투입할 수 있습니다. 먼저 투입한 금액을 반환한 후 다시 시도해주세요.`
-        );
-        return;
-      }
-      setInputMoney((prev) => prev + refundMoney);
-      resetDispenserAction();
-      setLatestDrinks([]);
+      return;
     }
+    setInputMoney((prev) => prev + refundMoney);
+    resetDispenserAction();
+    setLatestDrinks([]);
   };
 
   return (
