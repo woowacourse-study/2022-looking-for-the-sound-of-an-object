@@ -22,7 +22,7 @@ const useCustomerCharge = () => {
 
   const returnAllCustomerCharge = () => {
     setCustomerCharge((prevState) => ({
-      returnedChangeValue: prevState.value,
+      returnedChangeValue: prevState.returnedChangeValue + prevState.value,
       value: 0,
     }));
   };
