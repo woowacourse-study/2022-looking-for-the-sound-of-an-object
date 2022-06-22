@@ -1,12 +1,26 @@
+const drinks = [
+  "에스프레소",
+  "아메리카노",
+  "카페라떼",
+  "우유",
+  "콜라",
+  "사이다",
+];
+
+export type DrinkType =
+  | "에스프레소"
+  | "아메리카노"
+  | "카페라떼"
+  | "우유"
+  | "콜라"
+  | "사이다";
+
 type MenuType = {
   icon: string;
   price: number;
 };
 
-type MenusType = { [index: string]: MenuType };
-type RecipeType = { [index: string]: Array<string> };
-
-const menus: MenusType = {
+const menus: Record<DrinkType, MenuType> = {
   에스프레소: { icon: "☕️", price: 3000 },
   아메리카노: { icon: "☕️", price: 4100 },
   카페라떼: { icon: "☕️", price: 4500 },
@@ -15,13 +29,23 @@ const menus: MenusType = {
   사이다: { icon: "🥤", price: 1800 },
 };
 
-const recipes: RecipeType = {
-  에스프레소: ["🥤 컵 나옴", "☕️ 에스프레소 나옴"],
-  아메리카노: ["🥤 컵 나옴", "☕️ 에스프레소 나옴", "💧 물 나옴"],
-  카페라떼: ["🥤 컵 나옴", "☕️ 에스프레소 나옴", "🥛 우유 나옴"],
-  우유: ["🥤 컵 나옴", "🥛 우유 나옴"],
-  콜라: ["🥤 콜라 나옴"],
-  사이다: ["🥤 사이다 나옴"],
+const recipes: Record<DrinkType, Array<string>> = {
+  에스프레소: ["🥤 컵 나옴", "☕️ 에스프레소 나옴", "☕️ 에스프레소 완성"],
+  아메리카노: [
+    "🥤 컵 나옴",
+    "☕️ 에스프레소 나옴",
+    "💧 물 나옴",
+    "☕️ 아메리카노 완성",
+  ],
+  카페라떼: [
+    "🥤 컵 나옴",
+    "☕️ 에스프레소 나옴",
+    "🥛 우유 나옴",
+    "☕️ 카페라떼 완성",
+  ],
+  우유: ["🥤 컵 나옴", "🥛 우유 나옴", " 🥛우유 완성"],
+  콜라: ["🥤 컵 나옴", "🥤 콜라 완성"],
+  사이다: ["🥤 컵 나옴", "🥤 사이다 완성"],
 };
 
-export { menus, recipes };
+export { drinks, menus, recipes };

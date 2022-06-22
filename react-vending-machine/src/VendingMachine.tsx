@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 import Button from "./components/Button";
-import Dispenser from "./components/Dispenser";
+import DrinkDispenser from "./components/DrinkDispenser";
 import Menu from "./components/Menu";
 import MoneyDisplay from "./components/MoneyDisplay";
 import MoneyInput from "./components/MoneyInput";
 
-import { menus, recipes } from "./constants";
+import { DrinkType, menus } from "./constants";
 
 import {
   StyledVendingMachine,
@@ -19,6 +19,8 @@ import {
 export default function VendingMachine() {
   const [chargeMoney, setChargeMoney] = useState("");
   const [totalMoney, setTotalMoney] = useState(0);
+  const [vendingMachineState, setVendingMachineState] = useState("READY");
+  const [drink, setDrink] = useState<DrinkType>();
 
   const handleChargeMoneyChange = (e: React.FormEvent<HTMLInputElement>) => {
     setChargeMoney(e.currentTarget.value);
@@ -30,10 +32,9 @@ export default function VendingMachine() {
     setChargeMoney("");
   };
 
-  const handleMenuClick = (name: string, price: number) => {
-    const recipe = recipes[name];
-    recipe.map((order) => alert(order));
-
+  const handleMenuClick = (name: DrinkType, price: number) => {
+    setVendingMachineState("WORKING");
+    setDrink(name);
     setTotalMoney((prev) => (prev -= price));
   };
 
@@ -43,6 +44,10 @@ export default function VendingMachine() {
   };
 
   const handleReturnClick = () => {
+    if (totalMoney === 0) {
+      return alert("반환할 잔돈이 없습니다");
+    }
+    setVendingMachineState("WORKING");
     alert(`잔돈이 반환되었습니다 ${totalMoney}원`);
     setTotalMoney(0);
   };
@@ -53,12 +58,14 @@ export default function VendingMachine() {
       <StyledMenus>
         {Object.entries(menus).map(([key, value]) => (
           <Menu
-            lightOn={value.price <= totalMoney}
+            lightOn={
+              value.price <= totalMoney && vendingMachineState === "READY"
+            }
             name={key}
             icon={value.icon}
             price={value.price}
             key={key}
-            onClick={() => handleMenuClick(key, value.price)}
+            onClick={() => handleMenuClick(key as DrinkType, value.price)}
           />
         ))}
       </StyledMenus>
@@ -75,8 +82,10 @@ export default function VendingMachine() {
         </StyledMoney>
       </StyledMoneyBox>
       <StyledDispensers>
-        <Dispenser type="음료" />
-        <Dispenser type="동전" />
+        <DrinkDispenser
+          drink={drink}
+          setVendingMachineState={setVendingMachineState}
+        />
       </StyledDispensers>
     </StyledVendingMachine>
   );
