@@ -29,7 +29,7 @@ function InsertMoneySection({ inputMoney, setInputMoney }) {
       alert(error.message);
       return;
     }
-    if (inputMoney + insert >= INSERT_MONEY_RANGE.MAX) {
+    if (inputMoney + insert > INSERT_MONEY_RANGE.MAX) {
       alert(
         `더이상 금액을 넣을 수 없습니다(최대 ${INSERT_MONEY_RANGE.MAX.toLocaleString()}원).`
       );
