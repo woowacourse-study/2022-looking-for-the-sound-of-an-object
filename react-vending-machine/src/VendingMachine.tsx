@@ -1,38 +1,20 @@
 import { useState } from "react";
 
 import Button from "./components/Button";
+import Dispenser from "./components/Dispenser";
 import Menu from "./components/Menu";
 import MoneyDisplay from "./components/MoneyDisplay";
 import MoneyInput from "./components/MoneyInput";
+
+import { menus, recipes } from "./constants";
 
 import {
   StyledVendingMachine,
   StyledMenus,
   StyledMoneyBox,
   StyledMoney,
+  StyledDispensers,
 } from "./VendingMachine.styled";
-
-type MenuType = {
-  icon: string;
-  price: number;
-};
-
-type MenusType = { [index: string]: MenuType };
-type RecipeType = { [index: string]: Array<string> };
-
-const menus: MenusType = {
-  에스프레소: { icon: "☕️", price: 3000 },
-  아메리카노: { icon: "☕️", price: 4100 },
-  카페라떼: { icon: "☕️", price: 4500 },
-  우유: { icon: "🥛", price: 3500 },
-};
-
-const recipes: RecipeType = {
-  에스프레소: ["🥤 컵 나옴", "☕️ 에스프레소 나옴"],
-  아메리카노: ["🥤 컵 나옴", "☕️ 에스프레소 나옴", "💧 물 나옴"],
-  카페라떼: ["🥤 컵 나옴", "☕️ 에스프레소 나옴", "🥛 우유 나옴"],
-  우유: ["🥤 컵 나옴", "🥛 우유 나옴"],
-};
 
 export default function VendingMachine() {
   const [chargeMoney, setChargeMoney] = useState("");
@@ -92,6 +74,10 @@ export default function VendingMachine() {
           <Button onClick={handleReturnClick}>반환</Button>
         </StyledMoney>
       </StyledMoneyBox>
+      <StyledDispensers>
+        <Dispenser type="음료" />
+        <Dispenser type="동전" />
+      </StyledDispensers>
     </StyledVendingMachine>
   );
 }

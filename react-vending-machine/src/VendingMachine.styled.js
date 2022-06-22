@@ -16,10 +16,10 @@ const StyledVendingMachine = styled.div`
 `;
 
 const StyledMenus = styled.div`
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 8px;
+  grid-column-gap: 8px;
 
   padding: 8px;
   margin-top: 10px;
@@ -29,9 +29,8 @@ const StyledMenus = styled.div`
 `;
 
 const StyledMoneyBox = styled.div`
-  margin-top: 50px;
+  margin: 50px 30px 30px 0;
   align-self: flex-end;
-  margin-right: 30px;
 `;
 
 const StyledMoney = styled.div`
@@ -49,4 +48,15 @@ const StyledMoney = styled.div`
   }
 `;
 
-export { StyledVendingMachine, StyledMenus, StyledMoneyBox, StyledMoney };
+const StyledDispensers = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
+export {
+  StyledVendingMachine,
+  StyledMenus,
+  StyledMoneyBox,
+  StyledMoney,
+  StyledDispensers,
+};
