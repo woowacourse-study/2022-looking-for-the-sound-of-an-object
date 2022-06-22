@@ -8,18 +8,34 @@ function App() {
   // TODO: 나중엔 Context API로 관리
   const [inputMoney, setInputMoney] = useState(0);
 
+  const addInputMoney = (money) => {
+    setInputMoney((prev) => prev + money);
+  };
+
+  const subtractInputMoney = (money) => {
+    setInputMoney((prev) => prev - money);
+  };
+
+  const changeInputMoney = (money) => {
+    setInputMoney(money);
+  };
+
   return (
     <main className="App">
       <h1>자판기</h1>
       <InsertMoneySection
         inputMoney={inputMoney}
-        setInputMoney={setInputMoney}
+        addInputMoney={addInputMoney}
       />
       <ReturnMoneySection
         inputMoney={inputMoney}
-        setInputMoney={setInputMoney}
+        changeInputMoney={changeInputMoney}
       />
-      <DrinkSection inputMoney={inputMoney} setInputMoney={setInputMoney} />
+      <DrinkSection
+        inputMoney={inputMoney}
+        addInputMoney={addInputMoney}
+        subtractInputMoney={subtractInputMoney}
+      />
     </main>
   );
 }

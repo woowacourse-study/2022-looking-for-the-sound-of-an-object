@@ -18,24 +18,24 @@ const validateInsertMoney = (insert) => {
   }
 };
 
-function InsertMoneySection({ inputMoney, setInputMoney }) {
+function InsertMoneySection({ inputMoney, addInputMoney }) {
   const insertMoneyRef = useRef(null);
 
-  const InsertMoney = () => {
-    const insert = insertMoneyRef.current.valueAsNumber;
+  const insertMoney = () => {
+    const insertMoney = insertMoneyRef.current.valueAsNumber;
     try {
-      validateInsertMoney(insert);
+      validateInsertMoney(insertMoney);
     } catch (error) {
       alert(error.message);
       return;
     }
-    if (inputMoney + insert > INSERT_MONEY_RANGE.MAX) {
+    if (inputMoney + insertMoney > INSERT_MONEY_RANGE.MAX) {
       alert(
         `더이상 금액을 넣을 수 없습니다(최대 ${INSERT_MONEY_RANGE.MAX.toLocaleString()}원).`
       );
       return;
     }
-    setInputMoney((prev) => prev + insert);
+    addInputMoney(insertMoney);
   };
 
   return (
@@ -53,7 +53,7 @@ function InsertMoneySection({ inputMoney, setInputMoney }) {
         ref={insertMoneyRef}
       />
       원
-      <OutlinedButton type="button" onClick={InsertMoney}>
+      <OutlinedButton type="button" onClick={insertMoney}>
         투입하기
       </OutlinedButton>
       <p>

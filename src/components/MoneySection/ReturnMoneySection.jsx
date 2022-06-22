@@ -11,7 +11,7 @@ const initialChangeState = {
   [COIN_UNIT[10]]: 0,
 };
 
-function ReturnMoneySection({ inputMoney, setInputMoney }) {
+function ReturnMoneySection({ inputMoney, changeInputMoney }) {
   const [changes, setChanges] = useState(initialChangeState);
 
   const returnMoney = () => {
@@ -31,7 +31,7 @@ function ReturnMoneySection({ inputMoney, setInputMoney }) {
         [initialChangeState, inputMoney]
       );
     setChanges(counts);
-    setInputMoney(leftMoney);
+    changeInputMoney(leftMoney);
   };
 
   const totalChanges = Object.entries(changes).reduce(

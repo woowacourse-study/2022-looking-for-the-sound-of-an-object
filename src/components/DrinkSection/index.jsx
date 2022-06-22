@@ -4,7 +4,7 @@ import { useDispenser } from "hooks/useDispenser";
 
 import DrinkButtonSection from "components/DrinkSection/DrinkButtonSection";
 
-function DrinkSection({ inputMoney, setInputMoney }) {
+function DrinkSection({ inputMoney, addInputMoney, subtractInputMoney }) {
   const { dispenserAction, resetDispenserAction, addDispenserAction } =
     useDispenser(DISPENSER_TIME_INTERVAL);
 
@@ -14,7 +14,8 @@ function DrinkSection({ inputMoney, setInputMoney }) {
         addDispenserAction={addDispenserAction}
         resetDispenserAction={resetDispenserAction}
         inputMoney={inputMoney}
-        setInputMoney={setInputMoney}
+        addInputMoney={addInputMoney}
+        subtractInputMoney={subtractInputMoney}
       />
       <section>
         <h2>디스펜서</h2>

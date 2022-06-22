@@ -10,7 +10,8 @@ function DrinkButtonSection({
   inputMoney,
   addDispenserAction,
   resetDispenserAction,
-  setInputMoney,
+  addInputMoney,
+  subtractInputMoney,
 }) {
   const [latestDrinks, setLatestDrinks] = useState([]);
   const timeId = useRef(null);
@@ -24,7 +25,7 @@ function DrinkButtonSection({
       alert("더 이상 구입할 수 없습니다.");
       return;
     }
-    setInputMoney((prev) => prev - drinkPrice);
+    subtractInputMoney(drinkPrice);
     setLatestDrinks((prev) => [...prev, drink]);
   };
 
@@ -69,7 +70,7 @@ function DrinkButtonSection({
       );
       return;
     }
-    setInputMoney((prev) => prev + refundMoney);
+    addInputMoney(refundMoney);
     resetDispenserAction();
     setLatestDrinks([]);
   };
