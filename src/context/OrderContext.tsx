@@ -1,12 +1,15 @@
-import { createContext } from "react";
+import React, { createContext } from "react";
 import useOrder from "../hooks/useOrder";
+import { Order } from "../type";
 
-export const OrderContext = createContext({
-  order: null,
-  updateOrderStateToPending: null,
-  updateOrderStateToMaking: null,
-  updateOrderStateToComplete: null,
-});
+interface OrderContextInterface {
+  order: Order;
+  updateOrderStateToPending: () => void;
+  updateOrderStateToMaking: (orderedMenu: string) => void;
+  updateOrderStateToComplete: () => void;
+}
+
+export const OrderContext = createContext<OrderContextInterface | null>(null);
 
 export const OrderProvider = ({ children }) => {
   const {

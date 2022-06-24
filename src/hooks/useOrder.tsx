@@ -16,7 +16,7 @@ const useOrder = () => {
     });
   };
 
-  const updateOrderStateToMaking = (orderedMenu) => {
+  const updateOrderStateToMaking = (orderedMenu: string) => {
     setOrder({
       progress: ORDER_PROGRESS.MAKING,
       orderedMenu,

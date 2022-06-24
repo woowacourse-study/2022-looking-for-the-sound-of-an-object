@@ -1,13 +1,17 @@
-import { createContext } from "react";
+import React, { createContext } from "react";
 import useCustomerCharge from "../hooks/useCustomerCharge";
+import { CustomerCharge } from "../type";
 
-export const CustomerChargeContext = createContext({
-  customerCharge: null,
-  addCustomerCharge: null,
-  subtractCustomerCharge: null,
-  returnAllCustomerCharge: null,
-  resetReturnedChange: null,
-});
+interface CustomerChargeContextInterface {
+  customerCharge: CustomerCharge;
+  addCustomerCharge: (number) => void;
+  subtractCustomerCharge: (number) => void;
+  returnAllCustomerCharge: () => void;
+  resetReturnedChange: () => void;
+}
+
+export const CustomerChargeContext =
+  createContext<CustomerChargeContextInterface | null>(null);
 
 export const CustomerChargeProvider = ({ children }) => {
   const {
