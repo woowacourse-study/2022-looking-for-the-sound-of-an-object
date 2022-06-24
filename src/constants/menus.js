@@ -21,12 +21,12 @@ const menus = {
   },
   cola: {
     name: "콜라",
-    price: 1000,
+    price: 1500,
     ingredients: ["콜라"],
   },
   cider: {
     name: "사이다",
-    price: 1000,
+    price: 1400,
     ingredients: ["사이다"],
   },
 };
