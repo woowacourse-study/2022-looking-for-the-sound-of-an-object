@@ -6,7 +6,6 @@ export const Button = styled.button`
   box-shadow: 0.3rem 0.3rem 0 ${({ theme }) => theme.black};
   border: 2px solid ${({ theme }) => theme.black};
   background-color: ${({ theme }) => theme.white};
-  color: ${({ theme }) => theme.black};
   font-size: 1rem;
   font-weight: 700;
 
@@ -21,7 +20,7 @@ export const Button = styled.button`
   }
 
   &:disabled {
-    border: 2px solid ${({ theme }) => theme.secondaryDark};
+    border: 2px solid ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.secondaryDark};
   }
 `;
