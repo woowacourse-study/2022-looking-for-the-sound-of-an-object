@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import { COIN_UNIT, INSERT_MONEY_RANGE } from "constants";
 
-import OutlinedButton from "components/common/OutlinedButton";
+import OutlinedButton from "components/common/OutlinedButton/OutlinedButton";
 
 const validateInsertMoney = (insert) => {
   if (!insert) {

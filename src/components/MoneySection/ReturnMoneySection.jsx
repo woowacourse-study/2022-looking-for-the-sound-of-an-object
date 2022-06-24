@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { COIN_UNIT } from "constants";
 
-import OutlinedButton from "components/common/OutlinedButton";
+import OutlinedButton from "components/common/OutlinedButton/OutlinedButton";
 
 const initialChangeState = {
   [COIN_UNIT[500]]: 0,
