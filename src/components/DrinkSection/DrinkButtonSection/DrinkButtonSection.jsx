@@ -1,9 +1,12 @@
+import DrinkListItem from "../DrinkListItem/DrinkListItem";
 import { useRef, useState } from "react";
 
 import { DRINKS, INSERT_MONEY_RANGE } from "constants";
 
-import DrinkButton from "components/DrinkSection/DrinkButton";
-import OutlinedButton from "components/common/OutlinedButton";
+import DrinkButton from "components/DrinkSection/DrinkButton/DrinkButton";
+import * as S from "components/DrinkSection/DrinkButtonSection/DrinkButtonSection.style";
+import OutlinedButton from "components/common/OutlinedButton/OutlinedButton";
+import SectionHeader from "components/common/SectionHeader/SectionHeader";
 
 function DrinkButtonSection({
   inputMoney,
@@ -76,21 +79,24 @@ function DrinkButtonSection({
 
   return (
     <>
-      <section>
-        <h2>자판기 버튼</h2>
-        {Object.keys(DRINKS).map((drinkKey) => (
-          <DrinkButton
-            name={drinkKey}
-            onClick={addDrinkToList}
-            disabled={
-              inputMoney <
-                (DRINKS[drinkKey]?.PRICE || INSERT_MONEY_RANGE.MAX) ||
-              isDispenserProcessing
-            }
-          >
-            {DRINKS[drinkKey].NAME}
-          </DrinkButton>
-        ))}
+      <S.Container>
+        <SectionHeader>자판기 버튼</SectionHeader>
+        <S.DrinkButtonContainer>
+          {Object.keys(DRINKS).map((drinkKey) => (
+            <DrinkButton
+              name={drinkKey}
+              price={DRINKS[drinkKey].PRICE}
+              onClick={addDrinkToList}
+              disabled={
+                inputMoney <
+                  (DRINKS[drinkKey]?.PRICE || INSERT_MONEY_RANGE.MAX) ||
+                isDispenserProcessing
+              }
+            >
+              {DRINKS[drinkKey].NAME}
+            </DrinkButton>
+          ))}
+        </S.DrinkButtonContainer>
         <OutlinedButton
           type="button"
           onClick={refundMoney}
@@ -98,10 +104,14 @@ function DrinkButtonSection({
         >
           환불하기
         </OutlinedButton>
-      </section>
-      <section>
-        <h2>구입한 목록</h2>
-        <p>{latestDrinks.join(", ")}</p>
+      </S.Container>
+      <S.Container>
+        <SectionHeader>구입한 목록</SectionHeader>
+        <S.DrinkList>
+          {latestDrinks.map((drink) => (
+            <DrinkListItem>{DRINKS[drink].NAME}</DrinkListItem>
+          ))}
+        </S.DrinkList>
         <OutlinedButton
           type="button"
           onClick={buyDrinkList}
@@ -109,7 +119,7 @@ function DrinkButtonSection({
         >
           음료 받기
         </OutlinedButton>
-      </section>
+      </S.Container>
     </>
   );
 }
