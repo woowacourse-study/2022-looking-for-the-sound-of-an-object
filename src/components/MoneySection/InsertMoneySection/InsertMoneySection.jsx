@@ -2,7 +2,9 @@ import { useRef } from "react";
 
 import { COIN_UNIT, INSERT_MONEY_RANGE } from "constants";
 
+import * as S from "components/MoneySection/InsertMoneySection/InsertMoneySection.style";
 import OutlinedButton from "components/common/OutlinedButton/OutlinedButton";
+import SectionHeader from "components/common/SectionHeader/SectionHeader";
 
 const validateInsertMoney = (insert) => {
   if (!insert) {
@@ -39,27 +41,29 @@ function InsertMoneySection({ inputMoney, addInputMoney }) {
   };
 
   return (
-    <section>
-      <h2>금액 투입구</h2>
-      <label htmlFor="insert">금액을 투입해 주세요.</label>
-      <br />
-      <input
-        id="insert"
-        type="number"
-        max={INSERT_MONEY_RANGE.MAX}
-        min={INSERT_MONEY_RANGE.MIN}
-        step={COIN_UNIT[10]}
-        placeholder="1,000"
-        ref={insertMoneyRef}
-      />
-      원
-      <OutlinedButton type="button" onClick={insertMoney}>
-        투입하기
-      </OutlinedButton>
-      <p>
+    <S.SectionContainer>
+      <SectionHeader>금액 투입구</SectionHeader>
+      <S.InputContainer>
+        <S.Label htmlFor="insert">금액을 투입해 주세요.</S.Label>
+        <S.InputButtonContainer>
+          <S.Input
+            id="insert"
+            type="number"
+            max={INSERT_MONEY_RANGE.MAX}
+            min={INSERT_MONEY_RANGE.MIN}
+            step={COIN_UNIT[10]}
+            placeholder="1,000원"
+            ref={insertMoneyRef}
+          />
+          <OutlinedButton type="button" onClick={insertMoney}>
+            투입하기
+          </OutlinedButton>
+        </S.InputButtonContainer>
+      </S.InputContainer>
+      <S.TotalMoneyText>
         투입한 금액: <span>{inputMoney.toLocaleString()}</span>원
-      </p>
-    </section>
+      </S.TotalMoneyText>
+    </S.SectionContainer>
   );
 }
 

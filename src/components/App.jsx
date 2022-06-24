@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import DrinkSection from "components/DrinkSection";
-import InsertMoneySection from "components/MoneySection/InsertMoneySection";
-import ReturnMoneySection from "components/MoneySection/ReturnMoneySection";
+import DrinkSection from "components/DrinkSection/DrinkSection";
+import InsertMoneySection from "components/MoneySection/InsertMoneySection/InsertMoneySection";
+import ReturnMoneySection from "components/MoneySection/ReturnMoneySection/ReturnMoneySection";
 
 function App() {
   // TODO: 나중엔 Context API로 관리

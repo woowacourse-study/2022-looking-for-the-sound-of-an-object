@@ -12,13 +12,13 @@ export const Button = styled.button`
   font-weight: 700;
 
   &:hover {
-    border: 0.13rem solid ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.primary};
+    border: 0.13rem solid ${({ theme }) => theme.primaryDark};
+    color: ${({ theme }) => theme.primaryDark};
   }
 
   &:active {
-    border: 0.13rem solid ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.primary};
+    border: 0.13rem solid ${({ theme }) => theme.primaryDark};
+    color: ${({ theme }) => theme.primaryDark};
   }
 
   &:disabled {
