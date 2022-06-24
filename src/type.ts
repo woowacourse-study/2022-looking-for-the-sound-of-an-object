@@ -4,7 +4,7 @@ interface CustomerCharge {
 }
 
 interface Order {
-  progress: "PENDING" | "MAKING" | "COMPLETE";
+  progress: string;
   orderedMenu: string | null;
 }
 

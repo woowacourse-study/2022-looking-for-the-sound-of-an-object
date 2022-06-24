@@ -29,6 +29,6 @@ const menus = {
     price: 1400,
     ingredients: ["사이다"],
   },
-};
+} as const;
 
 export default menus;
