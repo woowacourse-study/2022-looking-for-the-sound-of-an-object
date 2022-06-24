@@ -2,7 +2,9 @@ import { useState } from "react";
 
 import { COIN_UNIT } from "constants";
 
+import * as S from "components/MoneySection/ReturnMoneySection/ReturnMoneySection.style";
 import OutlinedButton from "components/common/OutlinedButton/OutlinedButton";
+import SectionHeader from "components/common/SectionHeader/SectionHeader";
 
 const initialChangeState = {
   [COIN_UNIT[500]]: 0,
@@ -40,19 +42,33 @@ function ReturnMoneySection({ inputMoney, changeInputMoney }) {
   );
 
   return (
-    <section>
-      <h2>금액 반환구</h2>
+    <S.SectionContainer>
+      <SectionHeader>금액 반환구</SectionHeader>
       <OutlinedButton type="button" onClick={returnMoney}>
         반환하기
       </OutlinedButton>
-      <p>
-        반환한 금액: <span>{totalChanges.toLocaleString()}</span>원 <br />
-        500원: <span>{changes[COIN_UNIT[500]]}</span>개 <br />
-        100원: <span>{changes[COIN_UNIT[100]]}</span>개 <br />
-        50원: <span>{changes[COIN_UNIT[50]]}</span>개 <br />
-        10원: <span>{changes[COIN_UNIT[10]]}</span>개 <br />
-      </p>
-    </section>
+      <S.TotalReturnMoneyText>
+        반환한 금액: <span>{totalChanges.toLocaleString()}</span>원
+      </S.TotalReturnMoneyText>
+      <S.ReturnMoneyTable>
+        <tr>
+          <th scope="row">500원</th>
+          <td>{changes[COIN_UNIT[500]]}개</td>
+        </tr>
+        <tr>
+          <th scope="row">100원</th>
+          <td>{changes[COIN_UNIT[100]]}개</td>
+        </tr>
+        <tr>
+          <th scope="row">50원</th>
+          <td>{changes[COIN_UNIT[50]]}개</td>
+        </tr>
+        <tr>
+          <th scope="row">10원</th>
+          <td>{changes[COIN_UNIT[10]]}개</td>
+        </tr>
+      </S.ReturnMoneyTable>
+    </S.SectionContainer>
   );
 }
 
