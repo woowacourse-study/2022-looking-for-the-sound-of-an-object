@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "system",
-    "noImplicitAny": true,
+    // "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "outFile": "../../built/local/tsc.js",

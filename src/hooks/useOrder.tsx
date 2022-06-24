@@ -1,9 +1,10 @@
 import { useState } from "react";
 
+import { Order } from "../type";
 import { ORDER_PROGRESS } from "../constants";
 
 const useOrder = () => {
-  const [order, setOrder] = useState({
+  const [order, setOrder] = useState<Order>({
     progress: ORDER_PROGRESS.PENDING,
     orderedMenu: null,
   });

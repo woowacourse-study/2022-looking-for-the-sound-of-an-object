@@ -1,6 +1,11 @@
-type CustomerCharge = {
+interface CustomerCharge {
   value: number;
   returnedChangeValue: number;
-};
+}
 
-export { CustomerCharge };
+interface Order {
+  progress: "PENDING" | "MAKING" | "COMPLETE";
+  orderedMenu: string | null;
+}
+
+export { CustomerCharge, Order };
