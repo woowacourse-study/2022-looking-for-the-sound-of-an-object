@@ -1,8 +1,12 @@
+import ActionListItem from "./ActionListItem/ActionListItem";
+
 import { DISPENSER_TIME_INTERVAL } from "constants";
 
 import { useDispenser } from "hooks/useDispenser";
 
 import DrinkButtonSection from "components/DrinkSection/DrinkButtonSection/DrinkButtonSection";
+import * as S from "components/DrinkSection/DrinkSection.style";
+import SectionHeader from "components/common/SectionHeader/SectionHeader";
 
 function DrinkSection({ inputMoney, addInputMoney, subtractInputMoney }) {
   const { dispenserAction, resetDispenserAction, addDispenserAction } =
@@ -17,12 +21,14 @@ function DrinkSection({ inputMoney, addInputMoney, subtractInputMoney }) {
         addInputMoney={addInputMoney}
         subtractInputMoney={subtractInputMoney}
       />
-      <section>
-        <h2>디스펜서</h2>
-        {dispenserAction.map((action, index) => (
-          <p key={index}>{action}</p>
-        ))}
-      </section>
+      <S.SectionConatainer>
+        <SectionHeader>디스펜서</SectionHeader>
+        <S.ActionList>
+          {dispenserAction.map((action, index) => (
+            <ActionListItem key={index}>{action}</ActionListItem>
+          ))}
+        </S.ActionList>
+      </S.SectionConatainer>
     </>
   );
 }

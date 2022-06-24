@@ -79,7 +79,7 @@ function DrinkButtonSection({
 
   return (
     <>
-      <S.Container>
+      <S.SectionContainer>
         <SectionHeader>자판기 버튼</SectionHeader>
         <S.DrinkButtonContainer>
           {Object.keys(DRINKS).map((drinkKey) => (
@@ -104,8 +104,8 @@ function DrinkButtonSection({
         >
           환불하기
         </OutlinedButton>
-      </S.Container>
-      <S.Container>
+      </S.SectionContainer>
+      <S.SectionContainer>
         <SectionHeader>구입한 목록</SectionHeader>
         <S.DrinkList>
           {latestDrinks.length ? (
@@ -123,7 +123,7 @@ function DrinkButtonSection({
         >
           음료 받기
         </OutlinedButton>
-      </S.Container>
+      </S.SectionContainer>
     </>
   );
 }
