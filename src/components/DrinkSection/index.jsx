@@ -2,7 +2,7 @@ import { DISPENSER_TIME_INTERVAL } from "constants";
 
 import { useDispenser } from "hooks/useDispenser";
 
-import DrinkButtonSection from "components/DrinkSection/DrinkButtonSection";
+import DrinkButtonSection from "components/DrinkSection/DrinkButtonSection/DrinkButtonSection";
 
 function DrinkSection({ inputMoney, addInputMoney, subtractInputMoney }) {
   const { dispenserAction, resetDispenserAction, addDispenserAction } =

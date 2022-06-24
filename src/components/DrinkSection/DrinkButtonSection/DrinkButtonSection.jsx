@@ -108,9 +108,13 @@ function DrinkButtonSection({
       <S.Container>
         <SectionHeader>구입한 목록</SectionHeader>
         <S.DrinkList>
-          {latestDrinks.map((drink) => (
-            <DrinkListItem>{DRINKS[drink].NAME}</DrinkListItem>
-          ))}
+          {latestDrinks.length ? (
+            latestDrinks.map((drink) => (
+              <DrinkListItem>{DRINKS[drink].NAME}</DrinkListItem>
+            ))
+          ) : (
+            <S.NoDrinkText>구입한 목록이 없습니다.</S.NoDrinkText>
+          )}
         </S.DrinkList>
         <OutlinedButton
           type="button"

@@ -19,8 +19,17 @@ export const DrinkButtonContainer = styled.section`
 export const DrinkList = styled.ul`
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
 
-  min-height: 3rem;
-  width: 100%;
+  min-width: 20rem;
+  min-height: 5rem;
+  padding: 1rem;
+
+  border: 0.13rem dashed ${({ theme }) => theme.black};
+`;
+
+export const NoDrinkText = styled.p`
+  color: ${({ theme }) => theme.secondaryDark};
+  font-weight: 700;
 `;
