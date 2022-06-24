@@ -4,9 +4,10 @@ import { DISPENSER_TIME_INTERVAL } from "constants";
 
 import { useDispenser } from "hooks/useDispenser";
 
+import SectionHeader from "components/common/SectionHeader/SectionHeader";
+
 import DrinkButtonSection from "components/DrinkSection/DrinkButtonSection/DrinkButtonSection";
 import * as S from "components/DrinkSection/DrinkSection.style";
-import SectionHeader from "components/common/SectionHeader/SectionHeader";
 
 function DrinkSection({ inputMoney, addInputMoney, subtractInputMoney }) {
   const { dispenserAction, resetDispenserAction, addDispenserAction } =

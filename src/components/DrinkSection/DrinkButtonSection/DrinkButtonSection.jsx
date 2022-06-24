@@ -3,10 +3,11 @@ import { useRef, useState } from "react";
 
 import { DRINKS, INSERT_MONEY_RANGE } from "constants";
 
-import DrinkButton from "components/DrinkSection/DrinkButton/DrinkButton";
-import * as S from "components/DrinkSection/DrinkButtonSection/DrinkButtonSection.style";
 import OutlinedButton from "components/common/OutlinedButton/OutlinedButton";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
+
+import DrinkButton from "components/DrinkSection/DrinkButton/DrinkButton";
+import * as S from "components/DrinkSection/DrinkButtonSection/DrinkButtonSection.style";
 
 function DrinkButtonSection({
   inputMoney,
@@ -79,7 +80,7 @@ function DrinkButtonSection({
 
   return (
     <>
-      <S.SectionContainer>
+      <S.ButtonSectionContainer>
         <SectionHeader>자판기 버튼</SectionHeader>
         <S.DrinkButtonContainer>
           {Object.keys(DRINKS).map((drinkKey) => (
@@ -104,8 +105,8 @@ function DrinkButtonSection({
         >
           환불하기
         </OutlinedButton>
-      </S.SectionContainer>
-      <S.SectionContainer>
+      </S.ButtonSectionContainer>
+      <S.ListSectionContainer>
         <SectionHeader>구입한 목록</SectionHeader>
         <S.DrinkList>
           {latestDrinks.length ? (
@@ -123,7 +124,7 @@ function DrinkButtonSection({
         >
           음료 받기
         </OutlinedButton>
-      </S.SectionContainer>
+      </S.ListSectionContainer>
     </>
   );
 }

@@ -2,6 +2,8 @@
   "importOrder": [
     "^(@|constants)(.*|$)",
     "^(@|hooks)(.*|$)",
+    "^(@|components/common)(.*|$)",
+    "^(@|components/layout)(.*|$)",
     "^(@|components)(.*|$)",
     "^(@|styles)(.*|$)"
   ],

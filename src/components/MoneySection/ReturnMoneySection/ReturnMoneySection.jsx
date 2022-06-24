@@ -2,9 +2,10 @@ import { useState } from "react";
 
 import { COIN_UNIT } from "constants";
 
-import * as S from "components/MoneySection/ReturnMoneySection/ReturnMoneySection.style";
 import OutlinedButton from "components/common/OutlinedButton/OutlinedButton";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
+
+import * as S from "components/MoneySection/ReturnMoneySection/ReturnMoneySection.style";
 
 const initialChangeState = {
   [COIN_UNIT[500]]: 0,

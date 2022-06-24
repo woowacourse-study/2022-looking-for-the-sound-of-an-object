@@ -1,4 +1,7 @@
+import Header from "./layout/Header/Header";
 import { useState } from "react";
+
+import Main from "components/layout/Main/Main";
 
 import DrinkSection from "components/DrinkSection/DrinkSection";
 import InsertMoneySection from "components/MoneySection/InsertMoneySection/InsertMoneySection";
@@ -21,22 +24,24 @@ function App() {
   };
 
   return (
-    <main className="App">
-      <h1>자판기</h1>
-      <InsertMoneySection
-        inputMoney={inputMoney}
-        addInputMoney={addInputMoney}
-      />
-      <ReturnMoneySection
-        inputMoney={inputMoney}
-        changeInputMoney={changeInputMoney}
-      />
-      <DrinkSection
-        inputMoney={inputMoney}
-        addInputMoney={addInputMoney}
-        subtractInputMoney={subtractInputMoney}
-      />
-    </main>
+    <div id="app">
+      <Header>태태 자판기</Header>
+      <Main>
+        <InsertMoneySection
+          inputMoney={inputMoney}
+          addInputMoney={addInputMoney}
+        />
+        <ReturnMoneySection
+          inputMoney={inputMoney}
+          changeInputMoney={changeInputMoney}
+        />
+        <DrinkSection
+          inputMoney={inputMoney}
+          addInputMoney={addInputMoney}
+          subtractInputMoney={subtractInputMoney}
+        />
+      </Main>
+    </div>
   );
 }
 

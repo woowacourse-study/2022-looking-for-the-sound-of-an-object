@@ -6,6 +6,8 @@ export const SectionConatainer = styled.section`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
+  grid-area: dispenser;
 `;
 
 export const ActionList = styled.ul`

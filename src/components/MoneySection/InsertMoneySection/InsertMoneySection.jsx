@@ -2,9 +2,10 @@ import { useRef } from "react";
 
 import { COIN_UNIT, INSERT_MONEY_RANGE } from "constants";
 
-import * as S from "components/MoneySection/InsertMoneySection/InsertMoneySection.style";
 import OutlinedButton from "components/common/OutlinedButton/OutlinedButton";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
+
+import * as S from "components/MoneySection/InsertMoneySection/InsertMoneySection.style";
 
 const validateInsertMoney = (insert) => {
   if (!insert) {

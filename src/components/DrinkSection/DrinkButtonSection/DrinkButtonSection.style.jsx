@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SectionContainer = styled.section`
+export const ButtonSectionContainer = styled.section`
   padding: 1rem;
 
   display: flex;
@@ -8,6 +8,20 @@ export const SectionContainer = styled.section`
   align-items: center;
   justify-content: center;
   gap: 1rem;
+
+  grid-area: buttons;
+`;
+
+export const ListSectionContainer = styled.section`
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  grid-area: list;
 `;
 
 export const DrinkButtonContainer = styled.section`

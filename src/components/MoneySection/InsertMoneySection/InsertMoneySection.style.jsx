@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const SectionContainer = styled.section`
+  padding: 1rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
+  grid-area: insert;
 `;
 
 export const InputContainer = styled.div`
