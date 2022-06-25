@@ -12,10 +12,12 @@ const DrinkMenuSection = ({ makeDrink }) => {
     CustomerChargeContext
   );
 
-  const handleClickDrinkMenuButton = (e) => {
-    updateOrderStateToMaking(e.target.name);
-    makeDrink(e.target.name);
-    subtractCustomerCharge(menus[e.target.name].price);
+  const handleClickDrinkMenuButton = (e: React.MouseEvent) => {
+    const { name } = e.target as HTMLButtonElement;
+
+    updateOrderStateToMaking(name);
+    makeDrink(name);
+    subtractCustomerCharge(name);
   };
 
   return (

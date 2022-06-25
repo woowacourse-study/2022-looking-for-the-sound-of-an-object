@@ -5,6 +5,7 @@ import { OrderContext } from "../../context/OrderContext";
 import DrinkMenuSection from "./DrinkMenuSection";
 import DrinkPickupSection from "./DrinkPickupSection";
 
+import { Drink } from "../../type";
 import menus from "../../constants/menus";
 
 const PREPARE_INGREDIENT_TIME_INTERVAL = 1000;
@@ -13,8 +14,8 @@ const DrinkSection = () => {
   const { updateOrderStateToComplete } = useContext(OrderContext);
   const [ingredientList, setIngredientList] = useState([]);
 
-  const makeDrink = (menuName) => {
-    const drink = menus[menuName];
+  const makeDrink = (menuName: string) => {
+    const drink: Drink = menus[menuName];
     const initialPrepare = prepareIngredient("컵");
     const prepareIngredientChains = drink.ingredients.reduce(
       (prev, ingredient) => prev.then(() => prepareIngredient(ingredient)),
@@ -26,8 +27,8 @@ const DrinkSection = () => {
     });
   };
 
-  const prepareIngredient = (ingredient) => {
-    return new Promise((resolve) => {
+  const prepareIngredient = (ingredient: string) => {
+    return new Promise<void>((resolve) => {
       setTimeout(() => {
         setIngredientList((prevIngredientList) => [
           ...prevIngredientList,

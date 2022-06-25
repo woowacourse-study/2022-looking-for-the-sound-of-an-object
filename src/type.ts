@@ -8,4 +8,10 @@ interface Order {
   orderedMenu: string | null;
 }
 
-export { CustomerCharge, Order };
+interface Drink {
+  name: string;
+  price: number;
+  ingredients: string[];
+}
+
+export { CustomerCharge, Order, Drink };
