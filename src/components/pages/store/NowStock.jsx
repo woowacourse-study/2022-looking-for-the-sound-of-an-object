@@ -19,7 +19,9 @@ const NowStockItem = styled.td`
 `;
 
 const NowStock = () => {
-  const { espresso, milk, cup } = useSelector((state) => state.stock);
+  const { espresso, milk, cup, coke, sida } = useSelector(
+    (state) => state.stock
+  );
 
   return (
     <NowStockContainer>
@@ -30,11 +32,15 @@ const NowStock = () => {
             <NowStockTitle>에스프레소</NowStockTitle>
             <NowStockTitle>우유</NowStockTitle>
             <NowStockTitle>컵</NowStockTitle>
+            <NowStockTitle>콜라</NowStockTitle>
+            <NowStockTitle>사이다</NowStockTitle>
           </tr>
           <tr>
             <NowStockItem>{espresso}</NowStockItem>
             <NowStockItem>{milk}</NowStockItem>
             <NowStockItem>{cup}</NowStockItem>
+            <NowStockItem>{coke}</NowStockItem>
+            <NowStockItem>{sida}</NowStockItem>
           </tr>
         </tbody>
       </table>
