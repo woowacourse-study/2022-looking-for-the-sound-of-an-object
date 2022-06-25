@@ -43,8 +43,9 @@ const StyledMenu = styled.div<{ lightOn?: boolean }>`
     width: 80px;
     height: 30px;
 
-    background-color: ${({ lightOn }) => (lightOn ? "#3e93f7" : "#dddddd")};
-    color: ${({ lightOn }) => lightOn && "white"};
+    background-color: ${({ lightOn, theme }) =>
+      lightOn ? theme.color.blue : theme.color.gray};
+    color: ${({ lightOn, theme }) => lightOn && theme.color.white};
 
     border-radius: 4px;
 

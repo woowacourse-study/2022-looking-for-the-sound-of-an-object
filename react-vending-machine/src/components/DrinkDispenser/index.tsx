@@ -54,8 +54,8 @@ const StyledDispenser = styled.div`
   width: 200px;
   height: 90px;
 
-  background-color: black;
-  color: white;
+  background-color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.color.white};
 
   padding: 8px;
   border-radius: 4px;
@@ -75,7 +75,7 @@ const StyledDispenser = styled.div`
     position: absolute;
     width: 90%;
     padding: 5px;
-    background: #0ba;
+    background: ${({ theme }) => theme.color.blue};
     animation: drop 1.2s forwards;
   }
 

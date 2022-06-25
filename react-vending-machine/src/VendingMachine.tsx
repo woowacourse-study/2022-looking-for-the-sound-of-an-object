@@ -98,7 +98,7 @@ const StyledVendingMachine = styled.div`
 
   border-radius: 4px;
 
-  background-color: #a9cffc;
+  background-color: ${({ theme }) => theme.color.light_blue};
 `;
 
 const StyledMenus = styled.div`
@@ -111,7 +111,7 @@ const StyledMenus = styled.div`
   margin-top: 10px;
 
   border-radius: 4px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.white};
 `;
 
 const StyledMoneyBox = styled.div`

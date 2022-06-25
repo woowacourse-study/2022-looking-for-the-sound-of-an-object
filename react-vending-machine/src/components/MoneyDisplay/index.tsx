@@ -20,6 +20,6 @@ const StyledMoneyDisplay = styled.div`
   height: 40px;
 
   border-radius: 4px;
-  background-color: black;
-  color: #c9144e;
+  background-color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.color.red};
 `;

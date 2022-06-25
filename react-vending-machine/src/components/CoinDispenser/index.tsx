@@ -84,8 +84,8 @@ const StyledDispenser = styled.div`
   width: 200px;
   height: 90px;
 
-  background-color: black;
-  color: white;
+  background-color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.color.white};
 
   padding: 8px;
   border-radius: 4px;
@@ -98,7 +98,7 @@ const StyledDispenser = styled.div`
     width: 40px;
     height: 40px;
 
-    background-color: white;
+    background-color: ${({ theme }) => theme.color.white};
   }
 `;
 
@@ -125,7 +125,7 @@ const StyledCoin = styled.div`
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  background-color: #f9f510;
+  background-color: ${({ theme }) => theme.color.yellow};
   text-align: center;
   color: black;
   line-height: 35px;
