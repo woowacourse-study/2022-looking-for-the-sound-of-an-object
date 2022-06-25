@@ -52,7 +52,7 @@ export default function DrinkDispenser({
 
 const StyledDispenser = styled.div`
   width: 200px;
-  height: 100px;
+  height: 90px;
 
   background-color: black;
   color: white;
@@ -61,7 +61,7 @@ const StyledDispenser = styled.div`
   border-radius: 4px;
 
   h3 {
-    margin: 0;
+    margin: 5px 0;
   }
 
   button {
@@ -95,7 +95,7 @@ const StyledDispenser = styled.div`
     }
     to {
       opacity: 1;
-      transform: translate3d(0, 40px, 0) rotate3d(0, 0, 0, 0deg);
+      transform: translate3d(0, 10px, 0) rotate3d(0, 0, 0, 0deg);
     }
   }
 `;

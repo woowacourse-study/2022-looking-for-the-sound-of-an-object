@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Button from "./components/Button";
+import CoinDispenser from "./components/CoinDispenser";
 import DrinkDispenser from "./components/DrinkDispenser";
 import Menu from "./components/Menu";
 import MoneyDisplay from "./components/MoneyDisplay";
@@ -18,6 +19,7 @@ import {
 
 export default function VendingMachine() {
   const [chargeMoney, setChargeMoney] = useState("");
+  const [returnMoney, setReturnMoney] = useState(0);
   const [totalMoney, setTotalMoney] = useState(0);
   const [vendingMachineState, setVendingMachineState] = useState("READY");
   const [drink, setDrink] = useState<DrinkType>();
@@ -47,8 +49,7 @@ export default function VendingMachine() {
     if (totalMoney === 0) {
       return alert("반환할 잔돈이 없습니다");
     }
-    setVendingMachineState("WORKING");
-    alert(`잔돈이 반환되었습니다 ${totalMoney}원`);
+    setReturnMoney(totalMoney);
     setTotalMoney(0);
   };
 
@@ -86,6 +87,7 @@ export default function VendingMachine() {
           drink={drink}
           setVendingMachineState={setVendingMachineState}
         />
+        <CoinDispenser money={returnMoney} />
       </StyledDispensers>
     </StyledVendingMachine>
   );

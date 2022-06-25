@@ -5,7 +5,7 @@ const StyledVendingMachine = styled.div`
   flex-direction: column;
   align-items: center;
 
-  width: 400px;
+  width: 500px;
   height: 600px;
 
   margin: auto;
