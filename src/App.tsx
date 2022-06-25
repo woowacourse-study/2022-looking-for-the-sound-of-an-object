@@ -1,3 +1,4 @@
+import React from "react";
 import GuideMessage from "./components/GuideMessage";
 import ChargeSection from "./components/ChargeSection";
 import DrinkSection from "./components/DrinkSection";
