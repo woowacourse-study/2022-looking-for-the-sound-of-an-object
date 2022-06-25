@@ -7,7 +7,7 @@ interface MoneyDisplayType {
 export default function MoneyDisplay({ children }: MoneyDisplayType) {
   return (
     <StyledMoneyDisplay>
-      총액: {children?.toLocaleString("en")}원
+      총액: {children?.toLocaleString("ko")}원
     </StyledMoneyDisplay>
   );
 }

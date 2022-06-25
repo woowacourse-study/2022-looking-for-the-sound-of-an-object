@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 import Button from "../Button";
-import { DrinkType, recipes } from "../../constants";
-import { useEffect } from "react";
+import { DrinkType, recipes, STATUS } from "../../constants";
 
 interface DrinkDispenserType {
   drink: DrinkType | undefined;
@@ -17,7 +16,7 @@ export default function DrinkDispenser({
   const [recipe, setRecipe] = useState<string[]>([]);
 
   const handlePickupClick = () => {
-    setVendingMachineState("READY");
+    setVendingMachineState(STATUS.READY);
     setRecipe([]);
   };
 

@@ -48,4 +48,9 @@ const recipes: Record<DrinkType, Array<string>> = {
   사이다: ["🥤 컵 나옴", "🥤 사이다 완성"],
 };
 
-export { drinks, menus, recipes };
+const STATUS = {
+  READY: "READY",
+  WORKING: "WORKING",
+};
+
+export { drinks, menus, recipes, STATUS };

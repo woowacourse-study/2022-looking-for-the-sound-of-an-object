@@ -20,7 +20,7 @@ export default function Menu({
   return (
     <StyledMenu lightOn={lightOn}>
       {icon}
-      <div>{price.toLocaleString("en")}원</div>
+      <div>{price.toLocaleString("ko")}원</div>
       <Button disabled={!lightOn} onClick={onClick}>
         {name}
       </Button>

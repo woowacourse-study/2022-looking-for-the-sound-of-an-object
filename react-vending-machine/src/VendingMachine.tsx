@@ -8,13 +8,13 @@ import Menu from "./components/Menu";
 import MoneyDisplay from "./components/MoneyDisplay";
 import MoneyInput from "./components/MoneyInput";
 
-import { DrinkType, menus } from "./constants";
+import { DrinkType, menus, STATUS } from "./constants";
 
 export default function VendingMachine() {
   const [chargeMoney, setChargeMoney] = useState("");
   const [returnMoney, setReturnMoney] = useState(0);
   const [totalMoney, setTotalMoney] = useState(0);
-  const [vendingMachineState, setVendingMachineState] = useState("READY");
+  const [vendingMachineState, setVendingMachineState] = useState(STATUS.READY);
   const [drink, setDrink] = useState<DrinkType>();
 
   const handleChargeMoneyChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -28,7 +28,7 @@ export default function VendingMachine() {
   };
 
   const handleMenuClick = (name: DrinkType, price: number) => {
-    setVendingMachineState("WORKING");
+    setVendingMachineState(STATUS.WORKING);
     setDrink(name);
     setTotalMoney((prev) => (prev -= price));
   };
@@ -48,7 +48,7 @@ export default function VendingMachine() {
         {Object.entries(menus).map(([key, value]) => (
           <Menu
             lightOn={
-              value.price <= totalMoney && vendingMachineState === "READY"
+              value.price <= totalMoney && vendingMachineState === STATUS.READY
             }
             name={key}
             icon={value.icon}
@@ -65,11 +65,11 @@ export default function VendingMachine() {
             onSubmit={handleMoneySubmit}
             onChange={handleChargeMoneyChange}
             value={chargeMoney}
-            disabled={vendingMachineState === "WORKING"}
+            disabled={vendingMachineState === STATUS.WORKING}
           />
           <Button
             onClick={handleReturnClick}
-            disabled={vendingMachineState === "WORKING"}
+            disabled={vendingMachineState === STATUS.WORKING}
           >
             반환
           </Button>
