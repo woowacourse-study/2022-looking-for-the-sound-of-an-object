@@ -4,8 +4,8 @@ import { CustomerCharge } from "../type";
 
 interface CustomerChargeContextInterface {
   customerCharge: CustomerCharge;
-  addCustomerCharge: (number) => void;
-  subtractCustomerCharge: (number) => void;
+  addCustomerCharge: (chargeToAdd: number) => void;
+  subtractCustomerCharge: (chargeToSubtract: number) => void;
   returnAllCustomerCharge: () => void;
   resetReturnedChange: () => void;
 }
