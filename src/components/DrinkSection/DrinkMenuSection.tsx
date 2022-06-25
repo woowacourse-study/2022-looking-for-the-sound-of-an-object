@@ -12,7 +12,9 @@ const DrinkMenuSection = ({ makeDrink }) => {
     CustomerChargeContext
   );
 
-  const handleClickDrinkMenuButton = (e: React.MouseEvent) => {
+  const handleClickDrinkMenuButton = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     const { name } = e.target as HTMLButtonElement;
 
     updateOrderStateToMaking(name);
