@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 import styled from "styled-components";
 import Button from "../Button";
 
-=======
-import Button from "../Button";
-
-import { StyledMenu } from "./index.styled";
-
->>>>>>> 266826e76b0c958ff549ec0038844aa9c0cbec85
 interface MenuType {
   lightOn?: boolean;
   icon: string;
@@ -27,18 +20,13 @@ export default function Menu({
   return (
     <StyledMenu lightOn={lightOn}>
       {icon}
-<<<<<<< HEAD
       <div>{price.toLocaleString("ko")}원</div>
-=======
-      <div>{price.toLocaleString("en")}원</div>
->>>>>>> 266826e76b0c958ff549ec0038844aa9c0cbec85
       <Button disabled={!lightOn} onClick={onClick}>
         {name}
       </Button>
     </StyledMenu>
   );
 }
-<<<<<<< HEAD
 
 const StyledMenu = styled.div<{ lightOn?: boolean }>`
   display: flex;
@@ -66,5 +54,3 @@ const StyledMenu = styled.div<{ lightOn?: boolean }>`
     }
   }
 `;
-=======
->>>>>>> 266826e76b0c958ff549ec0038844aa9c0cbec85

@@ -1,4 +1,4 @@
-import StyledButton from "./index.styled";
+import styled from "styled-components";
 
 interface ButtonType {
   type?: "button" | "submit";
@@ -20,3 +20,13 @@ export default function Button({
     </StyledButton>
   );
 }
+
+const StyledButton = styled.button`
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  :disabled {
+    cursor: auto;
+  }
+`;
