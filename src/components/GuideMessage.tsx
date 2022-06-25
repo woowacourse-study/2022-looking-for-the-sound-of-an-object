@@ -4,7 +4,7 @@ import { OrderContext } from "../context/OrderContext";
 import { CustomerChargeContext } from "../context/CustomerChargeContext";
 
 import { ORDER_PROGRESS } from "../constants";
-import menus from "./../constants/menus";
+import menus from "../constants/menus";
 
 const GuideMessage = () => {
   const {
