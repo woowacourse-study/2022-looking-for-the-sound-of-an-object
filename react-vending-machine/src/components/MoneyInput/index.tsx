@@ -1,19 +1,33 @@
+<<<<<<< HEAD
 import styled from "styled-components";
+=======
+import StyledMoneyInput from "./index.styled";
+>>>>>>> 266826e76b0c958ff549ec0038844aa9c0cbec85
 
 import Button from "../Button";
 
 interface MoneyInputType {
   onSubmit: React.FormEventHandler;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+<<<<<<< HEAD
   value: string;
   disabled: boolean;
+=======
+
+  value: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+>>>>>>> 266826e76b0c958ff549ec0038844aa9c0cbec85
 }
 
 export default function MoneyInput({
   onSubmit,
   onChange,
   value,
+<<<<<<< HEAD
   disabled,
+=======
+  onClick,
+>>>>>>> 266826e76b0c958ff549ec0038844aa9c0cbec85
 }: MoneyInputType) {
   return (
     <StyledMoneyInput onSubmit={onSubmit}>
@@ -25,12 +39,17 @@ export default function MoneyInput({
         max={1000000}
         step={10}
       />
+<<<<<<< HEAD
       <Button type="submit" onClick={onSubmit} disabled={disabled}>
+=======
+      <Button type="submit" onClick={onClick}>
+>>>>>>> 266826e76b0c958ff549ec0038844aa9c0cbec85
         투입
       </Button>
     </StyledMoneyInput>
   );
 }
+<<<<<<< HEAD
 
 const StyledMoneyInput = styled.form`
   input {
@@ -51,3 +70,5 @@ const StyledMoneyInput = styled.form`
     outline: none;
   }
 `;
+=======
+>>>>>>> 266826e76b0c958ff549ec0038844aa9c0cbec85
