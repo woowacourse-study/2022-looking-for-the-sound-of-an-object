@@ -9,9 +9,13 @@ interface OrderContextInterface {
   updateOrderStateToComplete: () => void;
 }
 
+interface Props {
+  children: React.ReactNode;
+}
+
 export const OrderContext = createContext<OrderContextInterface | null>(null);
 
-export const OrderProvider = ({ children }) => {
+export const OrderProvider = ({ children }: Props) => {
   const {
     order,
     updateOrderStateToPending,

@@ -14,8 +14,8 @@ const DrinkSection = () => {
   const { updateOrderStateToComplete } = useContext(OrderContext);
   const [ingredientList, setIngredientList] = useState([]);
 
-  const makeDrink = (menuName: string) => {
-    const drink: Drink = menus[menuName];
+  const makeDrink = (menuName: keyof typeof menus) => {
+    const drink = menus[menuName] as unknown as Drink;
     const initialPrepare = prepareIngredient("컵");
     const prepareIngredientChains = drink.ingredients.reduce(
       (prev, ingredient) => prev.then(() => prepareIngredient(ingredient)),

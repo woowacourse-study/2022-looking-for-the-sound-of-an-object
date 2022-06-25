@@ -16,7 +16,11 @@ const GuideMessage = () => {
     switch (progress) {
       case ORDER_PROGRESS.PENDING:
         return customerCharge.value >=
-          Math.min(...Object.keys(menus).map((menu) => menus[menu].price))
+          Math.min(
+            ...Object.keys(menus).map(
+              (menu: keyof typeof menus) => menus[menu].price
+            )
+          )
           ? "원하는 음료를 선택하세요."
           : "투입 금액이 부족하여 선택 가능한 음료가 없습니다.";
       case ORDER_PROGRESS.MAKING:

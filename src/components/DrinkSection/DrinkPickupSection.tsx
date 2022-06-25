@@ -2,7 +2,12 @@ import React, { useContext } from "react";
 import { OrderContext } from "../../context/OrderContext";
 import { ORDER_PROGRESS } from "../../constants";
 
-const DrinkPickupSection = ({ ingredientList, clearIngredientList }) => {
+interface Props {
+  ingredientList: string[];
+  clearIngredientList: () => void;
+}
+
+const DrinkPickupSection = ({ ingredientList, clearIngredientList }: Props) => {
   const { order, updateOrderStateToPending } = useContext(OrderContext);
 
   const handleClickDrinkPickupButton = () => {
