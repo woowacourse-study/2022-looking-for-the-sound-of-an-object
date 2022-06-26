@@ -7,9 +7,9 @@ function GuideMessage() {
   const guideMessage = useRecoilValue(guideState);
 
   return (
-    <S.GuideMessage>
-      <span>{guideMessage}</span>
-    </S.GuideMessage>
+    <S.GuideMessageWrapper>
+      <S.GuideMessage>{guideMessage}</S.GuideMessage>
+    </S.GuideMessageWrapper>
   );
 }
 

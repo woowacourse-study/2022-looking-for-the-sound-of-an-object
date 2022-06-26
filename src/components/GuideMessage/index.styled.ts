@@ -10,7 +10,7 @@ const show = keyframes`
   }
 `;
 
-const GuideMessage = styled.div`
+const GuideMessageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,10 +25,10 @@ const GuideMessage = styled.div`
   color: ${({ theme: { colors } }) => colors.white001};
 
   font-size: 16px;
-
-  span {
-    animation: ${show} 3s linear infinite;
-  }
 `;
 
-export { GuideMessage };
+const GuideMessage = styled.span`
+  animation: ${show} 3s linear infinite;
+`;
+
+export { GuideMessageWrapper, GuideMessage };
