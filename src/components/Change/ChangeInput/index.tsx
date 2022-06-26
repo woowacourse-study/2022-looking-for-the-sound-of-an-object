@@ -4,6 +4,8 @@ import { useSetRecoilState } from 'recoil';
 import { changeState, guideState } from 'recoil/states';
 import { validateChangeInput } from 'utils/validator';
 
+import { CHANGE_RULES } from 'constants/rules';
+
 import * as S from './index.styled';
 
 function ChangeInput() {
@@ -42,7 +44,13 @@ function ChangeInput() {
 
   return (
     <S.ChangeInputForm onSubmit={tryInjectChange}>
-      <input type="number" min="500" max="999999500" autoFocus />
+      <input
+        type="number"
+        min={CHANGE_RULES.MIN}
+        max={CHANGE_RULES.MAX}
+        step={CHANGE_RULES.UNIT}
+        autoFocus
+      />
       <button>투입</button>
     </S.ChangeInputForm>
   );
