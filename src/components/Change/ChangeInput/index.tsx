@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import { useSetRecoilState } from 'recoil';
 import { changeState, guideState } from 'recoil/states';
@@ -9,7 +9,6 @@ import * as S from './index.styled';
 function ChangeInput() {
   const setGuideMessage = useSetRecoilState(guideState);
   const setChange = useSetRecoilState(changeState);
-  const changeRef = useRef<HTMLInputElement>(null);
 
   const chargeChange = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +19,8 @@ function ChangeInput() {
     )
       return;
 
-    const money = e.target.elements[0].valueAsNumber;
+    const input = e.target.elements[0];
+    const money = input.valueAsNumber;
 
     try {
       validateChangeInput(money);
@@ -33,20 +33,12 @@ function ChangeInput() {
 
     setGuideMessage('투입되었습니다.');
 
-    if (!changeRef.current) return;
-
-    changeRef.current.value = '';
+    input.value = '';
   };
 
   return (
     <S.ChangeInputForm onSubmit={chargeChange}>
-      <input
-        type="number"
-        min="500"
-        max="999999500"
-        ref={changeRef}
-        autoFocus
-      />
+      <input type="number" min="500" max="999999500" autoFocus />
       <button>투입</button>
     </S.ChangeInputForm>
   );
