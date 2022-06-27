@@ -19,16 +19,12 @@ const initialCoins: Record<coinType, number> = {
 };
 
 const changeToCoin = (money: number) => {
-  let index = 0;
   const returnCoins = { ...initialCoins };
 
-  while (money > 0 && index < 4) {
-    if (money >= coinArray[index]) {
-      money -= coinArray[index];
-      const prev = returnCoins[coinArray[index] as coinType];
-      returnCoins[coinArray[index] as coinType] = prev + 1;
-    } else {
-      index += 1;
+  for (const coin of coinArray) {
+    while (money >= coin) {
+      money -= coin;
+      returnCoins[coin] += 1;
     }
   }
 
@@ -46,13 +42,12 @@ export default function CoinDispenser({ money }: CoinDispenserType) {
     if (money > 0) {
       const changedCoins = changeToCoin(money);
 
-      // 이 부분이 맘에 안듭니다
       setCoins((prev) => {
-        const result = Object.keys(prev).reduce(
+        const result = (
+          Object.keys(prev) as unknown as Array<keyof typeof prev>
+        ).reduce(
           (acc, key) => {
-            acc[key as unknown as coinType] =
-              changedCoins[key as unknown as coinType] +
-              prev[key as unknown as coinType];
+            acc[key] = changedCoins[key] + prev[key];
             return acc;
           },
           { ...initialCoins }
