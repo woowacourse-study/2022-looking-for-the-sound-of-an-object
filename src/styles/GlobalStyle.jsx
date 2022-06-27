@@ -5,8 +5,8 @@ import { theme } from "styles/theme";
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
     box-sizing: border-box;
-    /* padding: 0; */
-    /* margin: 0; */
+    padding: 0;
+    margin: 0;
   }
 
   body {
@@ -15,7 +15,8 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: ${theme.white};
+    background-color: ${theme.primary};
+    color: ${theme.black};
   }
 
   code {
@@ -33,6 +34,17 @@ const GlobalStyle = createGlobalStyle`
     &:disabled {
       cursor: default;
     }
+  }
+
+  #app {
+    min-width: 59.5rem;
+    min-height: 56.25rem;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
