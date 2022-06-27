@@ -8,15 +8,15 @@ interface CoinDispenserType {
   money: number;
 }
 
-const initialCoins = {
+const coinArray = [500, 100, 50, 10] as const;
+type coinType = typeof coinArray[number];
+
+const initialCoins: Record<coinType, number> = {
   500: 0,
   100: 0,
   50: 0,
   10: 0,
 };
-
-const coinArray = [500, 100, 50, 10];
-type coinType = 500 | 100 | 50 | 10;
 
 const changeToCoin = (money: number) => {
   let index = 0;
