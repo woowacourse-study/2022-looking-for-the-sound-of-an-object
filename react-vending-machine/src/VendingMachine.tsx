@@ -10,12 +10,15 @@ import MoneyDisplay from "./components/MoneyDisplay";
 import MoneyInput from "./components/MoneyInput";
 
 import { DrinkType, menus, STATUS } from "./constants";
+import { ValueOf } from "./types";
 
 export default function VendingMachine() {
   const [chargeMoney, setChargeMoney] = useState("");
   const [returnMoney, setReturnMoney] = useState(0);
   const [totalMoney, setTotalMoney] = useState(0);
-  const [vendingMachineState, setVendingMachineState] = useState(STATUS.READY);
+  const [vendingMachineState, setVendingMachineState] = useState<
+    ValueOf<typeof STATUS>
+  >(STATUS.READY);
   const [drink, setDrink] = useState<DrinkType>();
 
   const handleChargeMoneyChange = (e: React.FormEvent<HTMLInputElement>) => {

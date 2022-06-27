@@ -3,10 +3,11 @@ import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 import Button from "../Button";
 import { DrinkType, recipes, STATUS } from "../../constants";
+import { ValueOf } from "../../types";
 
 interface DrinkDispenserType {
   drink: DrinkType | undefined;
-  setVendingMachineState: Dispatch<SetStateAction<string>>;
+  setVendingMachineState: Dispatch<SetStateAction<ValueOf<typeof STATUS>>>;
 }
 
 export default function DrinkDispenser({
