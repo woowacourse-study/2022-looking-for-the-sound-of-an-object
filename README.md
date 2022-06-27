@@ -1,4 +1,4 @@
-# 🚀 객체의 소리를 찾아서
+# 🚀 ~~객체~~ 컴포넌트의 소리를 찾아서
 
 <br >
 
@@ -13,14 +13,16 @@
 1. 정해진 주기에 따라 미션 요구사항을 공개한다.
    - 요구사항 공개 주기는 스터디원들끼리 합의하며 조정한다.
 2. 요구사항을 모두 구현한 후에는 스터디 repo의 본인 브랜치에 PR을 보낸다.
-   - PR에는 어떤 객체의 소리를 들었고, 왜 이렇게 작성했는지 설명을 적는다.
+   - PR에는 어떤 ~~객체~~ 컴포넌트의 소리를 들었고, 왜 이렇게 작성했는지 설명을 적는다.
    - PR 리뷰어를 지정하고, 서로의 코드를 리뷰한다.
 
 <br >
 
 ## 😄 멤버
 
-- [소피아](https://github.com/soyi47)
+- [도리](https://github.com/prefer2)
 - [샐리](https://github.com/liswktjs)
+- [소피아](https://github.com/soyi47)
+- [태태](https://github.com/nan-noo)
 - [하리](https://github.com/LAH1203)
-
+- [호프](https://github.com/moonheekim0118)

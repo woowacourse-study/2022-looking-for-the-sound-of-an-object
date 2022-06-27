@@ -1,12 +1,6 @@
-import StyledButton from "./index.styled";
+import styled from "styled-components";
 
-interface ButtonType {
-  type?: "button" | "submit";
-  disabled?: boolean;
-  children: React.ReactNode;
-  onClick: any;
-  // onClick: React.MouseEventHandler<HTMLButtonElement>;
-}
+interface ButtonType extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export default function Button({
   type = "button",
@@ -20,3 +14,13 @@ export default function Button({
     </StyledButton>
   );
 }
+
+const StyledButton = styled.button`
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  :disabled {
+    cursor: auto;
+  }
+`;

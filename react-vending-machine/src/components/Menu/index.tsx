@@ -1,6 +1,5 @@
+import styled from "styled-components";
 import Button from "../Button";
-
-import { StyledMenu } from "./index.styled";
 
 interface MenuType {
   lightOn?: boolean;
@@ -21,10 +20,37 @@ export default function Menu({
   return (
     <StyledMenu lightOn={lightOn}>
       {icon}
-      <div>{price.toLocaleString("en")}원</div>
+      <div>{price.toLocaleString("ko")}원</div>
       <Button disabled={!lightOn} onClick={onClick}>
         {name}
       </Button>
     </StyledMenu>
   );
 }
+
+const StyledMenu = styled.div<{ lightOn?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 28px;
+
+  div {
+    font-size: 14px;
+  }
+
+  button {
+    width: 80px;
+    height: 30px;
+
+    background-color: ${({ lightOn, theme }) =>
+      lightOn ? theme.color.blue : theme.color.gray};
+    color: ${({ lightOn, theme }) => lightOn && theme.color.white};
+
+    border-radius: 4px;
+
+    :hover:enabled {
+      filter: brightness(130%);
+    }
+  }
+`;
