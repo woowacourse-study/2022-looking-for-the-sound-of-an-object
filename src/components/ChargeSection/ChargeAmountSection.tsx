@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { CustomerChargeContext } from "../../context/CustomerChargeContext";
 
-function ChargeAmountSection({
-  customerCharge,
-  addCustomerCharge,
-  returnAllCustomerCharge,
-}) {
+const ChargeAmountSection = () => {
+  const { customerCharge, addCustomerCharge, returnAllCustomerCharge } =
+    useContext(CustomerChargeContext);
   const [chargeAmount, setChargeAmount] = useState(0);
 
-  const handleChangeChargeAmountInput = (e) => {
+  const handleChangeChargeAmountInput = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setChargeAmount(Number(e.target.value));
   };
 
-  const handleSubmitCustomerChargeForm = (e) => {
+  const handleSubmitCustomerChargeForm = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     addCustomerCharge(chargeAmount);
   };
 
-  const handleClickReturnChangeButton = (e) => {
+  const handleClickReturnChangeButton = () => {
     returnAllCustomerCharge();
   };
 
@@ -54,6 +57,6 @@ function ChargeAmountSection({
       </div>
     </section>
   );
-}
+};
 
 export default ChargeAmountSection;

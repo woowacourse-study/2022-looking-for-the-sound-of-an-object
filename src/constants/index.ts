@@ -1,0 +1,7 @@
+const ORDER_PROGRESS = {
+  PENDING: "PENDING",
+  MAKING: "MAKING",
+  COMPLETE: "COMPLETE",
+} as const;
+
+export { ORDER_PROGRESS };

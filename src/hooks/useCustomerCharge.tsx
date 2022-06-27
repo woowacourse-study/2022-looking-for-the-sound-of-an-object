@@ -1,19 +1,20 @@
 import { useState } from "react";
+import { CustomerCharge } from "../type";
 
 const useCustomerCharge = () => {
-  const [customerCharge, setCustomerCharge] = useState({
+  const [customerCharge, setCustomerCharge] = useState<CustomerCharge>({
     value: 0,
     returnedChangeValue: 0,
   });
 
-  const addCustomerCharge = (chargeToAdd) => {
+  const addCustomerCharge = (chargeToAdd: number) => {
     setCustomerCharge((prevState) => ({
       ...prevState,
       value: prevState.value + chargeToAdd,
     }));
   };
 
-  const subtractCustomerCharge = (chargeToSubtract) => {
+  const subtractCustomerCharge = (chargeToSubtract: number) => {
     setCustomerCharge((prevState) => ({
       ...prevState,
       value: prevState.value - chargeToSubtract,
@@ -22,7 +23,7 @@ const useCustomerCharge = () => {
 
   const returnAllCustomerCharge = () => {
     setCustomerCharge((prevState) => ({
-      returnedChangeValue: prevState.value,
+      returnedChangeValue: prevState.returnedChangeValue + prevState.value,
       value: 0,
     }));
   };

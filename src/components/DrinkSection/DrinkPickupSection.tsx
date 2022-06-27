@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { OrderContext } from "../../context/OrderContext";
 import { ORDER_PROGRESS } from "../../constants";
 
-function DrinkPickupSection({
-  order,
-  ingredientList,
-  clearIngredientList,
-  updateOrderStateToPending,
-}) {
+interface Props {
+  ingredientList: string[];
+  clearIngredientList: () => void;
+}
+
+const DrinkPickupSection = ({ ingredientList, clearIngredientList }: Props) => {
+  const { order, updateOrderStateToPending } = useContext(OrderContext);
+
   const handleClickDrinkPickupButton = () => {
     updateOrderStateToPending();
     clearIngredientList();
@@ -30,6 +33,6 @@ function DrinkPickupSection({
       </button>
     </section>
   );
-}
+};
 
 export default DrinkPickupSection;
