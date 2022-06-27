@@ -2,10 +2,8 @@ import styled from "styled-components";
 
 import Button from "../Button";
 
-interface MoneyInputType {
+interface MoneyInputType extends React.InputHTMLAttributes<HTMLInputElement> {
   onSubmit: React.FormEventHandler;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-  value: string;
   disabled: boolean;
 }
 
