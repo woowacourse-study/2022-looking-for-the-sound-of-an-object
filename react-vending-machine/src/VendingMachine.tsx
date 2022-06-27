@@ -31,7 +31,7 @@ export default function VendingMachine() {
     setChargeMoney("");
   };
 
-  const handleMenuClick = (name: DrinkType, price: number) => {
+  const handleMenuClick = (name: DrinkType, price: number) => () => {
     setVendingMachineState(STATUS.WORKING);
     setDrink(name);
     setTotalMoney((prev) => (prev -= price));
@@ -59,7 +59,7 @@ export default function VendingMachine() {
             icon={value.icon}
             price={value.price}
             key={key}
-            onClick={() => handleMenuClick(key as DrinkType, value.price)}
+            onClick={handleMenuClick(key as DrinkType, value.price)}
           />
         ))}
       </StyledMenus>
