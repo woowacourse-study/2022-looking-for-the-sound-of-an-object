@@ -5,7 +5,7 @@ const DispenserContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 `;
 
 const Light = styled.div`

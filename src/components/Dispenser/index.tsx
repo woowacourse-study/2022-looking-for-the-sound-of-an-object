@@ -1,4 +1,4 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { dispenserState } from 'recoil/states';
 
 import { DISPENSER_STATE } from 'constants/dispenser';
@@ -6,7 +6,7 @@ import { DISPENSER_STATE } from 'constants/dispenser';
 import * as S from './index.styled';
 
 function Dispenser() {
-  const [dispenser, setDispenser] = useRecoilState(dispenserState);
+  const dispenser = useRecoilValue(dispenserState);
 
   return (
     <S.DispenserContainer>
