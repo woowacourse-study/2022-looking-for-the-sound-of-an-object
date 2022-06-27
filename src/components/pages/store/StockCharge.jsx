@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { MENU_NAME } from "../../../constants";
 import { addStock } from "../../../modules/stock";
 import Button from "../../common/Button";
 
@@ -29,6 +30,8 @@ const StockCharge = () => {
   const [espresso, setEspresso] = useState(0);
   const [cup, setCup] = useState(0);
   const [milk, setMilk] = useState(0);
+  const [coke, setCoke] = useState(0);
+  const [sida, setSida] = useState(0);
 
   const chargeEspresso = () => {
     if (espresso < 0) {
@@ -53,6 +56,22 @@ const StockCharge = () => {
     }
     dispatch(addStock("milk", milk));
     setMilk(0);
+  };
+  const chargeCoke = () => {
+    if (coke < 0) {
+      alert("0이상의 숫자를 입력해 주세요");
+      return;
+    }
+    dispatch(addStock(MENU_NAME.coke, coke));
+    setCoke(0);
+  };
+  const chargeSida = () => {
+    if (sida < 0) {
+      alert("0이상의 숫자를 입력해 주세요");
+      return;
+    }
+    dispatch(addStock(MENU_NAME.sida, sida));
+    setSida(0);
   };
   return (
     <StockChargeContainer>
@@ -79,6 +98,20 @@ const StockCharge = () => {
           <input value={cup} onChange={(e) => setCup(e.target.value)} />
         </ChargeItemTitle>
         <Button onClick={chargeCup}>충전하기</Button>
+      </ChargeItemWrapper>
+      <ChargeItemWrapper>
+        <ChargeItemTitle>
+          콜라
+          <input value={coke} onChange={(e) => setCoke(e.target.value)} />
+        </ChargeItemTitle>
+        <Button onClick={chargeCoke}>충전하기</Button>
+      </ChargeItemWrapper>
+      <ChargeItemWrapper>
+        <ChargeItemTitle>
+          사이다
+          <input value={sida} onChange={(e) => setSida(e.target.value)} />
+        </ChargeItemTitle>
+        <Button onClick={chargeSida}>충전하기</Button>
       </ChargeItemWrapper>
     </StockChargeContainer>
   );

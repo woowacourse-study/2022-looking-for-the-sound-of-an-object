@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { MENU_PRICE } from "../../../constants";
+import { MENU_NAME, MENU_PRICE } from "../../../constants";
 import { coinUse } from "../../../modules/coin";
 import Button from "../../common/Button";
 
@@ -30,7 +30,9 @@ const DispenserWrapper = styled.div`
 const MenuSelect = () => {
   const dispatch = useDispatch();
   const { coin } = useSelector((state) => state.coin);
-  const { espresso, milk, cup } = useSelector((state) => state.stock);
+  const { espresso, milk, cup, coke, sida } = useSelector(
+    (state) => state.stock
+  );
   const [isTake, setIsTake] = useState(true);
   const [drink, setDrink] = useState("");
 
@@ -47,6 +49,12 @@ const MenuSelect = () => {
 
   const availableMilk =
     MENU_PRICE.milk <= coin && milk > 0 && cup > 0 ? false : true;
+
+  const availableCoke =
+    MENU_PRICE.coke <= coin && coke > 0 && cup > 0 ? false : true;
+
+  const availableSida =
+    MENU_PRICE.sida <= coin && sida > 0 && sida > 0 ? false : true;
 
   const buyDrink = (menu) => {
     setIsTake(false);
@@ -103,6 +111,26 @@ const MenuSelect = () => {
             우유
           </Button>
           {MENU_PRICE.milk}원
+        </label>
+        <label>
+          <Button
+            width="5rem"
+            disabled={availableCoke}
+            onClick={() => buyDrink(MENU_NAME.coke)}
+          >
+            콜라
+          </Button>
+          {MENU_PRICE.coke}원
+        </label>
+        <label>
+          <Button
+            width="6rem"
+            disabled={availableSida}
+            onClick={() => buyDrink(MENU_NAME.sida)}
+          >
+            사이다
+          </Button>
+          {MENU_PRICE.sida}원
         </label>
       </MenuSelectContainer>
       <DrinkDispenserContainer>
