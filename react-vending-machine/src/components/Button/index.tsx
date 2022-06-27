@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
-interface ButtonType {
-  type?: "button" | "submit";
-  disabled?: boolean;
-  children: React.ReactNode;
-  onClick: any;
-  // onClick: React.MouseEventHandler<HTMLButtonElement>;
-}
+interface ButtonType extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export default function Button({
   type = "button",
