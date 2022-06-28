@@ -39,7 +39,7 @@ const Dispenser = ({ orderedMenu, handleSetFinished }: Props) => {
         handleSetFinished();
       }, totalTime + NUMBER_VALUE.ORDER_DELAY_TIME),
     );
-  }, [orderedMenu]);
+  }, [orderedMenu, handleSetFinished]);
 
   useEffect(() => {
     return () => clearAllTimers(timers);

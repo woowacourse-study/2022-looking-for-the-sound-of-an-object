@@ -8,7 +8,7 @@ export const Container = styled.div`
 
   width: 500px;
   border-radius: 5px;
-  background-color: ${({ theme }) => theme.COLOR.WHITE};
+  background-color: ${({ theme }) => theme.COLOR.WHITE_100};
   padding: 30px 40px;
   gap: 20px;
 `;
