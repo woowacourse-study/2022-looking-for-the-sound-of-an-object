@@ -11,6 +11,7 @@ export const useDispenser = (timeInterval) => {
       setDispenserStatus({ active: true });
       setTimeout(() => {
         setDispenserAction((prev) => [...prev, action]);
+        setDispenserStatus({ active: false });
         resolve();
       }, timeInterval);
     });
