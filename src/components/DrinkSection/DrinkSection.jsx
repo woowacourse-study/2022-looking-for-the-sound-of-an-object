@@ -14,7 +14,7 @@ function DrinkSection({ inputMoney, addInputMoney, subtractInputMoney }) {
     useDispenser(DISPENSER_TIME_INTERVAL);
 
   return (
-    <>
+    <div>
       <DrinkButtonSection
         addDispenserAction={addDispenserAction}
         resetDispenserAction={resetDispenserAction}
@@ -30,7 +30,7 @@ function DrinkSection({ inputMoney, addInputMoney, subtractInputMoney }) {
           ))}
         </S.ActionList>
       </S.SectionConatainer>
-    </>
+    </div>
   );
 }
 

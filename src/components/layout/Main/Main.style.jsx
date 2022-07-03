@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.main`
-  display: grid;
-  grid-template-areas:
-    "insert buttons"
-    "return list"
-    "dispenser dispenser";
+  display: flex;
   align-items: flex-start;
   justify-items: center;
   gap: 1rem;

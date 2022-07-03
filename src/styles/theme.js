@@ -1,7 +1,7 @@
 const COLORS = {
   PURPLE: "#cda9ff",
   PURPLE_LIGHT: "#ffdbff",
-  PURPLE_DARK: "#9b7acc",
+  PURPLE_DARK: "#6b4d9b",
   GRAY: "#d5d5d5",
   GRAY_LIGHT: "#ededed",
   GRAY_DARK: "#a4a4a4",
