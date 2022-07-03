@@ -10,14 +10,12 @@ interface CustomerChargeContextInterface {
   resetReturnedChange: () => void;
 }
 
-interface Props {
-  children: React.ReactNode;
-}
-
 export const CustomerChargeContext =
   createContext<CustomerChargeContextInterface | null>(null);
 
-export const CustomerChargeProvider = ({ children }: Props) => {
+export const CustomerChargeProvider = ({
+  children,
+}: React.PropsWithChildren<{}>) => {
   const {
     customerCharge,
     addCustomerCharge,
