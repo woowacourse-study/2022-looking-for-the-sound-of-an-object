@@ -2,10 +2,14 @@ import { useState } from "react";
 
 export const useDispenser = (timeInterval) => {
   const [dispenserAction, setDispenserAction] = useState([]);
+  const [dispenserStatus, setDispenserStatus] = useState({
+    active: false,
+  });
 
-  const addDispenserAction = async (action, timeId) => {
+  const addDispenserAction = async (action) => {
     return new Promise((resolve) => {
-      timeId.current = setTimeout(() => {
+      setDispenserStatus({ active: true });
+      setTimeout(() => {
         setDispenserAction((prev) => [...prev, action]);
         resolve();
       }, timeInterval);
@@ -13,8 +17,14 @@ export const useDispenser = (timeInterval) => {
   };
 
   const resetDispenserAction = () => {
+    setDispenserStatus({ active: false });
     setDispenserAction([]);
   };
 
-  return { dispenserAction, resetDispenserAction, addDispenserAction };
+  return {
+    dispenserAction,
+    dispenserStatus,
+    resetDispenserAction,
+    addDispenserAction,
+  };
 };
