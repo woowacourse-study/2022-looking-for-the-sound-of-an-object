@@ -12,6 +12,7 @@ import DrinkListItem from "components/DrinkSection/DrinkListItem/DrinkListItem";
 function DrinkButtonSection({
   inputMoney,
   paymentMethod,
+  cardTerminalStatus: { active: isCardTerminalProcessing },
   dispenserStatus: { active: isDispenserProcessing },
   addDispenserAction,
   resetDispenserAction,
@@ -24,7 +25,7 @@ function DrinkButtonSection({
     paymentMethod === "cash"
       ? inputMoney < (DRINKS[drinkKey]?.PRICE || INSERT_MONEY_RANGE.MAX) ||
         isDispenserProcessing
-      : isDispenserProcessing;
+      : isDispenserProcessing || isCardTerminalProcessing;
 
   const addDrinkToList = ({ target: { name: drinkKey } }) => {
     if (isDispenserProcessing) return;

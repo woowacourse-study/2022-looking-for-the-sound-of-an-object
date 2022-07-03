@@ -1,14 +1,18 @@
-import { useState } from "react";
-
 import OutlinedButton from "components/common/OutlinedButton/OutlinedButton";
 
 import CardTerminalSection from "components/MoneySection/CardTerminalSection/CardTerminalSection";
 import InsertMoneySection from "components/MoneySection/InsertMoneySection/InsertMoneySection";
 import ReturnMoneySection from "components/MoneySection/ReturnMoneySection/ReturnMoneySection";
 
-function MoneySection({ inputMoney, addInputMoney, changeInputMoney }) {
-  const [paymentMethod, setPaymentMethod] = useState("cash");
-
+function MoneySection({
+  inputMoney,
+  paymentMethod,
+  cardTerminalMessage,
+  addInputMoney,
+  changeInputMoney,
+  setPaymentMethod,
+  updateCardTerminal,
+}) {
   const handleClickCashButton = () => {
     setPaymentMethod("cash");
   };
@@ -52,7 +56,10 @@ function MoneySection({ inputMoney, addInputMoney, changeInputMoney }) {
           />
         </>
       ) : (
-        <CardTerminalSection />
+        <CardTerminalSection
+          cardTerminalMessage={cardTerminalMessage}
+          updateCardTerminal={updateCardTerminal}
+        />
       )}
     </div>
   );

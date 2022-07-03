@@ -11,6 +11,7 @@ import * as S from "components/DrinkSection/DrinkSection.style";
 function DrinkSection({
   inputMoney,
   paymentMethod,
+  cardTerminalStatus,
   addInputMoney,
   subtractInputMoney,
 }) {
@@ -26,6 +27,7 @@ function DrinkSection({
       <DrinkButtonSection
         inputMoney={inputMoney}
         paymentMethod={paymentMethod}
+        cardTerminalStatus={cardTerminalStatus}
         dispenserStatus={dispenserStatus}
         addInputMoney={addInputMoney}
         subtractInputMoney={subtractInputMoney}
