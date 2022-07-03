@@ -1,21 +1,18 @@
 import { useState } from "react";
 
 export const useCardTerminal = (initialMessage, endMessage, timeInterval) => {
-  const [cardTerminalMessage, setCardTerminalMessage] =
-    useState(initialMessage);
-  const [cardTerminalStatus, setCardTerminalStatus] = useState({
+  const [cardTerminal, setCardTerminal] = useState({
+    message: initialMessage,
     active: false,
   });
 
   const updateCardTerminal = () => {
-    setCardTerminalMessage(initialMessage);
-    setCardTerminalStatus({ active: true });
+    setCardTerminal({ message: initialMessage, active: true });
 
     setTimeout(() => {
-      setCardTerminalMessage(endMessage);
-      setCardTerminalStatus({ active: false });
+      setCardTerminal({ message: endMessage, active: false });
     }, timeInterval);
   };
 
-  return { cardTerminalMessage, cardTerminalStatus, updateCardTerminal };
+  return { cardTerminal, updateCardTerminal };
 };

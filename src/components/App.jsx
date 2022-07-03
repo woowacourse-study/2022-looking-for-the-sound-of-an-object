@@ -11,8 +11,11 @@ import MoneySection from "components/MoneySection/MoneySection";
 function App() {
   const [inputMoney, setInputMoney] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("cash");
-  const { cardTerminalMessage, cardTerminalStatus, updateCardTerminal } =
-    useCardTerminal("카드 인식 중...", "카드가 인식되었습니다 :D", 2000);
+  const { cardTerminal, updateCardTerminal } = useCardTerminal(
+    "카드 인식 중...",
+    "카드가 인식되었습니다 :D",
+    2000
+  );
 
   const addInputMoney = (money) => {
     setInputMoney((prev) => prev + money);
@@ -33,7 +36,7 @@ function App() {
         <MoneySection
           inputMoney={inputMoney}
           paymentMethod={paymentMethod}
-          cardTerminalMessage={cardTerminalMessage}
+          cardTerminalMessage={cardTerminal.message}
           addInputMoney={addInputMoney}
           changeInputMoney={changeInputMoney}
           setPaymentMethod={setPaymentMethod}
@@ -42,7 +45,7 @@ function App() {
         <DrinkSection
           inputMoney={inputMoney}
           paymentMethod={paymentMethod}
-          cardTerminalStatus={cardTerminalStatus}
+          isCardTerminalActive={cardTerminal.active}
           addInputMoney={addInputMoney}
           subtractInputMoney={subtractInputMoney}
         />

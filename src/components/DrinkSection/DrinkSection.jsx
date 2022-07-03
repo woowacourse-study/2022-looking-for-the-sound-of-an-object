@@ -11,24 +11,21 @@ import * as S from "components/DrinkSection/DrinkSection.style";
 function DrinkSection({
   inputMoney,
   paymentMethod,
-  cardTerminalStatus,
+  isCardTerminalActive,
   addInputMoney,
   subtractInputMoney,
 }) {
-  const {
-    dispenserAction,
-    dispenserStatus,
-    resetDispenserAction,
-    addDispenserAction,
-  } = useDispenser(DISPENSER_TIME_INTERVAL);
+  const { dispenser, resetDispenserAction, addDispenserAction } = useDispenser(
+    DISPENSER_TIME_INTERVAL
+  );
 
   return (
     <div>
       <DrinkButtonSection
         inputMoney={inputMoney}
         paymentMethod={paymentMethod}
-        cardTerminalStatus={cardTerminalStatus}
-        dispenserStatus={dispenserStatus}
+        isCardTerminalActive={isCardTerminalActive}
+        isDispenserActive={dispenser.active}
         addInputMoney={addInputMoney}
         subtractInputMoney={subtractInputMoney}
         addDispenserAction={addDispenserAction}
@@ -37,7 +34,7 @@ function DrinkSection({
       <S.SectionConatainer>
         <SectionHeader>디스펜서</SectionHeader>
         <S.ActionList>
-          {dispenserAction.map((action, index) => (
+          {dispenser.actions.map((action, index) => (
             <ActionListItem key={index}>{action}</ActionListItem>
           ))}
         </S.ActionList>

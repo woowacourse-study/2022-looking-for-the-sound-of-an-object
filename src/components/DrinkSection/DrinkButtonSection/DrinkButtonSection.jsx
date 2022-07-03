@@ -12,8 +12,8 @@ import DrinkListItem from "components/DrinkSection/DrinkListItem/DrinkListItem";
 function DrinkButtonSection({
   inputMoney,
   paymentMethod,
-  cardTerminalStatus: { active: isCardTerminalProcessing },
-  dispenserStatus: { active: isDispenserProcessing },
+  isCardTerminalActive,
+  isDispenserActive,
   addDispenserAction,
   resetDispenserAction,
   addInputMoney,
@@ -24,11 +24,11 @@ function DrinkButtonSection({
   const isDisabledDrinkButton = (drinkKey) =>
     paymentMethod === "cash"
       ? inputMoney < (DRINKS[drinkKey]?.PRICE || INSERT_MONEY_RANGE.MAX) ||
-        isDispenserProcessing
-      : isDispenserProcessing || isCardTerminalProcessing;
+        isDispenserActive
+      : isDispenserActive || isCardTerminalActive;
 
   const addDrinkToList = ({ target: { name: drinkKey } }) => {
-    if (isDispenserProcessing) return;
+    if (isDispenserActive) return;
     if (paymentMethod === "card") {
       setLatestDrinks((prev) => [...prev, drinkKey]);
       return;
@@ -44,7 +44,7 @@ function DrinkButtonSection({
   };
 
   const buyDrinkList = async () => {
-    if (isDispenserProcessing || !latestDrinks.length) return;
+    if (isDispenserActive || !latestDrinks.length) return;
     if (
       !window.confirm(
         `음료가 나오면 환불할 수 없습니다. 음료를 받으시겠습니까?`
@@ -66,7 +66,7 @@ function DrinkButtonSection({
   };
 
   const refundMoney = () => {
-    if (isDispenserProcessing) {
+    if (isDispenserActive) {
       alert("음료가 나온 후에는 환불할 수 없습니다.");
       return;
     }
@@ -113,7 +113,7 @@ function DrinkButtonSection({
         <OutlinedButton
           type="button"
           onClick={refundMoney}
-          disabled={!latestDrinks.length || isDispenserProcessing}
+          disabled={!latestDrinks.length || isDispenserActive}
         >
           환불하기
         </OutlinedButton>
@@ -132,7 +132,7 @@ function DrinkButtonSection({
         <OutlinedButton
           type="button"
           onClick={buyDrinkList}
-          disabled={!latestDrinks.length || isDispenserProcessing}
+          disabled={!latestDrinks.length || isDispenserActive}
         >
           음료 받기
         </OutlinedButton>
