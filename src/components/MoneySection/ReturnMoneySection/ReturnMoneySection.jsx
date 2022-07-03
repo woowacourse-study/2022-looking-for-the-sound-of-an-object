@@ -52,22 +52,24 @@ function ReturnMoneySection({ inputMoney, changeInputMoney }) {
         반환한 금액: <span>{totalChanges.toLocaleString()}</span>원
       </S.TotalReturnMoneyText>
       <S.ReturnMoneyTable>
-        <tr>
-          <th scope="row">500원</th>
-          <td>{changes[COIN_UNIT[500]]}개</td>
-        </tr>
-        <tr>
-          <th scope="row">100원</th>
-          <td>{changes[COIN_UNIT[100]]}개</td>
-        </tr>
-        <tr>
-          <th scope="row">50원</th>
-          <td>{changes[COIN_UNIT[50]]}개</td>
-        </tr>
-        <tr>
-          <th scope="row">10원</th>
-          <td>{changes[COIN_UNIT[10]]}개</td>
-        </tr>
+        <tbody>
+          <tr>
+            <th scope="row">500원</th>
+            <td>{changes[COIN_UNIT[500]]}개</td>
+          </tr>
+          <tr>
+            <th scope="row">100원</th>
+            <td>{changes[COIN_UNIT[100]]}개</td>
+          </tr>
+          <tr>
+            <th scope="row">50원</th>
+            <td>{changes[COIN_UNIT[50]]}개</td>
+          </tr>
+          <tr>
+            <th scope="row">10원</th>
+            <td>{changes[COIN_UNIT[10]]}개</td>
+          </tr>
+        </tbody>
       </S.ReturnMoneyTable>
     </S.SectionContainer>
   );
