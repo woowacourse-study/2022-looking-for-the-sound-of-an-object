@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-import { Order } from "../type";
+import { Menu, Order } from "../type";
 import { ORDER_PROGRESS } from "../constants";
-import menus from "../constants/menus";
 
 const useOrder = () => {
   const [order, setOrder] = useState<Order>({
@@ -17,7 +16,7 @@ const useOrder = () => {
     });
   };
 
-  const updateOrderStateToMaking = (orderedMenu: keyof typeof menus) => {
+  const updateOrderStateToMaking = (orderedMenu: Menu) => {
     setOrder({
       progress: ORDER_PROGRESS.MAKING,
       orderedMenu,

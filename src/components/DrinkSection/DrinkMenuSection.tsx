@@ -5,9 +5,10 @@ import { CustomerChargeContext } from "../../context/CustomerChargeContext";
 
 import { ORDER_PROGRESS } from "../../constants";
 import menus from "../../constants/menus";
+import { Menu } from "../../type";
 
 interface Props {
-  makeDrink: (menuName: keyof typeof menus) => void;
+  makeDrink: (menuName: Menu) => void;
 }
 
 const DrinkMenuSection = ({ makeDrink }: Props) => {
@@ -20,7 +21,7 @@ const DrinkMenuSection = ({ makeDrink }: Props) => {
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     const { name } = e.target as HTMLButtonElement;
-    const menuName = name as keyof typeof menus;
+    const menuName = name as Menu;
 
     updateOrderStateToMaking(menuName);
     makeDrink(menuName);
@@ -31,7 +32,7 @@ const DrinkMenuSection = ({ makeDrink }: Props) => {
     <section>
       <h3 className="sr-only">음료 주문 버튼 영역</h3>
       <div className="menu-area">
-        {Object.keys(menus).map((menu: keyof typeof menus) => (
+        {Object.keys(menus).map((menu: Menu) => (
           <button
             key={menu}
             name={menu}

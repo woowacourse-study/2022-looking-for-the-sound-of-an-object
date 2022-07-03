@@ -5,7 +5,7 @@ import { OrderContext } from "../../context/OrderContext";
 import DrinkMenuSection from "./DrinkMenuSection";
 import DrinkPickupSection from "./DrinkPickupSection";
 
-import { Drink } from "../../type";
+import { Drink, Menu } from "../../type";
 import menus from "../../constants/menus";
 
 const PREPARE_INGREDIENT_TIME_INTERVAL = 1000;
@@ -14,7 +14,7 @@ const DrinkSection = () => {
   const { updateOrderStateToComplete } = useContext(OrderContext);
   const [ingredientList, setIngredientList] = useState([]);
 
-  const makeDrink = (menuName: keyof typeof menus) => {
+  const makeDrink = (menuName: Menu) => {
     const drink = menus[menuName] as unknown as Drink;
     const initialPrepare = prepareIngredient("컵");
     const prepareIngredientChains = drink.ingredients.reduce(

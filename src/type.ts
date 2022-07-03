@@ -1,5 +1,7 @@
 import menus from "./constants/menus";
 
+type Menu = keyof typeof menus;
+
 interface CustomerCharge {
   value: number;
   returnedChangeValue: number;
@@ -7,7 +9,7 @@ interface CustomerCharge {
 
 interface Order {
   progress: string;
-  orderedMenu: keyof typeof menus | null;
+  orderedMenu: Menu | null;
 }
 
 interface Drink {
@@ -16,4 +18,4 @@ interface Drink {
   ingredients: string[];
 }
 
-export { CustomerCharge, Order, Drink };
+export { Menu, CustomerCharge, Order, Drink };

@@ -1,5 +1,7 @@
 import React, { useContext, useMemo } from "react";
 
+import { Menu } from "../type";
+
 import { OrderContext } from "../context/OrderContext";
 import { CustomerChargeContext } from "../context/CustomerChargeContext";
 
@@ -16,11 +18,7 @@ const GuideMessage = () => {
     switch (progress) {
       case ORDER_PROGRESS.PENDING:
         return customerCharge.value >=
-          Math.min(
-            ...Object.keys(menus).map(
-              (menu: keyof typeof menus) => menus[menu].price
-            )
-          )
+          Math.min(...Object.keys(menus).map((menu: Menu) => menus[menu].price))
           ? "원하는 음료를 선택하세요."
           : "투입 금액이 부족하여 선택 가능한 음료가 없습니다.";
       case ORDER_PROGRESS.MAKING:
