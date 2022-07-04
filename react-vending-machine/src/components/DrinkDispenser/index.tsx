@@ -22,7 +22,6 @@ export default function DrinkDispenser({
   };
 
   useEffect(() => {
-<<<<<<< HEAD
     if (!drink) return;
     const orderedMenu = recipes[drink];
 
@@ -31,17 +30,6 @@ export default function DrinkDispenser({
         setRecipe((prev) => [...prev, item]);
       }, 1000 * index);
     });
-=======
-    if (drink) {
-      const orderedMenu = recipes[drink];
-
-      orderedMenu.forEach((item, index) => {
-        setTimeout(() => {
-          setRecipe((prev) => [...prev, item]);
-        }, 1000 * index);
-      });
-    }
->>>>>>> c74a7d1bee45ae95ace8300ce0b0b1baf808d753
   }, [drink]);
 
   return (
