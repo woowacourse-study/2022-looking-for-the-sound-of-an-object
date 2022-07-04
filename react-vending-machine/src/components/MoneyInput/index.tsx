@@ -4,6 +4,11 @@ import Button from "../Button";
 
 interface MoneyInputType extends React.InputHTMLAttributes<HTMLInputElement> {
   onSubmit: React.FormEventHandler;
+<<<<<<< HEAD
+=======
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  value: string;
+>>>>>>> c74a7d1bee45ae95ace8300ce0b0b1baf808d753
   disabled: boolean;
 }
 
