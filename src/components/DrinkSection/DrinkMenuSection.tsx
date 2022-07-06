@@ -6,6 +6,7 @@ import { useCustomerCharge } from "../../context/CustomerChargeContext";
 import { ORDER_PROGRESS } from "../../constants";
 import menus from "../../constants/menus";
 import { Menu } from "../../type";
+import { formatPrice } from "../../util";
 
 interface Props {
   makeDrink: (menuName: Menu) => void;
@@ -43,7 +44,7 @@ const DrinkMenuSection = ({ makeDrink }: Props) => {
           >
             {menus[menu].name}
             <br />
-            {menus[menu].price.toLocaleString()}원
+            {formatPrice(menus[menu].price)}원
           </button>
         ))}
       </div>
