@@ -9,7 +9,7 @@ const ChargeAmountSection = () => {
   const handleChangeChargeAmountInput = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setChargeAmount(Number(e.target.value));
+    setChargeAmount(e.target.valueAsNumber);
   };
 
   const handleSubmitCustomerChargeForm = (
