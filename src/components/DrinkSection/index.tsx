@@ -12,7 +12,7 @@ const PREPARE_INGREDIENT_TIME_INTERVAL = 1000;
 
 const DrinkSection = () => {
   const { updateOrderStateToComplete } = useOrder();
-  const [ingredientList, setIngredientList] = useState([]);
+  const [ingredientList, setIngredientList] = useState<string[]>([]);
 
   const makeDrink = (menuName: Menu) => {
     const drink = menus[menuName] as unknown as Drink;
