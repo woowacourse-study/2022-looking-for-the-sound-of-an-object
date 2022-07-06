@@ -51,6 +51,7 @@ const recipes: Record<DrinkType, Array<string>> = {
 const STATUS = {
   READY: "READY",
   WORKING: "WORKING",
+  CARD: "CARD",
 } as const;
 
 export { drinks, menus, recipes, STATUS };

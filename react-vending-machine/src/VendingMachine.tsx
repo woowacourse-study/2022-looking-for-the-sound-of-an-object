@@ -8,6 +8,7 @@ import DrinkDispenser from "./components/DrinkDispenser";
 import Menu from "./components/Menu";
 import MoneyDisplay from "./components/MoneyDisplay";
 import MoneyInput from "./components/MoneyInput";
+import CardPayment from "./components/CardPayment";
 
 import { DrinkType, menus, STATUS } from "./constants";
 import { ValueOf } from "./types";
@@ -32,8 +33,14 @@ export default function VendingMachine() {
   };
 
   const handleMenuClick = (name: DrinkType, price: number) => () => {
-    setVendingMachineState(STATUS.WORKING);
     setDrink(name);
+
+    if (vendingMachineState === STATUS.CARD) {
+      setVendingMachineState(STATUS.WORKING);
+      return;
+    }
+
+    setVendingMachineState(STATUS.WORKING);
     setTotalMoney((prev) => (prev -= price));
   };
 
@@ -46,6 +53,10 @@ export default function VendingMachine() {
     setTotalMoney(0);
   };
 
+  const handleCardPaymentClick = () => {
+    setVendingMachineState(STATUS.CARD);
+  };
+
   return (
     <StyledVendingMachine>
       <h1>도리의 자판기</h1>
@@ -53,7 +64,9 @@ export default function VendingMachine() {
         {Object.entries(menus).map(([key, value]) => (
           <Menu
             lightOn={
-              value.price <= totalMoney && vendingMachineState === STATUS.READY
+              (value.price <= totalMoney &&
+                vendingMachineState === STATUS.READY) ||
+              vendingMachineState === STATUS.CARD
             }
             name={key}
             icon={value.icon}
@@ -79,6 +92,10 @@ export default function VendingMachine() {
             반환
           </Button>
         </StyledMoney>
+        <CardPayment
+          onClick={handleCardPaymentClick}
+          vendingMachineState={vendingMachineState}
+        />
       </StyledMoneyBox>
       <StyledDispensers>
         <DrinkDispenser
@@ -97,8 +114,6 @@ const StyledVendingMachine = styled.div`
   align-items: center;
 
   width: 500px;
-  height: 600px;
-
   margin: auto;
 
   border-radius: 4px;
@@ -120,7 +135,10 @@ const StyledMenus = styled.div`
 `;
 
 const StyledMoneyBox = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: 50px 30px 30px 0;
+  gap: 10px;
   align-self: flex-end;
 `;
 
@@ -142,4 +160,5 @@ const StyledMoney = styled.div`
 const StyledDispensers = styled.div`
   display: flex;
   gap: 20px;
+  margin-bottom: 20px;
 `;
