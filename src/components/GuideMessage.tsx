@@ -1,18 +1,18 @@
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 
 import { Menu } from "../type";
 
-import { OrderContext } from "../context/OrderContext";
-import { CustomerChargeContext } from "../context/CustomerChargeContext";
+import { useCustomerCharge } from "../context/CustomerChargeContext";
 
 import { ORDER_PROGRESS } from "../constants";
 import menus from "../constants/menus";
+import { useOrder } from "./../context/OrderContext";
 
 const GuideMessage = () => {
   const {
     order: { progress, orderedMenu },
-  } = useContext(OrderContext);
-  const { customerCharge } = useContext(CustomerChargeContext);
+  } = useOrder();
+  const { customerCharge } = useCustomerCharge();
 
   const guideText = useMemo(() => {
     switch (progress) {

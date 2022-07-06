@@ -1,5 +1,4 @@
-import React, { createContext } from "react";
-import useCustomerCharge from "../hooks/useCustomerCharge";
+import React, { createContext, useState, useContext } from "react";
 import { CustomerCharge } from "../type";
 
 interface CustomerChargeContextInterface {
@@ -16,13 +15,38 @@ export const CustomerChargeContext =
 export const CustomerChargeProvider = ({
   children,
 }: React.PropsWithChildren<{}>) => {
-  const {
-    customerCharge,
-    addCustomerCharge,
-    subtractCustomerCharge,
-    returnAllCustomerCharge,
-    resetReturnedChange,
-  } = useCustomerCharge();
+  const [customerCharge, setCustomerCharge] = useState<CustomerCharge>({
+    value: 0,
+    returnedChangeValue: 0,
+  });
+
+  const addCustomerCharge = (chargeToAdd: number) => {
+    setCustomerCharge((prevState) => ({
+      ...prevState,
+      value: prevState.value + chargeToAdd,
+    }));
+  };
+
+  const subtractCustomerCharge = (chargeToSubtract: number) => {
+    setCustomerCharge((prevState) => ({
+      ...prevState,
+      value: prevState.value - chargeToSubtract,
+    }));
+  };
+
+  const returnAllCustomerCharge = () => {
+    setCustomerCharge((prevState) => ({
+      returnedChangeValue: prevState.returnedChangeValue + prevState.value,
+      value: 0,
+    }));
+  };
+
+  const resetReturnedChange = () => {
+    setCustomerCharge((prevState) => ({
+      ...prevState,
+      returnedChangeValue: 0,
+    }));
+  };
 
   return (
     <CustomerChargeContext.Provider
@@ -37,4 +61,14 @@ export const CustomerChargeProvider = ({
       {children}
     </CustomerChargeContext.Provider>
   );
+};
+
+export const useCustomerCharge = () => {
+  const context = useContext(CustomerChargeContext);
+  if (context === undefined) {
+    throw new Error(
+      "useCustomerCharge must be used within a CustomerChargeProvider"
+    );
+  }
+  return context;
 };

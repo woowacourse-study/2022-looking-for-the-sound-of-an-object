@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
-import { OrderContext } from "../../context/OrderContext";
+import { useOrder } from "./../../context/OrderContext";
 
 import DrinkMenuSection from "./DrinkMenuSection";
 import DrinkPickupSection from "./DrinkPickupSection";
@@ -11,7 +11,7 @@ import menus from "../../constants/menus";
 const PREPARE_INGREDIENT_TIME_INTERVAL = 1000;
 
 const DrinkSection = () => {
-  const { updateOrderStateToComplete } = useContext(OrderContext);
+  const { updateOrderStateToComplete } = useOrder();
   const [ingredientList, setIngredientList] = useState([]);
 
   const makeDrink = (menuName: Menu) => {

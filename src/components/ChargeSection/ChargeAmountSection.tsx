@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
-import { CustomerChargeContext } from "../../context/CustomerChargeContext";
+import React, { useState } from "react";
+import { useCustomerCharge } from "../../context/CustomerChargeContext";
 
 const ChargeAmountSection = () => {
   const { customerCharge, addCustomerCharge, returnAllCustomerCharge } =
-    useContext(CustomerChargeContext);
+    useCustomerCharge();
   const [chargeAmount, setChargeAmount] = useState(0);
 
   const handleChangeChargeAmountInput = (
