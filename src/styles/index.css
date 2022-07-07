@@ -182,7 +182,7 @@ button:disabled:hover {
 .table > thead > tr > th,
 .table > tbody > tr > td {
   width: fit-content;
-  min-width: 100px;
+  min-width: 80px;
   padding: 4px;
   border: 1px solid gray;
 }

@@ -14,12 +14,25 @@ const TakeChangeSection = () => {
       <table className="table">
         <thead>
           <tr>
-            <th>잔돈</th>
+            <th colSpan={2}>잔돈</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{customerCharge.returnedChangeValue}</td>
+            <td>500원</td>
+            <td>{customerCharge.returnedCoin.coin_500}개</td>
+          </tr>
+          <tr>
+            <td>100원</td>
+            <td>{customerCharge.returnedCoin.coin_100}개</td>
+          </tr>
+          <tr>
+            <td>50원</td>
+            <td>{customerCharge.returnedCoin.coin_50}개</td>
+          </tr>
+          <tr>
+            <td>10원</td>
+            <td>{customerCharge.returnedCoin.coin_10}개</td>
           </tr>
         </tbody>
       </table>
@@ -27,7 +40,9 @@ const TakeChangeSection = () => {
         className="flexible-button"
         type="button"
         onClick={handleClickTakeChangeButton}
-        disabled={customerCharge.returnedChangeValue <= 0}
+        disabled={Object.values(customerCharge.returnedCoin).every(
+          (coinQuantity) => coinQuantity <= 0
+        )}
       >
         잔돈 받아가기
       </button>
