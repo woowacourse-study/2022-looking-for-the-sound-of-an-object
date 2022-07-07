@@ -16,6 +16,7 @@ const ChargeAmountSection = () => {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
+    setChargeAmount(0);
     addCustomerCharge(chargeAmount);
   };
 
