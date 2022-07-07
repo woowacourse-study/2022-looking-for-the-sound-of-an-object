@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 
 import { Menu } from "../type";
 
-import { useCustomerCharge } from "../context/CustomerChargeContext";
+import { usePayment } from "../context/PaymentContext";
 
 import { ORDER_PROGRESS } from "../constants";
 import menus from "../constants/menus";
@@ -12,7 +12,7 @@ const GuideMessage = () => {
   const {
     order: { progress, orderedMenu },
   } = useOrder();
-  const { customerCharge } = useCustomerCharge();
+  const { customerCharge } = usePayment();
 
   const guideText = useMemo(() => {
     switch (progress) {

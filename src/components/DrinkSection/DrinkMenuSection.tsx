@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useOrder } from "../../context/OrderContext";
-import { useCustomerCharge } from "../../context/CustomerChargeContext";
+import { usePayment } from "../../context/PaymentContext";
 
 import { ORDER_PROGRESS } from "../../constants";
 import menus from "../../constants/menus";
@@ -14,7 +14,7 @@ interface Props {
 
 const DrinkMenuSection = ({ makeDrink }: Props) => {
   const { order, updateOrderStateToMaking } = useOrder();
-  const { customerCharge, subtractCustomerCharge } = useCustomerCharge();
+  const { customerCharge, subtractCustomerCharge } = usePayment();
 
   const handleClickDrinkMenuButton = (
     e: React.MouseEvent<HTMLButtonElement>

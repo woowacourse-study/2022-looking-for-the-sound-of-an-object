@@ -4,7 +4,7 @@ import PaymentSection from "./components/PaymentSection";
 import DrinkSection from "./components/DrinkSection";
 
 import { OrderProvider } from "./context/OrderContext";
-import { CustomerChargeProvider } from "./context/CustomerChargeContext";
+import { PaymentProvider } from "./context/PaymentContext";
 
 const App = () => {
   return (
@@ -14,13 +14,13 @@ const App = () => {
       </header>
       <main>
         <OrderProvider>
-          <CustomerChargeProvider>
+          <PaymentProvider>
             <GuideMessage />
             <div className="sections-wrapper">
               <DrinkSection />
               <PaymentSection />
             </div>
-          </CustomerChargeProvider>
+          </PaymentProvider>
         </OrderProvider>
       </main>
     </div>

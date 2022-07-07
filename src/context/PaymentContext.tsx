@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import { CustomerCharge } from "../type";
 
-interface CustomerChargeContextInterface {
+interface PaymentContextInterface {
   customerCharge: CustomerCharge;
   addCustomerCharge: (chargeToAdd: number) => void;
   subtractCustomerCharge: (chargeToSubtract: number) => void;
@@ -9,12 +9,11 @@ interface CustomerChargeContextInterface {
   resetReturnedChange: () => void;
 }
 
-export const CustomerChargeContext =
-  createContext<CustomerChargeContextInterface | null>(null);
+export const PaymentContext = createContext<PaymentContextInterface | null>(
+  null
+);
 
-export const CustomerChargeProvider = ({
-  children,
-}: React.PropsWithChildren<{}>) => {
+export const PaymentProvider = ({ children }: React.PropsWithChildren<{}>) => {
   const [customerCharge, setCustomerCharge] = useState<CustomerCharge>({
     value: 0,
     returnedCoin: {
@@ -59,8 +58,6 @@ export const CustomerChargeProvider = ({
         coin_10: coin_10 + prevState.returnedCoin.coin_10,
       };
 
-      console.log(newReturnedCoin);
-
       return {
         value: 0,
         returnedCoin: newReturnedCoin,
@@ -81,7 +78,7 @@ export const CustomerChargeProvider = ({
   };
 
   return (
-    <CustomerChargeContext.Provider
+    <PaymentContext.Provider
       value={{
         customerCharge,
         addCustomerCharge,
@@ -91,16 +88,14 @@ export const CustomerChargeProvider = ({
       }}
     >
       {children}
-    </CustomerChargeContext.Provider>
+    </PaymentContext.Provider>
   );
 };
 
-export const useCustomerCharge = () => {
-  const context = useContext(CustomerChargeContext);
+export const usePayment = () => {
+  const context = useContext(PaymentContext);
   if (context === undefined) {
-    throw new Error(
-      "useCustomerCharge must be used within a CustomerChargeProvider"
-    );
+    throw new Error("usePayment must be used within a PaymentProvider");
   }
   return context;
 };
