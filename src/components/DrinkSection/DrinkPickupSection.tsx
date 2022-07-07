@@ -21,7 +21,7 @@ const DrinkPickupSection = ({ ingredientList, clearIngredientList }: Props) => {
       <h3 className="sr-only">구입한 음료 가져가기 영역</h3>
       <ol className="ol-reverse">
         {ingredientList.map((ingredient) => (
-          <li>{ingredient}</li>
+          <li key={ingredient}>{ingredient}</li>
         ))}
       </ol>
       <button
