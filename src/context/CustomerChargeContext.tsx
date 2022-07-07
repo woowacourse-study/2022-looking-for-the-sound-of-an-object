@@ -17,7 +17,12 @@ export const CustomerChargeProvider = ({
 }: React.PropsWithChildren<{}>) => {
   const [customerCharge, setCustomerCharge] = useState<CustomerCharge>({
     value: 0,
-    returnedChangeValue: 0,
+    returnedCoin: {
+      coin_500: 0,
+      coin_100: 0,
+      coin_50: 0,
+      coin_10: 0,
+    },
   });
 
   const addCustomerCharge = (chargeToAdd: number) => {
@@ -35,16 +40,43 @@ export const CustomerChargeProvider = ({
   };
 
   const returnAllCustomerCharge = () => {
-    setCustomerCharge((prevState) => ({
-      returnedChangeValue: prevState.returnedChangeValue + prevState.value,
-      value: 0,
-    }));
+    setCustomerCharge((prevState) => {
+      let leftCustomerChargeValue = prevState.value;
+
+      const coin_500 = Math.floor(leftCustomerChargeValue / 500);
+      leftCustomerChargeValue = leftCustomerChargeValue - coin_500 * 500;
+      const coin_100 = Math.floor(leftCustomerChargeValue / 100);
+      leftCustomerChargeValue = leftCustomerChargeValue - coin_100 * 100;
+      const coin_50 = Math.floor(leftCustomerChargeValue / 50);
+      leftCustomerChargeValue = leftCustomerChargeValue - coin_50 * 50;
+      const coin_10 = Math.floor(leftCustomerChargeValue / 10);
+      leftCustomerChargeValue = leftCustomerChargeValue - coin_10 * 10;
+
+      const newReturnedCoin = {
+        coin_500: coin_500 + prevState.returnedCoin.coin_500,
+        coin_100: coin_100 + prevState.returnedCoin.coin_100,
+        coin_50: coin_50 + prevState.returnedCoin.coin_50,
+        coin_10: coin_10 + prevState.returnedCoin.coin_10,
+      };
+
+      console.log(newReturnedCoin);
+
+      return {
+        value: 0,
+        returnedCoin: newReturnedCoin,
+      };
+    });
   };
 
   const resetReturnedChange = () => {
     setCustomerCharge((prevState) => ({
       ...prevState,
-      returnedChangeValue: 0,
+      returnedCoin: {
+        coin_500: 0,
+        coin_100: 0,
+        coin_50: 0,
+        coin_10: 0,
+      },
     }));
   };
 
