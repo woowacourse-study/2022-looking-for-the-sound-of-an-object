@@ -24,11 +24,12 @@ const ChargeAmountSection = () => {
   };
 
   return (
-    <section className="form-container">
-      <h3 className="sr-only">음료 구입을 위한 금액 충전 영역</h3>
+    <section>
+      <h3 className="sr-only">현금 충전</h3>
       <form onSubmit={handleSubmitCustomerChargeForm}>
         <label form="customer-charge-form">
-          금액을 투입하세요. (1,000원 단위)
+          금액을 투입하세요. <br />
+          (1,000원 단위)
         </label>
         <div className="flex-row-space-between-container">
           <input

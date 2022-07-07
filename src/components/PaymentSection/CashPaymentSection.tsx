@@ -2,14 +2,14 @@ import React from "react";
 import ChargeAmountSection from "./ChargeAmountSection";
 import TakeChangeSection from "./TakeChangeSection";
 
-const ChargeSection = () => {
+const CashPaymentSection = () => {
   return (
-    <section className="charge-section">
-      <h2 className="sr-only">금액 충전 및 잔돈 반환 영역</h2>
+    <section className="payment-area">
+      <h3>현금 결제</h3>
       <ChargeAmountSection />
       <TakeChangeSection />
     </section>
   );
 };
 
-export default ChargeSection;
+export default CashPaymentSection;

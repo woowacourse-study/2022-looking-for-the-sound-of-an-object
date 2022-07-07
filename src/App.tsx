@@ -1,6 +1,6 @@
 import React from "react";
 import GuideMessage from "./components/GuideMessage";
-import ChargeSection from "./components/ChargeSection";
+import PaymentSection from "./components/PaymentSection";
 import DrinkSection from "./components/DrinkSection";
 
 import { OrderProvider } from "./context/OrderContext";
@@ -18,7 +18,7 @@ const App = () => {
             <GuideMessage />
             <div className="sections-wrapper">
               <DrinkSection />
-              <ChargeSection />
+              <PaymentSection />
             </div>
           </CustomerChargeProvider>
         </OrderProvider>
