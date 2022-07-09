@@ -32,12 +32,14 @@ function MoneySection({
       <div>
         <label>지불 방식을 선택해주세요.</label>
         <OutlinedButton
+          type="button"
           disabled={paymentMethod === "cash"}
           onClick={handleClickCashButton}
         >
           현금
         </OutlinedButton>
         <OutlinedButton
+          type="button"
           disabled={paymentMethod === "card"}
           onClick={handleClickCardButton}
         >

@@ -9,6 +9,7 @@ import DrinkSection from "components/DrinkSection/DrinkSection";
 import MoneySection from "components/MoneySection/MoneySection";
 
 function App() {
+  // TODO: props drilling을 막기 위해 Context API 사용
   const [inputMoney, setInputMoney] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const { cardTerminal, updateCardTerminal } = useCardTerminal(
