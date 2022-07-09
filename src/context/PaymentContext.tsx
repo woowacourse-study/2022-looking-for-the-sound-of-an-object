@@ -2,6 +2,9 @@ import React, { createContext, useState, useContext } from "react";
 import { CustomerCharge } from "../type";
 
 interface PaymentContextInterface {
+  isOnCardPayment: boolean;
+  setIsOnCardPayment: (value: any) => void;
+
   customerCharge: CustomerCharge;
   addCustomerCharge: (chargeToAdd: number) => void;
   subtractCustomerCharge: (chargeToSubtract: number) => void;
@@ -14,6 +17,7 @@ export const PaymentContext = createContext<PaymentContextInterface | null>(
 );
 
 export const PaymentProvider = ({ children }: React.PropsWithChildren<{}>) => {
+  const [isOnCardPayment, setIsOnCardPayment] = useState(false);
   const [customerCharge, setCustomerCharge] = useState<CustomerCharge>({
     value: 0,
     returnedCoin: {
@@ -25,6 +29,11 @@ export const PaymentProvider = ({ children }: React.PropsWithChildren<{}>) => {
   });
 
   const addCustomerCharge = (chargeToAdd: number) => {
+    if (isOnCardPayment) {
+      alert("카드 결제가 진행 중입니다.");
+      return;
+    }
+
     setCustomerCharge((prevState) => ({
       ...prevState,
       value: prevState.value + chargeToAdd,
@@ -32,6 +41,11 @@ export const PaymentProvider = ({ children }: React.PropsWithChildren<{}>) => {
   };
 
   const subtractCustomerCharge = (chargeToSubtract: number) => {
+    if (isOnCardPayment) {
+      alert("카드 결제가 진행 중입니다.");
+      return;
+    }
+
     setCustomerCharge((prevState) => ({
       ...prevState,
       value: prevState.value - chargeToSubtract,
@@ -39,6 +53,11 @@ export const PaymentProvider = ({ children }: React.PropsWithChildren<{}>) => {
   };
 
   const returnAllCustomerCharge = () => {
+    if (isOnCardPayment) {
+      alert("카드 결제가 진행 중입니다.");
+      return;
+    }
+
     setCustomerCharge((prevState) => {
       let leftCustomerChargeValue = prevState.value;
 
@@ -80,6 +99,9 @@ export const PaymentProvider = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <PaymentContext.Provider
       value={{
+        isOnCardPayment,
+        setIsOnCardPayment,
+
         customerCharge,
         addCustomerCharge,
         subtractCustomerCharge,
