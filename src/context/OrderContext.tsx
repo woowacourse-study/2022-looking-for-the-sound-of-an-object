@@ -1,6 +1,6 @@
-import React, { createContext } from "react";
-import useOrder from "../hooks/useOrder";
-import { Order } from "../type";
+import React, { createContext, useState, useContext } from "react";
+import { ORDER_PROGRESS } from "../constants";
+import { Menu, Order } from "../type";
 
 interface OrderContextInterface {
   order: Order;
@@ -9,19 +9,34 @@ interface OrderContextInterface {
   updateOrderStateToComplete: () => void;
 }
 
-interface Props {
-  children: React.ReactNode;
-}
+const OrderContext = createContext<OrderContextInterface | null>(null);
 
-export const OrderContext = createContext<OrderContextInterface | null>(null);
+export const OrderProvider = ({ children }: React.PropsWithChildren<{}>) => {
+  const [order, setOrder] = useState<Order>({
+    progress: ORDER_PROGRESS.PENDING,
+    orderedMenu: null,
+  });
 
-export const OrderProvider = ({ children }: Props) => {
-  const {
-    order,
-    updateOrderStateToPending,
-    updateOrderStateToMaking,
-    updateOrderStateToComplete,
-  } = useOrder();
+  const updateOrderStateToPending = () => {
+    setOrder({
+      progress: ORDER_PROGRESS.PENDING,
+      orderedMenu: null,
+    });
+  };
+
+  const updateOrderStateToMaking = (orderedMenu: Menu) => {
+    setOrder({
+      progress: ORDER_PROGRESS.MAKING,
+      orderedMenu,
+    });
+  };
+
+  const updateOrderStateToComplete = () => {
+    setOrder((prevState) => ({
+      ...prevState,
+      progress: ORDER_PROGRESS.COMPLETE,
+    }));
+  };
 
   return (
     <OrderContext.Provider
@@ -35,4 +50,12 @@ export const OrderProvider = ({ children }: Props) => {
       {children}
     </OrderContext.Provider>
   );
+};
+
+export const useOrder = () => {
+  const context = useContext(OrderContext);
+  if (context === undefined) {
+    throw new Error("useOrder must be used within a OrderProvider");
+  }
+  return context;
 };

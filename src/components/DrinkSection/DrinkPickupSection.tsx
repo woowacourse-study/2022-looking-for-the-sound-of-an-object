@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
-import { OrderContext } from "../../context/OrderContext";
+import React from "react";
+
 import { ORDER_PROGRESS } from "../../constants";
+import { useOrder } from "./../../context/OrderContext";
 
 interface Props {
   ingredientList: string[];
@@ -8,7 +9,7 @@ interface Props {
 }
 
 const DrinkPickupSection = ({ ingredientList, clearIngredientList }: Props) => {
-  const { order, updateOrderStateToPending } = useContext(OrderContext);
+  const { order, updateOrderStateToPending } = useOrder();
 
   const handleClickDrinkPickupButton = () => {
     updateOrderStateToPending();
@@ -20,7 +21,7 @@ const DrinkPickupSection = ({ ingredientList, clearIngredientList }: Props) => {
       <h3 className="sr-only">구입한 음료 가져가기 영역</h3>
       <ol className="ol-reverse">
         {ingredientList.map((ingredient) => (
-          <li>{ingredient}</li>
+          <li key={ingredient}>{ingredient}</li>
         ))}
       </ol>
       <button

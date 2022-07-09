@@ -34,7 +34,7 @@ label {
 }
 
 input {
-  width: 80%;
+  width: 70%;
   height: 36px;
   padding: 10px;
 }
@@ -140,6 +140,28 @@ button:disabled:hover {
   margin: 2px 0;
 }
 
+.payment-area {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 10px;
+  padding: 10px;
+
+  border: 3px solid var(--platinum-2);
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.payment-area > h3 {
+  font-size: 16px;
+  margin: 6px 0 12px;
+}
+
+.card-payment-button {
+  align-self: center;
+  width: 200px;
+}
+
 .text {
   text-align: center;
 }
@@ -182,7 +204,7 @@ button:disabled:hover {
 .table > thead > tr > th,
 .table > tbody > tr > td {
   width: fit-content;
-  min-width: 100px;
+  min-width: 80px;
   padding: 4px;
   border: 1px solid gray;
 }
