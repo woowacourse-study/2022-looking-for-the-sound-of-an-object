@@ -5,7 +5,7 @@ import TakeChangeSection from "./TakeChangeSection";
 const CashPaymentSection = () => {
   return (
     <section className="payment-area">
-      <h3>현금 결제</h3>
+      <h3 className="sr-only">현금 결제</h3>
       <ChargeAmountSection />
       <TakeChangeSection />
     </section>
