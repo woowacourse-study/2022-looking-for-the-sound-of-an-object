@@ -1,3 +1,5 @@
+import React from "react";
+
 import * as S from "components/DrinkSection/DrinkButton/DrinkButton.style";
 
 function DrinkButton({ name, price, onClick, disabled, children }) {
@@ -11,4 +13,4 @@ function DrinkButton({ name, price, onClick, disabled, children }) {
   );
 }
 
-export default DrinkButton;
+export default React.memo(DrinkButton);
