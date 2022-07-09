@@ -14,7 +14,8 @@ interface Props {
 
 const DrinkMenuSection = ({ makeDrink }: Props) => {
   const { order, updateOrderStateToMaking } = useOrder();
-  const { customerCharge, subtractCustomerCharge } = usePayment();
+  const { isOnCardPayment, customerCharge, subtractCustomerCharge } =
+    usePayment();
 
   const handleClickDrinkMenuButton = (
     e: React.MouseEvent<HTMLButtonElement>
@@ -22,9 +23,17 @@ const DrinkMenuSection = ({ makeDrink }: Props) => {
     const { name } = e.target as HTMLButtonElement;
     const menuName = name as Menu;
 
+    if (!isOnCardPayment && menus[menuName].price > customerCharge.value) {
+      alert("투입 금액이 상품 가격보다 작습니다.");
+      return;
+    }
+
+    if (!isOnCardPayment) {
+      subtractCustomerCharge(menus[menuName].price);
+    }
+
     updateOrderStateToMaking(menuName);
     makeDrink(menuName);
-    subtractCustomerCharge(menus[menuName].price);
   };
 
   return (
@@ -38,7 +47,7 @@ const DrinkMenuSection = ({ makeDrink }: Props) => {
             type="button"
             onClick={handleClickDrinkMenuButton}
             disabled={
-              menus[menu].price > customerCharge.value ||
+              (!isOnCardPayment && menus[menu].price > customerCharge.value) ||
               order.progress !== ORDER_PROGRESS.PENDING
             }
           >
