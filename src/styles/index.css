@@ -159,6 +159,7 @@ button:disabled:hover {
 
 .card-payment-button {
   align-self: center;
+  width: 200px;
 }
 
 .text {
