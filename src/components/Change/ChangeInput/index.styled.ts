@@ -1,11 +1,19 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import theme from 'styles/theme';
+
+const ChangeContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 90%;
+`;
 
 const ChangeInputForm = styled.form`
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 10px;
 
-  width: 90%;
+  width: 80%;
   height: 30px;
 
   input {
@@ -25,4 +33,24 @@ const ChangeInputForm = styled.form`
   }
 `;
 
-export { ChangeInputForm };
+const Card = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  width: 70px;
+  height: 50px;
+
+  border-radius: 5px;
+
+  font-size: 10px;
+
+  cursor: pointer;
+
+  ${({ isActive }: { isActive: boolean }) => css`
+    background: ${isActive ? theme.colors.brown001 : theme.colors.gray002};
+  `}
+`;
+
+export { ChangeContainer, ChangeInputForm, Card };

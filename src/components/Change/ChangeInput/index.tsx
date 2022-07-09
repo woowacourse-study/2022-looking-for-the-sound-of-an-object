@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useSetRecoilState } from 'recoil';
-import { changeState, guideState } from 'recoil/states';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { cardState, changeState, guideState } from 'recoil/states';
 import { validateChangeInput } from 'utils/validator';
 
 import { CHANGE_RULES } from 'constants/rules';
@@ -11,6 +11,7 @@ import * as S from './index.styled';
 function ChangeInput() {
   const setGuideMessage = useSetRecoilState(guideState);
   const setChange = useSetRecoilState(changeState);
+  const [card, setCard] = useRecoilState(cardState);
 
   const successToInject = (money: number, input: HTMLInputElement) => {
     setChange(prevState => prevState + money);
@@ -42,17 +43,26 @@ function ChangeInput() {
     successToInject(money, input);
   };
 
+  const activeCard = () => {
+    setCard(true);
+  };
+
   return (
-    <S.ChangeInputForm onSubmit={tryInjectChange}>
-      <input
-        type="number"
-        min={CHANGE_RULES.MIN}
-        max={CHANGE_RULES.MAX}
-        step={CHANGE_RULES.UNIT}
-        autoFocus
-      />
-      <button>투입</button>
-    </S.ChangeInputForm>
+    <S.ChangeContainer>
+      <S.ChangeInputForm onSubmit={tryInjectChange}>
+        <input
+          type="number"
+          min={CHANGE_RULES.MIN}
+          max={CHANGE_RULES.MAX}
+          step={CHANGE_RULES.UNIT}
+          autoFocus
+        />
+        <button>투입</button>
+      </S.ChangeInputForm>
+      <S.Card isActive={card} onClick={activeCard}>
+        {card ? '인식되었습니다.' : '누르면 인식됩니다.'}
+      </S.Card>
+    </S.ChangeContainer>
   );
 }
 
