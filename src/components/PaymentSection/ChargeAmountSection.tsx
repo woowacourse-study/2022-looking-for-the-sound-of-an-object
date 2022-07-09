@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { usePayment } from "../../context/PaymentContext";
 
 const ChargeAmountSection = () => {
-  const { customerCharge, addCustomerCharge, returnAllCustomerCharge } =
-    usePayment();
+  const {
+    isOnCardPayment,
+    customerCharge,
+    addCustomerCharge,
+    returnAllCustomerCharge,
+  } = usePayment();
   const [chargeAmount, setChargeAmount] = useState(0);
 
   const handleChangeChargeAmountInput = (
@@ -41,9 +45,12 @@ const ChargeAmountSection = () => {
             min="1000"
             max="10000"
             onChange={handleChangeChargeAmountInput}
+            disabled={isOnCardPayment}
             required
           />
-          <button className="small-button">충전</button>
+          <button className="small-button" disabled={isOnCardPayment}>
+            충전
+          </button>
         </div>
       </form>
       <div className="flex-row-space-between-container">
@@ -53,6 +60,7 @@ const ChargeAmountSection = () => {
         <button
           className="small-button"
           onClick={handleClickReturnChangeButton}
+          disabled={customerCharge.value <= 0}
         >
           잔돈 반환
         </button>
