@@ -24,7 +24,7 @@ export const ListSectionContainer = styled.section`
   grid-area: list;
 `;
 
-export const DrinkButtonContainer = styled.section`
+export const DrinkButtonList = styled.ul`
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -43,7 +43,7 @@ export const DrinkList = styled.ul`
   border: 0.13rem dashed ${({ theme }) => theme.black};
 `;
 
-export const NoDrinkText = styled.p`
-  color: ${({ theme }) => theme.secondaryDark};
+export const NoDrinkText = styled.li`
+  color: ${({ theme }) => theme.black};
   font-weight: 700;
 `;

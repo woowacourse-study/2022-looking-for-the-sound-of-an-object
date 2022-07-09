@@ -1,15 +1,22 @@
-import Header from "./layout/Header/Header";
 import { useState } from "react";
 
+import { useCardTerminal } from "hooks/useCardTerminal";
+
+import Header from "components/layout/Header/Header";
 import Main from "components/layout/Main/Main";
 
 import DrinkSection from "components/DrinkSection/DrinkSection";
-import InsertMoneySection from "components/MoneySection/InsertMoneySection/InsertMoneySection";
-import ReturnMoneySection from "components/MoneySection/ReturnMoneySection/ReturnMoneySection";
+import MoneySection from "components/MoneySection/MoneySection";
 
 function App() {
-  // TODO: 나중엔 Context API로 관리
+  // TODO: props drilling을 막기 위해 Context API 사용
   const [inputMoney, setInputMoney] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState("cash");
+  const { cardTerminal, updateCardTerminal } = useCardTerminal(
+    "카드 인식 중...",
+    "카드가 인식되었습니다 :D",
+    2000
+  );
 
   const addInputMoney = (money) => {
     setInputMoney((prev) => prev + money);
@@ -27,16 +34,19 @@ function App() {
     <div id="app">
       <Header>태태 자판기</Header>
       <Main>
-        <InsertMoneySection
+        <MoneySection
           inputMoney={inputMoney}
+          paymentMethod={paymentMethod}
+          cardTerminalMessage={cardTerminal.message}
           addInputMoney={addInputMoney}
-        />
-        <ReturnMoneySection
-          inputMoney={inputMoney}
           changeInputMoney={changeInputMoney}
+          setPaymentMethod={setPaymentMethod}
+          updateCardTerminal={updateCardTerminal}
         />
         <DrinkSection
           inputMoney={inputMoney}
+          paymentMethod={paymentMethod}
+          isCardTerminalActive={cardTerminal.active}
           addInputMoney={addInputMoney}
           subtractInputMoney={subtractInputMoney}
         />

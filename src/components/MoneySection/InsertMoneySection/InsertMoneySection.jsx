@@ -39,6 +39,7 @@ function InsertMoneySection({ inputMoney, addInputMoney }) {
       return;
     }
     addInputMoney(insertMoney);
+    insertMoneyRef.current.value = null;
   };
 
   return (
@@ -52,7 +53,7 @@ function InsertMoneySection({ inputMoney, addInputMoney }) {
             type="number"
             max={INSERT_MONEY_RANGE.MAX}
             min={INSERT_MONEY_RANGE.MIN}
-            step={COIN_UNIT[10]}
+            step={COIN_UNIT[100]}
             placeholder="1,000원"
             ref={insertMoneyRef}
           />
