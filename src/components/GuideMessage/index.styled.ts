@@ -23,8 +23,6 @@ const GuideMessageWrapper = styled.div`
 
   background: ${({ theme: { colors } }) => colors.black001};
   color: ${({ theme: { colors } }) => colors.white001};
-
-  font-size: 16px;
 `;
 
 const GuideMessage = styled.span`

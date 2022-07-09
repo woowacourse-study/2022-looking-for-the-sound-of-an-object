@@ -1,5 +1,10 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { changeState, dispenserState, guideState } from 'recoil/states';
+import {
+  cardState,
+  changeState,
+  dispenserState,
+  guideState,
+} from 'recoil/states';
 
 import { DISPENSER_STATE } from 'constants/dispenser';
 
@@ -9,6 +14,7 @@ import { Props } from './index.type';
 function MenuButton({ drink: { name, price, ingredients } }: Props) {
   const setGuideMessage = useSetRecoilState(guideState);
   const [change, setChange] = useRecoilState(changeState);
+  const [card, setCard] = useRecoilState(cardState);
   const [dispenser, setDispenser] = useRecoilState(dispenserState);
 
   const showMaking = () => {
@@ -21,6 +27,7 @@ function MenuButton({ drink: { name, price, ingredients } }: Props) {
     setTimeout(() => {
       setGuideMessage(`${name} 제조가 완료되었습니다.`);
       setDispenser(DISPENSER_STATE.EMPTY);
+      setCard(false);
     }, 1000 * (ingredients.length + 1));
   };
 
@@ -30,7 +37,9 @@ function MenuButton({ drink: { name, price, ingredients } }: Props) {
       return;
     }
 
-    setChange(prevState => prevState - price);
+    if (!card) {
+      setChange(prevState => prevState - price);
+    }
 
     setGuideMessage('음료 제조를 시작합니다.');
     setDispenser(DISPENSER_STATE.MAKING);
@@ -44,7 +53,11 @@ function MenuButton({ drink: { name, price, ingredients } }: Props) {
         {name}
         <p>{price}원</p>
       </S.Label>
-      <S.Button type="button" onClick={orderMenu} disabled={price > change} />
+      <S.Button
+        type="button"
+        onClick={orderMenu}
+        disabled={!card && price > change}
+      />
     </S.MenuButton>
   );
 }

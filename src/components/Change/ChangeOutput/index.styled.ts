@@ -30,4 +30,22 @@ const ReturnButton = styled.button`
   border-radius: 50%;
 `;
 
-export { ChangeContainer, Change, ReturnButton };
+const ReturnCoinTable = styled.table`
+  background: ${({ theme: { colors } }) => colors.gray001};
+  color: ${({ theme: { colors } }) => colors.white001};
+
+  border-radius: 10px;
+
+  font-size: 12px;
+
+  tr {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  td {
+    padding: 6px;
+  }
+`;
+
+export { ChangeContainer, Change, ReturnButton, ReturnCoinTable };
