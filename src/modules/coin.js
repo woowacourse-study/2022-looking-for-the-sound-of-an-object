@@ -11,11 +11,11 @@ export const chargeCoin = (chargeCoin) => {
   };
 };
 
-export const coinUse = (change) => {
+export const coinUse = (price) => {
   return {
     type: USE_COIN,
     payload: {
-      change,
+      price,
     },
   };
 };
@@ -33,14 +33,15 @@ const initState = {
 const coin = (state = initState, action) => {
   if (action.type === CHARGE_COIN) {
     const { chargeCoin } = action.payload;
+
     return {
-      coin: Number(state.coin) + Number(chargeCoin),
+      coin: state.coin + chargeCoin,
     };
   }
   if (action.type === USE_COIN) {
-    const { change } = action.payload;
+    const { price } = action.payload;
     return {
-      coin: Number(state.coin) - Number(change),
+      coin: state.coin - price,
     };
   }
   if (action.type === RETURN_COIN) {

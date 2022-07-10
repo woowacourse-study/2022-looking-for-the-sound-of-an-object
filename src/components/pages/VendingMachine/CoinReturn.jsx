@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { returnCoin } from "../../../modules/coin";
+import { chargeCoin, returnCoin } from "../../../modules/coin";
 import Button from "../../common/Button";
 
 const CoinReturnContainer = styled.article`
@@ -12,18 +12,32 @@ const CoinReturnContainer = styled.article`
 `;
 
 const CoinOutputWrapper = styled.span`
-  width: 8rem;
+  width: 20rem;
   height: 2rem;
   border: 1px solid black;
   border-radius: 2rem;
 `;
 
-const CoinReturn = ({ coin }) => {
+const CoinReturn = () => {
+  const { coin } = useSelector((state) => state.coin);
   const dispatch = useDispatch();
 
-  const [coinOutput, setCoinOutput] = useState(0);
+  const [coinOutput, setCoinOutput] = useState("");
+
   const handleReturnCoin = () => {
-    setCoinOutput(coin);
+    const coinObj = { 500: 0, 100: 0, 50: 0, 10: 0 };
+    let totalCoin = coin;
+    Object.keys(coinObj)
+      .reverse()
+      .forEach((item) => {
+        if (totalCoin === 0) return;
+        coinObj[item] = Math.floor(totalCoin / item);
+        totalCoin = totalCoin - Math.floor(totalCoin / item) * item;
+      });
+
+    setCoinOutput(
+      `500: ${coinObj[500]}개, 100: ${coinObj[100]}개, 50: ${coinObj[50]}개, 10: ${coinObj[10]}개`
+    );
     dispatch(returnCoin());
   };
   const takeCoin = () => {
