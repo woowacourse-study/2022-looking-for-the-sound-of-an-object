@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+
 import { STATUS } from "../../constants";
+import { ValueOf } from "../../types";
 
 interface CardPaymentType {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  vendingMachineState: string;
+  vendingMachineState: ValueOf<typeof STATUS>;
 }
 
 const StyledCardPayment = styled.div`
