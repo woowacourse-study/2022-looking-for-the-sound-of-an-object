@@ -13,14 +13,12 @@ const VendingMachineContainer = styled.section`
 `;
 
 const VendingMachine = () => {
-  const { coin } = useSelector((state) => state.coin);
-
   return (
     <VendingMachineContainer>
       <NowSelling />
-      <CoinInsert coin={coin} />
+      <CoinInsert />
       <MenuSelect />
-      <CoinReturn coin={coin} />
+      <CoinReturn />
     </VendingMachineContainer>
   );
 };

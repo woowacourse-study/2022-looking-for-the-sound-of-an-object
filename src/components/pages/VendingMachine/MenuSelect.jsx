@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { MENU_NAME, MENU_PRICE } from "../../../constants";
+import { buyDrinkByCard } from "../../../modules/card";
 import { coinUse } from "../../../modules/coin";
 import Button from "../../common/Button";
 
@@ -30,6 +31,8 @@ const DispenserWrapper = styled.div`
 const MenuSelect = () => {
   const dispatch = useDispatch();
   const { coin } = useSelector((state) => state.coin);
+  const { card } = useSelector((state) => state.card);
+
   const { espresso, milk, cup, coke, sida } = useSelector(
     (state) => state.stock
   );
@@ -37,29 +40,42 @@ const MenuSelect = () => {
   const [drink, setDrink] = useState("");
 
   const availableEspresso =
-    MENU_PRICE.espresso <= coin && espresso > 0 && cup > 0 ? false : true;
+    (MENU_PRICE.espresso <= coin || card) && espresso > 0 && cup > 0
+      ? true
+      : false;
 
   const availableAmericano =
-    MENU_PRICE.americano <= coin && espresso > 0 && cup > 0 ? false : true;
+    (MENU_PRICE.americano <= coin || card) && espresso > 0 && cup > 0
+      ? true
+      : false;
 
   const availableCaffeLatte =
-    MENU_PRICE.cafelatte <= coin && espresso > 0 && cup > 0 && milk > 0
-      ? false
-      : true;
+    (MENU_PRICE.cafelatte <= coin || card) &&
+    espresso > 0 &&
+    cup > 0 &&
+    milk > 0
+      ? true
+      : false;
 
   const availableMilk =
-    MENU_PRICE.milk <= coin && milk > 0 && cup > 0 ? false : true;
+    (MENU_PRICE.milk <= coin || card) && milk > 0 && cup > 0 ? true : false;
 
   const availableCoke =
-    MENU_PRICE.coke <= coin && coke > 0 && cup > 0 ? false : true;
+    (MENU_PRICE.coke <= coin || card) && coke > 0 && cup > 0 ? true : false;
 
   const availableSida =
-    MENU_PRICE.sida <= coin && sida > 0 && sida > 0 ? false : true;
+    (MENU_PRICE.sida <= coin || card) && sida > 0 && sida > 0 ? true : false;
 
   const buyDrink = (menu) => {
     setIsTake(false);
     setDrink(menu);
     const price = MENU_PRICE[menu];
+    if (card) {
+      dispatch(buyDrinkByCard());
+      alert(`${menu}가 구매되었습니다`);
+      return;
+    }
+
     dispatch(coinUse(price));
   };
 
@@ -75,7 +91,7 @@ const MenuSelect = () => {
         <label>
           <Button
             width="5rem"
-            disabled={availableEspresso}
+            disabled={!availableEspresso}
             onClick={() => buyDrink("espresso")}
           >
             에스프레소
@@ -85,7 +101,7 @@ const MenuSelect = () => {
         <label>
           <Button
             width="5rem"
-            disabled={availableAmericano}
+            disabled={!availableAmericano}
             onClick={() => buyDrink("americano")}
           >
             아메리카노
@@ -95,7 +111,7 @@ const MenuSelect = () => {
         <label>
           <Button
             width="5rem"
-            disabled={availableCaffeLatte}
+            disabled={!availableCaffeLatte}
             onClick={() => buyDrink("cafelatte")}
           >
             카페라떼
@@ -105,7 +121,7 @@ const MenuSelect = () => {
         <label>
           <Button
             width="5rem"
-            disabled={availableMilk}
+            disabled={!availableMilk}
             onClick={() => buyDrink("milk")}
           >
             우유
@@ -115,7 +131,7 @@ const MenuSelect = () => {
         <label>
           <Button
             width="5rem"
-            disabled={availableCoke}
+            disabled={!availableCoke}
             onClick={() => buyDrink(MENU_NAME.coke)}
           >
             콜라
@@ -125,7 +141,7 @@ const MenuSelect = () => {
         <label>
           <Button
             width="6rem"
-            disabled={availableSida}
+            disabled={!availableSida}
             onClick={() => buyDrink(MENU_NAME.sida)}
           >
             사이다
