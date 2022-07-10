@@ -24,6 +24,7 @@ const VendingMachine = () => {
   const [moneyInput, setMoneyInput] = useState('');
   const [chargedMoney, setChargedMoney] = useState(0);
   const [changes, setChanges] = useState<TCoin>(initChanges);
+  const [IsCreditCardTagged, setIsCreditCardTagged] = useState(false);
 
   const [status, setStatus] = useState<TVendingMachineStatus>(
     VENDING_MACHINE_STATUS.REST,
@@ -58,8 +59,12 @@ const VendingMachine = () => {
       ingredients: orderedMenu.ingredients,
     });
 
-    setChargedMoney((prevState) => prevState - orderedMenu.price);
     setStatus(VENDING_MACHINE_STATUS.SERVING);
+    if (IsCreditCardTagged) {
+      setIsCreditCardTagged(false);
+      return;
+    }
+    setChargedMoney((prevState) => prevState - orderedMenu.price);
   };
 
   const handlePickUpBeverage = () => {
@@ -71,6 +76,10 @@ const VendingMachine = () => {
     const newChanges = changeCoins(chargedMoney);
     setChargedMoney(0);
     setChanges(newChanges);
+  };
+
+  const handleTagCreditCard = () => {
+    setIsCreditCardTagged(true);
   };
 
   return (
@@ -87,6 +96,14 @@ const VendingMachine = () => {
           투입
         </Button>
       </S.FlexRow>
+      <Button
+        buttonStyle="primary"
+        type="button"
+        onClick={handleTagCreditCard}
+        disabled={!!IsCreditCardTagged}
+      >
+        누르면 신용카드가 인식되어요
+      </Button>
       <S.ChargedMoneyDescription>
         💰 투입된 금액 : {chargedMoney} 원 💰
       </S.ChargedMoneyDescription>
@@ -98,7 +115,9 @@ const VendingMachine = () => {
             buttonStyle="secondary"
             type="button"
             disabled={
-              chargedMoney < price || status !== VENDING_MACHINE_STATUS.REST
+              (chargedMoney < price ||
+                status !== VENDING_MACHINE_STATUS.REST) &&
+              !IsCreditCardTagged
             }
             onClick={handleOrderMenu(id)}
           >
