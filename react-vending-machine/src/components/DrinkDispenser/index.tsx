@@ -22,15 +22,14 @@ export default function DrinkDispenser({
   };
 
   useEffect(() => {
-    if (drink) {
-      const orderedMenu = recipes[drink];
+    if (!drink) return;
+    const orderedMenu = recipes[drink];
 
-      orderedMenu.forEach((item, index) => {
-        setTimeout(() => {
-          setRecipe((prev) => [...prev, item]);
-        }, 1000 * index);
-      });
-    }
+    orderedMenu.forEach((item, index) => {
+      setTimeout(() => {
+        setRecipe((prev) => [...prev, item]);
+      }, 1000 * index);
+    });
   }, [drink]);
 
   return (
